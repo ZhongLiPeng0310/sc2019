@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.pictureShow.dao.PictureShowDao">
+    <insert id="savePictureShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
+        insert into t_picture_show
+        (
+        show_code,
+        sort_no,
+        goods_code,
+        show_image_url,
+        show_state,
+        begin_time,
+        end_time,
+        is_deleted,
+        create_name,
+        create_time,
+        version
+        )
+        values
+        (
+        #{showCode},
+        #{sortNo},
+        #{goodsCode},
+        #{showImageUrl},
+        0,
+        #{beginTime},
+        #{endTime},
+        0,
+        #{createName},
+        now(),
+        0
+        )
+    </insert>
+
+    <!--查询轮播图列表-->
+    <select id="listPictureShowByPage" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
+        select
+        a.show_code showCode,
+        a.sort_no sortNo,
+        a.show_image_url showImageUrl,
+        a.show_state showCode,
+        a.begin_time beginTime,
+        a.end_time endTime
+        from
+        t_picture_show a
+        <if test="showCode != null and showCode != ''">
+            and a.show_code like concat('%', #{showCode}, '%')
+        </if>
+        <if test="sortNo != null and sortNo != ''">
+            and a.sort_no like concat('%', #{sortNo}, '%')
+        </if>
+        order by create_time desc
+
+    </select>
+
+    <!--删除轮播图-->
+    <update id="deletePictureShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
+        update t_picture_show
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where show_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改轮播图启用禁用状态接口-->
+    <update id="updatePictureShowState" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
+        update t_picture_show
+        set
+        show_state = #{showState},
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where show_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </update>
+
+    <!--连接商品列表-->
+    <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
+        select
+        a.goods_code goodsCode,
+        a.goods_name goodsName,
+        b.class_code classCode,
+        b.class_name className,
+        a.goods_state goodsState,
+        a.version
+        from
+        t_goods a LEFT join t_goods_class b
+        on a.class_code = b.class_code
+        where a.is_deleted = 0
+        and a.goods_state = 2
+        <if test="goodsCode != null and goodsCode != ''">
+            and a.goods_code like concat('%', #{goodsCode}, '%')
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and a.goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        order by a.create_time desc
+    </select>
+</mapper>

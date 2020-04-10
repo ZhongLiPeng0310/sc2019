@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.webauth.users.dao.UserDao">
+
+    <!--统计用户账号数量-->
+    <select id="countUserAcct" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
+        select count(user_acct)
+        from t_sys_user
+        where is_deleted = 0
+        and user_acct = #{userAcct}
+        <if test="userCode != null and userCode != ''">
+            and user_code != #{userCode}
+        </if>
+    </select>
+    <!--新增用户-->
+    <insert id="saveUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
+        insert into t_sys_user
+        (user_code,
+        user_acct,
+        user_password,
+        user_name,
+        sex,
+        phone,
+        email,
+        id_card,
+        role,
+        image_path,
+        is_deleted,
+        create_name,
+        create_time,
+        version
+        )
+        values
+        (#{userCode},
+        #{userAcct},
+        #{userPassword},
+        #{userName},
+        #{sex},
+        #{phone},
+        #{email},
+        #{idCard},
+        #{role},
+        #{imagePath},
+        #{isDeleted},
+        #{createName},
+        now(),
+        0
+        )
+    </insert>
+
+    <!--查询用户列表-->
+    <select id="listUsersByPage" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="com.neusoft.webauth.users.entity.UserInfo">
+        select
+        a.user_code userCode,
+        a.user_acct userAcct,
+        a.user_password userPassword,
+        a.user_name userName,
+        a.sex sex,
+        a.phone phone,
+        a.email email,
+        a.id_card idCard,
+        a.role role,
+        a.image_path imagePath,
+        a.version version
+        from t_sys_user a
+        where a.is_deleted = 0
+        and a.role in(0,2)
+        <if test="userAcct != null and userAcct != ''">
+            and a.user_acct like concat('%', #{userAcct}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and a.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            and a.role like concat('%', #{role}, '%')
+        </if>
+        order by create_time desc
+    </select>
+
+    <!--删除用户-->
+    <update id="deleteUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
+        update t_sys_user
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where user_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改用户信息-->
+    <update id="updateUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
+        update t_sys_user
+        set
+            user_name    = #{userName},
+            user_acct    = #{userAcct},
+            id_card      = #{idCard},
+            sex          = #{sex},
+            phone        = #{phone},
+            email        = #{email},
+            role         = #{role},
+            image_path   = #{imagePath},
+            update_time  = now(),
+            update_name  = #{updateName},
+            version      = version + 1
+        where user_code  = #{userCode}
+          and version    = #{version}
+    </update>
+
+    <!--查询用户详情-->
+    <select id="getUserByUserCode" parameterType="java.lang.String" resultType="com.neusoft.webauth.users.entity.UserInfo">
+        select
+            user_code userCode,
+            user_name userName,
+            user_acct userAcct,
+            user_password userPassword,
+            sex,
+            phone,
+            email,
+            id_card idCard,
+            role,
+            image_path imagePath,
+            version
+        from
+            t_sys_user
+        where user_code = #{userCode}
+        and is_deleted = 0
+    </select>
+</mapper>
