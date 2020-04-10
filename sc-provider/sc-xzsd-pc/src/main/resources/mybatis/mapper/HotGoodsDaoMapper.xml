@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.hotGoods.dao.HotGoodsDao">
 
+    <!--检验字典表中是否存在展示商品数量-->
+    <select id="countShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="int">
+        select count(mark)
+        from t_dictionary
+        where is_deleted = 0
+        <if test="dicCode != null and dicCode != ''">
+            and dic_code != #{dicCode}
+        </if>
+    </select>
+
     <!--新增热门商品-->
     <insert id="saveHotGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
         insert into t_hot_goods
@@ -73,5 +83,60 @@
             version      = version + 1
         where hot_code = #{hotCode}
         and version = #{version}
+    </update>
+
+    <!--设置热门商品展示数量-->
+    <insert id="saveShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        insert into
+        t_dictionary
+        (
+        dic_code,
+        dic_name,
+        show_no,
+        mark,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        VALUES
+        (
+        #{dicCode},
+        #{dicName},
+        #{showNo},
+        0,
+        #{isDeleted},
+        now(),
+        #{createName},
+        0
+        )
+    </insert>
+
+    <!--查询热门商品展示数量-->
+    <select id="getShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        select
+        a.dic_code dicCode,
+        a.dic_name dicName,
+        a.show_no showNo,
+        a.mark
+        from
+        t_dictionary a
+        where
+        a.mark = 0
+        and
+        a.is_deleted = 0
+    </select>
+
+    <!--更新热门商品展示数量-->
+    <update id="updateShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        update t_dictionary
+        set
+        dic_name = #{dicName},
+        show_no = #{showNo},
+        update_time = now(),
+        update_name = #{updateName},
+        version = version + 1
+        where
+        mark = 0
     </update>
 </mapper>

@@ -23,7 +23,7 @@ public class PictureShowInfo {
     /**
      * 图片路径
      */
-    private String showImageUrl;
+    private String imagePath;
     /**
      * 轮播图状态  0启用 1禁用
      */
@@ -93,12 +93,12 @@ public class PictureShowInfo {
         this.goodsCode = goodsCode;
     }
 
-    public String getShowImageUrl() {
-        return showImageUrl;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setShowImageUrl(String showImageUrl) {
-        this.showImageUrl = showImageUrl;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getShowState() {

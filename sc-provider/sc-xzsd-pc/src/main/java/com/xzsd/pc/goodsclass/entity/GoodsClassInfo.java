@@ -17,6 +17,22 @@ public class GoodsClassInfo {
      */
     private String className;
     /**
+     * 一级分类编码
+     */
+    private String classFirstCode;
+    /**
+     * 一级分类名称
+     */
+    private String classFirstName;
+    /**
+     * 二级分类编码
+     */
+    private String classSecondCode;
+    /**
+     * 二级分类名称
+     */
+    private String classSecondName;
+    /**
      * 上一级分类编码
      */
     private String lastClassCode;
@@ -73,6 +89,38 @@ public class GoodsClassInfo {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public String getClassFirstCode() {
+        return classFirstCode;
+    }
+
+    public void setClassFirstCode(String classFirstCode) {
+        this.classFirstCode = classFirstCode;
+    }
+
+    public String getClassFirstName() {
+        return classFirstName;
+    }
+
+    public void setClassFirstName(String classFirstName) {
+        this.classFirstName = classFirstName;
+    }
+
+    public String getClassSecondCode() {
+        return classSecondCode;
+    }
+
+    public void setClassSecondCode(String classSecondCode) {
+        this.classSecondCode = classSecondCode;
+    }
+
+    public String getClassSecondName() {
+        return classSecondName;
+    }
+
+    public void setClassSecondName(String classSecondName) {
+        this.classSecondName = classSecondName;
     }
 
     public String getLastClassCode() {

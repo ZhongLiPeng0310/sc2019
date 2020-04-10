@@ -72,13 +72,12 @@
 <!--        </if>-->
 <!--    </select>-->
     <!--获取商品分类列表-->
-    <select id="listGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.classFirstList"  resultMap="classFirstList">
+    <select id="listGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo"  resultMap="classFirstList">
         select
-        *
---         a.class_code classFirstCode,
---         a.class_name classFirstName,
---         b.class_code classSecondCode,
---         b.class_name classSecondName
+        a.class_code classFirstCode,
+        a.class_name classFirstName,
+        b.class_code classSecondCode,
+        b.class_name classSecondName
         from
         t_goods_class a INNER JOIN t_goods_class b
         on a.class_code = b.last_class_code

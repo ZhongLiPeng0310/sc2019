@@ -1,6 +1,7 @@
 package com.xzsd.pc.hotGoods.dao;
 
 
+import com.xzsd.pc.dictionary.entity.DictionaryInfo;
 import com.xzsd.pc.hotGoods.entity.HotGoodsInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -45,4 +46,36 @@ public interface HotGoodsDao {
      * @return
      */
     int updateHotGoods(HotGoodsInfo hotGoodsInfo);
+
+    /**
+     * 设置热门商品展示数量
+     * @param dictionaryInfo
+     * @return
+     */
+    int saveShowNo(DictionaryInfo dictionaryInfo);
+
+    /**
+     * 查询热门商品展示数量
+     * @param dictionaryInfo
+     * @return
+     */
+    List<DictionaryInfo> getShowNo(DictionaryInfo dictionaryInfo);
+
+    /**
+     * 检验热门商品数量展示是否存在
+     * @author zhong
+     * @date 2020-04-10
+     * @param dictionaryInfo
+     * @return
+     */
+    int countShowNo(DictionaryInfo dictionaryInfo);
+
+    /**
+     * 更新热门商品展示数量
+     * @author zhong
+     * @date 2020-04-10
+     * @param dictionaryInfo
+     * @return
+     */
+    int updateShowNo(DictionaryInfo dictionaryInfo);
 }

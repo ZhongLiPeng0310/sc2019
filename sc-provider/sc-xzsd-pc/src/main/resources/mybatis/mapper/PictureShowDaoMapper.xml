@@ -21,7 +21,7 @@
         #{showCode},
         #{sortNo},
         #{goodsCode},
-        #{showImageUrl},
+        #{imagePath},
         0,
         #{beginTime},
         #{endTime},
@@ -37,7 +37,7 @@
         select
         a.show_code showCode,
         a.sort_no sortNo,
-        a.show_image_url showImageUrl,
+        a.show_image_url imagePath,
         a.show_state showCode,
         a.begin_time beginTime,
         a.end_time endTime

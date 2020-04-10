@@ -14,11 +14,6 @@
         a.email email,
         a.id_card idCard,
         a.role role,
-        a.is_deleted isDeleted,
-        a.create_name createName,
-        a.create_time createTime,
-        a.update_name updateName,
-        a.update_time updateTime,
         a.version version
         from t_sys_user a
         where a.is_deleted = 0

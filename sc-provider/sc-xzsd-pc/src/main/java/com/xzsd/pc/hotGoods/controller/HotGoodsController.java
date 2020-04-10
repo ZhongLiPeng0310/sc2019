@@ -3,6 +3,8 @@ package com.xzsd.pc.hotGoods.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.AuthUtils;
+import com.sun.jersey.core.impl.provider.entity.XMLRootObjectProvider;
+import com.xzsd.pc.dictionary.entity.DictionaryInfo;
 import com.xzsd.pc.hotGoods.entity.HotGoodsInfo;
 import com.xzsd.pc.hotGoods.service.HotGoodsService;
 import org.slf4j.Logger;
@@ -106,6 +108,43 @@ public class HotGoodsController {
         }
     }
 
+    /**
+     * 设置热门商品展示数量
+     * @author zhong
+     * @date 2020-04-10
+     * @param dictionaryInfo
+     * @return
+     */
+    @PostMapping("saveShowNo")
+    public AppResponse saveShowNo(DictionaryInfo dictionaryInfo){
+        try{
+            //获取用户id
+            String userId = SecurityUtils.getCurrentUserId();
+            dictionaryInfo.setCreateName(userId);
+            return hotGoodsService.saveShowNo(dictionaryInfo);
+        }catch (Exception e){
+            logger.error("设置热门商品展示数量错误",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
+    /**
+     * 查询热门商品展示数量
+     * @author
+     * @date 2020-04-10
+     * @param dictionaryInfo
+     * @return
+     */
+    @PostMapping(value = "getShowNo")
+    public AppResponse getShowNoByDicCode(DictionaryInfo dictionaryInfo){
+        try{
+            return hotGoodsService.getShowNo(dictionaryInfo);
+        }catch (Exception e){
+            logger.error("热门商品展示数量查询错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
 }
