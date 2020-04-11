@@ -26,10 +26,8 @@ public class UserController {
      * 日志记录
      */
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @Resource
     private UserService userService;
-
     /**
      * 新增用户
      * @param userInfo

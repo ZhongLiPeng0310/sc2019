@@ -78,4 +78,11 @@ public interface HotGoodsDao {
      * @return
      */
     int updateShowNo(DictionaryInfo dictionaryInfo);
+
+    /**
+     * 检验新增的商品是否存在热门商品表中
+     * @param hotGoodsInfo
+     * @return
+     */
+    int countGoods(HotGoodsInfo hotGoodsInfo);
 }

@@ -34,6 +34,11 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveHotGoods(HotGoodsInfo hotGoodsInfo) {
+        //检验新增的商品是否存在热门商品中
+        int countGoods =  hotGoodsDao.countGoods(hotGoodsInfo);
+        if (0 != countGoods){
+            return AppResponse.bizError("新增失败，商品已存在！");
+        }
         hotGoodsInfo.setHotCode(StringUtil.getCommonCode(2));
         hotGoodsInfo.setIsDeleted(0);
         //新增热门商品
@@ -136,7 +141,4 @@ public class HotGoodsService {
         List<DictionaryInfo> dictionaryInfoList = hotGoodsDao.getShowNo(dictionaryInfo);
         return AppResponse.success("查询成功！",dictionaryInfoList);
     }
-
-
-
 }

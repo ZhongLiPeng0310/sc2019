@@ -3,7 +3,6 @@ package com.xzsd.pc.goodsclass.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.pc.goodsclass.entity.classFirstList;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
 import com.xzsd.pc.goodsclass.service.GoodsClassService;
 import org.slf4j.Logger;
@@ -51,15 +50,15 @@ public class GoodsClassController {
 
     /**
      * 查询商品分类列表
-     * @param classFirstList
+     * @param goodsClassInfo
      * @author zhong
      * @date 2020-03-27
      * @return
      */
     @RequestMapping(value = "listGoodsClass")
-    public AppResponse listGoodsClass(classFirstList classFirstList){
+    public AppResponse listGoodsClass(GoodsClassInfo goodsClassInfo){
         try{
-            return goodsClassService.listGoodsClass(classFirstList);
+            return goodsClassService.listGoodsClass(goodsClassInfo);
         }catch (Exception e){
             logger.error("查询商品分类列表异常",e);
             System.out.println(e.toString());

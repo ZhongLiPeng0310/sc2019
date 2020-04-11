@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
+import com.sun.jersey.core.impl.provider.entity.XMLRootObjectProvider;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.pictureShow.dao.PictureShowDao;
 import com.xzsd.pc.pictureShow.entity.PictureShowInfo;
@@ -28,6 +29,16 @@ public class PictureShowService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse savePictureShow(PictureShowInfo pictureShowInfo) {
+        //检验新增的商品是否存在轮播图中
+        int countGoods =  pictureShowDao.countGoods(pictureShowInfo);
+        if (0 != countGoods){
+            return AppResponse.bizError("新增失败，商品已存在！");
+        }
+        //检验新增的轮播图序号是否重复
+        int countSort =  pictureShowDao.countSort(pictureShowInfo);
+        if (0 != countSort){
+            return AppResponse.bizError("新增失败，改排序号已存在！");
+        }
         pictureShowInfo.setShowCode(StringUtil.getCommonCode(2));
         pictureShowInfo.setIsDeleted(0);
         //新增轮播图

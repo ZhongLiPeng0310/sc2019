@@ -22,10 +22,8 @@ import javax.annotation.Resource;
 @RequestMapping("/driver")
 public class DriverController {
     private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
-
     @Resource
     private DriverService driverService;
-
     /**
      * 新增司机
      * @author zhong

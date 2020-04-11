@@ -1,14 +1,13 @@
 package com.xzsd.pc.goodsclass.entity;
 
 import java.util.Date;
-import java.util.List;
 
-/**
- * 商品分类实体类
- * @author zhong
- * @date 2020-03-27
- */
-public class GoodsClassInfo {
+public class ClassFirstList {
+    /**
+     * 商品分类实体类
+     * @author zhong
+     * @date 2020-03-27
+     */
     /**
      * 分类编码
      */
@@ -79,14 +78,7 @@ public class GoodsClassInfo {
      * 页数
      */
     private int pageNum;
-    /**
-     * 一级分类集合
-     */
-    private List<ClassFirstList> classFirstList;
-    /**
-     * 二级分类集合
-     */
-    private List<ClassSecondList> classSecondList;
+
 
     public String getClassCode() {
         return classCode;
@@ -222,21 +214,5 @@ public class GoodsClassInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
-    }
-
-    public List<ClassFirstList> getClassFirstList() {
-        return classFirstList;
-    }
-
-    public void setClassFirstList(List<ClassFirstList> classFirstList) {
-        this.classFirstList = classFirstList;
-    }
-
-    public List<ClassSecondList> getClassSecondList() {
-        return classSecondList;
-    }
-
-    public void setClassSecondList(List<ClassSecondList> classSecondList) {
-        this.classSecondList = classSecondList;
     }
 }

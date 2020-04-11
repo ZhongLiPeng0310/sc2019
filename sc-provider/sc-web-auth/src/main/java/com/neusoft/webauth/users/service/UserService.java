@@ -22,10 +22,8 @@ import java.util.List;
  */
 @Service
 public class UserService {
-
     @Resource
     private UserDao userDao;
-
     /**
      * 新增用户
      * @param userInfo
@@ -123,7 +121,5 @@ public class UserService {
         UserInfo userInfo = userDao.getUserByUserCode(userCode);
         return AppResponse.success("查询成功！",userInfo);
     }
-
-
 
 }

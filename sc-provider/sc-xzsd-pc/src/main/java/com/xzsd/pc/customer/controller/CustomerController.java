@@ -20,12 +20,9 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
-
     @Resource
     private CustomerService customerService;
-    
     @PostMapping(value = "listCustomerByPage")
    public AppResponse listCustomerByPage(CustomerInfo customerInfo){
         try{

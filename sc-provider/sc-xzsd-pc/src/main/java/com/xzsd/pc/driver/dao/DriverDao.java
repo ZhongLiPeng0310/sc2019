@@ -48,6 +48,15 @@ public interface DriverDao {
     int deleteDriver(@Param("listCode") List<String> listCode,@Param("userId") String userId);
 
     /**
+     * 删除在用户表的司机信息
+     * @author zhong
+     * @date 2020-04-10
+     * @param listCode
+     * @param userId
+     * @return
+     */
+    int deleteUser(@Param("listCode") List<String> listCode,@Param("userId") String userId);
+    /**
      * 修改司机信息
      * @author zhong
      * @date 2020-04-06
@@ -64,6 +73,7 @@ public interface DriverDao {
      * @return
      */
     DriverInfo getDriverByUserCode(@Param("userCode")String userCode);
+
 
 
 }

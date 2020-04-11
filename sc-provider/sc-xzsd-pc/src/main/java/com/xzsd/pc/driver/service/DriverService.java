@@ -79,9 +79,11 @@ public class DriverService {
     public AppResponse deleteDriver(String userCode, String userId) {
         List<String> listCode = Arrays.asList(userCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-        // 删除用户
-        int count = driverDao.deleteDriver(listCode,userId);
-        if(0 == count) {
+        // 删除司机
+        int deleteDriver = driverDao.deleteDriver(listCode,userId);
+        //删除在用户表的司机信息
+        int deleteUser = driverDao.deleteUser(listCode,userId);
+        if(0 == deleteDriver && 0 == deleteUser) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }
         return appResponse;

@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.goodsclass.dao.GoodsClassDao">
-    <resultMap id="classFirstList" type="com.xzsd.pc.goodsclass.entity.classFirstList">
-        <id column="class_code" property="classFirstCode" jdbcType="VARCHAR" />
-        <result column="class_name" property="classFirstName" jdbcType="VARCHAR" />
-        <result column="remark" property="remark" jdbcType="VARCHAR" />
-        <result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
-        <collection property="classSecondList" ofType="com.xzsd.pc.goodsclass.entity.classSecondList">
-            <id column="class_code" property="classSecondCode" jdbcType="VARCHAR" />
-            <result column="class_name" property="classSecondName" jdbcType="VARCHAR" />
-            <result column="remark" property="remark" jdbcType="VARCHAR" />
-            <result column="last_class_code" property="lastClassCode" jdbcType="VARCHAR" />
-            <result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
-        </collection>
-    </resultMap>
 
     <!--新增商品分类-->
     <insert id="saveGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
@@ -23,6 +10,7 @@
         class_name,
         last_class_code,
         remark,
+        class_level,
         is_deleted,
         create_name,
         create_time,
@@ -33,6 +21,7 @@
         #{className},
         #{lastClassCode},
         #{remark},
+        #{classLevel},
         #{isDeleted},
         #{createName},
         now(),
@@ -71,18 +60,30 @@
 <!--            and a.class_name like concat('%', #{className}, '%')-->
 <!--        </if>-->
 <!--    </select>-->
+
+    <!--商品分类的Map-->
+        <resultMap id="classFirstList" type="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
+            <id column="class_code" property="classFirstCode" jdbcType="VARCHAR" />
+            <id column="class_name" property="classFirstName" jdbcType="VARCHAR" />
+        <collection property="classSecondList" ofType="com.xzsd.pc.goodsclass.entity.ClassSecondList">
+            <id column="classSecondCode" property="classSecondCode" jdbcType="VARCHAR" />
+            <id column="classSecondName" property="classSecondName" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
     <!--获取商品分类列表-->
-    <select id="listGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo"  resultMap="classFirstList">
+    <select id="listGoodsClass" resultMap="classFirstList">
         select
-        a.class_code classFirstCode,
-        a.class_name classFirstName,
-        b.class_code classSecondCode,
-        b.class_name classSecondName
+        a.class_code,
+        a.class_name,
+        b.class_code as classSecondCode,
+        b.class_name as classSecondName
         from
-        t_goods_class a INNER JOIN t_goods_class b
+        t_goods_class a LEFT JOIN t_goods_class b
         on a.class_code = b.last_class_code
         where
         a.is_deleted = 0
+        and
+        a.class_level = 1
     </select>
 
     <!--删除商品分类-->

@@ -2,7 +2,6 @@ package com.xzsd.pc.goodsclass.dao;
 
 
 
-import com.xzsd.pc.goodsclass.entity.classFirstList;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -40,10 +39,10 @@ public interface GoodsClassDao {
      * 查询商品分类列表
      * @author zhong
      * @date 2020-03-27
-     * @param classFirstList
+     * @param goodsClassInfo
      * @return
      */
-    List<classFirstList> listGoodsClass(classFirstList classFirstList);
+    List<GoodsClassInfo> listGoodsClass(GoodsClassInfo goodsClassInfo);
 
     /**
      * 删除商品分类

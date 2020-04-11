@@ -97,6 +97,19 @@
 
     <!--删除司机-->
     <update id="deleteDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
+        update t_driver
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where user_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <!--删除在用户表的司机信息-->
+    <update id="deleteUser" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_sys_user
         set
         is_deleted = 1,

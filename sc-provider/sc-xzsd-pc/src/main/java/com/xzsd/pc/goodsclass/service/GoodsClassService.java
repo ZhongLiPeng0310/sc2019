@@ -4,7 +4,6 @@ package com.xzsd.pc.goodsclass.service;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 import com.xzsd.pc.goodsclass.dao.GoodsClassDao;
-import com.xzsd.pc.goodsclass.entity.classFirstList;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,12 +67,12 @@ public class GoodsClassService {
      * 查询商品分类列表
      * @author zhong
      * @date 2020-03-27
-     * @param classFirstList
+     * @param goodsClassInfo
      * @return
      */
-    public AppResponse listGoodsClass(classFirstList classFirstList) {
-        List<classFirstList> classFirstListList = goodsClassDao.listGoodsClass(classFirstList);
-        return AppResponse.success("查询成功", classFirstListList);
+    public AppResponse listGoodsClass(GoodsClassInfo goodsClassInfo) {
+        List<GoodsClassInfo> goodsClassInfoList = goodsClassDao.listGoodsClass(goodsClassInfo);
+        return AppResponse.success("查询成功", goodsClassInfoList);
     }
     /**
      * 查询分类详情
