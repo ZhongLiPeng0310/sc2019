@@ -16,12 +16,24 @@ import java.util.List;
 public interface UserDao {
     /**
      * 统计用户账号数量
+     * @author zhong
+     * @date 2020-03-26
      * @param userInfo 用户信息
      * @return
      */
     int countUserAcct(UserInfo userInfo);
     /**
+     * 校验用户手机号码是否存在
+     * @author zhong
+     * @date 2020-03-26
+     * @param userInfo
+     * @return
+     */
+    int countUserPhone(UserInfo userInfo);
+    /**
      * 新增用户
+     * @author zhong
+     * @date 2020-03-26
      *  @param userInfo 用户信息
      * @return
      */
@@ -29,6 +41,8 @@ public interface UserDao {
 
     /**
      * 查询用户列表
+     * @author zhong
+     * @date 2020-03-26
      * @param userInfo
      * @return
      */
@@ -44,6 +58,8 @@ public interface UserDao {
 
     /**
      * 修改用户信息
+     * @author zhong
+     * @date 2020-03-26
      * @param userInfo
      * @return
      */
@@ -51,9 +67,12 @@ public interface UserDao {
 
     /**
      * 查询用户信息
+     * @author zhong
+     * @date 2020-03-26
      * @param userCode
      * @return
      */
     UserInfo getUserByUserCode(@Param("userCode") String userCode);
+
 
 }

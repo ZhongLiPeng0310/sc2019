@@ -52,7 +52,7 @@ public class DriverService {
         driverInfo.setIsDeleted(0);
         //新增司机
         int saveToDriver = driverDao.saveDriver(driverInfo);
-        if (0 == saveToDriver){
+        if (0 == saveToDriver){  
             return AppResponse.bizError("新增失败，请重试！");
         }
         //新增司机信息到用户

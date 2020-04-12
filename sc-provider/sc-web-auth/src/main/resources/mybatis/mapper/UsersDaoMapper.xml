@@ -12,6 +12,13 @@
             and user_code != #{userCode}
         </if>
     </select>
+    <!--校验新增的用户的手机号码是否已存在-->
+    <select id="countUserPhone" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
+        select count(phone)
+        from t_sys_user
+        where is_deleted = 0
+        and phone = #{phone}
+    </select>
     <!--新增用户-->
     <insert id="saveUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
         insert into t_sys_user
