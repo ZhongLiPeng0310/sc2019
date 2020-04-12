@@ -51,8 +51,8 @@ public class GoodsService {
             return AppResponse.bizError("新增失败，isbn书号已存在！");
         }
         // 新增商品
-        int count = goodsDao.saveGoods(goodsInfo);
-        if(0 == count) {
+        int saveToGoods = goodsDao.saveGoods(goodsInfo);
+        if(0 == saveToGoods) {
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功！");
@@ -85,8 +85,8 @@ public class GoodsService {
         AppResponse appResponse = AppResponse.success("修改成功");
 
         //修改商品信息
-        int count = goodsDao.updateGoods(goodsInfo);
-        if (0 == count){
+        int updateGood = goodsDao.updateGoods(goodsInfo);
+        if (0 == updateGood){
             appResponse = AppResponse.versionError("数据有变化，请刷新！");
             return appResponse;
         }
@@ -114,8 +114,8 @@ public class GoodsService {
             return AppResponse.bizError("删除的商品存在热门商品中,删除失败！");
         }
         //删除商品
-        int count = goodsDao.deleteGoods(listCode,userId);
-        if (0 == count){
+        int deleteGood = goodsDao.deleteGoods(listCode,userId);
+        if (0 == deleteGood){
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }
         return appResponse;
@@ -132,8 +132,8 @@ public class GoodsService {
         List<String> listCode = Arrays.asList(goodsCode.split(","));
         AppResponse appResponse = AppResponse.success("修改成功");
         //修改商品上架下架
-        int count = goodsDao.updateGoodsState(listCode,goodsState,userId);
-        if (0 == count){
+        int updateState = goodsDao.updateGoodsState(listCode,goodsState,userId);
+        if (0 == updateState){
             appResponse = AppResponse.bizError("修改失败，请重试！");
         }
         return appResponse;

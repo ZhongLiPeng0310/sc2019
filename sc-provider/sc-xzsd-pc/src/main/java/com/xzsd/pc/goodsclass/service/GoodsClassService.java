@@ -33,9 +33,14 @@ public class GoodsClassService {
     public AppResponse saveGoodsClass(GoodsClassInfo goodsClassInfo) {
         goodsClassInfo.setClassCode(StringUtil.getCommonCode(2));
         goodsClassInfo.setIsDeleted(0);
+        //检验新增的商品分类名称是否已存在
+        int countClassName = goodsClassDao.countClassName(goodsClassInfo);
+        if (0 != countClassName){
+            return AppResponse.bizError("新增失败，新增的分类名称已存在！");
+        }
         //新增商品分类
-        int count = goodsClassDao.saveGoodsClass(goodsClassInfo);
-        if (0 == count){
+        int saveGoodsClass = goodsClassDao.saveGoodsClass(goodsClassInfo);
+        if (0 == saveGoodsClass){
             return AppResponse.bizError("新增失败，请重试！");
         }
         else{
@@ -52,8 +57,8 @@ public class GoodsClassService {
     public AppResponse updateGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
         //修改商品分类
-        int count = goodsClassDao.updateGoodsClass(goodsClassInfo);
-        if (0 == count) {
+        int updateGoodsClass = goodsClassDao.updateGoodsClass(goodsClassInfo);
+        if (0 == updateGoodsClass) {
             appResponse = AppResponse.versionError("数据有变化，请刷新！");
             return appResponse;
         }
@@ -93,8 +98,8 @@ public class GoodsClassService {
     public AppResponse deleteGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("删除成功！");
         //删除商品分类
-        int count = goodsClassDao.deleteGoodsClass(goodsClassInfo);
-        if (0 == count) {
+        int deleteGoodsClass = goodsClassDao.deleteGoodsClass(goodsClassInfo);
+        if (0 == deleteGoodsClass) {
             appResponse = AppResponse.bizError("删除失败，请重试!");
         }
         return appResponse;

@@ -83,6 +83,12 @@
         <if test="areaCode != null and areaCode != ''">
             and a.area_code like concat('%', #{areaCode}, '%')
         </if>
+        <if test="role == 2">
+            and a.store_code in (select store_code from t_store where user_code = #{userId})
+        </if>
+        <if test="role == 0">
+
+        </if>
     </select>
 
     <!--删除门店-->

@@ -53,4 +53,12 @@ public interface GoodsClassDao {
      */
     int deleteGoodsClass(GoodsClassInfo goodsClassInfo);
 
+    /**
+     * 检验新增的商品分类名称是否已存在
+     * @author zhong
+     * @date 2020-04-11
+     * @param goodsClassInfo
+     * @return
+     */
+    int countClassName(GoodsClassInfo goodsClassInfo);
 }

@@ -689,6 +689,12 @@ label0:
 		String suffix = RandomUtil.radmonkey(num);
 		return prefix + suffix;
 	}
+
+    public static String getInviteCode(int num){
+        String prefix = RandomUtil.radmonkey(num);
+        String suffix = RandomUtil.radmonkey(num);
+        return prefix + suffix;
+    }
   	
 	/**
  	  * 部门：软件开发事业部

@@ -51,13 +51,13 @@ public class DriverService {
         driverInfo.setUserCode(StringUtil.getCommonCode(2));
         driverInfo.setIsDeleted(0);
         //新增司机
-        int count = driverDao.saveDriver(driverInfo);
-        if (0 == count){
+        int saveToDriver = driverDao.saveDriver(driverInfo);
+        if (0 == saveToDriver){
             return AppResponse.bizError("新增失败，请重试！");
         }
         //新增司机信息到用户
-        int count1 = driverDao.saveUser(driverInfo);
-        if (0 == count1){
+        int saveToUser = driverDao.saveUser(driverInfo);
+        if (0 == saveToUser){
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功！");

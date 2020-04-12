@@ -60,6 +60,15 @@ public class StoreInfo {
      */
     private String address;
     /**
+     * 权限  角色0管理员查全部
+     * 2店长只能查询自己的门店信息
+     */
+    private int role;
+    /**
+     * 当前登录人的id
+     */
+    private String userId;
+    /**
      * 作废标记 0为存在，1为作废
      */
     private int isDeleted;
@@ -180,6 +189,22 @@ public class StoreInfo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getIsDeleted() {
