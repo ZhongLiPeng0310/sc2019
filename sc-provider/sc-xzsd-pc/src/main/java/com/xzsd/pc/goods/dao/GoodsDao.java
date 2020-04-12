@@ -27,7 +27,14 @@ public interface GoodsDao {
      * @return
      */
     int saveGoods(GoodsInfo goodsInfo);
-
+    /**
+     * 校验书号isbn是否已经存在
+     * @author zhong
+     * @date 2020-04-12
+     * @param goodsInfo
+     * @return
+     */
+    int countIsbn(GoodsInfo goodsInfo);
     /**
      * 获取商品列表
      * @param goodsInfo 商品信息
@@ -97,7 +104,6 @@ public interface GoodsDao {
      * @return
      */
     List<GoodsClassInfo> getSecondClass(GoodsClassInfo goodsClassInfo);
-
 
 
 }

@@ -45,6 +45,11 @@ public class GoodsService {
          */
         goodsInfo.setGoodsCode(StringUtil.getCommonCode(2));
         goodsInfo.setIsDeleted(0);
+        // 校验新增商品时，isbn书号是否已存在
+        int countIsbn =goodsDao.countIsbn(goodsInfo);
+        if (0 != countIsbn){
+            return AppResponse.bizError("新增失败，isbn书号已存在！");
+        }
         // 新增商品
         int count = goodsDao.saveGoods(goodsInfo);
         if(0 == count) {

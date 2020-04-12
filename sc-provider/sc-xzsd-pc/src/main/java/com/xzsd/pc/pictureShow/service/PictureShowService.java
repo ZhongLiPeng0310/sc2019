@@ -37,7 +37,7 @@ public class PictureShowService {
         //检验新增的轮播图序号是否重复
         int countSort =  pictureShowDao.countSort(pictureShowInfo);
         if (0 != countSort){
-            return AppResponse.bizError("新增失败，改排序号已存在！");
+            return AppResponse.bizError("新增失败，该排序号已存在！");
         }
         pictureShowInfo.setShowCode(StringUtil.getCommonCode(2));
         pictureShowInfo.setIsDeleted(0);

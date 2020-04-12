@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.goods.dao.GoodsDao">
 
-
+    <!--统计商品书号数量，校验书号是否已存在商品中-->
+    <select id="countIsbn" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="int">
+        select count(isbn)
+        from t_goods
+        where is_deleted = 0
+        and isbn = #{isbn}
+    </select>
 
     <!--新增商品-->
     <insert id="saveGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">

@@ -12,7 +12,13 @@
             and hot_code != #{hotCode}
         </if>
     </select>
-
+    <!--检验新的热门商品的排序号是否重复-->
+    <select id="countSort" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo" resultType="int">
+        select count(hot_sort)
+        from t_hot_goods
+        where is_deleted = 0
+        and hot_sort = #{hotSort}
+    </select>
     <!--检验字典表中是否存在展示商品数量-->
     <select id="countShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="int">
         select count(mark)
