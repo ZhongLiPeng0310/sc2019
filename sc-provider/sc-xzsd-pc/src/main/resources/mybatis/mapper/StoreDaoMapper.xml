@@ -60,7 +60,8 @@
         a.invite_code inviteCode,
         a.user_code userCode,
         b.user_name userName,
-        b.user_acct userAcct
+        b.user_acct userAcct,
+        a.version version
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
@@ -139,7 +140,8 @@
         a.invite_code inviteCode,
         a.user_code userCode,
         b.user_name userName,
-        b.user_acct userAcct
+        b.user_acct userAcct,
+        a.version version
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code

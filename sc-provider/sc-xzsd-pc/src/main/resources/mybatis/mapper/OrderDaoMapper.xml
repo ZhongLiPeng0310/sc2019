@@ -12,7 +12,8 @@
         c.user_name userName,
         c.phone phone,
         a.create_time createTime,
-        b.invite_code inviteCode
+        b.invite_code inviteCode,
+        a.version version
         from t_customer b
         LEFT JOIN t_order a
         on a.user_code = b.user_code
@@ -49,7 +50,8 @@
         a.order_sum orderSum,
         a.order_money orderMoney,
         b.sale_price salePrice,
-        b.cost_price costPrice
+        b.cost_price costPrice,
+        a.version version
         from
         t_order_detail a LEFT JOIN t_goods b
         on a.goods_code = b.goods_code

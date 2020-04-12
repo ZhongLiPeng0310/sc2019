@@ -111,7 +111,8 @@
             class_name className,
             last_class_code lastClassCode,
             is_deleted isDeleted,
-            remark
+            remark,
+            version
         from t_goods_class
         where class_code = #{classCode}
         and is_deleted = 0

@@ -38,6 +38,11 @@
         t_menu a
         where
         a.is_deleted = 0
+<!--        <if test="role == 2">-->
+<!--            and a.menu_name = '订单管理'-->
+<!--            and a.menu_name = '门店管理'-->
+<!--            and a.menu_name = '司机管理'-->
+<!--        </if>-->
         order by a.create_time
     </select>
 

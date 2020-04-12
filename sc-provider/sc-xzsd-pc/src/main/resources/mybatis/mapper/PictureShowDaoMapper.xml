@@ -63,7 +63,8 @@
         a.show_image_url imagePath,
         a.show_state showState,
         a.begin_time beginTime,
-        a.end_time endTime
+        a.end_time endTime,
+        a.version version
         from
         t_picture_show a
         <if test="showState != null and showState != ''">

@@ -61,7 +61,8 @@
         b.goods_code goodsCode,
         b.goods_name goodsName,
         b.sale_price salePrice,
-        b.goods_introduce goodsIntroduce
+        b.goods_introduce goodsIntroduce,
+        a.version version
         from
         t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code
@@ -135,7 +136,8 @@
         a.dic_code dicCode,
         a.dic_name dicName,
         a.show_no showNo,
-        a.mark
+        a.mark mark,
+        a.version version
         from
         t_dictionary a
         where
