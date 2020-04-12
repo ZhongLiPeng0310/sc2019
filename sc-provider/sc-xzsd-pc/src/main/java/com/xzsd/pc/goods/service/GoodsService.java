@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
+import com.sun.jersey.core.impl.provider.entity.XMLRootObjectProvider;
 import com.xzsd.pc.goods.dao.GoodsDao;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
@@ -97,6 +98,16 @@ public class GoodsService {
     public AppResponse deleteGoods(String goodsCode,String userId){
         List<String> listCode = Arrays.asList(goodsCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
+        //检验检验删除的商品是否存在轮播图中
+        int countPicShow = goodsDao.findGoodsPicShow(listCode);
+        if (0 != countPicShow){
+            return AppResponse.bizError("删除的商品存在轮播图中,删除失败！");
+        }
+        //检验检验删除的商品是否存在热门商品中
+        int countHotGoods = goodsDao.findGoodsHotGoods(listCode);
+        if (0 != countHotGoods){
+            return AppResponse.bizError("删除的商品存在热门商品中,删除失败！");
+        }
         //删除商品
         int count = goodsDao.deleteGoods(listCode,userId);
         if (0 == count){

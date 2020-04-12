@@ -99,7 +99,6 @@ public class UserController {
         try {
             //获取用户id
             String userId = AuthUtils.getCurrentUserId();
-            userInfo.setCreateName(userId);
             userInfo.setUpdateName(userId);
             return userService.updateUser(userInfo);
         } catch (Exception e) {
@@ -110,7 +109,7 @@ public class UserController {
     }
 
     /**
-     * 查询用户详情
+     * 查询用户详情，根据用户编码查询
      * @param userCode
      * @return
      * @author zhong

@@ -1,6 +1,7 @@
 package com.xzsd.pc.order.controller;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.order.entity.OrderInfo;
 import com.xzsd.pc.order.service.OrderService;
 import org.slf4j.Logger;
@@ -61,6 +62,26 @@ public class OrderController {
         }
     }
 
+    /**
+     * 修改订单状态
+     * @author zhong
+     * @date 2020-04-12
+     * @param orderCode
+     * @param orderState
+     * @return
+     */
+    @PostMapping("updateOrderState")
+    public AppResponse updateOrderState(String orderCode,int orderState){
+        try{
+            //获取用户id
+            String userId = SecurityUtils.getCurrentUserId();
+            return orderService.updateOrderState(orderCode,orderState,userId);
+        }catch (Exception e){
+            logger.error("订单状态修改错误！",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
 
 }

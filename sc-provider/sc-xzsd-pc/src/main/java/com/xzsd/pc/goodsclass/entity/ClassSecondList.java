@@ -3,12 +3,20 @@ package com.xzsd.pc.goodsclass.entity;
 import java.util.Date;
 import java.util.List;
 
-public class classSecondList {
+public class ClassSecondList {
     /**
      * 商品分类实体类
      * @author zhong
      * @date 2020-03-27
      */
+    /**
+     * 分类编码
+     */
+    private String classCode;
+    /**
+     * 分类名称
+     */
+    private String className;
     /**
      * 一级分类编码
      */
@@ -33,6 +41,10 @@ public class classSecondList {
      * 备注
      */
     private String remark;
+    /**
+     * 分类等级 1为一级  2为二级
+     */
+    private int classLevel;
     /**
      * 作废标记 0不删除 1删除
      */
@@ -68,6 +80,22 @@ public class classSecondList {
      */
     private int pageNum;
 
+
+    public String getClassCode() {
+        return classCode;
+    }
+
+    public void setClassCode(String classCode) {
+        this.classCode = classCode;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public String getClassFirstCode() {
         return classFirstCode;
@@ -115,6 +143,14 @@ public class classSecondList {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public int getClassLevel() {
+        return classLevel;
+    }
+
+    public void setClassLevel(int classLevel) {
+        this.classLevel = classLevel;
     }
 
     public int getIsDeleted() {

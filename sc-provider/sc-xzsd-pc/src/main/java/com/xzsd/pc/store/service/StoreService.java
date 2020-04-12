@@ -30,10 +30,15 @@ public class StoreService {
     public AppResponse saveStore(StoreInfo storeInfo) {
         storeInfo.setStoreCode(StringUtil.getCommonCode(2));
         storeInfo.setIsDeleted(0);
+        //检验新增门店时用户编码是否已存在门店中
+        int countUser = storeDao.countUser(storeInfo);
+        if (0 != countUser){
+            return AppResponse.bizError("新增失败，该店长已存在！");
+        }
         //新增门店
         int count = storeDao.saveStore(storeInfo);
         if (0 == count){
-            return AppResponse.bizError("新增失败，请重试！");
+
         }
         return AppResponse.success("新增成功!");
     }
@@ -83,6 +88,11 @@ public class StoreService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        //检验修改门店时用户编码是否已存在门店中
+        int countUser = storeDao.countUser(storeInfo);
+        if (0 != countUser){
+            return AppResponse.bizError("修改失败，该店长已存在！");
+        }
         int count = storeDao.updateStore(storeInfo);
         if (0 == count) {
             appResponse = AppResponse.versionError("数据有变化，请刷新！");

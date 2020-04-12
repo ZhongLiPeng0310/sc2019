@@ -75,7 +75,7 @@ public class HotGoodsService {
     public AppResponse deleteHotGoods(String hotCode, String userId) {
         List<String> listCode = Arrays.asList(hotCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-        // 删除用户
+        // 删除热门商品
         int count = hotGoodsDao.deleteHotGoods(listCode,userId);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");

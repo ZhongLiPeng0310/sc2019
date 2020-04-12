@@ -84,6 +84,8 @@
         a.id_card idCard,
         a.version version
         from t_sys_user a
+        LEFT JOIN t_driver b
+        on a.user_code = b.user_code
         where a.is_deleted = 0
         and a.role = 3
         <if test="userAcct != null and userAcct != ''">
@@ -92,7 +94,22 @@
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
         </if>
-        order by create_time desc
+        <if test="provinceCode != null and provinceCode != ''">
+            and a.province_code like concat('%', #{provinceCode}, '%')
+        </if>
+        <if test="cityCode != null and cityCode != ''">
+            and a.city_code like concat('%', #{cityCode}, '%')
+        </if>
+        <if test="areaCode != null and areaCode != ''">
+            and a.area_code like concat('%', #{areaCode}, '%')
+        </if>
+        <if test="role == 2">
+            and b.city_code in (select city_code from t_store where user_code = #{userId})
+        </if>
+        <if test="role == 0">
+
+        </if>
+        order by b.create_time desc
     </select>
 
     <!--删除司机-->
@@ -124,14 +141,11 @@
 
     </update>
 
-    <!--修改用户信息-->
+    <!--修改司机信息-->
     <update id="updateDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_driver
         set
-            user_name    = #{userName},
-            user_acct    = #{userAcct},
-            id_card      = #{idCard},
-            phone        = #{phone},
+            store_code = #{storeCode},
             province_code = #{provinceCode},
             city_code = #{cityCode},
             area_code = #{areaCode},
@@ -140,7 +154,20 @@
             version      = version + 1
         where user_code = #{userCode}
           and version = #{version}
-          and role = 3
+    </update>
+    <!--修改在用户表的司机信息-->
+    <update id="updateUserDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
+        update t_sys_user
+        set
+            user_name    = #{userName},
+            user_acct    = #{userAcct},
+            id_card      = #{idCard},
+            phone        = #{phone},
+            update_time = now(),
+            update_name   = #{updateName},
+            version      = version + 1
+        where user_code = #{userCode}
+          and version = #{version}
     </update>
 
     <!--查询用户详情-->

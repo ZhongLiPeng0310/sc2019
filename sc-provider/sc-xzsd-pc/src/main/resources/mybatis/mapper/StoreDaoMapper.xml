@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
 
+    <!--统计用户账号数量-->
+    <select id="countUser" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(user_code)
+        from t_store
+        where is_deleted = 0
+        and user_code = #{userCode}
+    </select>
     <!--新增门店信息-->
     <insert id="saveStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
         insert into t_store
@@ -63,6 +70,18 @@
         </if>
         <if test="storeName != null and storeName != ''">
             and a.store_name like concat('%', #{storeName}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and a.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="provinceCode != null and provinceCode != ''">
+            and a.province_code like concat('%', #{provinceCode}, '%')
+        </if>
+        <if test="cityCode != null and cityCode != ''">
+            and a.city_code like concat('%', #{cityCode}, '%')
+        </if>
+        <if test="areaCode != null and areaCode != ''">
+            and a.area_code like concat('%', #{areaCode}, '%')
         </if>
     </select>
 

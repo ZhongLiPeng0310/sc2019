@@ -33,7 +33,6 @@ public class GoodsClassService {
     public AppResponse saveGoodsClass(GoodsClassInfo goodsClassInfo) {
         goodsClassInfo.setClassCode(StringUtil.getCommonCode(2));
         goodsClassInfo.setIsDeleted(0);
-
         //新增商品分类
         int count = goodsClassDao.saveGoodsClass(goodsClassInfo);
         if (0 == count){
@@ -43,8 +42,6 @@ public class GoodsClassService {
             return AppResponse.success("新增成功！");
         }
     }
-
-
 
 
     /**
@@ -102,7 +99,5 @@ public class GoodsClassService {
         }
         return appResponse;
     }
-
-
 
 }

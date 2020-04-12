@@ -38,7 +38,7 @@ public class DriverController {
             AppResponse appResponse = driverService.saveDriver(driverInfo);
             return appResponse;
         }catch (Exception e){
-            logger.error("用户新增失败",e);
+            logger.error("司机新增失败",e);
             System.out.println(e.toString());
             throw e;
         }
@@ -73,7 +73,7 @@ public class DriverController {
             String userId = SecurityUtils.getCurrentUserId();
             return driverService.deleteDriver(userCode,userId);
         } catch (Exception e) {
-            logger.error("用户删除错误", e);
+            logger.error("司机删除错误", e);
             System.out.println(e.toString());
             throw e;
         }
@@ -113,7 +113,7 @@ public class DriverController {
         try{
             return driverService.getDriverByUserCode(userCode);
         }catch (Exception e){
-            logger.error("用户查询错误");
+            logger.error("司机信息查询错误");
             System.out.println(e.toString());
             throw e;
         }

@@ -61,6 +61,18 @@ public class OrderInfo {
      */
     private String createTime;
     /**
+     * 角色 0管理员  1客户 2店长 3司机
+     */
+    private int role;
+    /**
+     * 店铺邀请码
+     */
+    private String inviteCode;
+    /**
+     * 当前登录人id
+     */
+    private String userId;
+    /**
      * 作废标记 0为存在，1为作废
      */
     private int isDeleted;
@@ -194,6 +206,30 @@ public class OrderInfo {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getIsDeleted() {

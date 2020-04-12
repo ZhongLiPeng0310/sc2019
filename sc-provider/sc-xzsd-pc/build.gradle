@@ -10,7 +10,13 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-data-redis',
             'org.springframework.session:spring-session-data-redis'
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
+    /**
+     * 腾讯云图片上传
+     */
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0-m02'
+    compile 'com.qcloud:cos_api:5.6.18',
+            'junit:junit:4.12',
+            'org.springframework.boot:spring-boot-configuration-processor'
 
 
 }

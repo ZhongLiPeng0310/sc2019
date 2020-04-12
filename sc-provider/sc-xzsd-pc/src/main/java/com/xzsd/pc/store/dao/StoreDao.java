@@ -56,4 +56,13 @@ public interface StoreDao {
      * @return
      */
     StoreInfo getStoreByStoreCode(@Param("storeCode") String storeCode);
+
+    /**
+     * 检验新增门店时用户编码是否已存在门店中
+     * @author zhong
+     * @date 2020-04-12
+     * @param storeInfo
+     * @return
+     */
+    int countUser(StoreInfo storeInfo);
 }

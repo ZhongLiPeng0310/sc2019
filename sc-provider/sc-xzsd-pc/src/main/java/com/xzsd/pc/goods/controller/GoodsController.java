@@ -157,7 +157,8 @@ public class GoodsController {
      * 查询查询商品一级分类接口
      * @author zhong
      * @date 2020-03-26
-     *
+     * @param goodsClassInfo
+     * @return
      */
     @RequestMapping(value = "getFirstClass")
     public AppResponse getFirstClass(GoodsClassInfo goodsClassInfo) {
@@ -170,6 +171,13 @@ public class GoodsController {
         }
     }
 
+    /**
+     * 查询商品二级分类
+     * @author zhong
+     * @date 2020-03-26
+     * @param goodsClassInfo
+     * @return
+     */
     @RequestMapping(value = "getSecondClass")
     public AppResponse getSecondClass(GoodsClassInfo goodsClassInfo) {
         try {

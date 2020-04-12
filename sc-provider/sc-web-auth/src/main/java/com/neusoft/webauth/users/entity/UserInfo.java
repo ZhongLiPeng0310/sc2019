@@ -41,7 +41,7 @@ public class UserInfo {
      */
     private String idCard;
     /**
-     *角色 0管理员，1用户，2店长 3司机
+     *角色 0管理员，2店长
      */
     private int role;
     /**
@@ -49,7 +49,7 @@ public class UserInfo {
      */
     private String imagePath;
     /**
-     * 作废标记
+     * 作废标记  0保留  1删除
      */
     private int isDeleted;
     /**

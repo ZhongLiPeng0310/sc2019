@@ -66,6 +66,12 @@ public interface DriverDao {
     int updateDriver(DriverInfo driverInfo);
 
     /**
+     * 修改在用户表的司机信息
+     * @param driverInfo
+     * @return
+     */
+    int updateUserDriver(DriverInfo driverInfo);
+    /**
      * 查询司机详情信息
      * @author zhong
      * @date 2020-04-06

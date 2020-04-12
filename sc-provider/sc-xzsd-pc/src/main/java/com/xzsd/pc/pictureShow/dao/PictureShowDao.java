@@ -76,4 +76,13 @@ public interface PictureShowDao {
      * @return
      */
     int countSort(PictureShowInfo pictureShowInfo);
+
+    /**
+     * 检验新增的轮播图的图片是否已存在
+     * @author zhong
+     * @date 2020-04-10
+     * @param pictureShowInfo
+     * @return
+     */
+    int countPicture(PictureShowInfo pictureShowInfo);
 }

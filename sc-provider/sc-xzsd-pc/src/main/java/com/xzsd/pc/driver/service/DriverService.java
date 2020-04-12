@@ -1,6 +1,4 @@
 package com.xzsd.pc.driver.service;
-
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
@@ -9,7 +7,6 @@ import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +47,6 @@ public class DriverService {
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct){
             return AppResponse.bizError("用户账号已存在，请重新输入");
-
         }
         driverInfo.setUserCode(StringUtil.getCommonCode(2));
         driverInfo.setIsDeleted(0);
@@ -99,9 +95,11 @@ public class DriverService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        // 修改司机在用户表的信息
+        int updateUserDriver = driverDao.updateUserDriver(driverInfo);
         // 修改司机信息
         int count = driverDao.updateDriver(driverInfo);
-        if (0 == count) {
+        if (0 == count && 0 == updateUserDriver) {
             appResponse = AppResponse.versionError("数据有变化，请刷新！");
             return appResponse;
         }

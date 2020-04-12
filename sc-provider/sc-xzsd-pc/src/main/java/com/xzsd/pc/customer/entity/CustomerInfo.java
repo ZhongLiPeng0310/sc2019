@@ -44,6 +44,14 @@ public class CustomerInfo {
      */
     private int role;
     /**
+     * 店铺邀请码
+     */
+    private String inviteCode;
+    /**
+     * 测试人登录编码
+     */
+    private String userId;
+    /**
      * 作废标记 0保留  1删除
      */
     private int isDeleted;
@@ -146,6 +154,22 @@ public class CustomerInfo {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getIsDeleted() {

@@ -42,6 +42,23 @@ public interface GoodsDao {
     int updateGoods(GoodsInfo goodsInfo);
 
     /**
+     * 检验删除的商品是否存在轮播图中
+     * @author zhong
+     * @date 2020-04-11
+     * @param listCode
+     * @return
+     */
+    int findGoodsPicShow(@Param("listCode") List<String> listCode);
+
+    /**
+     * 检验检验删除的商品是否存在热门商品中
+     * @author zhong
+     * @date 2020-04-11
+     * @param listCode
+     * @return
+     */
+    int findGoodsHotGoods(@Param("listCode") List<String> listCode);
+    /**
      * 删除商品信息信息
      * @param listCode 选中的商品编号集合
      * @param
@@ -80,4 +97,7 @@ public interface GoodsDao {
      * @return
      */
     List<GoodsClassInfo> getSecondClass(GoodsClassInfo goodsClassInfo);
+
+
+
 }

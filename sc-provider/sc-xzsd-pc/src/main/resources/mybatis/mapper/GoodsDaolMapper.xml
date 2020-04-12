@@ -79,11 +79,20 @@
     from
         t_goods a
     where a.is_deleted = 0
-    <if test="goodsCode != null and goodsCode != ''">
-     and a.goods_code like concat('%', #{goodsCode}, '%')
+    <if test="goodsState != null and goodsState != ''">
+     and a.goods_state like concat('%', #{goodsState}, '%')
     </if>
     <if test="goodsName != null and goodsName != ''">
      and a.goods_name like concat('%', #{goodsName}, '%')
+    </if>
+    <if test="goodsIntroduce != null and goodsIntroduce != ''">
+     and a.goods_introduce like concat('%', #{goodsIntroduce}, '%')
+    </if>
+    <if test="publisher != null and publisher != ''">
+    and a.publisher like concat('%', #{publisher}, '%')
+    </if>
+    <if test="author != null and author != ''">
+    and a.author like concat('%', #{author}, '%')
     </if>
     order by create_time desc
    </select>
@@ -114,6 +123,36 @@
     and version = #{version}
   </update>
 
+    <!--检验删除的商品是否存在轮播图中-->
+    <select id="findGoodsPicShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
+        select count(a.goods_code)
+        from
+        t_picture_show a LEFT JOIN t_goods b
+        on
+        a.goods_code = b.goods_code
+        where
+        a.goods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and
+        a.is_deleted = 0
+    </select>
+    <!--检验删除的商品是否存在热门商品中-->
+    <select id="findGoodsHotGoods" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
+        select count(a.goods_code)
+        from
+        t_hot_goods a LEFT JOIN t_goods b
+        on
+        a.goods_code = b.goods_code
+        where
+        a.goods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and
+        a.is_deleted = 0
+    </select>
     <!--删除商品-->
     <update id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
         update t_goods

@@ -27,4 +27,15 @@ public interface OrderDao {
      * @return
      */
     OrderInfo getOrderByOrderCode(@Param("orderCode") String orderCode);
+
+    /**
+     * 修改订单状态
+     * @author zhong
+     * @date 2020-04-12
+     * @param listCode
+     * @param orderState
+     * @param userId
+     * @return
+     */
+    int updateOrderState(@Param("listCode") List<String> listCode,@Param("orderState") int orderState,@Param("userId") String userId);
 }

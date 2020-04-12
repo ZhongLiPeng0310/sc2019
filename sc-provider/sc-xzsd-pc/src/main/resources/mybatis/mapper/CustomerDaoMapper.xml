@@ -14,8 +14,10 @@
         a.email email,
         a.id_card idCard,
         a.role role,
+        b.invite_code inviteCode,
         a.version version
-        from t_sys_user a
+        from t_sys_user a LEFT JOIN t_customer b
+        on a.user_code = b.user_code
         where a.is_deleted = 0
         and
         a.role = 1
@@ -25,6 +27,12 @@
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
         </if>
-        order by create_time desc
+        <if test="role == 2">
+            and b.invite_code in (select invite_code from t_store where user_code = #{userId})
+        </if>
+        <if test="role == 0">
+
+        </if>
+        order by a.create_time desc
     </select>
 </mapper>

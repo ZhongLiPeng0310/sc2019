@@ -60,8 +60,8 @@
         t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
-        <if test="hotCode != null and hotCode != ''">
-            and a.hot_code like concat('%', #{hotCode}, '%')
+        <if test="goodsName != null and goodsName != ''">
+            and a.goods_name like concat('%', #{goodsName}, '%')
         </if>
         <if test="goodsCode != null and goodsCode != ''">
             and a.goods_code like concat('%', #{goodsCode}, '%')

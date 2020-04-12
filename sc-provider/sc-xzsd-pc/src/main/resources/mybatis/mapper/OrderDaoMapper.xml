@@ -9,20 +9,34 @@
         a.order_money orderMoney,
         a.order_state orderState,
         a.store_code storeCode,
-        b.user_name userName,
-        b.phone phone,
-        a.create_time createTime
-        from t_order a
-        LEFT JOIN t_sys_user b
+        c.user_name userName,
+        c.phone phone,
+        a.create_time createTime,
+        b.invite_code inviteCode
+        from t_customer b
+        LEFT JOIN t_order a
         on a.user_code = b.user_code
+        LEFT JOIN t_sys_user c
+        on b.user_code = c.user_code
         where a.is_deleted = 0
         <if test="orderCode != null and orderCode != ''">
             and a.order_code like concat('%', #{orderCode}, '%')
         </if>
         <if test="userName != null and userName != ''">
-            and b.user_name like concat('%', #{userName}, '%')
+            and c.user_name like concat('%', #{userName}, '%')
         </if>
+        <if test="phone != null and phone != ''">
+            and c.phone like concat('%', #{phone}, '%')
+        </if>
+        <if test="orderState != null and orderState != ''">
+            and a.order_state like concat('%', #{orderState}, '%')
+        </if>
+        <if test="role == 2">
+            and a.store_code in (select store_code from t_store where user_code = #{userId})
+        </if>
+        <if test="role == 0">
 
+        </if>
     </select>
 
     <!--查询订单详情-->
@@ -42,5 +56,19 @@
         where a.order_code = #{orderCode}
         and a.is_deleted = 0
     </select>
-</mapper>
 
+    <!--修改订单状态-->
+    <update id="updateOrderState" parameterType="com.xzsd.pc.order.entity.OrderInfo">
+        update t_order
+        set
+        order_state = #{orderState},
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where
+        order_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

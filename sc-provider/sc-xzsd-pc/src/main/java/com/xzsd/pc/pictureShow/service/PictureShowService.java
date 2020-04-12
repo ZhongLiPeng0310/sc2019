@@ -42,8 +42,13 @@ public class PictureShowService {
         pictureShowInfo.setShowCode(StringUtil.getCommonCode(2));
         pictureShowInfo.setIsDeleted(0);
         //新增轮播图
-        int count = pictureShowDao.savePictureShow(pictureShowInfo);
-        if (0 == count){
+        int countPicture = pictureShowDao.countPicture(pictureShowInfo);
+        if (0 != countPicture){
+            return AppResponse.bizError("新增失败，轮播图的图片已存在！");
+        }
+        //检验新增的轮播图图片是否已新增
+        int savePictureShow = pictureShowDao.savePictureShow(pictureShowInfo);
+        if (0 == savePictureShow){
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功!");

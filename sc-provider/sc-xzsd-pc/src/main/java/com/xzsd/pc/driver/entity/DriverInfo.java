@@ -42,6 +42,10 @@ public class DriverInfo {
      */
     private String userPassword;
     /**
+     * 店铺编码
+     */
+    private String storeCode;
+    /**
      * 省份编码
      */
     private String provinceCode;
@@ -69,6 +73,10 @@ public class DriverInfo {
      * 角色标记  3位司机
      */
     private int role;
+    /**
+     * 当前登录人ID
+     */
+    private String userId;
     /**
      * 作废标记
      */
@@ -166,6 +174,14 @@ public class DriverInfo {
         this.userPassword = userPassword;
     }
 
+    public String getStoreCode() {
+        return storeCode;
+    }
+
+    public void setStoreCode(String storeCode) {
+        this.storeCode = storeCode;
+    }
+
     public String getProvinceCode() {
         return provinceCode;
     }
@@ -220,6 +236,14 @@ public class DriverInfo {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getIsDeleted() {
