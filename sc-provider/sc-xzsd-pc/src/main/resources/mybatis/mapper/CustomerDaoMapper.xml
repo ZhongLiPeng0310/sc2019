@@ -26,9 +26,7 @@
         a.version version
         from t_sys_user a LEFT JOIN t_customer b
         on a.user_code = b.user_code
-        where a.is_deleted = 0
-        and
-        a.role = 1
+        where b.is_deleted = 0
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
@@ -41,6 +39,6 @@
         <if test="role == 0">
 
         </if>
-        order by a.create_time desc
+        order by b.create_time desc
     </select>
 </mapper>
