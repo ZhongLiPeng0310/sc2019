@@ -1,6 +1,7 @@
 package com.xzsd.pc.store.dao;
 
 
+import com.xzsd.pc.dictionary.entity.DictionaryInfo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -83,4 +84,29 @@ public interface StoreDao {
      * @return
      */
     int countUserInUser(StoreInfo storeInfo);
+
+    /**
+     * 查询省份列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    List<DictionaryInfo> listProvince(DictionaryInfo dictionaryInfo);
+    /**
+     * 查询城市列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    List<DictionaryInfo> listCity(DictionaryInfo dictionaryInfo);
+    /**
+     * 查询区列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    List<DictionaryInfo> listArea(DictionaryInfo dictionaryInfo);
 }

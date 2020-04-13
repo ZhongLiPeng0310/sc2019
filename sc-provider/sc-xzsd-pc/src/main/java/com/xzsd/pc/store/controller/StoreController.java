@@ -3,6 +3,7 @@ package com.xzsd.pc.store.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.pc.dictionary.entity.DictionaryInfo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.service.StoreService;
 import org.slf4j.Logger;
@@ -124,5 +125,55 @@ public class StoreController {
         }
     }
 
-
+    /**
+     * 查询省份列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    @PostMapping("listProvince")
+    public AppResponse listProvince(DictionaryInfo dictionaryInfo){
+        try {
+            return storeService.listProvince(dictionaryInfo);
+        }catch (Exception e){
+            logger.error("查询省份列表失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+    /**
+     * 查询城市列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    @PostMapping("listCity")
+    public AppResponse listCity(DictionaryInfo dictionaryInfo){
+        try {
+            return storeService.listCity(dictionaryInfo);
+        }catch (Exception e){
+            logger.error("查询城市列表失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+    /**
+     * 查询区列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    @PostMapping("listArea")
+    public AppResponse listArea(DictionaryInfo dictionaryInfo){
+        try {
+            return storeService.listArea(dictionaryInfo);
+        }catch (Exception e){
+            logger.error("查询区列表失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

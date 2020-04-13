@@ -16,9 +16,37 @@ public class DictionaryInfo {
      */
     private int showNo;
     /**
-     * 标记  0为热门商品展示数量
+     * 类型标记  0中国  1省份 2市级 3区级 4为热门商品展示数量
      */
-    private int mark;
+    private int type;
+    /**
+     * 父类编码
+     */
+    private String parentCode;
+    /**
+     * 省份编码
+     */
+    private String provinceCode;
+    /**
+     * 省份名称
+     */
+    private String provinceName;
+    /**
+     * 市级编码
+     */
+    private String cityCode;
+    /**
+     * 市级名称
+     */
+    private String cityName;
+    /**
+     * 区级名称
+     */
+    private String areaName;
+    /**
+     * 区级编码
+     */
+    private String areaCode;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -48,6 +76,30 @@ public class DictionaryInfo {
      */
     private String version;
 
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
     public String getDicCode() {
         return dicCode;
     }
@@ -72,12 +124,44 @@ public class DictionaryInfo {
         this.showNo = showNo;
     }
 
-    public int getMark() {
-        return mark;
+    public int getType() {
+        return type;
     }
 
-    public void setMark(int mark) {
-        this.mark = mark;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public int getIsDeleted() {

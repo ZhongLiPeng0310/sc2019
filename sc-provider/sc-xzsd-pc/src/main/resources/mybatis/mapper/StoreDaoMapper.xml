@@ -168,5 +168,42 @@
         where a.is_deleted = 0
         and store_code = #{storeCode}
     </select>
+
+    <!--查询省份列表-->
+    <select id="listProvince" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        select
+        dic_code provinceCode,
+        dic_name provinceName
+        from
+        t_dictionary
+        where
+        type = 1
+        order by
+        dic_code
+    </select>
+    <!--查询省份列表-->
+    <select id="listCity" parameterType="java.lang.String" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        select
+        dic_code provinceCode,
+        dic_name provinceName
+        from
+        t_dictionary
+        where
+        parent_code = #{parentCode}
+        order by
+        dic_code
+    </select>
+    <!--查询区列表-->
+    <select id="listArea" parameterType="java.lang.String" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
+        select
+        dic_code provinceCode,
+        dic_name provinceName
+        from
+        t_dictionary
+        where
+        parent_code = #{parentCode}
+        order by
+        dic_code
+    </select>
 </mapper>
 

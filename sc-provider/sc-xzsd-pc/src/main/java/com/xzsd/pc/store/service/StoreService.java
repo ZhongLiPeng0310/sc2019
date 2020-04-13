@@ -6,6 +6,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.xzsd.pc.customer.dao.CustomerDao;
+import com.xzsd.pc.dictionary.entity.DictionaryInfo;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.stereotype.Service;
@@ -142,5 +143,34 @@ public class StoreService {
     public AppResponse getStoreByStoreCode(String storeCode) {
         StoreInfo storeInfo = storeDao.getStoreByStoreCode(storeCode);
         return AppResponse.success("查询成功！",storeInfo);
+    }
+
+    /**
+     * 查询省份列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    public AppResponse listProvince(DictionaryInfo dictionaryInfo) {
+        List<DictionaryInfo> listProvince = storeDao.listProvince(dictionaryInfo);
+        return AppResponse.success("查询成功！",listProvince);
+    }
+
+    /**
+     * 查询城市列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
+    public AppResponse listCity(DictionaryInfo dictionaryInfo) {
+        List<DictionaryInfo> listCity = storeDao.listCity(dictionaryInfo);
+        return AppResponse.success("查询成功！",listCity);
+    }
+
+    public AppResponse listArea(DictionaryInfo dictionaryInfo) {
+        List<DictionaryInfo> listArea = storeDao.listArea(dictionaryInfo);
+        return AppResponse.success("查询成功！",listArea);
     }
 }

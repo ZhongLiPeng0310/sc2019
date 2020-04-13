@@ -24,9 +24,11 @@
     </select>
     <!--检验字典表中是否存在展示商品数量-->
     <select id="countShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="int">
-        select count(mark)
+        select count(type)
         from t_dictionary
         where is_deleted = 0
+        and
+        type = 4
         <if test="dicCode != null and dicCode != ''">
             and dic_code != #{dicCode}
         </if>
@@ -112,9 +114,8 @@
         t_dictionary
         (
         dic_code,
-        dic_name,
         show_no,
-        mark,
+        type,
         is_deleted,
         create_time,
         create_name,
@@ -123,9 +124,8 @@
         VALUES
         (
         #{dicCode},
-        #{dicName},
         #{showNo},
-        0,
+        4,
         #{isDeleted},
         now(),
         #{createName},
@@ -137,14 +137,13 @@
     <select id="getShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
         select
         a.dic_code dicCode,
-        a.dic_name dicName,
         a.show_no showNo,
-        a.mark mark,
+        a.type type,
         a.version version
         from
         t_dictionary a
         where
-        a.mark = 0
+        a.type = 4
         and
         a.is_deleted = 0
     </select>
@@ -153,13 +152,12 @@
     <update id="updateShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
         update t_dictionary
         set
-        dic_name = #{dicName},
         show_no = #{showNo},
         update_time = now(),
         update_name = #{updateName},
         version = version + 1
         where
-        mark = 0
+        type = 4
         and version = #{version}
     </update>
 </mapper>
