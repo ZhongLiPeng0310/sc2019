@@ -100,15 +100,6 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUser(UserInfo userInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        userInfo.setUserCode(userInfo.getUserCode());
-        userInfo.setUserAcct(userInfo.getUserAcct());
-        userInfo.setUserName(userInfo.getUserName());
-        userInfo.setPhone(userInfo.getPhone());
-        userInfo.setEmail(userInfo.getEmail());
-        userInfo.setIdCard(userInfo.getIdCard());
-        userInfo.setUserPassword(userInfo.getUserPassword());
-        userInfo.setRole(userInfo.getRole());
-        userInfo.setVersion(userInfo.getVersion());
         // 校验账号是否存在
         int countUserAcct = userDao.countUserAcct(userInfo);
         if(0 != countUserAcct) {
@@ -134,5 +125,4 @@ public class UserService {
         UserInfo userInfo = userDao.getUserByUserCode(userCode);
         return AppResponse.success("查询成功！",userInfo);
     }
-
 }
