@@ -61,6 +61,11 @@ public class OrderInfo {
      */
     private String createTime;
     /**
+     * 付款时间区间
+     */
+    private String startPayTime;
+    private String endPayTime;
+    /**
      * 角色 0管理员  1客户 2店长 3司机
      */
     private int role;
@@ -206,6 +211,22 @@ public class OrderInfo {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getStartPayTime() {
+        return startPayTime;
+    }
+
+    public void setStartPayTime(String startPayTime) {
+        this.startPayTime = startPayTime;
+    }
+
+    public String getEndPayTime() {
+        return endPayTime;
+    }
+
+    public void setEndPayTime(String endPayTime) {
+        this.endPayTime = endPayTime;
     }
 
     public int getRole() {
