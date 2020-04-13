@@ -106,8 +106,7 @@
         from t_sys_user a
         LEFT JOIN t_driver b
         on a.user_code = b.user_code
-        where a.is_deleted = 0
-        and a.role = 3
+        where b.is_deleted = 0
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
@@ -219,7 +218,6 @@
         LEFT JOIN t_dictionary e
         on b.province_code = e.dic_code
         where a.user_code = #{userCode}
-        and a.is_deleted = 0
-        and a.role = 3
+        and b.is_deleted = 0
     </select>
 </mapper>
