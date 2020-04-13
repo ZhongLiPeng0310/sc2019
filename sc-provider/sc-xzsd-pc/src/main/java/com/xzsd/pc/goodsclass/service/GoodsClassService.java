@@ -56,10 +56,6 @@ public class GoodsClassService {
      */
     public AppResponse updateGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        goodsClassInfo.setClassCode(goodsClassInfo.getClassCode());
-        goodsClassInfo.setClassName(goodsClassInfo.getClassName());
-        goodsClassInfo.setRemark(goodsClassInfo.getRemark());
-        goodsClassInfo.setVersion(goodsClassInfo.getVersion());
         //检验修改的商品分类名称是否已存在
         int countClassName = goodsClassDao.countClassName(goodsClassInfo);
         if (0 != countClassName){

@@ -99,16 +99,6 @@ public class StoreService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        storeInfo.setStoreCode(storeInfo.getStoreCode());
-        storeInfo.setStoreName(storeInfo.getStoreName());
-        storeInfo.setPhone(storeInfo.getPhone());
-        storeInfo.setUserCode(storeInfo.getUserCode());
-        storeInfo.setLicenseCode(storeInfo.getLicenseCode());
-        storeInfo.setProvinceCode(storeInfo.getProvinceCode());
-        storeInfo.setCityCode(storeInfo.getCityCode());
-        storeInfo.setAreaCode(storeInfo.getAreaCode());
-        storeInfo.setAddress(storeInfo.getAddress());
-        storeInfo.setVersion(storeInfo.getVersion());
         //检验修改门店时用户编码是否已存在门店中
         int countUser = storeDao.countUser(storeInfo);
         if (0 != countUser){

@@ -112,15 +112,6 @@ public class DriverService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        driverInfo.setUserCode(driverInfo.getUserCode());
-        driverInfo.setVersion(driverInfo.getVersion());
-        driverInfo.setUserName(driverInfo.getUserName());
-        driverInfo.setPhone(driverInfo.getPhone());
-        driverInfo.setUserAcct(driverInfo.getUserAcct());
-        driverInfo.setUserPassword(driverInfo.getUserPassword());
-        driverInfo.setProvinceCode(driverInfo.getProvinceCode());
-        driverInfo.setCityCode(driverInfo.getCityCode());
-        driverInfo.setAreaCode(driverInfo.getAreaCode());
         //检验账号是否存在
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct){

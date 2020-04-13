@@ -96,9 +96,6 @@ public class HotGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        hotGoodsInfo.setHotCode(hotGoodsInfo.getHotCode());
-        hotGoodsInfo.setHotSort(hotGoodsInfo.getHotSort());
-        hotGoodsInfo.setVersion(hotGoodsInfo.getVersion());
         //检验新增的商品是否存在热门商品中
         int countGoods =  hotGoodsDao.countGoods(hotGoodsInfo);
         if (0 != countGoods){
