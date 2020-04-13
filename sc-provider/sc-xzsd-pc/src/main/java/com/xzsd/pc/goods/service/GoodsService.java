@@ -83,7 +83,23 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoods(GoodsInfo goodsInfo){
         AppResponse appResponse = AppResponse.success("修改成功");
-
+        goodsInfo.setGoodsCode(goodsInfo.getGoodsCode());
+        goodsInfo.setVersion(goodsInfo.getVersion());
+        goodsInfo.setGoodsName(goodsInfo.getGoodsName());
+        goodsInfo.setIsbn(goodsInfo.getIsbn());
+        goodsInfo.setClassCode(goodsInfo.getGoodsCode());
+        goodsInfo.setGoodsIntroduce(goodsInfo.getGoodsIntroduce());
+        goodsInfo.setAdvertisement(goodsInfo.getAdvertisement());
+        goodsInfo.setStoreCode(goodsInfo.getStoreCode());
+        goodsInfo.setStock(goodsInfo.getStock());
+        goodsInfo.setCostPrice(goodsInfo.getCostPrice());
+        goodsInfo.setSalePrice(goodsInfo.getSalePrice());
+        goodsInfo.setImageurl(goodsInfo.getImageurl());
+        // 校验修改商品时，isbn书号是否已存在
+        int countIsbn =goodsDao.countIsbn(goodsInfo);
+        if (0 != countIsbn){
+            return AppResponse.bizError("新增失败，isbn书号已存在！");
+        }
         //修改商品信息
         int updateGood = goodsDao.updateGoods(goodsInfo);
         if (0 == updateGood){

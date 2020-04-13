@@ -18,6 +18,9 @@
         from t_hot_goods
         where is_deleted = 0
         and hot_sort = #{hotSort}
+        <if test="hotCode != null and hotCode != ''">
+            and hot_code != #{hotCode}
+        </if>
     </select>
     <!--检验字典表中是否存在展示商品数量-->
     <select id="countShowNo" parameterType="com.xzsd.pc.dictionary.entity.DictionaryInfo" resultType="int">

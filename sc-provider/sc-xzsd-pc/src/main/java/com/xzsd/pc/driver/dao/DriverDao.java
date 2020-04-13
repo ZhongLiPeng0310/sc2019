@@ -80,6 +80,12 @@ public interface DriverDao {
      */
     DriverInfo getDriverByUserCode(@Param("userCode")String userCode);
 
-
-
+    /**
+     * 检验新增司机时 手机号码是否已存在
+     * @author zhong
+     * @date 2020-04-06
+     * @param driverInfo
+     * @return
+     */
+    int countUserPhone(DriverInfo driverInfo);
 }

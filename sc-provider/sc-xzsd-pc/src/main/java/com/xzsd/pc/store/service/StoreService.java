@@ -3,7 +3,9 @@ package com.xzsd.pc.store.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
+import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class StoreService {
 
     @Resource
     private StoreDao storeDao;
+    @Resource
+    private CustomerDao customerDao;
 
     /**
      * 新增门店
@@ -39,7 +43,7 @@ public class StoreService {
         //新增门店
         int count = storeDao.saveStore(storeInfo);
         if (0 == count){
-
+            return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功!");
     }
@@ -52,6 +56,12 @@ public class StoreService {
      * @return
      */
     public AppResponse listStoreByPage(StoreInfo storeInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        storeInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = customerDao.getUserRole(userId);
+        storeInfo.setRole(role);
         PageHelper.startPage(storeInfo.getPageNum(),storeInfo.getPageSize());
         List<StoreInfo> storeInfoList = storeDao.listStoreByPage(storeInfo);
         //包装Page对象
@@ -89,6 +99,16 @@ public class StoreService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        storeInfo.setStoreCode(storeInfo.getStoreCode());
+        storeInfo.setStoreName(storeInfo.getStoreName());
+        storeInfo.setPhone(storeInfo.getPhone());
+        storeInfo.setUserCode(storeInfo.getUserCode());
+        storeInfo.setLicenseCode(storeInfo.getLicenseCode());
+        storeInfo.setProvinceCode(storeInfo.getProvinceCode());
+        storeInfo.setCityCode(storeInfo.getCityCode());
+        storeInfo.setAreaCode(storeInfo.getAreaCode());
+        storeInfo.setAddress(storeInfo.getAddress());
+        storeInfo.setVersion(storeInfo.getVersion());
         //检验修改门店时用户编码是否已存在门店中
         int countUser = storeDao.countUser(storeInfo);
         if (0 != countUser){

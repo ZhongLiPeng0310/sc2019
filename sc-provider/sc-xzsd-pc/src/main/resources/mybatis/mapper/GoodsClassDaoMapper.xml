@@ -8,6 +8,9 @@
         from t_goods_class
         where is_deleted = 0
         and class_name = #{className}
+        <if test="classCode != null and classCode != ''">
+            and class_code != #{classCode}
+        </if>
     </select>
     <!--新增商品分类-->
     <insert id="saveGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">

@@ -100,7 +100,7 @@ public class DriverInfo {
     /**
      * 版本号
      */
-    private String version;
+    private int version;
     /**
      * 页码
      */
@@ -286,11 +286,11 @@ public class DriverInfo {
         this.updateTime = updateTime;
     }
 
-    public String getVersion() {
+    public int getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(int version) {
         this.version = version;
     }
 

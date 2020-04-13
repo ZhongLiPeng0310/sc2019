@@ -8,6 +8,9 @@
         from t_picture_show
         where is_deleted = 0
         and goods_code = #{goodsCode}
+        <if test="showCode != null and showCode != ''">
+            and show_code != #{showCode}
+        </if>
     </select>
     <!--检验新的轮播图的排序号是否重复-->
     <select id="countSort" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
@@ -15,6 +18,9 @@
         from t_picture_show
         where is_deleted = 0
         and sort_no = #{sortNo}
+        <if test="showCode != null and showCode != ''">
+            and show_code != #{showCode}
+        </if>
     </select>
     <!--检验商品是否已存在轮播图-->
     <select id="countPicture" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
@@ -22,6 +28,9 @@
         from t_picture_show
         where is_deleted = 0
         and show_image_url = #{imagePath}
+        <if test="showCode != null and showCode != ''">
+            and show_code != #{showCode}
+        </if>
     </select>
     <!--新增轮播图-->
     <insert id="savePictureShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">

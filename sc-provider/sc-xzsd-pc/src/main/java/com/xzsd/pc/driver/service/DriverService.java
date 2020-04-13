@@ -2,11 +2,15 @@ package com.xzsd.pc.driver.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
+import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.List;
 public class DriverService {
     @Resource
     private DriverDao driverDao;
+    @Resource
+    private CustomerDao customerDao;
 
     /**
      * 查询司机列表
@@ -27,6 +33,12 @@ public class DriverService {
      * @return
      */
     public AppResponse listDriverByPage(DriverInfo driverInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        driverInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = customerDao.getUserRole(userId);
+        driverInfo.setRole(role);
         PageHelper.startPage(driverInfo.getPageNum(), driverInfo.getPageSize());
         List<DriverInfo> driverInfoList = driverDao.listDriverByPage(driverInfo);
         //包装Page对象
@@ -47,6 +59,11 @@ public class DriverService {
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct){
             return AppResponse.bizError("用户账号已存在，请重新输入");
+        }
+        //检验手机号码是否存在
+        int countDriverPhone = driverDao.countUserPhone(driverInfo);
+        if (0 != countDriverPhone){
+            return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
         driverInfo.setUserCode(StringUtil.getCommonCode(2));
         driverInfo.setIsDeleted(0);
@@ -95,6 +112,20 @@ public class DriverService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        driverInfo.setUserCode(driverInfo.getUserCode());
+        driverInfo.setVersion(driverInfo.getVersion());
+        driverInfo.setUserName(driverInfo.getUserName());
+        driverInfo.setPhone(driverInfo.getPhone());
+        driverInfo.setUserAcct(driverInfo.getUserAcct());
+        driverInfo.setUserPassword(driverInfo.getUserPassword());
+        driverInfo.setProvinceCode(driverInfo.getProvinceCode());
+        driverInfo.setCityCode(driverInfo.getCityCode());
+        driverInfo.setAreaCode(driverInfo.getAreaCode());
+        //检验账号是否存在
+        int countUserAcct = driverDao.countUserAcct(driverInfo);
+        if (0 != countUserAcct){
+            return AppResponse.bizError("用户账号已存在，请重新输入");
+        }
         // 修改司机在用户表的信息
         int updateUserDriver = driverDao.updateUserDriver(driverInfo);
         // 修改司机信息

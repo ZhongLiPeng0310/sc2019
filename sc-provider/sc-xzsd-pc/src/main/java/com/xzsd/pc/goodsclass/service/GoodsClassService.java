@@ -56,6 +56,15 @@ public class GoodsClassService {
      */
     public AppResponse updateGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        goodsClassInfo.setClassCode(goodsClassInfo.getClassCode());
+        goodsClassInfo.setClassName(goodsClassInfo.getClassName());
+        goodsClassInfo.setRemark(goodsClassInfo.getRemark());
+        goodsClassInfo.setVersion(goodsClassInfo.getVersion());
+        //检验修改的商品分类名称是否已存在
+        int countClassName = goodsClassDao.countClassName(goodsClassInfo);
+        if (0 != countClassName){
+            return AppResponse.bizError("新增失败，新增的分类名称已存在！");
+        }
         //修改商品分类
         int updateGoodsClass = goodsClassDao.updateGoodsClass(goodsClassInfo);
         if (0 == updateGoodsClass) {

@@ -44,7 +44,7 @@ public class DriverController {
         }
     }
     /**
-     * 查询用户列表  分页
+     * 查询司机列表  分页
      * @param driverInfo
      * @return
      */
@@ -53,7 +53,7 @@ public class DriverController {
         try{
             return driverService.listDriverByPage(driverInfo);
         }catch (Exception e){
-            logger.error("查询用户列表异常",e);
+            logger.error("查询司机列表异常",e);
             System.out.println(e.toString());
             throw e;
         }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,6 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-
-
-
     @Resource
     private CustomerDao customerDao;
 
@@ -34,6 +32,12 @@ public class CustomerService {
      * @return
      */
     public AppResponse listCustomerByPage(CustomerInfo customerInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        customerInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = customerDao.getUserRole(userId);
+        customerInfo.setRole(role);
         PageHelper.startPage(customerInfo.getPageNum(), customerInfo.getPageSize());
         List<CustomerInfo> customerInfoList = customerDao.listCustomerByPage(customerInfo);
         //包装Page对象

@@ -3,6 +3,8 @@ package com.xzsd.pc.order.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.order.entity.OrderInfo;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,8 @@ public class OrderService {
 
     @Resource
     private OrderDao orderDao;
-
+    @Resource
+    private CustomerDao customerDao;
     /**
      * 查询订单列表  分页
      * @author zhong
@@ -26,6 +29,12 @@ public class OrderService {
      * @return
      */
     public AppResponse listOrderByPage(OrderInfo orderInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        orderInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = customerDao.getUserRole(userId);
+        orderInfo.setRole(role);
         PageHelper.startPage(orderInfo.getPageNum(), orderInfo.getPageSize());
         List<OrderInfo> orderInfoList = orderDao.listOrderByPage(orderInfo);
         //包装Page对象

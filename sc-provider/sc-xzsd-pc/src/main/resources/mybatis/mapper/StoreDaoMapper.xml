@@ -8,6 +8,9 @@
         from t_store
         where is_deleted = 0
         and user_code = #{userCode}
+        <if test="storeCode != null and storeCode != ''">
+            and store_code != #{storeCode}
+        </if>
     </select>
     <!--新增门店信息-->
     <insert id="saveStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">

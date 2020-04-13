@@ -8,6 +8,9 @@
         from t_goods
         where is_deleted = 0
         and isbn = #{isbn}
+        <if test="goodsCode != null and goodsCode != ''">
+            and goods_code != #{goodsCode}
+        </if>
     </select>
 
     <!--新增商品-->

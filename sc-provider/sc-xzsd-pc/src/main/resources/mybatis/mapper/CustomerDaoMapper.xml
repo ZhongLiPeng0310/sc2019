@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.customer.dao.CustomerDao">
-
+    <!--获取当前登录人的角色-->
+    <select id="getUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        role
+        from
+        t_sys_user
+        where
+        user_code = #{userId}
+    </select>
     <!--查询客户列表-->
     <select id="listCustomerByPage" parameterType="com.xzsd.pc.customer.entity.CustomerInfo" resultType="com.xzsd.pc.customer.entity.CustomerInfo">
         select
