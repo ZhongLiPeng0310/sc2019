@@ -33,10 +33,10 @@
             and a.order_state like concat('%', #{orderState}, '%')
         </if>
         <if test="startPayTime != null and startPayTime != ''">
-            and a.create_time = DATE_FORMAT( #{startPayTime}, '%Y-%m-%d %h:%i:%S')
+            and a.create_time = DATE_FORMAT( #{startPayTime},'%Y-%m-%d %h:%i:%S')
         </if>
         <if test="endPayTime != null and endPayTime != ''">
-            and a.create_time = DATE_FORMAT( #{endPayTime}, '%Y-%m-%d %h:%i:%S')
+            and a.create_time = DATE_FORMAT( #{endPayTime},'%Y-%m-%d %h:%i:%S')
         </if>
         <if test="role == 2">
             and a.store_code in (select store_code from t_store where user_code = #{userId})
