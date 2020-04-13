@@ -5,13 +5,14 @@
     <select id="getPictureShow" resultType="com.xzsd.app.homePage.entity.PictureShowInfo">
         select
         show_image_url imagePath,
-        goods_code goodsCode
+        goods_code goodsCode,
+        sort_no sortNo
         from
         t_picture_show
         where
         is_deleted = 0
         order by
-        create_time
+        sort_no
     </select>
 
     <!--查询首页热门商品-->
@@ -20,11 +21,12 @@
         b.goods_code goodsCode,
         b.goods_name goodsName,
         b.sale_price salePrice,
-        b.imageurl imagePath
+        b.imageurl imagePath,
+        a.hot_sort hotSort
         from
         t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
-        order by a.create_time desc
+        order by a.hot_sort desc
     </select>
 </mapper>
