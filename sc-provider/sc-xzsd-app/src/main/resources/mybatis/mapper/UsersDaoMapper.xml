@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.regist.dao.UserDao">
+
+    <!--统计用户账号数量-->
+    <select id="countUserAcct" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
+        select count(user_acct)
+        from t_sys_user
+        where is_deleted = 0
+        and user_acct = #{userAcct}
+        <if test="userCode != null and userCode != ''">
+            and user_code != #{userCode}
+        </if>
+    </select>
+    <!--校验新增的用户的手机号码是否已存在-->
+    <select id="countUserPhone" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
+        select count(phone)
+        from t_sys_user
+        where is_deleted = 0
+        and phone = #{phone}
+    </select>
+    <!--新增用户-->
+    <insert id="saveUser" parameterType="com.xzsd.app.regist.entity.UserInfo">
+        insert into t_sys_user
+        (user_code,
+        user_acct,
+        user_password,
+        user_name,
+        sex,
+        phone,
+        email,
+        id_card,
+        role,
+        image_path,
+        is_deleted,
+        create_name,
+        create_time,
+        version
+        )
+        values
+        (#{userCode},
+        #{userAcct},
+        #{userPassword},
+        #{userName},
+        #{sex},
+        #{phone},
+        #{email},
+        #{idCard},
+        1,
+        #{imagePath},
+        #{isDeleted},
+        #{createName},
+        now(),
+        0
+        )
+    </insert>
+
+</mapper>

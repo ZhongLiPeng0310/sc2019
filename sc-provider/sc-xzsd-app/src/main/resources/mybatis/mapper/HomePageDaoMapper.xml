@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.homePage.dao.HomePageDao">
+    <!--查询首页轮播图-->
+    <select id="getPictureShow" resultType="com.xzsd.app.homePage.entity.PictureShowInfo">
+        select
+        show_image_url imagePath,
+        goods_code goodsCode
+        from
+        t_picture_show
+        where
+        is_deleted = 0
+        order by
+        create_time
+    </select>
+
+    <!--查询首页热门商品-->
+    <select id="getHotGoods" parameterType="com.xzsd.app.homePage.entity.HotGoodsInfo" resultType="com.xzsd.app.homePage.entity.HotGoodsInfo">
+        select
+        b.goods_code goodsCode,
+        b.goods_name goodsName,
+        b.sale_price salePrice,
+        b.imageurl imagePath
+        from
+        t_hot_goods a RIGHT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        where a.is_deleted = 0
+        order by a.create_time desc
+    </select>
+</mapper>
