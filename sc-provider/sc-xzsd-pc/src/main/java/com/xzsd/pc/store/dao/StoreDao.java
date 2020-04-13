@@ -65,4 +65,22 @@ public interface StoreDao {
      * @return
      */
     int countUser(StoreInfo storeInfo);
+
+    /**
+     * 检验新增门店时营业执照编码是否已存在门店中
+     * @author zhong
+     * @date 2020-04-12
+     * @param storeInfo
+     * @return
+     */
+    int countLicense(StoreInfo storeInfo);
+
+    /**
+     * 检验新增的用户编码是否存在用户表中
+     * @author zhong
+     * @date 2020-04-12
+     * @param storeInfo
+     * @return
+     */
+    int countUserInUser(StoreInfo storeInfo);
 }

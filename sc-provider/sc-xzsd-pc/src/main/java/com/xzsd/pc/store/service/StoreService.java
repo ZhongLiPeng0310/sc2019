@@ -40,6 +40,16 @@ public class StoreService {
         if (0 != countUser){
             return AppResponse.bizError("新增失败，该店长已存在！");
         }
+        //检验新增门店时营业执照编码是否已存在门店中
+        int countLicense = storeDao.countLicense(storeInfo);
+        if (0 != countLicense){
+            return AppResponse.bizError("新增失败，该营业执照已存在！");
+        }
+        //检验新增的用户编码是否存在用户表中
+        int countUserInUser = storeDao.countUserInUser(storeInfo);
+        if (0 == countUserInUser){
+            return AppResponse.bizError("新增失败，不存在该店长！");
+        }
         //新增门店
         int count = storeDao.saveStore(storeInfo);
         if (0 == count){
@@ -99,10 +109,20 @@ public class StoreService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        //检验修改门店时用户编码是否已存在门店中
+        //检验新增门店时用户编码是否已存在门店中
         int countUser = storeDao.countUser(storeInfo);
         if (0 != countUser){
-            return AppResponse.bizError("修改失败，该店长已存在！");
+            return AppResponse.bizError("新增失败，该店长已存在！");
+        }
+        //检验新增门店时营业执照编码是否已存在门店中
+        int countLicense = storeDao.countLicense(storeInfo);
+        if (0 != countLicense){
+            return AppResponse.bizError("新增失败，该营业执照已存在！");
+        }
+        //检验新增的用户编码是否存在用户表中
+        int countUserInUser = storeDao.countUserInUser(storeInfo);
+        if (0 == countUserInUser){
+            return AppResponse.bizError("新增失败，不存在该店长！");
         }
         int count = storeDao.updateStore(storeInfo);
         if (0 == count) {

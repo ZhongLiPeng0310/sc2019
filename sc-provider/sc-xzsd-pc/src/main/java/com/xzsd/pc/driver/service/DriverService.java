@@ -65,6 +65,11 @@ public class DriverService {
         if (0 != countDriverPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
+        //检验身份证号码是否存在
+        int countIdCard = driverDao.countIdCard(driverInfo);
+        if (0 != countIdCard){
+            return AppResponse.bizError("用户身份证已存在，请重新输入");
+        }
         driverInfo.setUserCode(StringUtil.getCommonCode(2));
         driverInfo.setIsDeleted(0);
         //新增司机
@@ -121,6 +126,11 @@ public class DriverService {
         int countDriverPhone = driverDao.countUserPhone(driverInfo);
         if (0 != countDriverPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
+        }
+        //检验身份证号码是否存在
+        int countIdCard = driverDao.countIdCard(driverInfo);
+        if (0 != countIdCard){
+            return AppResponse.bizError("用户身份证已存在，请重新输入");
         }
         // 修改司机在用户表的信息
         int updateUserDriver = driverDao.updateUserDriver(driverInfo);

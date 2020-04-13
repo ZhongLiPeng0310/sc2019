@@ -88,4 +88,13 @@ public interface DriverDao {
      * @return
      */
     int countUserPhone(DriverInfo driverInfo);
+
+    /**
+     * 校验新增的用户的身份证号码是否已存在
+     * @author zhong
+     * @date 2020-04-06
+     * @param driverInfo
+     * @return
+     */
+    int countIdCard(DriverInfo driverInfo);
 }

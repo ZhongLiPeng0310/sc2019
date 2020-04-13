@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
 
-    <!--统计用户账号数量-->
+    <!--校验用户编码是否存在店铺中-->
     <select id="countUser" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
         select count(user_code)
         from t_store
@@ -11,6 +11,23 @@
         <if test="storeCode != null and storeCode != ''">
             and store_code != #{storeCode}
         </if>
+    </select>
+    <!--检验营业执照编码是否存在-->
+    <select id="countLicense" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(license_code)
+        from t_store
+        where is_deleted = 0
+        and license_code = #{licenseCode}
+        <if test="storeCode != null and storeCode != ''">
+            and store_code != #{storeCode}
+        </if>
+    </select>
+    <!--检验新增的用户编码是否存在用户表中-->
+    <select id="countUserInUser" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(user_code)
+        from t_sys_user
+        where is_deleted = 0
+        and user_code = #{userCode}
     </select>
     <!--新增门店信息-->
     <insert id="saveStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
