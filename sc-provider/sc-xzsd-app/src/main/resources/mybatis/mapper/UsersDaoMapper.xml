@@ -18,6 +18,9 @@
         from t_sys_user
         where is_deleted = 0
         and phone = #{phone}
+        <if test="userCode != null and userCode != ''">
+            and user_code != #{userCode}
+        </if>
     </select>
     <!--新增用户-->
     <insert id="saveUser" parameterType="com.xzsd.app.regist.entity.UserInfo">
@@ -31,7 +34,6 @@
         email,
         id_card,
         role,
-        image_path,
         is_deleted,
         create_name,
         create_time,
@@ -47,7 +49,6 @@
         #{email},
         #{idCard},
         1,
-        #{imagePath},
         #{isDeleted},
         #{createName},
         now(),
