@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.customer.dao.CustomerDao">
     <!--获取当前登录人的角色-->
-    <select id="getUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="getUserRole" parameterType="java.lang.String" resultType="int">
         select
         role
         from
