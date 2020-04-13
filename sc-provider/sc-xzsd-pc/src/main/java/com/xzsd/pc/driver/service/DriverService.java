@@ -117,6 +117,11 @@ public class DriverService {
         if (0 != countUserAcct){
             return AppResponse.bizError("用户账号已存在，请重新输入");
         }
+        //检验手机号码是否存在
+        int countDriverPhone = driverDao.countUserPhone(driverInfo);
+        if (0 != countDriverPhone){
+            return AppResponse.bizError("用户手机号码已存在，请重新输入");
+        }
         // 修改司机在用户表的信息
         int updateUserDriver = driverDao.updateUserDriver(driverInfo);
         // 修改司机信息
