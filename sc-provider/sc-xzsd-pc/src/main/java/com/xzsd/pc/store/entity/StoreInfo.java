@@ -48,13 +48,25 @@ public class StoreInfo {
      */
     private String provinceCode;
     /**
+     * 省份名称
+     */
+    private String provinceName;
+    /**
      * 市编码
      */
     private String cityCode;
     /**
+     * 市级名称
+     */
+    private String cityName;
+    /**
      * 区编码
      */
     private String areaCode;
+    /**
+     * 区级名称
+     */
+    private String areaName;
     /**
      * 详细地址
      */
@@ -110,6 +122,29 @@ public class StoreInfo {
     private int pageNum;
 
 
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
     public String getStoreCode() {
         return storeCode;

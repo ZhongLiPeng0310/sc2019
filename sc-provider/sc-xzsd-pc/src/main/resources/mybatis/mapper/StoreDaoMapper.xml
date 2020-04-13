@@ -152,9 +152,9 @@
         select
         a.store_code storeCode,
         a.store_name storeName,
-        a.province_code provinceCode,
-        a.city_code cityCode,
-        a.area_code areaCode,
+        e.dic_name provinceName,
+        c.dic_name cityName,
+        d.dic_name areaName,
         a.address address,
         a.phone phone,
         a.invite_code inviteCode,
@@ -165,6 +165,12 @@
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
+        LEFT JOIN t_dictionary c
+        on a.city_code = c.dic_code
+        LEFT JOIN t_dictionary d
+        on a.area_code = d.dic_code
+        LEFT JOIN t_dictionary e
+        on a.province_code = e.dic_code
         where a.is_deleted = 0
         and store_code = #{storeCode}
     </select>
