@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.goods.dao.GoodsDao">
+    <!--app查询商品详情-->
+    <select id="getGoods" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsInfo">
+        select
+        a.goods_name goodsName,
+        a.stock stock,
+        a.imageurl imagePath,
+        a.goods_introduce goodsIntroduce,
+        a.publisher publisher,
+        a.author author,
+        a.sale_price salePrice,
+        c.store_name storeName,
+        b.a_level appraiseLevel
+        from
+        t_goods a
+        LEFT JOIN
+        t_goods_appraise b
+        on
+        a.goods_code = b.goods_code
+        LEFT JOIN
+        t_store c
+        on
+        a.store_code = c.store_code
+        where
+        a.is_deleted = 0
+        and a.goods_code = #{goodsCode}
+    </select>
+
+    <!--查询商品评价列表-->
+    <select id="getGoodsAppraise" parameterType="com.xzsd.app.goods.entity.GoodsAppraiseInfo" resultType="com.xzsd.app.goods.entity.GoodsAppraiseInfo">
+        select
+        a.appraise_code appraiseCode,
+        b.user_acct userAcct,
+        a.appraise_detail appraiseDetail,
+        a.imageurl imagePath,
+        a.a_level appraiseLevel,
+        a.create_time createTime
+        from
+        t_goods_appraise a
+        LEFT JOIN
+        t_sys_user b
+        on
+        a.user_code = b.user_code
+        where
+        a.is_deleted = 0
+        and
+        a.goods_code = #{goodsCode}
+        order by
+        a.create_time
+    </select>
+</mapper>
