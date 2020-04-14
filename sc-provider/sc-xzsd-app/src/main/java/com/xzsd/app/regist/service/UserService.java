@@ -43,6 +43,16 @@ public class UserService {
         if (0 != countUserPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
+        //检验身份证号码是否存在
+        int countIdCard = userDao.countIdCard(userInfo);
+        if (0 != countIdCard){
+            return AppResponse.bizError("用户身份证已存在，请重新输入");
+        }
+        //检验邮箱是否存在
+        int countEmail = userDao.countEmail(userDao);
+        if (0 != countEmail){
+            return AppResponse.bizError("用户邮箱已存在，请重新输入");
+        }
         // 密码加密 默认为123456
         String password = PasswordUtils.generatePassword("123456");
         userInfo.setUserPassword(password);

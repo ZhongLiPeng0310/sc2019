@@ -31,7 +31,17 @@
             and user_code != #{userCode}
         </if>
     </select>
-
+    <!--校验注册的用户的邮箱是否已存在-->
+    <select id="countEmail" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
+        select count(email)
+        from t_sys_user
+        where is_deleted = 0
+        and email = #{email}
+        <if test="userCode != null and userCode != ''">
+            and user_code != #{userCode}
+        </if>
+    </select>
+    <!--注册用户-->
     <!--新增司机-->
     <insert id="saveDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         insert into

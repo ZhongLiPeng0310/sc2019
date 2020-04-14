@@ -97,4 +97,13 @@ public interface DriverDao {
      * @return
      */
     int countIdCard(DriverInfo driverInfo);
+
+    /**
+     * 校验用户邮箱是否存在
+     * @author zhong
+     * @date 2020-04-10
+     * @param driverInfo
+     * @return
+     */
+    int countEmail(DriverInfo driverInfo);
 }
