@@ -6,7 +6,9 @@
         select
         show_image_url imagePath,
         goods_code goodsCode,
-        sort_no sortNo
+        sort_no sortNo,
+        begin_time beginTime,
+        end_time endTime
         from
         t_picture_show
         where
