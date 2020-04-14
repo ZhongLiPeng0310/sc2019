@@ -30,7 +30,14 @@ public interface UserDao {
      * @return
      */
     int countUserPhone(UserInfo userInfo);
-
+    /**
+     * 校验用户邮箱是否存在
+     * @author zhong
+     * @date 2020-04-10
+     * @param userDao
+     * @return
+     */
+    int countEmail(UserDao userDao);
     /**
      * @author zhong
      * @date 2020-04-1-
@@ -49,12 +56,5 @@ public interface UserDao {
      */
     int saveUser(UserInfo userInfo);
 
-    /**
-     * 校验用户邮箱是否存在
-     * @author zhong
-     * @date 2020-04-10
-     * @param userDao
-     * @return
-     */
-    int countEmail(UserDao userDao);
+
 }
