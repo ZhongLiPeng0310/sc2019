@@ -18,6 +18,11 @@ spring:
     database : 0
     host : 127.0.0.1
     port : 6379
+    #配置腾讯云上传图片
+  http:
+    multipart:
+      max-request-size: 20MB
+      max-file-size: 20MB
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -54,6 +59,15 @@ spring:
           statement-executable-sql-log-enable: false
           connection-log-enabled: false
           result-set-log-enabled: false
+  # =================================================== 腾讯云存储配置 ====================================================
+  tengxun:
+    accessKey: AKIDUmpdEbwZqse9ONRe7e2B3f2GPOGt6PH9
+    secretKey: oRpzxiIezFQXIsCHKEuKUYO0NdmlVzPa
+    bucket: images-1301708519
+    bucketName: images-1301708519
+    path: https://images-1301708519.cos.ap-chengdu.myqcloud.com/
+    qianzhui: images
+    area: ap-chengdu
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*Mapper.xml
   config-location: classpath:mybatis/mybatis-config.xml
@@ -70,24 +84,6 @@ sc:
       enabled: true
       description: 'spring cloud 模板项目'
 
-#配置腾讯云上传图片
-#server:
-#  port: 8899
-#  tomcat:
-#    uri-encoding: utf-8
-#  servlet:
-#    context-path: /
-#    session:
-#      timeout: 24h
-#    multipart:
-#      max-request-size: 10MB
-#      max-file-size: 10MB
-#  # =================================================== 腾讯云存储配置 ====================================================
-#  tengxun:
-#    accessKey: AKIDUmpdEbwZqse9ONRe7e2B3f2GPOGt6PH9
-#    secretKey: oRpzxiIezFQXIsCHKEuKUYO0NdmlVzPa
-#    bucket: images-1301708519
-#    bucketName: images-1301708519
-#    path: https://images-1301708519.cos.ap-chengdu.myqcloud.com/
-#    qianzhui: lover
-#    area: ap-chengdu
+
+
+
