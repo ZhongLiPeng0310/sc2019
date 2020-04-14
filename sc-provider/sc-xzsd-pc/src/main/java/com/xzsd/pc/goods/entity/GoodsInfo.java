@@ -37,6 +37,14 @@ public class GoodsInfo {
      */
     private String className;
     /**
+     * 一级分类名称
+     */
+    private String classFristName;
+    /**
+     * 二级分类名称
+     */
+    private String classSecondName;
+    /**
      * 广告词
      */
     private String advertisement;
@@ -136,6 +144,22 @@ public class GoodsInfo {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+    public String getClassFristName() {
+        return classFristName;
+    }
+
+    public void setClassFristName(String classFristName) {
+        this.classFristName = classFristName;
+    }
+
+    public String getClassSecondName() {
+        return classSecondName;
+    }
+
+    public void setClassSecondName(String classSecondName) {
+        this.classSecondName = classSecondName;
     }
 
     public float getCostPrice() {

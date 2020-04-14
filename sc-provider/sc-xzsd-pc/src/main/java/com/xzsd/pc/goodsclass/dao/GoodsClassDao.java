@@ -61,4 +61,13 @@ public interface GoodsClassDao {
      * @return
      */
     int countClassName(GoodsClassInfo goodsClassInfo);
+
+    /**
+     * 校验删除的商品分类是否存在二级分类
+     * @author zhong
+     * @date 2020-04-11
+     * @param goodsClassInfo
+     * @return
+     */
+    int countSecondClass(GoodsClassInfo goodsClassInfo);
 }

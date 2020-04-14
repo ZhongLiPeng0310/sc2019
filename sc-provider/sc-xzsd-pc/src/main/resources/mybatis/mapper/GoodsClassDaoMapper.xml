@@ -12,6 +12,17 @@
             and class_code != #{classCode}
         </if>
     </select>
+    <!--检验删除的商品分类是否存在二级分类-->
+    <select id="countSecondClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="int">
+        select count(class_name)
+        from t_goods_class
+        where is_deleted = 0
+        and class_code = #{classCode}
+        and last_class_code is NULL
+        <if test="classCode != null and classCode != ''">
+            and class_code != #{classCode}
+        </if>
+    </select>
     <!--新增商品分类-->
     <insert id="saveGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         insert into

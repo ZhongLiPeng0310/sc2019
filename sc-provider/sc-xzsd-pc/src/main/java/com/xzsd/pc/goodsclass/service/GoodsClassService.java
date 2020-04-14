@@ -102,6 +102,11 @@ public class GoodsClassService {
      */
     public AppResponse deleteGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("删除成功！");
+        //检验删除的商品分类是否存在二级分类
+        int countSecondClass = goodsClassDao.countSecondClass(goodsClassInfo);
+        if (0 != countSecondClass){
+            return AppResponse.bizError("删除失败，删除的分类存在二级分类！");
+        }
         //删除商品分类
         int deleteGoodsClass = goodsClassDao.deleteGoodsClass(goodsClassInfo);
         if (0 == deleteGoodsClass) {
