@@ -187,7 +187,7 @@
         order by
         dic_code
     </select>
-    <!--查询省份列表-->
+    <!--查询城市列表-->
     <select id="listCity" parameterType="java.lang.String" resultType="com.xzsd.pc.dictionary.entity.DictionaryInfo">
         select
         dic_code provinceCode,
