@@ -49,7 +49,7 @@ public class UserService {
             return AppResponse.bizError("用户身份证已存在，请重新输入");
         }
         //检验邮箱是否存在
-        int countEmail = userDao.countEmail(userDao);
+        int countEmail = userDao.countEmail(userInfo);
         if (0 != countEmail){
             return AppResponse.bizError("用户邮箱已存在，请重新输入");
         }
