@@ -1,11 +1,11 @@
-package com.xzsd.pc.imageUploa.controller;
+package com.xzsd.pc.imageUpload.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.UUIDUtils;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
-import com.xzsd.pc.imageUploa.util.TencentUtil;
+import com.xzsd.pc.imageUpload.util.TencentUtil;
 
 
 

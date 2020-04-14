@@ -1,4 +1,4 @@
-package com.xzsd.pc.imageUploa.util;
+package com.xzsd.pc.imageUpload.util;
 
 
 import com.qcloud.cos.COSClient;
