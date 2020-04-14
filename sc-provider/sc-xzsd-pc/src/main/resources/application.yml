@@ -18,7 +18,7 @@ spring:
     database : 0
     host : 127.0.0.1
     port : 6379
-    #配置腾讯云上传图片
+    #配置腾讯云上传图片---------------
   http:
     multipart:
       max-request-size: 20MB
