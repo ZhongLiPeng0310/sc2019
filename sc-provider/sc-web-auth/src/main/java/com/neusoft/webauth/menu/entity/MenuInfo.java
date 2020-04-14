@@ -29,6 +29,14 @@ public class MenuInfo {
      */
     private int isDeleted;
     /**
+     * 用户角色标记
+     */
+    private int role;
+    /**
+     * 当前登录人id
+     */
+    private String userId;
+    /**
      * 创建人
      */
     private String createName;
@@ -87,6 +95,22 @@ public class MenuInfo {
 
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCreateName() {

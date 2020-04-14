@@ -49,6 +49,12 @@ public class MenuService {
      * @return
      */
     public AppResponse listMenus(MenuInfo menuInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        menuInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = menuDao.getUserRole(userId);
+        menuInfo.setRole(role);
         List<MenuInfo> menuInfoList = menuDao.listMenus(menuInfo);
         return AppResponse.success("查询成功！",menuInfoList);
     }

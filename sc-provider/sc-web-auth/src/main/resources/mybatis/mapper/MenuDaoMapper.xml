@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neusoft.webauth.menu.dao.MenuDao">
+
+    <!--获取当前登录人的角色-->
+    <select id="getUserRole" parameterType="java.lang.String" resultType="int">
+        select
+        role
+        from
+        t_sys_user
+        where
+        user_code = #{userId}
+    </select>
     <!--新增菜单-->
     <insert id="saveMenu" parameterType="com.neusoft.webauth.menu.entity.MenuInfo">
         insert into t_menu
@@ -12,7 +22,8 @@
         create_time,
         create_name,
         is_deleted,
-        version
+        version,
+        role
         )
         values
         (
@@ -23,7 +34,8 @@
         now(),
         #{createName},
         0,
-        0
+        0,
+        #{role}
         )
     </insert>
 
@@ -38,11 +50,8 @@
         t_menu a
         where
         a.is_deleted = 0
-<!--        <if test="role == 2">-->
-<!--            and a.menu_name = '订单管理'-->
-<!--            and a.menu_name = '门店管理'-->
-<!--            and a.menu_name = '司机管理'-->
-<!--        </if>-->
+        and
+        a.role = #{role}
         order by a.create_time
     </select>
 
@@ -55,6 +64,7 @@
         remarks = #{remarks},
         update_name = #{updateName},
         update_time = now(),
+        role = #{role},
         version = version + 1
         where
         menu_code = #{menuCode}

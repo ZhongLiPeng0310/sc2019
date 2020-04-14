@@ -58,4 +58,13 @@ public interface MenuDao {
      * @return
      */
     MenuInfo getMenuByCode(@Param("menuCode") String menuCode);
+
+    /**
+     * 获取当前登录人的角色
+     * @author zhong
+     * @date 2020-04-11
+     * @param userId
+     * @return
+     */
+    int getUserRole(String userId);
 }
