@@ -17,7 +17,7 @@ public class PasswordUtils {
      * @return 加密后的密码
      */
     public static String generatePassword(String rawPassword) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(); 
         return bCryptPasswordEncoder.encode(rawPassword);
     }
 
