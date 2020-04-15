@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.driver.dao.DriverDao">
     <!--检验新增或修改的用户的账号和手机号码是否存在-->
-    <select id="countUsers" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
+    <select id="countUsers" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
         select count(user_acct)
         from t_sys_user
         where is_deleted = 0
