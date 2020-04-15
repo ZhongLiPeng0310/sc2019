@@ -21,7 +21,7 @@
          cost_price,
          sale_price,
          sum_sale,
-         frist_class_code,
+         first_class_code,
          second_class_code,
          advertisement,
          goods_introduce,
@@ -44,7 +44,7 @@
             #{costPrice},
             #{salePrice},
             0,
-            #{classFristCode},
+            #{classFirstCode},
             #{classSecondCode},
             #{advertisement},
             #{goodsIntroduce},
@@ -71,7 +71,9 @@
         a.cost_price costPrice,
         a.sale_price salePrice,
         a.sum_sale sumPrice,
-        b.class_name classFristName,
+        a.class_first_code classFirstCode,
+        b.class_name classFirstName,
+        a.class_second_code classSecondCode,
         c.class_name classSecondName,
         a.advertisement advertisement,
         a.goods_introduce goodsIntroduce,
@@ -86,12 +88,12 @@
         a.imageurl imageurl,
         a.is_deleted isDeleted,
         a.create_name createName,
-        a.create_time creaTime,
+        a.create_time createTime,
         a.version
     from
         t_goods a
     LEFT JOIN t_goods_class b
-    on a.class_frist_code = b.class_code
+    on a.class_first_code = b.class_code
     LEFT JOIN t_goods_class c
     on a.class_second_code = c.class_code
     where a.is_deleted = 0
@@ -110,7 +112,7 @@
     <if test="author != null and author != ''">
     and a.author like concat('%', #{author}, '%')
     </if>
-    order by create_time desc
+    order by a.create_time desc
    </select>
 
   <!--修改商品信息-->
@@ -121,7 +123,7 @@
          cost_price = #{costPrice},
          sale_price = #{salePrice},
          sum_sale = #{sumSale},
-         class_frist_code = #{classFristCode},
+         class_first_code = #{classFirstCode},
          class_second_code = #{classSecondCode},
          advertisement = #{advertisement},
          goods_introduce = #{goodsIntroduce},
@@ -202,37 +204,43 @@
     <!--查询商品信息-->
     <select id="getGoodsByGoodsCode" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
         select
-             goods_code goodsCode,
-             goods_name goodsName,
-             cost_price costPrice,
-             sale_price salePrice,
-             sum_sale sumSale,
-             class_frist_code classFristCode,
-             class_second_code classSecondCode,
-             advertisement,
-             goods_introduce goodsIntroduce,
-             goods_state goodsState,
-             up_time upTime,
-             browse,
-             store_code storeCode,
-             stock,
-             isbn,
-             author,
-             publisher,
-             imageurl,
-             create_name createName,
-             create_time createTime,
-             version
-         from t_goods
-         where goods_code = #{goodsCode}
-         and is_deleted = 0
+             a.goods_code goodsCode,
+             a.goods_name goodsName,
+             a.cost_price costPrice,
+             a.sale_price salePrice,
+             a.sum_sale sumSale,
+             a.class_first_code classFirstCode,
+             b.class_name classFirstName,
+             a.class_second_code classSecondCode,
+             c.class_name classSecondName,
+             a.advertisement,
+             a.goods_introduce goodsIntroduce,
+             a.goods_state goodsState,
+             a.up_time upTime,
+             a.browse,
+             a.store_code storeCode,
+             a.stock,
+             a.isbn,
+             a.author,
+             a.publisher,
+             a.imageurl,
+             a.create_name createName,
+             a.create_time createTime,
+             a.version
+         from t_goods a
+         LEFT JOIN t_goods_class b
+         on a.class_first_code = b.class_code
+         LEFT JOIN t_goods_class c
+         on a.class_second_code = c.class_code
+         where a.goods_code = #{goodsCode}
+         and a.is_deleted = 0
     </select>
 
     <!--查询一级分类列表-->
     <select id="getFirstClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         select
-        a.class_name classFristName,
-        a.class_code classFristCode,
+        a.class_name classFirstName,
+        a.class_code classFirstCode,
         a.version version
         from
         t_goods_class a

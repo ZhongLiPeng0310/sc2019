@@ -37,9 +37,17 @@ public class GoodsInfo {
      */
     private String className;
     /**
+     * 一级分类编码
+     */
+    private String classFirstCode;
+    /**
      * 一级分类名称
      */
-    private String classFristName;
+    private String classFirstName;
+    /**
+     * 二级分类编码
+     */
+    private String classSecondCode;
     /**
      * 二级分类名称
      */
@@ -146,12 +154,28 @@ public class GoodsInfo {
         this.goodsName = goodsName;
     }
 
-    public String getClassFristName() {
-        return classFristName;
+    public String getClassFirstName() {
+        return classFirstName;
     }
 
-    public void setClassFristName(String classFristName) {
-        this.classFristName = classFristName;
+    public void setClassFirstName(String classFirstName) {
+        this.classFirstName = classFirstName;
+    }
+
+    public String getClassFirstCode() {
+        return classFirstCode;
+    }
+
+    public void setClassFirstCode(String classFirstCode) {
+        this.classFirstCode = classFirstCode;
+    }
+
+    public String getClassSecondCode() {
+        return classSecondCode;
+    }
+
+    public void setClassSecondCode(String classSecondCode) {
+        this.classSecondCode = classSecondCode;
     }
 
     public String getClassSecondName() {
