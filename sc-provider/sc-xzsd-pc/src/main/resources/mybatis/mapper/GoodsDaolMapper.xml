@@ -71,7 +71,8 @@
         a.cost_price costPrice,
         a.sale_price salePrice,
         a.sum_sale sumPrice,
-        a.class_code classCode,
+        b.class_name classFristName,
+        c.class_name classSecondName,
         a.advertisement advertisement,
         a.goods_introduce goodsIntroduce,
         a.goods_state goodsState,
@@ -89,6 +90,10 @@
         a.version
     from
         t_goods a
+    LEFT JOIN t_goods_class b
+    on a.class_frist_code = b.class_code
+    LEFT JOIN t_goods_class c
+    on a.class_second_code = c.class_code
     where a.is_deleted = 0
     <if test="goodsState != null and goodsState != ''">
      and a.goods_state like concat('%', #{goodsState}, '%')
