@@ -36,7 +36,7 @@ public class SecurityUtils {
      */
     public static String getCurrentUserId() {
         if (scCloudProperties.getDev()) {
-            return "2020032623441126331";
+            return "测试用户";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object details = authentication.getDetails();

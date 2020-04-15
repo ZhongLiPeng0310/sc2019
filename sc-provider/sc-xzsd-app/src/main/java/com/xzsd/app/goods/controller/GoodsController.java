@@ -2,6 +2,7 @@ package com.xzsd.app.goods.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.app.goods.entity.GoodsAppraiseInfo;
+import com.xzsd.app.goods.entity.GoodsClassInfo;
 import com.xzsd.app.goods.entity.GoodsInfo;
 import com.xzsd.app.goods.service.GoodsService;
 import org.slf4j.Logger;
@@ -59,6 +60,41 @@ public class GoodsController {
             return goodsService.getGoodsAppraise(goodsAppraiseInfo);
         }catch (Exception e){
             logger.error("查询商品评价错误",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+    /**
+     * 查询查询商品一级分类接口
+     * @author zhong
+     * @date 2020-03-26
+     * @param goodsClassInfo
+     * @return
+     */
+    @RequestMapping(value = "getFirstClass")
+    public AppResponse getFirstClass(GoodsClassInfo goodsClassInfo) {
+        try {
+            return goodsService.getFirstClass(goodsClassInfo);
+        } catch (Exception e) {
+            logger.error("商品查询错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 查询商品二级分类
+     * @author zhong
+     * @date 2020-03-26
+     * @param lastClassCode
+     * @return
+     */
+    @RequestMapping(value = "getSecondClass")
+    public AppResponse getSecondClass(String lastClassCode) {
+        try {
+            return goodsService.getSecondClass(lastClassCode);
+        } catch (Exception e) {
+            logger.error("商品查询错误", e);
             System.out.println(e.toString());
             throw e;
         }

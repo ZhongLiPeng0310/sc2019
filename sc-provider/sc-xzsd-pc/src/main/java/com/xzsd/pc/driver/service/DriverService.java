@@ -7,6 +7,7 @@ import com.neusoft.util.StringUtil;
 import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
+import com.xzsd.pc.util.PasswordUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,6 +76,9 @@ public class DriverService {
         if (0 != countEmail){
             return AppResponse.bizError("用户邮箱已存在，请重新输入");
         }
+        //加密密码
+        String password = PasswordUtils.generatePassword(driverInfo.getUserPassword());
+        driverInfo.setUserPassword(password);
         driverInfo.setUserCode(StringUtil.getCommonCode(2));
         driverInfo.setIsDeleted(0);
         //新增司机
@@ -142,6 +146,9 @@ public class DriverService {
         if (0 != countEmail){
             return AppResponse.bizError("用户邮箱已存在，请重新输入");
         }
+        //加密密码
+        String password = PasswordUtils.generatePassword(driverInfo.getUserPassword());
+        driverInfo.setUserPassword(password);
         // 修改司机在用户表的信息
         int updateUserDriver = driverDao.updateUserDriver(driverInfo);
         // 修改司机信息

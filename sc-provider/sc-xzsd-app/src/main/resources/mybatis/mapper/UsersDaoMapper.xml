@@ -22,16 +22,16 @@
             and user_code != #{userCode}
         </if>
     </select>
-    <!--校验注册的用户的身份证号码是否已存在-->
-    <select id="countIdCard" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
-        select count(idCard)
-        from t_sys_user
-        where is_deleted = 0
-        and id_card = #{idCard}
-        <if test="userCode != null and userCode != ''">
-            and user_code != #{userCode}
-        </if>
-    </select>
+<!--    &lt;!&ndash;校验注册的用户的身份证号码是否已存在&ndash;&gt;-->
+<!--    <select id="countIdCard" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">-->
+<!--        select count(idCard)-->
+<!--        from t_sys_user-->
+<!--        where is_deleted = 0-->
+<!--        and id_card = #{idCard}-->
+<!--        <if test="userCode != null and userCode != ''">-->
+<!--            and user_code != #{userCode}-->
+<!--        </if>-->
+<!--    </select>-->
     <!--校验注册的用户的邮箱是否已存在-->
     <select id="countEmail" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
         select count(email)

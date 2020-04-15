@@ -165,14 +165,14 @@ public class GoodsService {
         return AppResponse.success("查询列表成功！", classFirstList);
     }
     /**
-     * 查询一级分类接口
+     * 查询二级分类接口
      * @date 2020-03-26
      * @author zhong
-     * @param goodsClassInfo
+     * @param lastClassCode
      * @return
      */
-    public AppResponse getSecondClass(GoodsClassInfo goodsClassInfo) {
-        List<GoodsClassInfo> classSecondList = goodsDao.getSecondClass(goodsClassInfo);
+    public AppResponse getSecondClass(String lastClassCode) {
+        List<GoodsClassInfo> classSecondList = goodsDao.getSecondClass(lastClassCode);
         return AppResponse.success("查询列表成功！", classSecondList);
     }
 }

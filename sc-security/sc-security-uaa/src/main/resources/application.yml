@@ -26,7 +26,7 @@ spring:
       testOnReturn: false
       filters: stat,slf4j
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/**/*Mapper.xml
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
   config-location: classpath:mybatis/mybatis-config.xml
 security:
   oauth2:

@@ -175,13 +175,13 @@ public class GoodsController {
      * 查询商品二级分类
      * @author zhong
      * @date 2020-03-26
-     * @param goodsClassInfo
+     * @param lastClassCode
      * @return
      */
     @RequestMapping(value = "getSecondClass")
-    public AppResponse getSecondClass(GoodsClassInfo goodsClassInfo) {
+    public AppResponse getSecondClass(String lastClassCode) {
         try {
-            return goodsService.getSecondClass(goodsClassInfo);
+            return goodsService.getSecondClass(lastClassCode);
         } catch (Exception e) {
             logger.error("商品查询错误", e);
             System.out.println(e.toString());

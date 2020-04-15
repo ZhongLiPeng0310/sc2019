@@ -100,10 +100,10 @@ public interface GoodsDao {
      * 查询商品二级分类接口
      * @author zhong
      * @date 2020-03-26
-     * @param goodsClassInfo
+     * @param lastClassCode
      * @return
      */
-    List<GoodsClassInfo> getSecondClass(GoodsClassInfo goodsClassInfo);
+    List<GoodsClassInfo> getSecondClass(String lastClassCode);
 
 
 }

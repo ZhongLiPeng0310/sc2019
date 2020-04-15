@@ -192,6 +192,7 @@
             user_acct    = #{userAcct},
             id_card      = #{idCard},
             phone        = #{phone},
+            user_password = #{userPassword},
             update_time = now(),
             update_name   = #{updateName},
             version      = version + 1

@@ -8,7 +8,7 @@
         SELECT
             t.user_code as id,
             t.user_acct as account,
-            t.user_pwd as password,
+            t.user_password as password,
             t.user_name as name,
             t.is_deleted as locked
         FROM t_sys_user t

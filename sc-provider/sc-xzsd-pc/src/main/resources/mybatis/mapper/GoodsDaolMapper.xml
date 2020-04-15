@@ -240,7 +240,7 @@
     </select>
 
     <!--查询二级分类列表-->
-    <select id="getSecondClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
+    <select id="getSecondClass" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         select
         a.class_name className,
         a.class_code classCode,
@@ -249,7 +249,7 @@
         t_goods_class a
         where a.is_deleted = 0
         and
-        a.class_code = #{lastClassCode}
+        a.last_class_code = #{lastClassCode}
         order by
         create_time desc
     </select>

@@ -36,7 +36,7 @@ public class UploadController {
      * @return
      */
     @PostMapping("/uploadImage")
-    public AppResponse uploadImage(@RequestParam("file") MultipartFile file){
+    public AppResponse uploadImage(@RequestParam("imageFile") MultipartFile file){
         System.out.println(file.getContentType().substring(6));// image/png
         if (file.isEmpty()) {
             return AppResponse.bizError("上传失败，请选择文件");
@@ -58,7 +58,7 @@ public class UploadController {
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
         Map<String,String> map = new HashMap<>();
-        map.put("url",tencentUtil.getPath()+key);
+        map.put("imagePath",tencentUtil.getPath()+key);
         return AppResponse.success("",map);
     }
 }
