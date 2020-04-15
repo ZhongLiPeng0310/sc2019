@@ -36,10 +36,7 @@ public class HomePageService {
      * @return
      */
     public AppResponse getHotGoods(HotGoodsInfo hotGoodsInfo) {
-        PageHelper.startPage(hotGoodsInfo.getPageNum(),hotGoodsInfo.getPageSize());
         List<HotGoodsInfo> hotGoodsInfoList = homePageDao.getHotGoods(hotGoodsInfo);
-        //包装page对象
-        PageInfo<HotGoodsInfo> pageData = new PageInfo<>(hotGoodsInfoList);
-        return AppResponse.success("查询成功！",pageData);
+        return AppResponse.success("查询成功！",hotGoodsInfoList);
     }
 }

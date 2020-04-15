@@ -58,9 +58,11 @@ public class UserService {
         userInfo.setUserPassword(password);
         userInfo.setUserCode(StringUtil.getCommonCode(2));
         userInfo.setIsDeleted(0);
-        //新增用户
+        //新增客户信息到用户表
         int count = userDao.saveUser(userInfo);
-        if (0 == count){
+        //新增客户信息到客户表
+        int countTnCustomer = userDao.saveUserToCus(userInfo);
+        if (0 == count && 0 ==countTnCustomer){
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功！");

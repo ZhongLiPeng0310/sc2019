@@ -54,6 +54,7 @@
         email,
         id_card,
         role,
+        image_path,
         is_deleted,
         create_name,
         create_time,
@@ -69,11 +70,30 @@
         #{email},
         #{idCard},
         1,
+        #{imagePath},
         #{isDeleted},
         #{createName},
         now(),
         0
         )
     </insert>
-
+    <!--注册用户信息到客户表-->
+    <insert id="saveUserToCus" parameterType="com.xzsd.app.regist.entity.UserInfo">
+        insert into t_customer
+        (user_code,
+        invite_code,
+        is_deleted,
+        create_name,
+        create_time,
+        version
+        )
+        values
+        (#{userCode},
+        #{inviteCode},
+        #{isDeleted},
+        #{createName},
+        now(),
+        0
+        )
+    </insert>
 </mapper>

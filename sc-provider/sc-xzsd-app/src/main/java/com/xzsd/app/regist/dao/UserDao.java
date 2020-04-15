@@ -48,11 +48,20 @@ public interface UserDao {
     int countIdCard(UserInfo userInfo);
 
     /**
-     * 新增用户
+     * 新增客户信息用户客户表
      * @author zhong
      * @date 2020-03-26
      *  @param userInfo 用户信息
      * @return
      */
     int saveUser(UserInfo userInfo);
+
+    /**
+     * 新增用户信息到客户表
+     * @author zhong
+     * @date 2020-03-26
+     * @param userInfo
+     * @return
+     */
+    int saveUserToCus(UserInfo userInfo);
 }

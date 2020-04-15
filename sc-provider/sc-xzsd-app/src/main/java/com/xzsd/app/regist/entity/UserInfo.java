@@ -49,6 +49,10 @@ public class UserInfo {
      */
     private String imagePath;
     /**
+     * 店铺邀请码
+     */
+    private String inviteCode;
+    /**
      * 作废标记  0保留  1删除
      */
     private int isDeleted;
@@ -160,6 +164,14 @@ public class UserInfo {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
     public int getIsDeleted() {

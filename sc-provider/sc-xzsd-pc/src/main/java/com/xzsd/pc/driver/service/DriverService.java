@@ -66,11 +66,11 @@ public class DriverService {
         if (0 != countDriverPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
-        //检验身份证号码是否存在
-        int countIdCard = driverDao.countIdCard(driverInfo);
-        if (0 != countIdCard){
-            return AppResponse.bizError("用户身份证已存在，请重新输入");
-        }
+//        //检验身份证号码是否存在
+//        int countIdCard = driverDao.countIdCard(driverInfo);
+//        if (0 != countIdCard){
+//            return AppResponse.bizError("用户身份证已存在，请重新输入");
+//        }
         //检验邮箱是否存在
         int countEmail = driverDao.countEmail(driverInfo);
         if (0 != countEmail){
@@ -136,11 +136,11 @@ public class DriverService {
         if (0 != countDriverPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
-        //检验身份证号码是否存在
-        int countIdCard = driverDao.countIdCard(driverInfo);
-        if (0 != countIdCard){
-            return AppResponse.bizError("用户身份证已存在，请重新输入");
-        }
+//        //检验身份证号码是否存在
+//        int countIdCard = driverDao.countIdCard(driverInfo);
+//        if (0 != countIdCard){
+//            return AppResponse.bizError("用户身份证已存在，请重新输入");
+//        }
         //检验邮箱是否存在
         int countEmail = driverDao.countEmail(driverInfo);
         if (0 != countEmail){
