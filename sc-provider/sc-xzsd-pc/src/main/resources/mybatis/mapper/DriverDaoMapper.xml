@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.driver.dao.DriverDao">
-    <!--校验新增的用户的手机号码是否已存在-->
-    <select id="countUserPhone" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(phone)
-        from t_sys_user
-        where is_deleted = 0
-        and phone = #{phone}
-        <if test="userCode != null and userCode != ''">
-            and user_code != #{userCode}
-        </if>
-    </select>
-<!--    &lt;!&ndash;校验新增的用户的身份证号码是否已存在&ndash;&gt;-->
-<!--    <select id="countIdCard" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">-->
-<!--        select count(idCard)-->
-<!--        from t_sys_user-->
-<!--        where is_deleted = 0-->
-<!--        and id_card = #{idCard}-->
-<!--        <if test="userCode != null and userCode != ''">-->
-<!--            and user_code != #{userCode}-->
-<!--        </if>-->
-<!--    </select>-->
-    <!--统计用户账号数量-->
-    <select id="countUserAcct" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
+    <!--检验新增或修改的用户的账号和手机号码是否存在-->
+    <select id="countUsers" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
         select count(user_acct)
         from t_sys_user
         where is_deleted = 0
-        and user_acct = #{userAcct}
-        <if test="userCode != null and userCode != ''">
-            and user_code != #{userCode}
-        </if>
-    </select>
-    <!--校验注册的用户的邮箱是否已存在-->
-    <select id="countEmail" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(email)
-        from t_sys_user
-        where is_deleted = 0
-        and email = #{email}
+        and (user_acct = #{userAcct} or phone = #{phone})
         <if test="userCode != null and userCode != ''">
             and user_code != #{userCode}
         </if>
@@ -199,7 +169,7 @@
           and version = #{version}
     </update>
 
-    <!--查询司机详情-->
+    <!--查询用户详情-->
     <select id="getDriverByUserCode" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverInfo">
         select
             a.user_code userCode,

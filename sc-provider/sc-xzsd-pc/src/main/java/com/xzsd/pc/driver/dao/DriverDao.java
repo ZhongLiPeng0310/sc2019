@@ -106,4 +106,13 @@ public interface DriverDao {
      * @return
      */
     int countEmail(DriverInfo driverInfo);
+
+    /**
+     * 校验司机输入的账号和手机号码是否重复
+     * @author zhong
+     * @date 2020-04-14
+     * @param driverInfo
+     * @return
+     */
+    int countUsers(DriverInfo driverInfo);
 }

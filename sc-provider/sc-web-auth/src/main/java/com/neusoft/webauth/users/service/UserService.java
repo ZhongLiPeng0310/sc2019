@@ -34,15 +34,10 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveUser(UserInfo userInfo){
-        //检验账号是否存在
-        int countUserAcct = userDao.countUserAcct(userInfo);
-        if (0 != countUserAcct){
-            return AppResponse.bizError("用户账号已存在，请重新输入");
-        }
-        //检验手机号码是否存在
-        int countUserPhone = userDao.countUserPhone(userInfo);
-        if (0 != countUserPhone){
-            return AppResponse.bizError("用户手机号码已存在，请重新输入");
+        //检验用户账号和手机号码是否存在
+        int countUsers = userDao.countUsers(userInfo);
+        if (0 != countUsers){
+            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
         // 密码加密 默认为123456
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
@@ -100,12 +95,12 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUser(UserInfo userInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        // 校验账号是否存在
-        int countUserAcct = userDao.countUserAcct(userInfo);
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
         userInfo.setUserPassword(password);
-        if(0 != countUserAcct) {
-            return AppResponse.bizError("用户账号已存在，请重新输入！");
+        //检验用户账号和手机号码是否存在
+        int countUsers = userDao.countUsers(userInfo);
+        if (0 != countUsers){
+            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
         // 修改用户信息
         int count = userDao.updateUser(userInfo);

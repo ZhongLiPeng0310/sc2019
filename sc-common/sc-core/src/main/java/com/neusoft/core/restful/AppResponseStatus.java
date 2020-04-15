@@ -61,7 +61,7 @@ public enum AppResponseStatus {
     /**
      * 业务异常
      */
-    BIZ_ERROR(10000),
+    BIZ_ERROR(1),
 
     /**
      * 验证码错误

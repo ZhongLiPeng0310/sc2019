@@ -56,25 +56,10 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveDriver(DriverInfo driverInfo) {
-        //检验账号是否存在
-        int countUserAcct = driverDao.countUserAcct(driverInfo);
-        if (0 != countUserAcct){
-            return AppResponse.bizError("用户账号已存在，请重新输入");
-        }
-        //检验手机号码是否存在
-        int countDriverPhone = driverDao.countUserPhone(driverInfo);
-        if (0 != countDriverPhone){
-            return AppResponse.bizError("用户手机号码已存在，请重新输入");
-        }
-//        //检验身份证号码是否存在
-//        int countIdCard = driverDao.countIdCard(driverInfo);
-//        if (0 != countIdCard){
-//            return AppResponse.bizError("用户身份证已存在，请重新输入");
-//        }
-        //检验邮箱是否存在
-        int countEmail = driverDao.countEmail(driverInfo);
-        if (0 != countEmail){
-            return AppResponse.bizError("用户邮箱已存在，请重新输入");
+        //检验用户账号和手机号码是否存在
+        int countUsers = driverDao.countUsers(driverInfo);
+        if (0 != countUsers){
+            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
         //加密密码
         String password = PasswordUtils.generatePassword(driverInfo.getUserPassword());
@@ -126,25 +111,10 @@ public class DriverService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        //检验账号是否存在
-        int countUserAcct = driverDao.countUserAcct(driverInfo);
-        if (0 != countUserAcct){
-            return AppResponse.bizError("用户账号已存在，请重新输入");
-        }
-        //检验手机号码是否存在
-        int countDriverPhone = driverDao.countUserPhone(driverInfo);
-        if (0 != countDriverPhone){
-            return AppResponse.bizError("用户手机号码已存在，请重新输入");
-        }
-//        //检验身份证号码是否存在
-//        int countIdCard = driverDao.countIdCard(driverInfo);
-//        if (0 != countIdCard){
-//            return AppResponse.bizError("用户身份证已存在，请重新输入");
-//        }
-        //检验邮箱是否存在
-        int countEmail = driverDao.countEmail(driverInfo);
-        if (0 != countEmail){
-            return AppResponse.bizError("用户邮箱已存在，请重新输入");
+        //检验用户账号和手机号码是否存在
+        int countUsers = driverDao.countUsers(driverInfo);
+        if (0 != countUsers){
+            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
         //加密密码
         String password = PasswordUtils.generatePassword(driverInfo.getUserPassword());

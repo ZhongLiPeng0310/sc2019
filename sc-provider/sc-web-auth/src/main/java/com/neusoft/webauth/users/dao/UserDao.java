@@ -15,22 +15,6 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     /**
-     * 统计用户账号数量
-     * @author zhong
-     * @date 2020-03-26
-     * @param userInfo 用户信息
-     * @return
-     */
-    int countUserAcct(UserInfo userInfo);
-    /**
-     * 校验用户手机号码是否存在
-     * @author zhong
-     * @date 2020-03-26
-     * @param userInfo
-     * @return
-     */
-    int countUserPhone(UserInfo userInfo);
-    /**
      * 新增用户
      * @author zhong
      * @date 2020-03-26
@@ -74,5 +58,12 @@ public interface UserDao {
      */
     UserInfo getUserByUserCode(@Param("userCode") String userCode);
 
-
+    /**
+     * 校验用户账号和手机号码是否重复
+     * @author zhong
+     * @date 2020-04-14
+     * @param userInfo
+     * @return
+     */
+    int countUsers(UserInfo userInfo);
 }
