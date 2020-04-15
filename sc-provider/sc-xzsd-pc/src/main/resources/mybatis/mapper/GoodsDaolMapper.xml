@@ -21,7 +21,8 @@
          cost_price,
          sale_price,
          sum_sale,
-         class_code,
+         frist_class_code,
+         second_class_code,
          advertisement,
          goods_introduce,
          goods_state,
@@ -43,7 +44,8 @@
             #{costPrice},
             #{salePrice},
             0,
-            #{classCode},
+            #{classFristCode},
+            #{classSecondCode},
             #{advertisement},
             #{goodsIntroduce},
             1,
@@ -114,7 +116,8 @@
          cost_price = #{costPrice},
          sale_price = #{salePrice},
          sum_sale = #{sumSale},
-         class_code = #{classCode},
+         class_frist_code = #{classFristCode},
+         class_second_code = #{classSecondCode},
          advertisement = #{advertisement},
          goods_introduce = #{goodsIntroduce},
          goods_state = #{goodsState},
@@ -199,7 +202,8 @@
              cost_price costPrice,
              sale_price salePrice,
              sum_sale sumSale,
-             class_code classCode,
+             class_frist_code classFristCode,
+             class_second_code classSecondCode,
              advertisement,
              goods_introduce goodsIntroduce,
              goods_state goodsState,
@@ -222,8 +226,8 @@
     <!--查询一级分类列表-->
     <select id="getFirstClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         select
-        a.class_name className,
-        a.class_code classCode,
+        a.class_name classFristName,
+        a.class_code classFristCode,
         a.version version
         from
         t_goods_class a
@@ -242,8 +246,8 @@
     <!--查询二级分类列表-->
     <select id="getSecondClass" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         select
-        a.class_name className,
-        a.class_code classCode,
+        a.class_name classSecondName,
+        a.class_code classSecondCode,
         a.version version
         from
         t_goods_class a
