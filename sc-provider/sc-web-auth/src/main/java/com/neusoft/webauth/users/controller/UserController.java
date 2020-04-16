@@ -125,4 +125,22 @@ public class UserController {
             throw e;
         }
     }
+
+    /**
+     * 获取顶部导航栏
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    @PostMapping("getUserUrl")
+    public AppResponse getUserUrl(UserInfo userInfo){
+        try{
+            return userService.getUserUrl(userInfo);
+        }catch (Exception e){
+            logger.error("导航栏查询失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

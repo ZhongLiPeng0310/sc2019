@@ -66,4 +66,13 @@ public interface UserDao {
      * @return
      */
     int countUsers(UserInfo userInfo);
+
+    /**
+     * 获取顶部导航栏
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    UserInfo getUserUrl(UserInfo userInfo);
 }

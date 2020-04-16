@@ -133,4 +133,16 @@
         where user_code = #{userCode}
         and is_deleted = 0
     </select>
+    <!--获取顶部导航栏-->
+    <select id="getUserUrl" resultType="com.neusoft.webauth.users.entity.UserInfo">
+        select
+        user_code userCode,
+        user_name userName,
+        image_path imagePath,
+        role role
+        from
+        t_sys_user
+        where
+        user_code = #{userId}
+    </select>
 </mapper>

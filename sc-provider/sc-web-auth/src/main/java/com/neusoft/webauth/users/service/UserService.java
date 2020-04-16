@@ -122,4 +122,16 @@ public class UserService {
         UserInfo userInfo = userDao.getUserByUserCode(userCode);
         return AppResponse.success("查询成功！",userInfo);
     }
+
+    /**
+     * 获取顶部导航栏
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    public AppResponse getUserUrl(UserInfo userInfo) {
+        UserInfo userInfo1 = userDao.getUserUrl(userInfo);
+        return AppResponse.success("查询成功！",userInfo1);
+    }
 }
