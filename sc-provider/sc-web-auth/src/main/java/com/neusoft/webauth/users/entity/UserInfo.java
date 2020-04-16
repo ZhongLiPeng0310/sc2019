@@ -31,7 +31,7 @@ public class UserInfo {
     /**
      * 手机号码
      */
-    private int phone;
+    private String phone;
     /**
      * 邮箱
      */
@@ -122,11 +122,11 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

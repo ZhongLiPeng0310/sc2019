@@ -64,4 +64,22 @@ public interface UserDao {
      * @return
      */
     int saveUserToCus(UserInfo userInfo);
+
+    /**
+     * 获取用户信息
+     * @author zhong
+     * @date 2020-04-16
+     * @param userCode
+     * @return
+     */
+    UserInfo getUserById(String userCode);
+
+    /**
+     * 修改密码
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    int updateUserPassword(UserInfo userInfo);
 }

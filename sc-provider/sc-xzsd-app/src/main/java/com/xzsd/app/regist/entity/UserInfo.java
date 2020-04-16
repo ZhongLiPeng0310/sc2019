@@ -21,6 +21,14 @@ public class UserInfo {
      */
     private String userPassword;
     /**
+     * 用户新密码
+     */
+    private String userNewPassword;
+    /**
+     * 当前登录人的id
+     */
+    private String userId;
+    /**
      * 用户姓名
      */
     private String userName;
@@ -31,7 +39,7 @@ public class UserInfo {
     /**
      * 手机号码
      */
-    private int phone;
+    private String phone;
     /**
      * 邮箱
      */
@@ -110,6 +118,22 @@ public class UserInfo {
         this.userPassword = userPassword;
     }
 
+    public String getUserNewPassword() {
+        return userNewPassword;
+    }
+
+    public void setUserNewPassword(String userNewPassword) {
+        this.userNewPassword = userNewPassword;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -126,11 +150,11 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

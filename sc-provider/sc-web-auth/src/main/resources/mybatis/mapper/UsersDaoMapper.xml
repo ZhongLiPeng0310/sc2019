@@ -67,7 +67,12 @@
         and
         (a.role = 0
         or
-        a.role = 2)
+        a.role = 2
+        or
+        a.role = 1
+        or
+        a.role = 3
+        )
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>

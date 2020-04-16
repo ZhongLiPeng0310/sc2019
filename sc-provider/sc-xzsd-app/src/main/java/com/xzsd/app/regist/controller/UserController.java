@@ -49,4 +49,26 @@ public class UserController {
             throw e;
         }
     }
+
+    /**
+     * 修改密码
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    @PostMapping("updateUserPassword")
+    public AppResponse updateUserPassword(UserInfo userInfo) {
+        try {
+            //获取用户id
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUpdateName(userId);
+            userInfo.setUserCode(userId);
+            return userService.updateUserPassword(userInfo);
+        } catch (Exception e) {
+            logger.error("修改异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

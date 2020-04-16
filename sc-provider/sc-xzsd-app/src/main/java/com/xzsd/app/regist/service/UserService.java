@@ -3,6 +3,7 @@ package com.xzsd.app.regist.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.xzsd.app.regist.dao.UserDao;
 import com.xzsd.app.regist.entity.UserInfo;
@@ -68,5 +69,35 @@ public class UserService {
         return AppResponse.success("新增成功！");
     }
 
-
+    /**
+     * 修改密码
+     * @author zhong
+     * @date 2020-04-16
+     * @param userInfo
+     * @return
+     */
+    public AppResponse updateUserPassword(UserInfo userInfo) {
+        AppResponse appResponse = AppResponse.success("修改密码成功！");
+        // 需要校验原密码是否正确
+        if(null != userInfo.getUserPassword() && !"".equals(userInfo.getUserPassword())) {
+            String userPassword = PasswordUtils.generatePassword(userInfo.getUserPassword());
+            // 获取用户信息
+            String userId = SecurityUtils.getCurrentUserId();
+            UserInfo userDetail = userDao.getUserById(userId);
+            if(null == userDetail) {
+                return AppResponse.bizError("用户不存在或已被删除！");
+            } else {
+                if(!userPassword.equals(userDetail.getUserPassword())) {
+                    return AppResponse.bizError("原密码不匹配，请重新输入！");
+                }
+            }
+        }
+        // 修改密码
+        userInfo.setUserNewPassword(PasswordUtils.generatePassword(userInfo.getUserNewPassword()));
+        int count = userDao.updateUserPassword(userInfo);
+        if(0 == count) {
+            appResponse = AppResponse.bizError("修改密码失败，请重试！");
+        }
+        return appResponse;
+    }
 }
