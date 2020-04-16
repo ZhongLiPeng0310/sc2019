@@ -66,7 +66,7 @@
         #{phone},
         #{email},
         #{idCard},
-        3,
+        4,
         #{isDeleted},
         #{createName},
         now(),
@@ -102,10 +102,10 @@
         <if test="areaCode != null and areaCode != ''">
             and a.area_code like concat('%', #{areaCode}, '%')
         </if>
-        <if test="role == 2">
+        <if test="role == 3">
             and b.city_code in (select city_code from t_store where user_code = #{userId})
         </if>
-        <if test="role == 0">
+        <if test="role == 1">
 
         </if>
         order by b.create_time desc

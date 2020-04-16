@@ -6,6 +6,7 @@ import com.neusoft.util.AuthUtils;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goods.service.GoodsService;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
+import com.xzsd.pc.store.entity.StoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -188,4 +189,23 @@ public class GoodsController {
             throw e;
         }
     }
+
+    /**
+     * 获取所有门店信息
+     * @author zhong
+     * @date 2020-04-16
+     * @param storeInfo
+     * @return
+     */
+    @RequestMapping(value = "getAllStore")
+    public AppResponse getAllStore (StoreInfo storeInfo){
+        try{
+            return goodsService.getAllStore(storeInfo);
+        }catch (Exception e){
+            logger.error("查询门店错误",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
 }

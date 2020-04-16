@@ -31,7 +31,6 @@
         class_name,
         last_class_code,
         remark,
-        class_level,
         is_deleted,
         create_name,
         create_time,
@@ -42,7 +41,6 @@
         #{className},
         #{lastClassCode},
         #{remark},
-        #{classLevel},
         #{isDeleted},
         #{createName},
         now(),
@@ -104,7 +102,7 @@
         where
         a.is_deleted = 0
         and
-        a.class_level = 1
+        a.last_class_code is null
     </select>
 
     <!--删除商品分类-->

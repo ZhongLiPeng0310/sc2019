@@ -8,6 +8,7 @@ import com.sun.jersey.core.impl.provider.entity.XMLRootObjectProvider;
 import com.xzsd.pc.goods.dao.GoodsDao;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
+import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -174,5 +175,17 @@ public class GoodsService {
     public AppResponse getSecondClass(String lastClassCode) {
         List<GoodsClassInfo> classSecondList = goodsDao.getSecondClass(lastClassCode);
         return AppResponse.success("查询列表成功！", classSecondList);
+    }
+
+    /**
+     * 获取所有门店信息
+     * @author zhong
+     * @date 2020-04-16
+     * @param storeInfo
+     * @return
+     */
+    public AppResponse getAllStore(StoreInfo storeInfo) {
+        List<StoreInfo> storeInfoList = goodsDao.getAllStore(storeInfo);
+        return AppResponse.success("查询列表成功！", storeInfoList);
     }
 }

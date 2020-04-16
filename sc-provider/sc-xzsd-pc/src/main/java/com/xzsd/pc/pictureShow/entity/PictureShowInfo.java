@@ -25,7 +25,7 @@ public class PictureShowInfo {
      */
     private String imagePath;
     /**
-     * 轮播图状态  0启用 1禁用
+     * 轮播图状态  1启用 2禁用
      */
     private int showState;
     /**

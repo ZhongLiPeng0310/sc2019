@@ -66,7 +66,7 @@ public class clientOrder {
     private String startPayTime;
     private String endPayTime;
     /**
-     * 角色 0管理员  1客户 2店长 3司机
+     * 角色 1管理员  2客户 3店长 4司机
      */
     private int role;
     /**

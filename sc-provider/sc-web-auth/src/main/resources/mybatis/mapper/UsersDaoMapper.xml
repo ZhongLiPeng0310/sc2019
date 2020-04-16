@@ -65,13 +65,13 @@
         from t_sys_user a
         where a.is_deleted = 0
         and
-        (a.role = 0
+        (a.role = 1
         or
         a.role = 2
         or
-        a.role = 1
-        or
         a.role = 3
+        or
+        a.role = 4
         )
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
@@ -80,7 +80,7 @@
             and a.user_name like concat('%', #{userName}, '%')
         </if>
         <if test="role != null and role != ''">
-            and a.role like concat('%', #{role}, '%')
+            and a.role = #{role}
         </if>
         order by create_time desc
     </select>

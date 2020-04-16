@@ -61,7 +61,7 @@ public class GoodsInfo {
      */
     private String goodsIntroduce;
     /**
-     * 商品状态 0下架 1上架  2在售
+     * 商品状态 1下架  2上架（在售） 3未发布
      */
     private int goodsState ;
     /**
@@ -76,6 +76,10 @@ public class GoodsInfo {
      * 门店编码
      */
     private String storeCode;
+    /**
+     * 门店名称
+     */
+    private String storeName;
     /**
      * 库存
      */
@@ -272,6 +276,14 @@ public class GoodsInfo {
 
     public void setStoreCode(String storeCode) {
         this.storeCode = storeCode;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public int getStock() {

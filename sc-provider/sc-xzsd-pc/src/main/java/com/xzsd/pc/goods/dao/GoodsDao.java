@@ -4,6 +4,7 @@ package com.xzsd.pc.goods.dao;
 
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
+import com.xzsd.pc.store.entity.StoreInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -105,5 +106,12 @@ public interface GoodsDao {
      */
     List<GoodsClassInfo> getSecondClass(String lastClassCode);
 
-
+    /**
+     * 查询所有门店信息
+     * @author zhong
+     * @date 2020-04-16
+     * @param storeInfo
+     * @return
+     */
+    List<StoreInfo> getAllStore(StoreInfo storeInfo);
 }

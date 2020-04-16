@@ -82,7 +82,7 @@
         #{phone},
         #{email},
         #{idCard},
-        1,
+        2,
         #{imagePath},
         #{isDeleted},
         #{createName},

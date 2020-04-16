@@ -41,7 +41,7 @@ public class UserInfo {
      */
     private String idCard;
     /**
-     *角色 0管理员，2店长
+     *角色 1管理员，3店长
      */
     private int role;
     /**

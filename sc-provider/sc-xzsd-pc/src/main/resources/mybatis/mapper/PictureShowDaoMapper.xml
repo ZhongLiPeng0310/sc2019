@@ -54,7 +54,7 @@
         #{sortNo},
         #{goodsCode},
         #{imagePath},
-        0,
+        1,
         #{beginTime},
         #{endTime},
         0,
