@@ -76,10 +76,11 @@
         a.version version
         from
         t_picture_show a
+        where a.is_deleted = 0
         <if test="showState != null and showState != ''">
             and a.show_state like concat('%', #{showState}, '%')
         </if>
-        order by create_time desc
+        order by a.create_time desc
 
     </select>
 

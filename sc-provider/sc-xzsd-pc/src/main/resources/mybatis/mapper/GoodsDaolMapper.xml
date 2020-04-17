@@ -21,8 +21,8 @@
          cost_price,
          sale_price,
          sum_sale,
-         first_class_code,
-         second_class_code,
+         class_first_code,
+         class_second_code,
          advertisement,
          goods_introduce,
          goods_state,
@@ -106,8 +106,8 @@
     <if test="goodsName != null and goodsName != ''">
      and a.goods_name like concat('%', #{goodsName}, '%')
     </if>
-    <if test="goodsIntroduce != null and goodsIntroduce != ''">
-     and a.goods_introduce like concat('%', #{goodsIntroduce}, '%')
+    <if test="advertisement != null and advertisement != ''">
+     and a.advertisement like concat('%', #{advertisement}, '%')
     </if>
     <if test="publisher != null and publisher != ''">
     and a.publisher like concat('%', #{publisher}, '%')

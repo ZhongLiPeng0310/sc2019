@@ -5,10 +5,12 @@ import com.neusoft.util.UUIDUtils;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
+import com.xzsd.pc.goodsclass.controller.GoodsClassController;
 import com.xzsd.pc.imageUpload.util.TencentUtil;
 
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,7 @@ public class UploadController {
     // 原因：不能用new工具类的方式，应该是用容器注册（@Autowried）的方式使用此工具类，就能得到配置文件里的值
     @Autowired
     private TencentUtil tencentUtil;//不能通过new来调用
+    private static final Logger logger = LoggerFactory.getLogger(GoodsClassController.class);
     /**
      * markdown图片上传到腾讯云
      * @param file
@@ -53,12 +56,13 @@ public class UploadController {
             localFile = File.createTempFile("temp",null);
             file.transferTo(localFile);
         }catch (IOException e){
+            logger.error("上传失败！请重新上传！");
             System.out.println(e.getMessage());
         }
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
         Map<String,String> map = new HashMap<>();
         map.put("imagePath",tencentUtil.getPath()+key);
-        return AppResponse.success("",map);
+        return AppResponse.success("上传成功！",map);
     }
 }

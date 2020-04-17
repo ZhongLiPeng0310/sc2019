@@ -118,6 +118,8 @@ public class GoodsService {
         if (0 != countHotGoods){
             return AppResponse.bizError("删除的商品存在热门商品中,删除失败！");
         }
+
+
         //删除商品
         int deleteGood = goodsDao.deleteGoods(listCode,userId);
         if (0 == deleteGood){
