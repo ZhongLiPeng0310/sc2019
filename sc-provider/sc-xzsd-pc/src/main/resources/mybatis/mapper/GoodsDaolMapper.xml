@@ -86,11 +86,11 @@
         a.publisher publisher,
         a.imageurl imagePath,
         a.is_deleted isDeleted,
-        a.create_name createName,
         a.create_time createTime,
+        a.create_name createName,
         a.update_time updateTime,
         a.update_name updateName,
-        a.version
+        a.version version
     from
         t_goods a
     LEFT JOIN t_goods_class b
@@ -230,11 +230,11 @@
              a.author author,
              a.publisher publisher,
              a.imageurl imagePath,
-             a.create_name createName,
              a.create_time createTime,
+             a.create_name createName,
              a.update_time updateTime,
              a.update_name updateName,
-             a.version
+             a.version version
          from t_goods a
          LEFT JOIN t_goods_class b
          on a.class_first_code = b.class_code

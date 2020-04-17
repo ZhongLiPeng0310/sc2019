@@ -67,6 +67,10 @@
         b.goods_name goodsName,
         b.sale_price salePrice,
         b.goods_introduce goodsIntroduce,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from
         t_hot_goods a RIGHT JOIN t_goods b
@@ -139,6 +143,10 @@
         a.dic_code dicCode,
         a.show_no showNo,
         a.type type,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from
         t_dictionary a

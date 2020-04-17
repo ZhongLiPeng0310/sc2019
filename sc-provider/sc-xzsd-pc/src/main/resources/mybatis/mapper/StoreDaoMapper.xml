@@ -81,6 +81,10 @@
         a.user_code userCode,
         b.user_name userName,
         b.user_acct userAcct,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from t_store a
         LEFT JOIN t_sys_user b
@@ -161,6 +165,10 @@
         a.user_code userCode,
         b.user_name userName,
         b.user_acct userAcct,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from t_store a
         LEFT JOIN t_sys_user b

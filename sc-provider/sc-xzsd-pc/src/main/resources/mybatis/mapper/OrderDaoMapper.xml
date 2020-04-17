@@ -13,6 +13,10 @@
         c.phone phone,
         a.create_time createTime,
         b.invite_code inviteCode,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from t_customer b
         LEFT JOIN t_order a
@@ -57,6 +61,10 @@
         a.order_money orderMoney,
         b.sale_price salePrice,
         b.cost_price costPrice,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from
         t_order_detail a LEFT JOIN t_goods b

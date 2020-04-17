@@ -124,7 +124,11 @@
             last_class_code lastClassCode,
             is_deleted isDeleted,
             remark,
-            version
+            create_time createTime,
+            create_name createName,
+            update_time updateTime,
+            update_name updateName,
+            version version
         from t_goods_class
         where class_code = #{classCode}
         and is_deleted = 0

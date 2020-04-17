@@ -82,6 +82,10 @@
         a.user_name userName,
         a.phone phone,
         a.id_card idCard,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from t_sys_user a
         LEFT JOIN t_driver b

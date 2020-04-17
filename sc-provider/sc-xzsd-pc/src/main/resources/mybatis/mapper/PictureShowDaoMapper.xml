@@ -73,6 +73,10 @@
         a.show_state showState,
         a.begin_time beginTime,
         a.end_time endTime,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from
         t_picture_show a
@@ -121,7 +125,11 @@
         b.class_name classFristName,
         b.class_name classSecondName,
         a.goods_state goodsState,
-        a.version
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
         from
         t_goods a LEFT join t_goods_class b
         on a.class_code = b.class_code

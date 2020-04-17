@@ -8,7 +8,12 @@
         goods_code goodsCode,
         sort_no sortNo,
         begin_time beginTime,
-        end_time endTime
+        end_time endTime,
+        create_time createTime,
+        create_name createName,
+        update_time updateTime,
+        update_name updateName,
+        version version
         from
         t_picture_show
         where
@@ -24,7 +29,12 @@
         b.goods_name goodsName,
         b.sale_price salePrice,
         b.imageurl imagePath,
-        a.hot_sort hotSort
+        a.hot_sort hotSort,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
         from
         t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code

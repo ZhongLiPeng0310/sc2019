@@ -12,7 +12,12 @@
         a.author author,
         a.sale_price salePrice,
         c.store_name storeName,
-        b.a_level appraiseLevel
+        b.a_level appraiseLevel,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
         from
         t_goods a
         LEFT JOIN
@@ -36,7 +41,11 @@
         a.appraise_detail appraiseDetail,
         a.imageurl imagePath,
         a.a_level appraiseLevel,
-        a.create_time createTime
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
         from
         t_goods_appraise a
         LEFT JOIN

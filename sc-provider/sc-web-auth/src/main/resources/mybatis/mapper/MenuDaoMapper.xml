@@ -45,7 +45,12 @@
             a.menu_code menuCode,
             a.menu_name menuName,
             a.route,
-            a.remarks
+            a.remarks,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from
         t_menu a
         where
@@ -90,7 +95,12 @@
         menu_code menuCode,
         menu_name menuName,
         route route,
-        remarks remarks
+        remarks remarks,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
         from
         t_menu
         where
