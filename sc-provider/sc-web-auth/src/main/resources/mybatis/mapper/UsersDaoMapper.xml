@@ -61,6 +61,10 @@
         a.id_card idCard,
         a.role role,
         a.image_path imagePath,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version version
         from t_sys_user a
         where a.is_deleted = 0
@@ -132,6 +136,10 @@
             id_card idCard,
             role,
             image_path imagePath,
+            create_time createTime,
+            create_name createName,
+            update_time updateTime,
+            update_name updateName,
             version
         from
             t_sys_user

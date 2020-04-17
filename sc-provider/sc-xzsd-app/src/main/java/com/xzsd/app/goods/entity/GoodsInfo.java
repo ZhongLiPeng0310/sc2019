@@ -51,7 +51,7 @@ public class GoodsInfo {
     /**
      * 上架时间
      */
-    private Date upTime;
+    private String upTime;
     /**
      * 浏览量
      */
@@ -100,7 +100,7 @@ public class GoodsInfo {
      * 创建时间
      * @return
      */
-    private Date createTime;
+    private String createTime;
     /**
      * 更新人
      * @return
@@ -110,7 +110,7 @@ public class GoodsInfo {
      * 更新时间
      * @return
      */
-    private Date updateTime;
+    private String updateTime;
     /**
      * 版本号
      * @return
@@ -210,11 +210,11 @@ public class GoodsInfo {
         this.goodsState = goodsState;
     }
 
-    public Date getUpTime() {
+    public String getUpTime() {
         return upTime;
     }
 
-    public void setUpTime(Date upTime) {
+    public void setUpTime(String upTime) {
         this.upTime = upTime;
     }
 
@@ -306,11 +306,11 @@ public class GoodsInfo {
         this.createName = createName;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -322,11 +322,11 @@ public class GoodsInfo {
         this.updateName = updateName;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

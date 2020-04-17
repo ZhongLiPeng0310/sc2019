@@ -90,7 +90,7 @@ public class OrderInfo {
      * 更新时间
      * @return
      */
-    private Date updateTime;
+    private String updateTime;
     /**
      * 版本号
      * @return
@@ -269,11 +269,11 @@ public class OrderInfo {
         this.updateName = updateName;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

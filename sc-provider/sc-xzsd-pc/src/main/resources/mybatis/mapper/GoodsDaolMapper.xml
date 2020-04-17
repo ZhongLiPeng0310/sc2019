@@ -26,7 +26,6 @@
          advertisement,
          goods_introduce,
          goods_state,
-         up_time,
          browse,
          store_code,
          stock,
@@ -49,14 +48,13 @@
             #{advertisement},
             #{goodsIntroduce},
             3,
-            now(),
             0,
             #{storeCode},
             100,
             #{isbn},
             #{author},
             #{publisher},
-            #{imageurl},
+            #{imagePath},
             #{isDeleted},
             #{createName},
             now(),
@@ -86,10 +84,12 @@
         a.isbn isbn,
         a.author author,
         a.publisher publisher,
-        a.imageurl imageurl,
+        a.imageurl imagePath,
         a.is_deleted isDeleted,
         a.create_name createName,
         a.create_time createTime,
+        a.update_time updateTime,
+        a.update_name updateName,
         a.version
     from
         t_goods a
@@ -137,7 +137,7 @@
          isbn = #{isbn},
          author = #{author},
          publisher = #{publisher},
-         imageurl = #{imageurl},
+         imageurl = #{imagePath},
          update_name = #{updateName},
          update_time = now(),
          version = version + 1
@@ -195,6 +195,9 @@
         set
             goods_state = #{goodsState},
             update_time = now(),
+        <if test="goodsState != null and goodsState != '' and goodsState == 1">
+            up_time = now(),
+        </if>
             update_name = #{userId},
             version = version + 1
         where goods_code in
@@ -220,15 +223,17 @@
              a.goods_introduce goodsIntroduce,
              a.goods_state goodsState,
              a.up_time upTime,
-             a.browse,
+             a.browse browse,
              a.store_code storeCode,
-             a.stock,
-             a.isbn,
-             a.author,
-             a.publisher,
-             a.imageurl,
+             a.stock stock,
+             a.isbn isbn,
+             a.author author,
+             a.publisher publisher,
+             a.imageurl imagePath,
              a.create_name createName,
              a.create_time createTime,
+             a.update_time updateTime,
+             a.update_name updateName,
              a.version
          from t_goods a
          LEFT JOIN t_goods_class b
