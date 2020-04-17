@@ -48,7 +48,7 @@ public interface PictureShowDao {
      * @param userId
      * @return
      */
-    int updatePictureShowState(@Param("listCode")List<String> listCode,@Param("showState") int showState,@Param("userId") String userId);
+    int updatePictureShowState(@Param("listCode")List<String> listCode,@Param("showState") int showState,@Param("listVersion")List<String> listVersion,@Param("userId") String userId);
 
     /**
      * 连接商品列表

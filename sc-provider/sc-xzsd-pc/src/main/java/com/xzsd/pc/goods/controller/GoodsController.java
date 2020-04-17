@@ -126,11 +126,11 @@ public class GoodsController {
      * @return
      */
     @PostMapping("updateGoodsState")
-    public AppResponse updateGoodsState(String goodsCode,int goodsState) {
+    public AppResponse updateGoodsState(String goodsCode,int goodsState,String version) {
         try {
             //     获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return goodsService.updateGoodsState(goodsCode, goodsState ,userId);
+            return goodsService.updateGoodsState(goodsCode, goodsState , version,userId);
         } catch (Exception e) {
             logger.error("商品修改状态错误", e);
             System.out.println(e.toString());
@@ -166,7 +166,7 @@ public class GoodsController {
         try {
             return goodsService.getFirstClass(goodsClassInfo);
         } catch (Exception e) {
-            logger.error("商品查询错误", e);
+            logger.error("一级分类查询错误", e);
             System.out.println(e.toString());
             throw e;
         }
@@ -184,7 +184,7 @@ public class GoodsController {
         try {
             return goodsService.getSecondClass(lastClassCode);
         } catch (Exception e) {
-            logger.error("商品查询错误", e);
+            logger.error("二级分类查询错误", e);
             System.out.println(e.toString());
             throw e;
         }

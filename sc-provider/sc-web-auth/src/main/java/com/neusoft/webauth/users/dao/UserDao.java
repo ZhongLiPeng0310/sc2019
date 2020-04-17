@@ -74,5 +74,5 @@ public interface UserDao {
      * @param userInfo
      * @return
      */
-    UserInfo getUserUrl(UserInfo userInfo);
+    List<UserInfo> getUserUrl(UserInfo userInfo);
 }

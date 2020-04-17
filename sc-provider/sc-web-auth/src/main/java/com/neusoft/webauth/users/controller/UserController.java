@@ -133,9 +133,11 @@ public class UserController {
      * @param userInfo
      * @return
      */
-    @PostMapping("getUserUrl")
+    @PostMapping(value = "getUserUrl")
     public AppResponse getUserUrl(UserInfo userInfo){
         try{
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUserId(userId);
             return userService.getUserUrl(userInfo);
         }catch (Exception e){
             logger.error("导航栏查询失败",e);

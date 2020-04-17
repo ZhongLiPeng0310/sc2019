@@ -95,11 +95,11 @@ public class PictureShowController {
      * @return
      */
     @PostMapping("updatePictureShowState")
-    public AppResponse updatePictureShowState(String showCode,int showState) {
+    public AppResponse updatePictureShowState(String showCode,int showState,String version) {
         try {
             //     获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return pictureShowService.updatePictureShowState(showCode, showState ,userId);
+            return pictureShowService.updatePictureShowState(showCode, showState ,version,userId);
         } catch (Exception e) {
             logger.error("商品修改状态错误", e);
             System.out.println(e.toString());

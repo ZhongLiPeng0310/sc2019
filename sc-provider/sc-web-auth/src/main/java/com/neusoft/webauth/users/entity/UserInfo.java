@@ -73,6 +73,10 @@ public class UserInfo {
      */
     private String version;
     /**
+     * 测试登录人id
+     */
+    private String userId;
+    /**
      * 页码
      */
     private int pageSize;
@@ -208,6 +212,14 @@ public class UserInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getPageSize() {

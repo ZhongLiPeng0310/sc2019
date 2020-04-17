@@ -99,11 +99,12 @@ public class PictureShowService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updatePictureShowState(String showCode, int showState, String userId) {
+    public AppResponse updatePictureShowState(String showCode, int showState,String version,String userId) {
         List<String> listCode = Arrays.asList(showCode.split(","));
+        List<String> listVersion = Arrays.asList(version.split(","));
         AppResponse appResponse = AppResponse.success("修改成功");
         //修改轮播图上架下架
-        int count = pictureShowDao.updatePictureShowState(listCode,showState,userId);
+        int count = pictureShowDao.updatePictureShowState(listCode,showState,listVersion,userId);
         if (0 == count){
             appResponse = AppResponse.bizError("修改失败，请重试！");
         }

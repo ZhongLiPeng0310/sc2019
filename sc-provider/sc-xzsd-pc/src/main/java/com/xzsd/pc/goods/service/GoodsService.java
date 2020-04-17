@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -108,22 +109,22 @@ public class GoodsService {
     public AppResponse deleteGoods(String goodsCode,String userId){
         List<String> listCode = Arrays.asList(goodsCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-        //检验检验删除的商品是否存在轮播图中
-        int countPicShow = goodsDao.findGoodsPicShow(listCode);
-        if (0 != countPicShow){
-            return AppResponse.bizError("删除的商品存在轮播图中,删除失败！");
-        }
-        //检验检验删除的商品是否存在热门商品中
-        int countHotGoods = goodsDao.findGoodsHotGoods(listCode);
-        if (0 != countHotGoods){
-            return AppResponse.bizError("删除的商品存在热门商品中,删除失败！");
-        }
 
-
+        //获取轮播图和热门商品的list
+        List<String> goodsCodeList = goodsDao.listHotShow(listCode);
+        //排除处于轮播图和热门商品的商品编码
+        ArrayList listGoodsCode = new ArrayList<>(listCode);
+        listGoodsCode.removeAll(goodsCodeList);
+        if (goodsCodeList.size() != 0){
+            appResponse =  AppResponse.success("商品删除失败，商品编码为"+ goodsCodeList+"的商品存在轮播图和热门商品，无法删除" );
+        }
         //删除商品
-        int deleteGood = goodsDao.deleteGoods(listCode,userId);
+        int deleteGood = goodsDao.deleteGoods(listGoodsCode,userId);
         if (0 == deleteGood){
-            appResponse = AppResponse.bizError("删除失败，请重试！");
+            appResponse = AppResponse.bizError("商品存在轮播图或热门商品中，删除失败，请重试！");
+        }
+        if (goodsCodeList.size() != 0 && listGoodsCode.size() != 0){
+            return AppResponse.success("部分商品删除成功，商品编码为"+ goodsCodeList+"的商品存在轮播图和热门商品，无法删除" );
         }
         return appResponse;
     }
@@ -135,11 +136,12 @@ public class GoodsService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateGoodsState(String goodsCode,int goodsState,String userId) {
+    public AppResponse updateGoodsState(String goodsCode,int goodsState,String version,String userId) {
         List<String> listCode = Arrays.asList(goodsCode.split(","));
+        List<String> listVersion = Arrays.asList(version.split(","));
         AppResponse appResponse = AppResponse.success("修改成功");
         //修改商品上架下架
-        int updateState = goodsDao.updateGoodsState(listCode,goodsState,userId);
+        int updateState = goodsDao.updateGoodsState(listCode,goodsState,listVersion,userId);
         if (0 == updateState){
             appResponse = AppResponse.bizError("修改失败，请重试！");
         }

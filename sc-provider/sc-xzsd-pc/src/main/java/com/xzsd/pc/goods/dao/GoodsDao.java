@@ -8,6 +8,7 @@ import com.xzsd.pc.store.entity.StoreInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,31 +49,22 @@ public interface GoodsDao {
      * @return 修改结果
      */
     int updateGoods(GoodsInfo goodsInfo);
-
     /**
-     * 检验删除的商品是否存在轮播图中
+     * 查出是热门商品或轮播图的商品
      * @author zhong
-     * @date 2020-04-11
+     * @date 2020-04-17
      * @param listCode
      * @return
      */
-    int findGoodsPicShow(@Param("listCode") List<String> listCode);
+    List<String> listHotShow(@Param("listCode")List<String> listCode);
 
-    /**
-     * 检验检验删除的商品是否存在热门商品中
-     * @author zhong
-     * @date 2020-04-11
-     * @param listCode
-     * @return
-     */
-    int findGoodsHotGoods(@Param("listCode") List<String> listCode);
     /**
      * 删除商品信息信息
-     * @param listCode 选中的商品编号集合
+     * @param listGoodsCode 可删除的商品编号集合
      * @param
      * @return
      */
-    int deleteGoods(@Param("listCode") List<String> listCode, @Param("userId") String userId);
+    int deleteGoods(@Param("listGoodsCode") List<String> listGoodsCode,@Param("userId") String userId);
 
     /**
      * 修改商品上架下架
@@ -81,7 +73,7 @@ public interface GoodsDao {
      * @param goodsState
      * @return
      */
-    int updateGoodsState(@Param("listCode") List<String> listCode,@Param("goodsState") int goodsState,@Param("userId") String userId);
+    int updateGoodsState(@Param("listCode") List<String> listCode,@Param("goodsState") int goodsState,@Param("listVersion")List<String> listVersion, @Param("userId") String userId);
     /**
      * 查看商品信息
      * goodInfo
@@ -114,4 +106,8 @@ public interface GoodsDao {
      * @return
      */
     List<StoreInfo> getAllStore(StoreInfo storeInfo);
+
+
+
+
 }

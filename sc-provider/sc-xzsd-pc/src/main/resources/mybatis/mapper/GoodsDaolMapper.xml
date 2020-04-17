@@ -175,6 +175,25 @@
         and
         a.is_deleted = 0
     </select>
+
+    <!--查询在轮播图和热门商品的商品编码-->
+    <select id="listHotShow" parameterType="java.lang.String" resultType="java.lang.String">
+        select distinct
+        goods_code
+        from
+        t_goods
+        where
+        is_deleted = 0
+        and
+        goods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and (goods_code in
+        (select goods_code from t_hot_goods where is_deleted = 0)
+        or goods_code in
+        (select goods_code from t_picture_show where is_deleted = 0))
+    </select>
     <!--删除商品-->
     <update id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
         update t_goods
@@ -184,7 +203,7 @@
             update_name = #{userId},
             version = version + 1
         where goods_code in
-        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="listGoodsCode" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
@@ -202,6 +221,10 @@
             version = version + 1
         where goods_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and version in
+        <foreach item="item" index="index" collection="listVersion" open="(" separator="," close=")">
             #{item}
         </foreach>
 

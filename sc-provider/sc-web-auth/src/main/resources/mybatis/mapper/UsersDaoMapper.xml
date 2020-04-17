@@ -147,7 +147,7 @@
         and is_deleted = 0
     </select>
     <!--获取顶部导航栏-->
-    <select id="getUserUrl" resultType="com.neusoft.webauth.users.entity.UserInfo">
+    <select id="getUserUrl" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="com.neusoft.webauth.users.entity.UserInfo">
         select
         user_code userCode,
         user_name userName,
