@@ -62,8 +62,8 @@
     <!--查询一级分类列表-->
     <select id="getFirstClass" parameterType="com.xzsd.app.goods.entity.GoodsClassInfo" resultType="com.xzsd.app.goods.entity.GoodsClassInfo">
         select
-        a.class_name className,
-        a.class_code classCode,
+        a.class_name classFirstName,
+        a.class_code classFirstCode,
         a.version version
         from
         t_goods_class a
@@ -82,8 +82,8 @@
     <!--查询二级分类列表-->
     <select id="getSecondClass" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsClassInfo">
         select
-        a.class_name className,
-        a.class_code classCode,
+        a.class_name classSecondName,
+        a.class_code classSecondCode,
         a.version version
         from
         t_goods_class a

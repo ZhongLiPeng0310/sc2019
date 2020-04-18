@@ -147,4 +147,21 @@ public class HotGoodsController {
         }
     }
 
+    /**
+     * 查询热门商品详情
+     * @author zhong
+     * @date 2020-04-10
+     * @param hotCode
+     * @return
+     */
+    @RequestMapping(value = "getHotGoodsByHotCode")
+    public AppResponse getHotGoodsByHotCode(String hotCode) {
+        try {
+            return hotGoodsService.getHotGoodsByHotCode(hotCode);
+        } catch (Exception e) {
+            logger.error("热门商品查询错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

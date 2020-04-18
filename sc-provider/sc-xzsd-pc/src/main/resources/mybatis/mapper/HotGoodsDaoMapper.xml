@@ -77,7 +77,7 @@
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
         <if test="goodsName != null and goodsName != ''">
-            and a.goods_name like concat('%', #{goodsName}, '%')
+            and b.goods_name like concat('%', #{goodsName}, '%')
         </if>
         <if test="goodsCode != null and goodsCode != ''">
             and a.goods_code like concat('%', #{goodsCode}, '%')
@@ -168,4 +168,21 @@
         type = 4
         and version = #{version}
     </update>
+    <!--查询热门商品详情-->
+    <select id="getHotGoodsByHotCode" parameterType="java.lang.String" resultType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">
+        select
+        a.goods_code goodsCode,
+        b.goods_name goodsName,
+        a.hot_sort hotSort,
+        a.create_time createTime,
+        a.create_name createName,
+        a.update_time updateTime,
+        a.update_name updateName,
+        a.version version
+        from t_hot_goods a
+        LEFT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        where a.is_deleted = 0
+        and a.hot_code = #{hotCode}
+    </select>
 </mapper>

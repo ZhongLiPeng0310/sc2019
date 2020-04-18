@@ -98,13 +98,13 @@
             and a.user_name like concat('%', #{userName}, '%')
         </if>
         <if test="provinceCode != null and provinceCode != ''">
-            and a.province_code like concat('%', #{provinceCode}, '%')
+            and b.province_code like concat('%', #{provinceCode}, '%')
         </if>
         <if test="cityCode != null and cityCode != ''">
-            and a.city_code like concat('%', #{cityCode}, '%')
+            and b.city_code like concat('%', #{cityCode}, '%')
         </if>
         <if test="areaCode != null and areaCode != ''">
-            and a.area_code like concat('%', #{areaCode}, '%')
+            and b.area_code like concat('%', #{areaCode}, '%')
         </if>
         <if test="role == 3">
             and b.city_code in (select city_code from t_store where user_code = #{userId})

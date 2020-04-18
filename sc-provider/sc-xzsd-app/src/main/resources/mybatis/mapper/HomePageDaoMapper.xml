@@ -18,8 +18,10 @@
         t_picture_show
         where
         is_deleted = 0
+        and
+        show_state = 1
         order by
-        sort_no
+        sort_no desc
     </select>
 
     <!--查询首页热门商品-->

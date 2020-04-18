@@ -13,8 +13,6 @@
         c.phone phone,
         a.create_time createTime,
         b.invite_code inviteCode,
-        a.create_time createTime,
-        a.create_name createName,
         a.update_time updateTime,
         a.update_name updateName,
         a.version version
@@ -36,11 +34,8 @@
         <if test="orderState != null and orderState != ''">
             and a.order_state like concat('%', #{orderState}, '%')
         </if>
-        <if test="startPayTime != null and startPayTime != ''">
-            and a.create_time = DATE_FORMAT( #{startPayTime},'%Y-%m-%d %h:%i:%S')
-        </if>
-        <if test="endPayTime != null and endPayTime != ''">
-            and a.create_time = DATE_FORMAT( #{endPayTime},'%Y-%m-%d %h:%i:%S')
+        <if test="startPayTime != null and startPayTime != '' and endPayTime != null and endPayTime != ''">
+            and a.create_time between DATE_FORMAT( #{startPayTime},'%Y-%m-%d %H:%i:%s') and DATE_FORMAT( #{endPayTime},'%Y-%m-%d %H:%i:%s')
         </if>
         <if test="role == 3">
             and a.store_code in (select store_code from t_store where user_code = #{userId})
@@ -62,7 +57,6 @@
         b.sale_price salePrice,
         b.cost_price costPrice,
         a.create_time createTime,
-        a.create_name createName,
         a.update_time updateTime,
         a.update_name updateName,
         a.version version

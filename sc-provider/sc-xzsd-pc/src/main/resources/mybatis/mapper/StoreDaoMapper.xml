@@ -97,7 +97,7 @@
             and a.store_name like concat('%', #{storeName}, '%')
         </if>
         <if test="userName != null and userName != ''">
-            and a.user_name like concat('%', #{userName}, '%')
+            and b.user_name like concat('%', #{userName}, '%')
         </if>
         <if test="provinceCode != null and provinceCode != ''">
             and a.province_code like concat('%', #{provinceCode}, '%')

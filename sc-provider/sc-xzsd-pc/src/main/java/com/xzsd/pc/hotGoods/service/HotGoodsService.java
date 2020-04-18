@@ -156,4 +156,16 @@ public class HotGoodsService {
         List<DictionaryInfo> dictionaryInfoList = hotGoodsDao.getShowNo(dictionaryInfo);
         return AppResponse.success("查询成功！",dictionaryInfoList);
     }
+
+    /**
+     * 查询热门商品详情
+     * @author zhong
+     * @date 2020-04-17
+     * @param hotCode
+     * @return
+     */
+    public AppResponse getHotGoodsByHotCode(String hotCode) {
+        HotGoodsInfo hotGoodsInfo = hotGoodsDao.getHotGoodsByHotCode(hotCode);
+        return AppResponse.success("查询成功！",hotGoodsInfo);
+    }
 }

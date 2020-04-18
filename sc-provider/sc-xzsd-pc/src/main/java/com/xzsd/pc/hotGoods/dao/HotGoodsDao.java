@@ -94,4 +94,13 @@ public interface HotGoodsDao {
      * @return
      */
     int countSort(HotGoodsInfo hotGoodsInfo);
+
+    /**
+     * 查询热门商品详情
+     * @author zhong
+     * @date 2020-04-17
+     * @param hotCode
+     * @return
+     */
+    HotGoodsInfo getHotGoodsByHotCode(String hotCode);
 }

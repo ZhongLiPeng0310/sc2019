@@ -127,7 +127,7 @@
         a.goods_code goodsCode,
         a.goods_name goodsName,
         b.class_name classFristName,
-        b.class_name classSecondName,
+        c.class_name classSecondName,
         a.goods_state goodsState,
         a.create_time createTime,
         a.create_name createName,
@@ -135,8 +135,11 @@
         a.update_name updateName,
         a.version version
         from
-        t_goods a LEFT join t_goods_class b
-        on a.class_code = b.class_code
+        t_goods a
+        LEFT JOIN t_goods_class b
+        on a.class_first_code = b.class_code
+        LEFT JOIN t_goods_class c
+        on a.class_second_code = c.class_code
         where a.is_deleted = 0
         and a.goods_state = 2
         <if test="goodsCode != null and goodsCode != ''">

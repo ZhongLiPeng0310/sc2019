@@ -214,7 +214,7 @@
         set
             goods_state = #{goodsState},
             update_time = now(),
-        <if test="goodsState != null and goodsState != '' and goodsState == 1">
+        <if test="goodsState != null and goodsState != '' and goodsState == 2">
             up_time = now(),
         </if>
             update_name = #{userId},
