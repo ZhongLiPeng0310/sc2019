@@ -34,7 +34,7 @@ public class HotGoodsController {
      * @param hotGoodsInfo
      * @return
      */
-    @PostMapping("/saveHotGoods")
+    @PostMapping("saveHotGoods")
     public AppResponse saveHotGoods (HotGoodsInfo hotGoodsInfo){
         try{
             //获取用户id
@@ -154,7 +154,7 @@ public class HotGoodsController {
      * @param hotCode
      * @return
      */
-    @RequestMapping(value = "getHotGoodsByHotCode")
+    @PostMapping(value = "getHotGoodsByHotCode")
     public AppResponse getHotGoodsByHotCode(String hotCode) {
         try {
             return hotGoodsService.getHotGoodsByHotCode(hotCode);

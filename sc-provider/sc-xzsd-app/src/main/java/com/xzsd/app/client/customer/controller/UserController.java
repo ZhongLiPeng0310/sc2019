@@ -1,11 +1,10 @@
-package com.xzsd.app.regist.controller;
+package com.xzsd.app.client.customer.controller;
 
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.neusoft.util.AuthUtils;
-import com.xzsd.app.regist.entity.UserInfo;
-import com.xzsd.app.regist.service.UserService;
+import com.xzsd.app.client.customer.service.UserService;
+import com.xzsd.app.client.customer.entity.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +66,45 @@ public class UserController {
             return userService.updateUserPassword(userInfo);
         } catch (Exception e) {
             logger.error("修改异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+    /**
+     * 查询客户信息
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    @PostMapping("getMyself")
+    private AppResponse getMyself(UserInfo userInfo){
+        try {
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUserId(userId);
+            return userService.getMyself(userInfo);
+        }catch (Exception e){
+            logger.error("查询客户信息失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 修改客户邀请码
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    @PostMapping("updateInviteCode")
+    private AppResponse updateInviteCode(UserInfo userInfo){
+        try{
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUserId(userId);
+            return userService.updateInviteCode(userInfo);
+        }catch (Exception e){
+            logger.error("修改邀请码失败！",e);
             System.out.println(e.toString());
             throw e;
         }

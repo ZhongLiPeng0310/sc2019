@@ -278,12 +278,6 @@
         where a.is_deleted = 0
         and
         a.last_class_code is null
-        <if test="classCode != null and classCode != ''">
-            and a.class_code like concat('%', #{classCode}, '%')
-        </if>
-        <if test="className != null and className != ''">
-            and a.class_name like concat('%', #{className}, '%')
-        </if>
         order by create_time desc
     </select>
 

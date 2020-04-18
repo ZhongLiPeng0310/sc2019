@@ -34,6 +34,10 @@ public class DriverInfo {
      */
     private String email;
     /**
+     * 司机头像
+     */
+    private String imagePath;
+    /**
      * 身份证
      */
     private String idCard;
@@ -156,6 +160,14 @@ public class DriverInfo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getIdCard() {

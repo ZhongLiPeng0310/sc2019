@@ -1,11 +1,8 @@
-package com.xzsd.app.regist.dao;
+package com.xzsd.app.client.customer.dao;
 
 
-import com.xzsd.app.regist.entity.UserInfo;
+import com.xzsd.app.client.customer.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * UsersDao
@@ -82,4 +79,22 @@ public interface UserDao {
      * @return
      */
     int updateUserPassword(UserInfo userInfo);
+
+    /**
+     * 获取用户信息
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    UserInfo getMysef(UserInfo userInfo);
+
+    /**
+     * 修改用户邀请码
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    int updateInviteCode(UserInfo userInfo);
 }

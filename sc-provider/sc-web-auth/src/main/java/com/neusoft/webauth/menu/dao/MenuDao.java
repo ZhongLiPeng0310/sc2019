@@ -67,4 +67,13 @@ public interface MenuDao {
      * @return
      */
     int getUserRole(String userId);
+
+    /**
+     * 根据角色查询菜单lieb
+     * @author zhong
+     * @date 2020-04-13
+     * @param menuInfo
+     * @return
+     */
+    List<MenuInfo> listMenuHome(MenuInfo menuInfo);
 }

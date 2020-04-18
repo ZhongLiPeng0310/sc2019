@@ -1,19 +1,15 @@
-package com.xzsd.app.regist.service;
+package com.xzsd.app.client.customer.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
-import com.xzsd.app.regist.dao.UserDao;
-import com.xzsd.app.regist.entity.UserInfo;
+import com.xzsd.app.client.customer.dao.UserDao;
+import com.xzsd.app.client.customer.entity.UserInfo;
 import com.xzsd.app.util.PasswordUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 实现类
@@ -97,6 +93,34 @@ public class UserService {
         int count = userDao.updateUserPassword(userInfo);
         if(0 == count) {
             appResponse = AppResponse.bizError("修改密码失败，请重试！");
+        }
+        return appResponse;
+    }
+
+    /**
+     * 获取用户信息
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    public AppResponse getMyself(UserInfo userInfo) {
+        UserInfo clientMessage = userDao.getMysef(userInfo);
+        return AppResponse.success("查询成功！",clientMessage);
+    }
+
+    /**
+     * 修改用户邀请码
+     * @author zhong
+     * @date 2020-04-18
+     * @param userInfo
+     * @return
+     */
+    public AppResponse updateInviteCode(UserInfo userInfo) {
+        AppResponse appResponse = AppResponse.success("修改成功！");
+        int updateCode = userDao.updateInviteCode(userInfo);
+        if (0 == updateCode){
+            appResponse = AppResponse.bizError("修改失败，请重试！");
         }
         return appResponse;
     }

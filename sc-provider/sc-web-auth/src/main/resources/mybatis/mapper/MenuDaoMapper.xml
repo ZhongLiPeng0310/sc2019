@@ -35,7 +35,7 @@
         #{createName},
         0,
         0,
-        #{role}
+        1
         )
     </insert>
 
@@ -55,8 +55,6 @@
         t_menu a
         where
         a.is_deleted = 0
-        and
-        a.role = #{role}
         order by a.create_time
     </select>
 
@@ -107,5 +105,24 @@
         menu_code = #{menuCode}
         and
         is_deleted = 0
+    </select>
+    <!--根据角色查询菜单列表-->
+    <select id="listMenuHome" resultType="com.neusoft.webauth.menu.entity.MenuInfo">
+        select
+            a.menu_code menuCode,
+            a.menu_name menuName,
+            a.route,
+            a.remarks,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
+        from
+        t_menu a
+        where
+        a.is_deleted = 0
+        and
+        a.role = #{role}
     </select>
 </mapper>

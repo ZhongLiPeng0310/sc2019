@@ -1,4 +1,4 @@
-package com.xzsd.app.clientOrder.entity;
+package com.xzsd.app.client.clientOrder.entity;
 
 import java.util.Date;
 

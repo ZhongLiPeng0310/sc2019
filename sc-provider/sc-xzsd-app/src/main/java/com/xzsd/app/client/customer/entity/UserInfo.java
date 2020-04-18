@@ -1,6 +1,4 @@
-package com.xzsd.app.regist.entity;
-
-import java.util.Date;
+package com.xzsd.app.client.customer.entity;
 
 /**
  * 用户实体类
@@ -60,6 +58,31 @@ public class UserInfo {
      * 店铺邀请码
      */
     private String inviteCode;
+    /**
+     * 门店编码
+     */
+    private String storeCode;
+    /**
+     * 门店名称
+     */
+    private String storeName;
+    /**
+     * 省份名称
+     */
+    private String provinceName;
+    /**
+     * 城市名称
+     */
+    private String cityName;
+    /**
+     * 区名称
+     */
+    private String areaName;
+    /**
+     * 门店地址
+     */
+    private String address;
+
     /**
      * 作废标记  0保留  1删除
      */
@@ -180,6 +203,54 @@ public class UserInfo {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getStoreCode() {
+        return storeCode;
+    }
+
+    public void setStoreCode(String storeCode) {
+        this.storeCode = storeCode;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public String getImagePath() {

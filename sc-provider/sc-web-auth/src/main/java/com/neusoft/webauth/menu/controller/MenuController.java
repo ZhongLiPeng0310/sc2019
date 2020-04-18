@@ -123,4 +123,21 @@ public class MenuController {
             throw e;
         }
     }
+    /**
+     * 查询菜单列表
+     * @author zhong
+     * @date 2020-04-11
+     * @param menuInfo
+     * @return
+     */
+    @PostMapping("listMenuHome")
+    public AppResponse listMenuHome(MenuInfo menuInfo){
+        try {
+            return menuService.listMenuHome(menuInfo);
+        }catch (Exception e){
+            logger.error("查询全部菜单成功");
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

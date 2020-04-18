@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.client.driver.dao.DriverDao">
+    <!--查询司机附近的门店-->
+    <select id="getStoreByDriver" parameterType="com.xzsd.app.client.customer.entity.UserInfo" resultType="com.xzsd.app.client.customer.entity.UserInfo">
+        select
+        b.store_code storeCode,
+        b.store_name storeName,
+        c.dic_name provinceName,
+        d.dic_name cityName,
+        e.dic_name areaName,
+        b.address address,
+        a.user_code userCode,
+        a.user_name userName,
+        a.phone phone
+        from
+        t_sys_user a
+        LEFT JOIN t_store b
+        on a.user_code = b.user_code
+        LEFT JOIN t_dictionary c
+        on b.province_code = c.dic_code
+        LEFT JOIN t_dictionary d
+        on b.city_code = d.dic_code
+        LEFT JOIN t_dictionary e
+        on b.area_code = e.dic_code
+        where a.is_deleted = 0
+        and b.city_code in
+        (select city_code from t_driver where user_code = #{userId})
+    </select>
+    <!--查询司机信息-->
+    <select id="getMyself" resultType="com.xzsd.app.manager.managerMessage.entity.UserInfo">
+        select
+        a.user_code userCode,
+        a.user_name userName,
+        a.phone phone,
+        a.image_path imagePath,
+        role role
+        from
+        t_sys_user a
+        LEFT JOIN t_driver b
+        on a.user_code = b.user_code
+        where
+        a.user_code = #{userId}
+    </select>
+</mapper>

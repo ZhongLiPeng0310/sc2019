@@ -108,4 +108,22 @@ public class MenuService {
         MenuInfo menuInfo = menuDao.getMenuByCode(menuCode);
         return AppResponse.success("查询成功！",menuInfo);
     }
+
+    /**
+     * 根据角色查询菜单
+     * @author zhong
+     * @date 2020-04-13
+     * @param menuInfo
+     * @return
+     */
+    public AppResponse listMenuHome(MenuInfo menuInfo) {
+        //查询当前登录人的的id
+        String userId = SecurityUtils.getCurrentUserId();
+        menuInfo.setUserId(userId);
+        //查询当前登录人的角色
+        int role = menuDao.getUserRole(userId);
+        menuInfo.setRole(role);
+        List<MenuInfo> menuInfoList = menuDao.listMenuHome(menuInfo);
+        return AppResponse.success("查询成功！",menuInfoList);
+    }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.app.regist.dao.UserDao">
+<mapper namespace="com.xzsd.app.client.customer.dao.UserDao">
 
     <!--统计用户账号数量-->
-    <select id="countUserAcct" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
+    <select id="countUserAcct" parameterType="com.xzsd.app.client.customer.entity.UserInfo" resultType="int">
         select count(user_acct)
         from t_sys_user
         where is_deleted = 0
@@ -13,7 +13,7 @@
         </if>
     </select>
     <!--校验注册的用户的手机号码是否已存在-->
-    <select id="countUserPhone" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
+    <select id="countUserPhone" parameterType="com.xzsd.app.client.customer.entity.UserInfo" resultType="int">
         select count(phone)
         from t_sys_user
         where is_deleted = 0
@@ -22,18 +22,8 @@
             and user_code != #{userCode}
         </if>
     </select>
-<!--    &lt;!&ndash;校验注册的用户的身份证号码是否已存在&ndash;&gt;-->
-<!--    <select id="countIdCard" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">-->
-<!--        select count(idCard)-->
-<!--        from t_sys_user-->
-<!--        where is_deleted = 0-->
-<!--        and id_card = #{idCard}-->
-<!--        <if test="userCode != null and userCode != ''">-->
-<!--            and user_code != #{userCode}-->
-<!--        </if>-->
-<!--    </select>-->
     <!--校验注册的用户的邮箱是否已存在-->
-    <select id="countEmail" parameterType="com.xzsd.app.regist.entity.UserInfo" resultType="int">
+    <select id="countEmail" parameterType="com.xzsd.app.client.customer.entity.UserInfo" resultType="int">
         select count(email)
         from t_sys_user
         where is_deleted = 0
@@ -43,7 +33,7 @@
         </if>
     </select>
     <!--获取用户信息-->
-    <select id="getUserById" parameterType="java.lang.String" resultType="com.xzsd.app.regist.entity.UserInfo">
+    <select id="getUserById" parameterType="java.lang.String" resultType="com.xzsd.app.client.customer.entity.UserInfo">
         select
             user_code,
             user_name,
@@ -56,7 +46,7 @@
     </select>
 
     <!--注册用户-->
-    <insert id="saveUser" parameterType="com.xzsd.app.regist.entity.UserInfo">
+    <insert id="saveUser" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
         insert into t_sys_user
         (user_code,
         user_acct,
@@ -91,7 +81,7 @@
         )
     </insert>
     <!--注册用户信息到客户表-->
-    <insert id="saveUserToCus" parameterType="com.xzsd.app.regist.entity.UserInfo">
+    <insert id="saveUserToCus" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
         insert into t_customer
         (user_code,
         invite_code,
@@ -111,12 +101,35 @@
     </insert>
 
     <!--修改密码-->
-    <update id="updateUserPassword" parameterType="com.xzsd.app.regist.entity.UserInfo" >
+    <update id="updateUserPassword" parameterType="com.xzsd.app.client.customer.entity.UserInfo" >
         update t_sys_user
            set user_password = #{userNewPassword},
                update_time = now(),
                update_name = #{updateName},
                version     = version + 1
          where user_code = #{userCode}
+    </update>
+
+    <!--获取用户信息-->
+    <select id="getMysef" resultType="com.xzsd.app.client.customer.entity.UserInfo">
+        select
+        user_code userCode,
+        user_name userName,
+        image_path imagePath,
+        role role
+        from
+        t_sys_user
+        where
+        user_code = #{userId}
+    </select>
+
+    <!--修改邀请码-->
+    <update id="updateInviteCode" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
+        update t_customer
+        set
+        invite_code = #{inviteCode},
+        version = version + 1
+        where
+        user_code = #{userId}
     </update>
 </mapper>
