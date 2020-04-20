@@ -35,4 +35,16 @@
         )
 
     </insert>
+
+    <!--修改客户端订单状态-->
+    <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        update t_order
+        set
+        order_state = #{orderState},
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where
+        order_code = #{orderCode}
+    </update>
 </mapper>

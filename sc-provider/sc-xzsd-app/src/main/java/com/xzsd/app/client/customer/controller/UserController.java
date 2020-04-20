@@ -37,9 +37,6 @@ public class UserController {
     @PostMapping("userRegister")
     public AppResponse userRegister(UserInfo userInfo){
         try {
-            //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            userInfo.setCreateName(userId);
             AppResponse appResponse = userService.userRegister(userInfo);
             return appResponse;
         }catch (Exception e){

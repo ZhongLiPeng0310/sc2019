@@ -183,7 +183,7 @@
             a.user_name userName,
             a.user_acct userAcct,
             a.user_password userPassword,
-            a.phone,
+            a.phone phone,
             a.id_card idCard,
             a.image_path imagePath,
             e.dic_code provinceCode,
@@ -197,7 +197,7 @@
             a.create_time createTime,
             a.update_name updateName,
             a.update_time updateTime,
-            a.version
+            a.version version
         from
             t_sys_user a
         LEFT JOIN t_driver b

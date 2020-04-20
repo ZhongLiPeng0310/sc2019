@@ -99,4 +99,21 @@ public class GoodsController {
             throw e;
         }
     }
+    /**
+     * 新增订单评价
+     * @author zhong
+     * @date 2020-04-19
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    @PostMapping("saveOrdersAppraise")
+    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo){
+        try {
+            return goodsService.saveOrdersAppraise(goodsAppraiseInfo);
+        }catch (Exception e){
+            logger.error("新增订单评价失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

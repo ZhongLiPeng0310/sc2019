@@ -42,10 +42,6 @@ public class GoodsClassInfo {
      */
     private String remark;
     /**
-     * 分类等级 1为一级  2为二级
-     */
-    private int classLevel;
-    /**
      * 作废标记 0不删除 1删除
      */
     private int isDeleted;
@@ -152,13 +148,6 @@ public class GoodsClassInfo {
         this.remark = remark;
     }
 
-    public int getClassLevel() {
-        return classLevel;
-    }
-
-    public void setClassLevel(int classLevel) {
-        this.classLevel = classLevel;
-    }
 
     public int getIsDeleted() {
         return isDeleted;

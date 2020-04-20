@@ -1,21 +1,19 @@
-package com.xzsd.app.client.clientOrder.dao;
+package com.xzsd.app.client.managerOrder.dao;
 
-import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.access.method.P;
 
-import java.util.List;
-
+/**
+ * @author  zhong
+ * @date 2020-04-20
+ */
 @Mapper
-public interface ClientOrderDao {
-
-
+public interface ManagerOrderDao {
     /**
-     * 修改订单状态
+     * 修改店长订单状态
      * @date 2020-04-20
      * @author zhong
-     * @param orderState
+     * @param orderCode
      * @param orderState
      * @param userId
      * @return

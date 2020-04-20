@@ -4,6 +4,7 @@ import com.github.pagehelper.PageException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.goods.dao.GoodsDao;
 import com.xzsd.app.goods.entity.GoodsAppraiseInfo;
 import com.xzsd.app.goods.entity.GoodsClassInfo;
@@ -66,5 +67,24 @@ public class GoodsService {
     public AppResponse getSecondClass(String lastClassCode) {
         List<GoodsClassInfo> classSecondList = goodsDao.getSecondClass(lastClassCode);
         return AppResponse.success("查询列表成功！", classSecondList);
+    }
+
+    /**
+     * 新增订单评价
+     * @author zhong
+     * @date 2002-04-19
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo) {
+        String userId = SecurityUtils.getCurrentUserId();
+        goodsAppraiseInfo.setUserId(userId);
+        goodsAppraiseInfo.setIsDeleted(0);
+        goodsAppraiseInfo.setCreateName(userId);
+        int saveOrdersAppraise = goodsDao.saveOrdersAppraise(goodsAppraiseInfo);
+        if (0 == saveOrdersAppraise){
+            return AppResponse.bizError("新增失败！");
+        }
+        return AppResponse.success("新增成功！");
     }
 }

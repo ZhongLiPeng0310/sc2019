@@ -21,6 +21,10 @@ public class GoodsAppraiseInfo {
      */
     private String userAcct;
     /**
+     * 当前登录人id
+     */
+    private String userId;
+    /**
      * 评价内容
      */
     private String appraiseDetail;
@@ -103,6 +107,14 @@ public class GoodsAppraiseInfo {
 
     public void setUserAcct(String userAcct) {
         this.userAcct = userAcct;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAppraiseDetail() {

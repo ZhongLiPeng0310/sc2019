@@ -17,8 +17,7 @@
         select count(class_name)
         from t_goods_class
         where is_deleted = 0
-        and class_code = #{classCode}
-        and last_class_code is NULL
+        and last_class_code = #{classCode}
         <if test="classCode != null and classCode != ''">
             and class_code != #{classCode}
         </if>
@@ -123,7 +122,7 @@
             class_name className,
             last_class_code lastClassCode,
             is_deleted isDeleted,
-            remark,
+            remark remark,
             create_time createTime,
             create_name createName,
             update_time updateTime,
