@@ -28,7 +28,7 @@
         (select city_code from t_driver where user_code = #{userId})
     </select>
     <!--查询司机信息-->
-    <select id="getMyself" resultType="com.xzsd.app.manager.managerMessage.entity.UserInfo">
+    <select id="getMyself" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
         select
         a.user_code userCode,
         a.user_name userName,

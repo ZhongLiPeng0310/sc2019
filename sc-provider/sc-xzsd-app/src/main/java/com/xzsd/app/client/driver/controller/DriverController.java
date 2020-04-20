@@ -3,7 +3,7 @@ package com.xzsd.app.client.driver.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.client.driver.service.DriverService;
-import com.xzsd.app.manager.managerMessage.entity.UserInfo;
+import com.xzsd.app.client.manager.managerMessage.entity.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

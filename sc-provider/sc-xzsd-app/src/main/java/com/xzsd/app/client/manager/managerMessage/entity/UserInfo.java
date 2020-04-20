@@ -1,4 +1,4 @@
-package com.xzsd.app.manager.managerMessage.entity;
+package com.xzsd.app.client.manager.managerMessage.entity;
 
 /**
  * 用户实体类

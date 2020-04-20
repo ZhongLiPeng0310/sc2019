@@ -73,18 +73,34 @@
         order by create_time desc
     </select>
 
-    <!--查询商品二级分类-->
-    <select id="getSecondClass" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsClassInfo">
+    <!--二级分类商品的Map-->
+    <resultMap id="getSecondClass" type="com.xzsd.app.goods.entity.GoodsClassInfo">
+        <id column="class_code" property="classSecondCode" jdbcType="VARCHAR" />
+        <id column="class_name" property="classSecondName" jdbcType="VARCHAR" />
+        <collection property="classSecondList" ofType="com.xzsd.app.goods.entity.ClassSecondList">
+            <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
+            <id column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+            <id column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />
+            <id column="salePrice" property="salePrice" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+    <!--查询商品二级分类和商品-->
+    <select id="getSecondClass" resultMap="getSecondClass">
         select
-        a.class_name classSecondName,
-        a.class_code classSecondCode,
-        a.version version
+        a.class_name,
+        a.class_code,
+        b.goods_code goodsCode,
+        b.goods_name goodsName,
+        b.imageurl imageUrl,
+        b.sale_price salePrice
         from
         t_goods_class a
+        LEFT JOIN t_goods b
+        on a.class_code = b.class_second_code
         where a.is_deleted = 0
         and
         a.last_class_code = #{lastClassCode}
         order by
-        create_time desc
+        b.create_time desc
     </select>
 </mapper>

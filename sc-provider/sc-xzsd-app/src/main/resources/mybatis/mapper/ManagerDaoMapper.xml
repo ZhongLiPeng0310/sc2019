@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.app.manager.managerMessage.dao.ManagerDao">
+<mapper namespace="com.xzsd.app.client.manager.managerMessage.dao.ManagerDao">
     <!--查询店长信息-->
-    <select id="getStoreByCode" resultType="com.xzsd.app.manager.managerMessage.entity.UserInfo">
+    <select id="getStoreByCode" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
         select
         b.store_code storeCode,
         b.store_name storeName,
@@ -27,7 +27,7 @@
     </select>
 
     <!--查询附近司机信息-->
-    <select id="getStoreDriverByCode" parameterType="com.xzsd.app.manager.managerMessage.entity.UserInfo" resultType="com.xzsd.app.manager.managerMessage.entity.UserInfo">
+    <select id="getStoreDriverByCode" parameterType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
         select
         a.user_code userCode,
         a.user_name userName,

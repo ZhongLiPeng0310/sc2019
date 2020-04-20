@@ -28,22 +28,22 @@ public class UserController {
     @Resource
     private UserService userService;
     /**
-     * 新增用户
+     * 注册用户
      * @param userInfo
      * @return
      * @author zhong
      * @date 2020-03-26
      */
-    @PostMapping("registUSer")
-    public AppResponse saveUser(UserInfo userInfo){
+    @PostMapping("userRegister")
+    public AppResponse userRegister(UserInfo userInfo){
         try {
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
             userInfo.setCreateName(userId);
-            AppResponse appResponse = userService.saveUser(userInfo);
+            AppResponse appResponse = userService.userRegister(userInfo);
             return appResponse;
         }catch (Exception e){
-            logger.error("用户新增失败",e);
+            logger.error("用户注册失败",e);
             System.out.println(e.toString());
             throw e;
         }

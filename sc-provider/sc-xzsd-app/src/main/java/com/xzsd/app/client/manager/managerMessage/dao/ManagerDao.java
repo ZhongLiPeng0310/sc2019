@@ -1,6 +1,6 @@
-package com.xzsd.app.manager.managerMessage.dao;
+package com.xzsd.app.client.manager.managerMessage.dao;
 
-import com.xzsd.app.manager.managerMessage.entity.UserInfo;
+import com.xzsd.app.client.manager.managerMessage.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

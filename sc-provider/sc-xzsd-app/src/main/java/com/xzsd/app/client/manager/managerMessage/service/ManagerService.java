@@ -1,9 +1,9 @@
-package com.xzsd.app.manager.managerMessage.service;
+package com.xzsd.app.client.manager.managerMessage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
-import com.xzsd.app.manager.managerMessage.dao.ManagerDao;
-import com.xzsd.app.manager.managerMessage.entity.UserInfo;
+import com.xzsd.app.client.manager.managerMessage.dao.ManagerDao;
+import com.xzsd.app.client.manager.managerMessage.entity.UserInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,8 +35,6 @@ public class ManagerService {
      */
     public AppResponse getStoreDriverByCode(UserInfo userInfo) {
         List<UserInfo> driverlist = managerDao.getStoreDriverByCode(userInfo);
-        //包装Page对象
-        PageInfo<UserInfo> pageData = new PageInfo<>(driverlist);
-        return AppResponse.success("查询成功！",pageData);
+        return AppResponse.success("查询成功！",driverlist);
     }
 }

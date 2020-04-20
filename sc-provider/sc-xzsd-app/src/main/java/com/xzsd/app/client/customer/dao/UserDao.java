@@ -35,14 +35,6 @@ public interface UserDao {
      * @return
      */
     int countEmail(UserInfo userInfo);
-    /**
-     * @author zhong
-     * @date 2020-04-1-
-     * 校验用户身份证号码是否存在
-     * @param userInfo
-     * @return
-     */
-    int countIdCard(UserInfo userInfo);
 
     /**
      * 新增客户信息用户客户表
@@ -51,7 +43,7 @@ public interface UserDao {
      *  @param userInfo 用户信息
      * @return
      */
-    int saveUser(UserInfo userInfo);
+    int userRegister(UserInfo userInfo);
 
     /**
      * 新增用户信息到客户表

@@ -163,6 +163,7 @@
         a.phone phone,
         a.invite_code inviteCode,
         a.user_code userCode,
+        a.license_code licenseCode,
         b.user_name userName,
         b.user_acct userAcct,
         a.create_time createTime,

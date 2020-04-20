@@ -46,7 +46,7 @@
     </select>
 
     <!--注册用户-->
-    <insert id="saveUser" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
+    <insert id="userRegister" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
         insert into t_sys_user
         (user_code,
         user_acct,

@@ -7,7 +7,7 @@ import java.util.Date;
  * @author zhong
  * @date 2020-04-14
  */
-public class clientOrder {
+public class ClientOrderInfo {
     /**
      * 订单编码
      */
@@ -109,6 +109,10 @@ public class clientOrder {
      * 图片顺序
      */
     private int imageNum;
+    /**
+     * 创建人
+     */
+    private String createName;
     /**
      * 更新人
      * @return
@@ -343,6 +347,14 @@ public class clientOrder {
 
     public void setImageNum(int imageNum) {
         this.imageNum = imageNum;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
     }
 
     public String getUpdateName() {

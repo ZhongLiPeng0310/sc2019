@@ -17,6 +17,22 @@ public class ClassSecondList {
      */
     private String className;
     /**
+     * 商品编码
+     */
+    private String goodsCode;
+    /**
+     * 商品名称
+     */
+    private String goodsName;
+    /**
+     * 商品图片路径
+     */
+    private String imageUrl;
+    /**
+     * 商品售价
+     */
+     private String salePrice;
+    /**
      * 一级分类编码
      */
     private String classFirstCode;
@@ -36,14 +52,6 @@ public class ClassSecondList {
      * 上一级分类编码
      */
     private String lastClassCode;
-    /**
-     * 备注
-     */
-    private String remark;
-    /**
-     * 分类等级 1为一级  2为二级
-     */
-    private int classLevel;
     /**
      * 作废标记 0不删除 1删除
      */
@@ -96,6 +104,38 @@ public class ClassSecondList {
         this.className = className;
     }
 
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
+    }
+
     public String getClassFirstCode() {
         return classFirstCode;
     }
@@ -134,22 +174,6 @@ public class ClassSecondList {
 
     public void setLastClassCode(String lastClassCode) {
         this.lastClassCode = lastClassCode;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public int getClassLevel() {
-        return classLevel;
-    }
-
-    public void setClassLevel(int classLevel) {
-        this.classLevel = classLevel;
     }
 
     public int getIsDeleted() {

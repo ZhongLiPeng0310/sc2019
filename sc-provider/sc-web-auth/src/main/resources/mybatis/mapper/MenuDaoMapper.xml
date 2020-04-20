@@ -67,7 +67,6 @@
         remarks = #{remarks},
         update_name = #{updateName},
         update_time = now(),
-        role = #{role},
         version = version + 1
         where
         menu_code = #{menuCode}
@@ -94,11 +93,11 @@
         menu_name menuName,
         route route,
         remarks remarks,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+        create_time createTime,
+        create_name createName,
+        update_time updateTime,
+        update_name updateName,
+        version version
         from
         t_menu
         where
@@ -111,8 +110,8 @@
         select
             a.menu_code menuCode,
             a.menu_name menuName,
-            a.route,
-            a.remarks,
+            a.route route,
+            a.remarks remarks,
             a.create_time createTime,
             a.create_name createName,
             a.update_time updateTime,

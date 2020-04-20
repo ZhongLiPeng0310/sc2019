@@ -21,7 +21,7 @@ public class UserService {
     @Resource
     private UserDao userDao;
     /**
-     * 新增用户
+     * 注册用户
      * @param userInfo
      * @return
      * @author zhong
@@ -29,7 +29,7 @@ public class UserService {
      */
 
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse saveUser(UserInfo userInfo){
+    public AppResponse userRegister(UserInfo userInfo){
         //检验账号是否存在
         int countUserAcct = userDao.countUserAcct(userInfo);
         if (0 != countUserAcct){
@@ -40,12 +40,6 @@ public class UserService {
         if (0 != countUserPhone){
             return AppResponse.bizError("用户手机号码已存在，请重新输入");
         }
-//        //检验身份证号码是否存在
-//        int countIdCard = userDao.countIdCard(userInfo);
-//        if (0 != countIdCard){
-//            return AppResponse.bizError("用户身份证已存在，请重新输入");
-//        }
-        //检验邮箱是否存在
         int countEmail = userDao.countEmail(userInfo);
         if (0 != countEmail){
             return AppResponse.bizError("用户邮箱已存在，请重新输入");
@@ -56,13 +50,13 @@ public class UserService {
         userInfo.setUserCode(StringUtil.getCommonCode(2));
         userInfo.setIsDeleted(0);
         //新增客户信息到用户表
-        int count = userDao.saveUser(userInfo);
+        int count = userDao.userRegister(userInfo);
         //新增客户信息到客户表
         int countTnCustomer = userDao.saveUserToCus(userInfo);
         if (0 == count && 0 ==countTnCustomer){
-            return AppResponse.bizError("新增失败，请重试！");
+            return AppResponse.bizError("注册失败，请重试！");
         }
-        return AppResponse.success("新增成功！");
+        return AppResponse.success("注册成功！");
     }
 
     /**

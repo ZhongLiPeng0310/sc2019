@@ -1,48 +1,58 @@
-package com.xzsd.pc.pictureShow.entity;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+package com.xzsd.app.client.cart.entity;
 
 /**
- * 轮播图实体类
+ * 购物车
  * @author zhong
- * @date 2020-04-05
+ * @date 2020-04-19
  */
-public class PictureShowInfo {
+public class CartInfo {
     /**
-     *轮播图编码
+     * 购物车编码
      */
-    private String showCode;
+    private String cartCode;
     /**
-     * 轮播图排序号
+     * 购物车序号
      */
-    private int sortNo;
+    private String sortNo;
+    /**
+     * 客户编码
+     */
+    private String userCode;
+    /**
+     * 当前登录人编码
+     */
+    private String userId;
     /**
      * 商品编码
      */
     private String goodsCode;
     /**
-     * 图片路径
+     * 商品名称
+     */
+    private String goodsName;
+    /**
+     * 售价
+     */
+    private float salePrice;
+    /**
+     * 购买数量
+     */
+    private int orderSum;
+    /**
+     * 新加的数量
+     */
+    private int NewOrderSum;
+    /**
+     * 商品图片
      */
     private String imagePath;
-    /**
-     * 轮播图状态  1启用 2禁用
-     */
-    private int showState;
-    /**
-     *有效期开始
-     */
 
-    private String beginTime;
     /**
-     * 有效期停止
+     * 总金额
      */
-
-    private String endTime;
+    private float orderMoney;
     /**
-     * 作废标记 0保留  1删除
+     * 作废标记  0保留  1删除
      */
     private int isDeleted;
     /**
@@ -74,20 +84,36 @@ public class PictureShowInfo {
      */
     private int pageNum;
 
-    public String getShowCode() {
-        return showCode;
+    public String getCartCode() {
+        return cartCode;
     }
 
-    public void setShowCode(String showCode) {
-        this.showCode = showCode;
+    public void setCartCode(String cartCode) {
+        this.cartCode = cartCode;
     }
 
-    public int getSortNo() {
+    public String getSortNo() {
         return sortNo;
     }
 
-    public void setSortNo(int sortNo) {
+    public void setSortNo(String sortNo) {
         this.sortNo = sortNo;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getGoodsCode() {
@@ -98,6 +124,22 @@ public class PictureShowInfo {
         this.goodsCode = goodsCode;
     }
 
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public float getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(float salePrice) {
+        this.salePrice = salePrice;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
@@ -106,28 +148,28 @@ public class PictureShowInfo {
         this.imagePath = imagePath;
     }
 
-    public int getShowState() {
-        return showState;
+    public int getOrderSum() {
+        return orderSum;
     }
 
-    public void setShowState(int showState) {
-        this.showState = showState;
+    public void setOrderSum(int orderSum) {
+        this.orderSum = orderSum;
     }
 
-    public String getBeginTime() {
-        return beginTime;
+    public int getNewOrderSum() {
+        return NewOrderSum;
     }
 
-    public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
+    public void setNewOrderSum(int newOrderSum) {
+        NewOrderSum = newOrderSum;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public float getOrderMoney() {
+        return orderMoney;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setOrderMoney(float orderMoney) {
+        this.orderMoney = orderMoney;
     }
 
     public int getIsDeleted() {
