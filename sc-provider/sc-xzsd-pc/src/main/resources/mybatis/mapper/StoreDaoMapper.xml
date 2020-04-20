@@ -156,8 +156,11 @@
         select
         a.store_code storeCode,
         a.store_name storeName,
+        e.dic_code provinceCode,
         e.dic_name provinceName,
+        c.dic_code cityCode,
         c.dic_name cityName,
+        d.dic_code areaCode,
         d.dic_name areaName,
         a.address address,
         a.phone phone,

@@ -176,7 +176,7 @@
           and version = #{version}
     </update>
 
-    <!--查询用户详情-->
+    <!--查询司机详情-->
     <select id="getDriverByUserCode" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverInfo">
         select
             a.user_code userCode,
@@ -186,8 +186,11 @@
             a.phone,
             a.id_card idCard,
             a.image_path imagePath,
+            e.dic_code provinceCode,
             e.dic_name provinceName,
+            c.dic_code cityCode,
             c.dic_name cityName,
+            d.dic_code areaCode,
             d.dic_name areaName,
             a.is_deleted isDeleted,
             a.create_name createName,
