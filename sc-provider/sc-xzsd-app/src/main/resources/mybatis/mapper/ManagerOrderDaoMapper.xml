@@ -42,23 +42,23 @@
         e.phone,
         a.order_state,
         a.store_code,
-        c.store_name,
-        c.address,
+        d.store_name,
+        d.address,
         a.create_time,
-        b.goods_code goodsCode,
-        b.goods_name goodsName,
-        b.goods_introduce goodsIntroduce,
-        b.imageurl imagePath,
-        b.sale_price salePrice,
-        d.order_sum orderSum
+        c.goods_code goodsCode,
+        c.goods_name goodsName,
+        c.goods_introduce goodsIntroduce,
+        c.imageurl imagePath,
+        c.sale_price salePrice,
+        b.order_sum orderSum
         from
         t_order a
-        LEFT JOIN t_goods b
-        on a.goods_code = b.goods_code
-        LEFT JOIN t_store c
-        on a.store_code = c.store_code
-        LEFT JOIN t_order_detail d
-        on a.order_code = d.order_code
+        LEFT JOIN t_order_detail b
+        on a.order_code = b.order_code
+        LEFT JOIN t_goods c
+        on b.goods_code = c.goods_code
+        LEFT JOIN t_store d
+        on a.store_code = d.store_code
         LEFT JOIN t_sys_user e
         on a.user_code = e.user_code
         where

@@ -58,7 +58,6 @@
         order_state,
         cart_code,
         store_code,
-        goods_code,
         is_deleted,
         create_time,
         create_name,
@@ -72,7 +71,6 @@
         7,
         0,
         #{storeCode},
-        #{goodsCode},
         #{isDeleted},
         now(),
         #{createName},
@@ -130,21 +128,21 @@
         a.order_money,
         a.order_state,
         a.store_code,
-        c.address,
+        d.address,
         a.create_time,
         b.goods_code goodsCode,
-        b.goods_name goodsName,
-        b.imageurl imagePath,
-        b.sale_price salePrice,
-        d.order_sum orderSum
+        c.goods_name goodsName,
+        c.imageurl imagePath,
+        c.sale_price salePrice,
+        b.order_sum orderSum
         from
         t_order a
-        LEFT JOIN t_goods b
-        on a.goods_code = b.goods_code
-        LEFT JOIN t_store c
-        on a.store_code = c.store_code
-        LEFT JOIN t_order_detail d
-        on a.order_code = d.order_code
+        LEFT JOIN t_order_detail b
+        on a.order_code = b.order_code
+        LEFT JOIN t_goods c
+        on b.goods_code = c.goods_code
+        LEFT JOIN t_store d
+        on a.store_code = d.store_code
         where
         a.is_deleted = 0
         and
