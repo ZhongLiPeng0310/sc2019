@@ -12,4 +12,58 @@
         where
         order_code = #{orderCode}
     </update>
+
+    <!--订单对应商品的Map-->
+    <resultMap id="getOrderDetail" type="com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo">
+        <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+        <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+        <collection property="goodsList" ofType="com.xzsd.app.client.managerOrder.entity.GoodsInfo">
+            <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
+            <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+            <result column="imagePath" property="imagePath" jdbcType="VARCHAR" />
+            <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
+            <result column="salePrice" property="salePrice" jdbcType="VARCHAR" />
+            <result column="orderSum" property="orderSum" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+    <!--查询订单详情-->
+    <select id="getStoreOrdersByCode" parameterType="java.lang.String" resultMap="getOrderDetail">
+        select
+        a.order_code,
+        a.order_money,
+        e.user_name,
+        e.phone,
+        a.order_state,
+        a.store_code,
+        c.store_name,
+        c.address,
+        a.create_time,
+        b.goods_code goodsCode,
+        b.goods_name goodsName,
+        b.goods_introduce goodsIntroduce,
+        b.imageurl imagePath,
+        b.sale_price salePrice,
+        d.order_sum orderSum
+        from
+        t_order a
+        LEFT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        LEFT JOIN t_store c
+        on a.store_code = c.store_code
+        LEFT JOIN t_order_detail d
+        on a.order_code = d.order_code
+        LEFT JOIN t_sys_user e
+        on a.user_code = e.user_code
+        where
+        a.is_deleted = 0
+        and
+        a.order_code = #{orderCode}
+    </select>
 </mapper>

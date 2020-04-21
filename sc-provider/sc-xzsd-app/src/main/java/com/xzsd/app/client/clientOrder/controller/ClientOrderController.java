@@ -44,4 +44,41 @@ public class ClientOrderController {
         }
     }
 
+    /**
+     * 新增订单
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    @PostMapping("saveOrder")
+    private AppResponse saveOrder(ClientOrderInfo clientOrderInfo){
+        try{
+            String userId = SecurityUtils.getCurrentUserId();
+            clientOrderInfo.setCreateName(userId);
+            return clientOrderService.saveOrder(clientOrderInfo);
+        }catch (Exception e){
+            logger.error("新增成功！");
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 客户端获取订单详情
+     * @autho zhong
+     * @date 2020-04-21
+     * @param orderCode
+     * @return
+     */
+    @PostMapping("getOrdersByCode")
+    private AppResponse getOrdersByCode(String orderCode){
+        try{
+            return clientOrderService.getOrdersByCode(orderCode);
+        }catch (Exception e){
+            logger.error("查询详情失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

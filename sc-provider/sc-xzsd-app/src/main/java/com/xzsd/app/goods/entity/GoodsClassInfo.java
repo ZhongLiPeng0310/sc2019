@@ -78,7 +78,7 @@ public class GoodsClassInfo {
     /**
      * 二级分类集合
      */
-    private List<ClassSecondList> classSecondList;
+    private List<ClassSecondList> classSecondGoodsList;
 
     public String getClassCode() {
         return classCode;
@@ -208,11 +208,11 @@ public class GoodsClassInfo {
         this.classFirstList = classFirstList;
     }
 
-    public List<ClassSecondList> getClassSecondList() {
-        return classSecondList;
+    public List<ClassSecondList> getClassSecondGoodsList() {
+        return classSecondGoodsList;
     }
 
-    public void setClassSecondList(List<ClassSecondList> classSecondList) {
-        this.classSecondList = classSecondList;
+    public void setClassSecondGoodsList(List<ClassSecondList> classSecondGoodsList) {
+        this.classSecondGoodsList = classSecondGoodsList;
     }
 }

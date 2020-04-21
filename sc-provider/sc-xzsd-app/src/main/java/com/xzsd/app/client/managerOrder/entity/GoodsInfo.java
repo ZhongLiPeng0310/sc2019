@@ -1,7 +1,4 @@
-package com.xzsd.app.goods.entity;
-
-import java.util.Date;
-import java.util.List;
+package com.xzsd.app.client.managerOrder.entity;
 
 /**
  * 商品实体类
@@ -38,6 +35,22 @@ public class GoodsInfo {
      */
     private String className;
     /**
+     * 一级分类编码
+     */
+    private String classFirstCode;
+    /**
+     * 一级分类名称
+     */
+    private String classFirstName;
+    /**
+     * 二级分类编码
+     */
+    private String classSecondCode;
+    /**
+     * 二级分类名称
+     */
+    private String classSecondName;
+    /**
      * 广告词
      */
     private String advertisement;
@@ -46,7 +59,11 @@ public class GoodsInfo {
      */
     private String goodsIntroduce;
     /**
-     * 商品状态 0下架 1上架  2在售
+     * 购买总数
+     */
+    private String orderSum;
+    /**
+     * 商品状态 1下架  2上架（在售） 3未发布
      */
     private int goodsState ;
     /**
@@ -61,6 +78,10 @@ public class GoodsInfo {
      * 门店编码
      */
     private String storeCode;
+    /**
+     * 门店名称
+     */
+    private String storeName;
     /**
      * 库存
      */
@@ -82,34 +103,9 @@ public class GoodsInfo {
      */
     private String imagePath;
     /**
-     * 评价等级
-     */
-    private String appraiseLevel;
-    /**
-     * 评价内容
-     */
-    private String appraiseDetail;
-    /**
-     * 评价编码
-     */
-    private String appraiseCode;
-    /**
-     * 客户编码
-     */
-    private String userCode;
-    /**
-     * 用户账号
-     */
-    private String userAcct;
-    /**
-     * 当前登录人id
-     */
-    private String userId;
-    /**
      * 作废标记 0为存在，1为作废
      */
     private int isDeleted;
-
     /**
      * 创建者
      */
@@ -162,6 +158,38 @@ public class GoodsInfo {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+    public String getClassFirstName() {
+        return classFirstName;
+    }
+
+    public void setClassFirstName(String classFirstName) {
+        this.classFirstName = classFirstName;
+    }
+
+    public String getClassFirstCode() {
+        return classFirstCode;
+    }
+
+    public void setClassFirstCode(String classFirstCode) {
+        this.classFirstCode = classFirstCode;
+    }
+
+    public String getClassSecondCode() {
+        return classSecondCode;
+    }
+
+    public void setClassSecondCode(String classSecondCode) {
+        this.classSecondCode = classSecondCode;
+    }
+
+    public String getClassSecondName() {
+        return classSecondName;
+    }
+
+    public void setClassSecondName(String classSecondName) {
+        this.classSecondName = classSecondName;
     }
 
     public float getCostPrice() {
@@ -252,6 +280,14 @@ public class GoodsInfo {
         this.storeCode = storeCode;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -292,22 +328,6 @@ public class GoodsInfo {
         this.imagePath = imagePath;
     }
 
-    public String getAppraiseLevel() {
-        return appraiseLevel;
-    }
-
-    public void setAppraiseLevel(String appraiseLevel) {
-        this.appraiseLevel = appraiseLevel;
-    }
-
-    public String getAppraiseDetail() {
-        return appraiseDetail;
-    }
-
-    public void setAppraiseDetail(String appraiseDetail) {
-        this.appraiseDetail = appraiseDetail;
-    }
-
     public int getIsDeleted() {
         return isDeleted;
     }
@@ -315,39 +335,6 @@ public class GoodsInfo {
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-    public String getAppraiseCode() {
-        return appraiseCode;
-    }
-
-    public void setAppraiseCode(String appraiseCode) {
-        this.appraiseCode = appraiseCode;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-
-    public String getUserAcct() {
-        return userAcct;
-    }
-
-    public void setUserAcct(String userAcct) {
-        this.userAcct = userAcct;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
 
     public String getCreateName() {
         return createName;
@@ -403,5 +390,13 @@ public class GoodsInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getOrderSum() {
+        return orderSum;
+    }
+
+    public void setOrderSum(String orderSum) {
+        this.orderSum = orderSum;
     }
 }

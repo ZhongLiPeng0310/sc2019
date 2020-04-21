@@ -44,8 +44,8 @@
         select
             a.menu_code menuCode,
             a.menu_name menuName,
-            a.route,
-            a.remarks,
+            a.route route,
+            a.remarks remarks,
             a.create_time createTime,
             a.create_name createName,
             a.update_time updateTime,

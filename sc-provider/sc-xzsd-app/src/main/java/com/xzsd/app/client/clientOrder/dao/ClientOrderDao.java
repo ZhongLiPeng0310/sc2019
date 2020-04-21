@@ -21,4 +21,31 @@ public interface ClientOrderDao {
      * @return
      */
     int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("userId") String userId);
+
+    /**
+     * 客户端新增订单
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    int saveOrder(ClientOrderInfo clientOrderInfo);
+
+    /**
+     * 客户端新增订单到订单详情
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    int saveOrderDeatail(ClientOrderInfo clientOrderInfo);
+
+    /**
+     * 客户端查询订单详情
+     * @author zhong
+     * @date 2020-04-21
+     * @param orderCode
+     * @return
+     */
+    ClientOrderInfo getOrdersByCode(@Param("orderCode") String orderCode);
 }

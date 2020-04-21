@@ -19,8 +19,6 @@ public interface GoodsDao {
      */
     GoodsInfo getGoods(@Param("goodsCode") String goodsCode);
 
-
-
     /**
      * app查询商品评价列表
      * @author zhong
@@ -53,5 +51,5 @@ public interface GoodsDao {
      * @param goodsAppraiseInfo
      * @return
      */
-    int saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo);
+//    int saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo);
 }

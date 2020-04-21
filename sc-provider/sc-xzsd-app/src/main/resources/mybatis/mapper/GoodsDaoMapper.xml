@@ -11,8 +11,6 @@
         a.publisher publisher,
         a.author author,
         a.sale_price salePrice,
-        c.store_name storeName,
-        b.a_level appraiseLevel,
         a.create_time createTime,
         a.create_name createName,
         a.update_time updateTime,
@@ -20,32 +18,34 @@
         a.version version
         from
         t_goods a
-        LEFT JOIN
-        t_goods_appraise b
-        on
-        a.goods_code = b.goods_code
-        LEFT JOIN
-        t_store c
-        on
-        a.store_code = c.store_code
         where
         a.is_deleted = 0
         and a.goods_code = #{goodsCode}
     </select>
 
     <!--查询商品评价列表-->
-    <select id="getGoodsAppraise" parameterType="com.xzsd.app.goods.entity.GoodsAppraiseInfo" resultType="com.xzsd.app.goods.entity.GoodsAppraiseInfo">
+    <resultMap id="selectAppraise" type="com.xzsd.app.goods.entity.GoodsAppraiseInfo" >
+        <id property="appraiseCode" column="appraise_code" jdbcType="VARCHAR"/>
+        <result property="userAcct" column="user_acct" jdbcType="VARCHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="appraiseDetail" column="appraise_detail" jdbcType="VARCHAR"/>
+        <result property="appraiseLevel" column="a_level" jdbcType="VARCHAR"/>
+        <result property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+        <collection property="imageInfoList" ofType="com.xzsd.app.goods.entity.ImageInfo" select="selectImage" column="user_code">
+            <id property="imageCode" column="image_code" jdbcType="VARCHAR"/>
+            <result property="imagePath" column="image_path" jdbcType="VARCHAR"/>
+            <result property="imageNum" column="image_num" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="getGoodsAppraise" parameterType="com.xzsd.app.goods.entity.GoodsAppraiseInfo" resultMap="selectAppraise">
         select
-        a.appraise_code appraiseCode,
-        b.user_acct userAcct,
-        a.appraise_detail appraiseDetail,
-        a.imageurl imagePath,
-        a.a_level appraiseLevel,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+        a.appraise_code,
+        b.user_acct,
+        a.appraise_detail,
+        a.a_level,
+        a.user_code,
+        a.create_time
         from
         t_goods_appraise a
         LEFT JOIN
@@ -56,9 +56,31 @@
         a.is_deleted = 0
         and
         a.goods_code = #{goodsCode}
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 1 and appraiseLevel == 2">
+            and a.a_level = 1
+            and a.a_level = 2
+        </if>
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 3 and appraiseLevel == 4">
+            and a.a_level = 3
+            and a.a_level = 4
+        </if>
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 5">
+            and a.a_level = 5
+        </if>
         order by
-        a.create_time
+        a.create_time DESC
     </select>
+    <select id="selectImage" parameterType="com.xzsd.app.goods.entity.GoodsAppraiseInfo" resultType="com.xzsd.app.goods.entity.ImageInfo">
+		select
+		image_path imagePath
+		from
+		t_image
+		where
+		user_code = #{userCode}
+		order by
+		image_num
+		desc
+	</select>
     <!--查询商品一级分类列表-->
     <select id="getFirstClass" parameterType="com.xzsd.app.goods.entity.GoodsClassInfo" resultType="com.xzsd.app.goods.entity.GoodsClassInfo">
         select
@@ -77,7 +99,7 @@
     <resultMap id="getSecondClass" type="com.xzsd.app.goods.entity.GoodsClassInfo">
         <id column="class_code" property="classSecondCode" jdbcType="VARCHAR" />
         <id column="class_name" property="classSecondName" jdbcType="VARCHAR" />
-        <collection property="classSecondList" ofType="com.xzsd.app.goods.entity.ClassSecondList">
+        <collection property="classSecondGoodsList" ofType="com.xzsd.app.goods.entity.ClassSecondList">
             <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
             <id column="goodsName" property="goodsName" jdbcType="VARCHAR" />
             <id column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />

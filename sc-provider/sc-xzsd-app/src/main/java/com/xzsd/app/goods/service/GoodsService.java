@@ -69,22 +69,22 @@ public class GoodsService {
         return AppResponse.success("查询列表成功！", classSecondList);
     }
 
-    /**
-     * 新增订单评价
-     * @author zhong
-     * @date 2002-04-19
-     * @param goodsAppraiseInfo
-     * @return
-     */
-    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        goodsAppraiseInfo.setUserId(userId);
-        goodsAppraiseInfo.setIsDeleted(0);
-        goodsAppraiseInfo.setCreateName(userId);
-        int saveOrdersAppraise = goodsDao.saveOrdersAppraise(goodsAppraiseInfo);
-        if (0 == saveOrdersAppraise){
-            return AppResponse.bizError("新增失败！");
-        }
-        return AppResponse.success("新增成功！");
-    }
+//    /**
+//     * 新增订单评价
+//     * @author zhong
+//     * @date 2002-04-19
+//     * @param goodsAppraiseInfo
+//     * @return
+//     */
+//    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo) {
+//        String userId = SecurityUtils.getCurrentUserId();
+//        goodsAppraiseInfo.setUserId(userId);
+//        goodsAppraiseInfo.setIsDeleted(0);
+//        goodsAppraiseInfo.setCreateName(userId);
+//        int saveOrdersAppraise = goodsDao.saveOrdersAppraise(goodsAppraiseInfo);
+//        if (0 == saveOrdersAppraise){
+//            return AppResponse.bizError("新增失败！");
+//        }
+//        return AppResponse.success("新增成功！");
+//    }
 }

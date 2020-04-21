@@ -1,6 +1,6 @@
 package com.xzsd.app.goods.entity;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * 商品评价实体类
@@ -33,30 +33,27 @@ public class GoodsAppraiseInfo {
      */
     private String goodsCode;
     /**
-     * 商品图片
-     */
-    private String imagePath;
-    /**
      * 评价等级(1-2星差评 3-4星中评 5好评)
      */
     private int appraiseLevel;
-    /**
-     * 作废标记 0为存在，1为作废
-     */
-    private int isDeleted;
-    /**
-     * 评价状态 1已评价
-     */
-    private int appraiseState;
-    /**
-     * 创建者
-     */
-    private String createName;
     /**
      * 创建时间
      * @return
      */
     private String createTime;
+    /**
+     * 图片集合
+     */
+    private List<ImageInfo> imageInfoList;
+    /**
+     * 作废标记 0为存在，1为作废
+     */
+    private int isDeleted;
+    /**
+     * 创建者
+     */
+    private String createName;
+
     /**
      * 更新人
      * @return
@@ -133,12 +130,12 @@ public class GoodsAppraiseInfo {
         this.goodsCode = goodsCode;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public List<ImageInfo> getImageInfoList() {
+        return imageInfoList;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageInfoList(List<ImageInfo> imageInfoList) {
+        this.imageInfoList = imageInfoList;
     }
 
     public int getAppraiseLevel() {
@@ -155,14 +152,6 @@ public class GoodsAppraiseInfo {
 
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public int getAppraiseState() {
-        return appraiseState;
-    }
-
-    public void setAppraiseState(int appraiseState) {
-        this.appraiseState = appraiseState;
     }
 
     public String getCreateName() {

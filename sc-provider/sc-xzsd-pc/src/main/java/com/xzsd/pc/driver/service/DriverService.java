@@ -38,7 +38,7 @@ public class DriverService {
         String userId = SecurityUtils.getCurrentUserId();
         driverInfo.setUserId(userId);
         //查询当前登录人的角色
-        int role = customerDao.getUserRole(userId);
+        String role = customerDao.getUserRole(userId);
         driverInfo.setRole(role);
         PageHelper.startPage(driverInfo.getPageNum(), driverInfo.getPageSize());
         List<DriverInfo> driverInfoList = driverDao.listDriverByPage(driverInfo);

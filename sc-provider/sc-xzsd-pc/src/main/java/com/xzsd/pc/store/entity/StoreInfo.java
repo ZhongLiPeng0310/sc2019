@@ -75,7 +75,7 @@ public class StoreInfo {
      * 权限  角色0管理员查全部
      * 2店长只能查询自己的门店信息
      */
-    private int role;
+    private String role;
     /**
      * 当前登录人的id
      */
@@ -226,11 +226,11 @@ public class StoreInfo {
         this.address = address;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

@@ -71,7 +71,7 @@ public class StoreService {
         String userId = SecurityUtils.getCurrentUserId();
         storeInfo.setUserId(userId);
         //查询当前登录人的角色
-        int role = customerDao.getUserRole(userId);
+        String role = customerDao.getUserRole(userId);
         storeInfo.setRole(role);
         PageHelper.startPage(storeInfo.getPageNum(),storeInfo.getPageSize());
         List<StoreInfo> storeInfoList = storeDao.listStoreByPage(storeInfo);

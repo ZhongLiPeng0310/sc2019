@@ -2,6 +2,7 @@ package com.xzsd.app.client.managerOrder.service;
 
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.app.client.managerOrder.dao.ManagerOrderDao;
+import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,4 +30,15 @@ public class ManagerOrderService {
         return AppResponse.success("修改成功！");
     }
 
+    /**
+     * 店长查询订单详情
+     * @author zhong
+     * @date 2020-04-21
+     * @param orderCode
+     * @return
+     */
+    public AppResponse getStoreOrdersByCode(String orderCode) {
+        ManagerOrderInfo managerOrderInfo = managerOrderDao.getStoreOrdersByCode(orderCode);
+        return AppResponse.success("查询成功！",managerOrderInfo);
+    }
 }

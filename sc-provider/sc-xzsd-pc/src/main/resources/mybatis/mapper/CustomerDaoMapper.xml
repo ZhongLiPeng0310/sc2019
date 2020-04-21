@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.customer.dao.CustomerDao">
     <!--获取当前登录人的角色-->
-    <select id="getUserRole" parameterType="java.lang.String" resultType="int">
+    <select id="getUserRole" parameterType="java.lang.String" resultType="java.lang.String">
         select
-        role
+        IFNULL(MAX(role),null)
         from
         t_sys_user
         where
@@ -37,11 +37,11 @@
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="role == 3">
+        <if test="role != null and role != '' and role == 3">
             and b.invite_code in (select invite_code from t_store where user_code = #{userId})
         </if>
-        <if test="role == 1">
-
+        <if test="role != null and role != '' and role == 1">
+            and a.is_deleted = 0
         </if>
         order by b.create_time desc
     </select>

@@ -42,7 +42,7 @@ public class CustomerInfo {
     /**
      *角色 0管理员，1用户，2店长 3司机
      */
-    private int role;
+    private String role;
     /**
      * 店铺邀请码
      */
@@ -145,11 +145,11 @@ public class CustomerInfo {
         this.idCard = idCard;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

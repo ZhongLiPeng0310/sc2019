@@ -1,10 +1,16 @@
 package com.xzsd.app.client.managerOrder.entity;
 
+import java.util.List;
+
 public class ManagerOrderInfo {
     /**
      * 订单编码
      */
     private String orderCode;
+    /**
+     * 付款时间
+     */
+    private String createTime;
     /**
      * 客户编码
      */
@@ -22,6 +28,10 @@ public class ManagerOrderInfo {
      */
     private String storeCode;
     /**
+     * 门店名称
+     */
+    private String storeName;
+    /**
      * 下单人
      */
     private String userName;
@@ -38,6 +48,14 @@ public class ManagerOrderInfo {
      */
     private String goodsName;
     /**
+     * 详情地址
+     */
+    private String address;
+    /**
+     * 商品集合
+     */
+    private List<GoodsInfo> goodsList;
+    /**
      * 购买数量
      */
     private int orderSum;
@@ -49,10 +67,7 @@ public class ManagerOrderInfo {
      * 商品成本价
      */
     private float costPrice;
-    /**
-     * 付款时间
-     */
-    private String createTime;
+
     /**
      * 付款时间区间
      */
@@ -86,10 +101,7 @@ public class ManagerOrderInfo {
      * 商品图片
      */
     private String imagePath;
-    /**
-     * 详情地址
-     */
-    private String address;
+
     /**
      * 评价内容
      */
@@ -172,6 +184,14 @@ public class ManagerOrderInfo {
 
     public void setStoreCode(String storeCode) {
         this.storeCode = storeCode;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public String getUserName() {
@@ -388,5 +408,13 @@ public class ManagerOrderInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public List<GoodsInfo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsInfo> goodsList) {
+        this.goodsList = goodsList;
     }
 }

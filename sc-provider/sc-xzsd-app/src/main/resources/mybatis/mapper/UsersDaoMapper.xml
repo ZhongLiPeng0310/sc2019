@@ -35,11 +35,11 @@
     <!--获取用户信息-->
     <select id="getUserById" parameterType="java.lang.String" resultType="com.xzsd.app.client.customer.entity.UserInfo">
         select
-            user_code,
-            user_name,
-            user_acct,
-            user_password,
-            version
+            user_code userCode,
+            user_name userName,
+            user_acct userAcct,
+            user_password userPassword,
+            version version
         from t_sys_user
         where user_code = #{userId}
         and is_deleted = 0
@@ -109,14 +109,21 @@
     <!--获取用户信息-->
     <select id="getMysef" resultType="com.xzsd.app.client.customer.entity.UserInfo">
         select
-        user_code userCode,
-        user_name userName,
-        image_path imagePath,
-        role role
+        a.user_code userCode,
+        a.user_name userName,
+        a.image_path imagePath,
+        c.store_name storeName,
+        c.store_code storeCode,
+        b.invite_code inviteCode,
+        a.role role
         from
-        t_sys_user
+        t_sys_user a
+        LEFT JOIN t_customer b
+        on a.user_code = b.user_code
+        LEFT JOIN t_store c
+        on b.invite_code = c.invite_code
         where
-        user_code = #{userId}
+        b.user_code = #{userId}
     </select>
 
     <!--修改邀请码-->

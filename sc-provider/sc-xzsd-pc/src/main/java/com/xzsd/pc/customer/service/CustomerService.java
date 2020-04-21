@@ -36,9 +36,9 @@ public class CustomerService {
         String userId = SecurityUtils.getCurrentUserId();
         customerInfo.setUserId(userId);
         //查询当前登录人的角色
-        int role = customerDao.getUserRole(userId);
-        customerInfo.setRole(role);
         PageHelper.startPage(customerInfo.getPageNum(), customerInfo.getPageSize());
+        String role = customerDao.getUserRole(userId);
+        customerInfo.setRole(role);
         List<CustomerInfo> customerInfoList = customerDao.listCustomerByPage(customerInfo);
         //包装Page对象
         PageInfo<CustomerInfo> pageData = new PageInfo<>(customerInfoList);

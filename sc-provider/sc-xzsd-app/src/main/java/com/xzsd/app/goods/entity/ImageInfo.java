@@ -1,13 +1,14 @@
 package com.xzsd.app.goods.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 图片实体类
  * @author zhong
  * @date 2020-04-13
  */
-public class imageInfo {
+public class ImageInfo {
     /**
      * 图片编码
      */
@@ -20,6 +21,14 @@ public class imageInfo {
      * 图片序号
      */
     private int imageNum;
+    /**
+     * 商品编码
+     */
+    private String goodsCode;
+    /**
+     * 用户编码
+     */
+    private String userCode;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -71,6 +80,22 @@ public class imageInfo {
 
     public void setImageNum(int imageNum) {
         this.imageNum = imageNum;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     public int getIsDeleted() {

@@ -37,10 +37,10 @@
         <if test="startPayTime != null and startPayTime != '' and endPayTime != null and endPayTime != ''">
             and a.create_time between DATE_FORMAT( #{startPayTime},'%Y-%m-%d %H:%i:%s') and DATE_FORMAT( #{endPayTime},'%Y-%m-%d %H:%i:%s')
         </if>
-        <if test="role == 3">
+        <if test="role != null and role != '' and role == 3">
             and a.store_code in (select store_code from t_store where user_code = #{userId})
         </if>
-        <if test="role == 1">
+        <if test="role != null and role != '' and role == 1">
 
         </if>
     </select>

@@ -3,6 +3,7 @@ package com.xzsd.pc.customer.dao;
 
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface CustomerDao {
      * @param userId
      * @return
      */
-    int getUserRole(String userId);
+    String getUserRole(String userId);
 }

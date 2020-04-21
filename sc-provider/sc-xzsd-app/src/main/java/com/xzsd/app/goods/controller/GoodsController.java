@@ -106,14 +106,14 @@ public class GoodsController {
      * @param goodsAppraiseInfo
      * @return
      */
-    @PostMapping("saveOrdersAppraise")
-    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo){
-        try {
-            return goodsService.saveOrdersAppraise(goodsAppraiseInfo);
-        }catch (Exception e){
-            logger.error("新增订单评价失败",e);
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
+//    @PostMapping("saveOrdersAppraise")
+//    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo){
+//        try {
+//            return goodsService.saveOrdersAppraise(goodsAppraiseInfo);
+//        }catch (Exception e){
+//            logger.error("新增订单评价失败",e);
+//            System.out.println(e.toString());
+//            throw e;
+//        }
+//    }
 }

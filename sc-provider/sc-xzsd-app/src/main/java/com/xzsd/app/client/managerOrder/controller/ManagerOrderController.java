@@ -42,4 +42,22 @@ public class ManagerOrderController {
             throw e;
         }
     }
+
+    /**
+     * 店长获取订单详情
+     * @autho zhong
+     * @date 2020-04-21
+     * @param orderCode
+     * @return
+     */
+    @PostMapping("getStoreOrdersByCode")
+    private AppResponse getStoreOrdersByCode(String orderCode){
+        try{
+            return managerOrderService.getStoreOrdersByCode(orderCode);
+        }catch (Exception e){
+            logger.error("查询详情失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

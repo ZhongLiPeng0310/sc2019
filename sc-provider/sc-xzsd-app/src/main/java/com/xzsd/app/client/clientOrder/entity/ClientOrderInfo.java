@@ -1,6 +1,7 @@
 package com.xzsd.app.client.clientOrder.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单实体类
@@ -12,6 +13,14 @@ public class ClientOrderInfo {
      * 订单编码
      */
     private String orderCode;
+    /**
+     * 付款时间
+     */
+    private String createTime;
+    /**
+     * 订单详情编码
+     */
+    private String detailCode;
     /**
      * 客户编码
      */
@@ -28,6 +37,14 @@ public class ClientOrderInfo {
      * 门店编码
      */
     private String storeCode;
+    /**
+     * 详情地址
+     */
+    private String address;
+    /**
+     * 商品集合
+     */
+    private List<GoodsInfo> goodsList;
     /**
      * 下单人
      */
@@ -56,10 +73,7 @@ public class ClientOrderInfo {
      * 商品成本价
      */
     private float costPrice;
-    /**
-     * 付款时间
-     */
-    private String createTime;
+
     /**
      * 付款时间区间
      */
@@ -93,10 +107,7 @@ public class ClientOrderInfo {
      * 商品图片
      */
     private String imagePath;
-    /**
-     * 详情地址
-     */
-    private String address;
+
     /**
      * 评价内容
      */
@@ -395,5 +406,21 @@ public class ClientOrderInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getDetailCode() {
+        return detailCode;
+    }
+
+    public void setDetailCode(String detailCode) {
+        this.detailCode = detailCode;
+    }
+
+    public List<GoodsInfo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsInfo> goodsList) {
+        this.goodsList = goodsList;
     }
 }

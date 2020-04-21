@@ -71,16 +71,9 @@ public class UserService {
         // 需要校验原密码是否正确
         if(null != userInfo.getUserPassword() && !"".equals(userInfo.getUserPassword())) {
             String userPassword = PasswordUtils.generatePassword(userInfo.getUserPassword());
-            // 获取用户信息
-            String userId = SecurityUtils.getCurrentUserId();
-            UserInfo userDetail = userDao.getUserById(userId);
-            if(null == userDetail) {
-                return AppResponse.bizError("用户不存在或已被删除！");
-            } else {
-                if(!userPassword.equals(userDetail.getUserPassword())) {
+                if(PasswordUtils.Password(userPassword,userInfo.getUserPassword())) {
                     return AppResponse.bizError("原密码不匹配，请重新输入！");
                 }
-            }
         }
         // 修改密码
         userInfo.setUserNewPassword(PasswordUtils.generatePassword(userInfo.getUserNewPassword()));

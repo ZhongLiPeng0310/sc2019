@@ -31,6 +31,10 @@ public class HotGoodsInfo {
      */
     private String goodsIntroduce;
     /**
+     * 商品图片
+     */
+    private String imagePath;
+    /**
      * 作废标记
      */
     private int isDeleted;
@@ -173,5 +177,13 @@ public class HotGoodsInfo {
 
     public void setGoodsIntroduce(String goodsIntroduce) {
         this.goodsIntroduce = goodsIntroduce;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

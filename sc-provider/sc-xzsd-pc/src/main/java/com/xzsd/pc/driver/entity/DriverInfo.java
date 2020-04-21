@@ -76,7 +76,7 @@ public class DriverInfo {
     /**
      * 角色标记  3位司机
      */
-    private int role;
+    private String role;
     /**
      * 当前登录人ID
      */
@@ -242,11 +242,11 @@ public class DriverInfo {
         this.areaName = areaName;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

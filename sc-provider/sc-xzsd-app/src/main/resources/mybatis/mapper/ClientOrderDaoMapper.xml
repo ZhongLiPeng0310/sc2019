@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.app.client.clientOrder.dao.ClientOrderDao">
-    <!--新增订单评价-->
-    <insert id="saveOrdersAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
-        insert into t_goods_appraise
-        (goods_code,
-        appraise_detail
-        appraise_level,
-        user_code,
-        image_num,
-        image_path,
-        create_time,
-        create_name,
-        version)
-        values
-        (
-        #{goods_code},
-        #{appraiseDetail},
-        #{appraiseLevel},
-        #{userId},
-        <foreach collection="listNum" item="item" index= "index" separator =",">
-            (
-            #{imageNum},
-            )
-        </foreach>
-        <foreach collection="listImage" item="item" index= "index" separator =",">
-            (
-            #{imagePath},
-            )
-        </foreach>
-        now(),
-        #{createName},
-        0
-        )
+<!--    &lt;!&ndash;新增订单评价&ndash;&gt;-->
+<!--    <insert id="saveOrdersAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">-->
+<!--        insert into t_goods_appraise-->
+<!--        (goods_code,-->
+<!--        appraise_detail-->
+<!--        appraise_level,-->
+<!--        user_code,-->
+<!--        image_num,-->
+<!--        image_path,-->
+<!--        create_time,-->
+<!--        create_name,-->
+<!--        version)-->
+<!--        values-->
+<!--        (-->
+<!--        #{goods_code},-->
+<!--        #{appraiseDetail},-->
+<!--        #{appraiseLevel},-->
+<!--        #{userId},-->
+<!--        <foreach collection="listNum" item="item" index= "index" separator =",">-->
+<!--            (-->
+<!--            #{imageNum},-->
+<!--            )-->
+<!--        </foreach>-->
+<!--        <foreach collection="listImage" item="item" index= "index" separator =",">-->
+<!--            (-->
+<!--            #{imagePath},-->
+<!--            )-->
+<!--        </foreach>-->
+<!--        now(),-->
+<!--        #{createName},-->
+<!--        0-->
+<!--        )-->
 
-    </insert>
+<!--    </insert>-->
 
     <!--修改客户端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
@@ -47,4 +47,107 @@
         where
         order_code = #{orderCode}
     </update>
+    <!--新增订单-->
+    <insert id="saveOrder" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        insert into
+        t_order
+        (
+        order_code,
+        user_code,
+        order_money,
+        order_state,
+        cart_code,
+        store_code,
+        goods_code,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        values
+        (
+        #{orderCode},
+        #{createName},
+        #{orderMoney},
+        7,
+        0,
+        #{storeCode},
+        #{goodsCode},
+        #{isDeleted},
+        now(),
+        #{createName},
+        0
+        )
+    </insert>
+    <!--新增订单信息到详情表-->
+    <insert id="saveOrderDeatail" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        insert into
+        t_order_detail
+        (
+        order_code,
+        user_code,
+        goods_code,
+        order_sum,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        values
+        (
+        #{orderCode},
+        #{createName},
+        #{goodsCode},
+        #{orderSum},
+        #{isDeleted},
+        now(),
+        #{createName},
+        0
+        )
+    </insert>
+
+
+    <!--订单对应商品的Map-->
+    <resultMap id="getOrderDetail" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+        <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+        <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
+            <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
+            <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+            <result column="imagePath" property="imagePath" jdbcType="VARCHAR" />
+            <result column="salePrice" property="salePrice" jdbcType="VARCHAR" />
+            <result column="orderSum" property="orderSum" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+    <!--查询订单详情-->
+    <select id="getOrdersByCode" parameterType="java.lang.String" resultMap="getOrderDetail">
+        select
+        a.order_code,
+        a.order_money,
+        a.order_state,
+        a.store_code,
+        c.address,
+        a.create_time,
+        b.goods_code goodsCode,
+        b.goods_name goodsName,
+        b.imageurl imagePath,
+        b.sale_price salePrice,
+        d.order_sum orderSum
+        from
+        t_order a
+        LEFT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        LEFT JOIN t_store c
+        on a.store_code = c.store_code
+        LEFT JOIN t_order_detail d
+        on a.order_code = d.order_code
+        where
+        a.is_deleted = 0
+        and
+        a.order_code = #{orderCode}
+    </select>
 </mapper>

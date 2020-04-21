@@ -1,5 +1,6 @@
 package com.xzsd.app.client.managerOrder.dao;
 
+import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ManagerOrderDao {
     /**
-     * 修改店长订单状态
+     * 店长修改订单状态
      * @date 2020-04-20
      * @author zhong
      * @param orderCode
@@ -19,4 +20,13 @@ public interface ManagerOrderDao {
      * @return
      */
     int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("userId") String userId);
+
+    /**
+     * 店长查询订单详情
+     * @author zhong
+     * @date 2020-04-21
+     * @param orderCode
+     * @return
+     */
+    ManagerOrderInfo getStoreOrdersByCode(@Param("orderCode") String orderCode);
 }
