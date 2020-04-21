@@ -88,7 +88,7 @@ public class GoodsService {
         // 校验修改商品时，isbn书号是否已存在
         int countIsbn =goodsDao.countIsbn(goodsInfo);
         if (0 != countIsbn){
-            return AppResponse.bizError("新增失败，isbn书号已存在！");
+            return AppResponse.bizError("修改失败，isbn书号已存在！");
         }
         //修改商品信息
         int updateGood = goodsDao.updateGoods(goodsInfo);

@@ -99,12 +99,12 @@ public class HotGoodsService {
         //检验新增的商品是否存在热门商品中
         int countGoods =  hotGoodsDao.countGoods(hotGoodsInfo);
         if (0 != countGoods){
-            return AppResponse.bizError("新增失败，商品已存在！");
+            return AppResponse.bizError("修改失败，商品已存在！");
         }
         //检验新增的热门商品的排序序号是否重复
         int countSort =  hotGoodsDao.countSort(hotGoodsInfo);
         if (0 != countSort){
-            return AppResponse.bizError("新增失败，该排序号已存在！");
+            return AppResponse.bizError("修改失败，该排序号已存在！");
         }
         //修改热门商品信息
         int count = hotGoodsDao.updateHotGoods(hotGoodsInfo);
