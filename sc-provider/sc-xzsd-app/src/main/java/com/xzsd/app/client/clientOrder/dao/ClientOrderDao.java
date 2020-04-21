@@ -41,6 +41,20 @@ public interface ClientOrderDao {
      * @return
      */
     int saveOrderDeatail(ClientOrderInfo clientOrderInfo);
+    /**
+     * 获取下单商品的库存
+     * @param clientOrderInfo
+     * @return
+     */
+    int nowStock(ClientOrderInfo clientOrderInfo);
+    /**
+     * 更新下单商品的库存数量
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    int updateStock(ClientOrderInfo clientOrderInfo);
 
     /**
      * 客户端查询订单详情
@@ -85,4 +99,6 @@ public interface ClientOrderDao {
      * @return
      */
     List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
+
+
 }

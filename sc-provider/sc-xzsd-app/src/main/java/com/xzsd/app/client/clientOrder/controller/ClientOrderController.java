@@ -48,7 +48,7 @@ public class ClientOrderController {
     }
 
     /**
-     * 新增订单
+     * 在商品页面新增订单
      * @author zhong
      * @date 2020-04-21
      * @param clientOrderInfo
@@ -57,8 +57,6 @@ public class ClientOrderController {
     @PostMapping("saveOrder")
     private AppResponse saveOrder(ClientOrderInfo clientOrderInfo){
         try{
-            String userId = SecurityUtils.getCurrentUserId();
-            clientOrderInfo.setCreateName(userId);
             return clientOrderService.saveOrder(clientOrderInfo);
         }catch (Exception e){
             logger.error("新增成功！");

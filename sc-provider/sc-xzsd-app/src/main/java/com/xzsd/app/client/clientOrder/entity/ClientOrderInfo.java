@@ -62,6 +62,14 @@ public class ClientOrderInfo {
      */
     private String goodsName;
     /**
+     * 当前商品的库存
+     */
+    private int stock;
+    /**
+     * 选择商品的数量
+     */
+    private int sumOrder;
+    /**
      * 购买数量
      */
     private int orderSum;
@@ -422,5 +430,21 @@ public class ClientOrderInfo {
 
     public void setGoodsList(List<GoodsInfo> goodsList) {
         this.goodsList = goodsList;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getSumOrder() {
+        return sumOrder;
+    }
+
+    public void setSumOrder(int sumOrder) {
+        this.sumOrder = sumOrder;
     }
 }

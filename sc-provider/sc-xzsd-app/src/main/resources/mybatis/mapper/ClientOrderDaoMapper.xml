@@ -122,8 +122,24 @@
         0
         )
     </insert>
-
-
+    <!--修改下单商品的库存数量-->
+    <update id="updateStock" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        update
+        t_goods
+        set
+        stock = #{stock} - #{sumOrder}
+        where
+        goods_code = #{goodsCode}
+    </update>
+   <!--获取该商品的库存-->
+   <select id="nowStock" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="int">
+       select
+       stock
+       from
+       t_goods
+       where
+       goods_code = #{goodsCode}
+   </select>
     <!--订单对应商品的Map-->
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
