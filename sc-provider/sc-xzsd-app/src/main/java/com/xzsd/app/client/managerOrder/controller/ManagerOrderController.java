@@ -2,6 +2,7 @@ package com.xzsd.app.client.managerOrder.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
 import com.xzsd.app.client.managerOrder.service.ManagerOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,24 @@ public class ManagerOrderController {
             return managerOrderService.getStoreOrdersByCode(orderCode);
         }catch (Exception e){
             logger.error("查询详情失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 店长查询订单列表接口
+     * @author zhong
+     * @date 2020-04-21
+     * @param managerOrderInfo
+     * @return
+     */
+    @PostMapping("getStoreOrdersList")
+    private AppResponse getStoreOrdersList(ManagerOrderInfo managerOrderInfo){
+        try{
+            return managerOrderService.getStoreOrdersList(managerOrderInfo);
+        }catch (Exception e){
+            logger.error("查询订单列表失败",e);
             System.out.println(e.toString());
             throw e;
         }

@@ -102,4 +102,22 @@ public class ClientOrderController {
             throw e;
         }
     }
+
+    /**
+     * 客户查询订单列表接口
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    @PostMapping("getOrdersList")
+    private AppResponse getOrdersList(ClientOrderInfo clientOrderInfo){
+         try{
+             return clientOrderService.getOrdersList(clientOrderInfo);
+         }catch (Exception e){
+             logger.error("查询订单列表失败",e);
+             System.out.println(e.toString());
+             throw e;
+         }
+    }
 }

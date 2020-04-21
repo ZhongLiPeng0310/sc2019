@@ -167,4 +167,59 @@
         and
         a.order_code = #{orderCode}
     </select>
+
+    <!--客户查询订单列表-->
+    <resultMap id="getOrdersList" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        <id property="orderCode" column="order_code" jdbcType="VARCHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
+        <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
+        <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
+            <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
+            <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
+            <result property="imagePath" column="imageurl" jdbcType="VARCHAR"/>
+            <result property="salePrice" column="sale_price" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="getOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getOrdersList">
+        select
+        order_code,
+        user_code,
+        order_state,
+        order_money
+        from
+        t_order
+        where
+        is_deleted = 0
+        and
+        user_code = #{userId}
+        <if test="orderState != null and orderState != '' and orderState == 7">
+            and order_state = 7
+        </if>
+        <if test="orderState != null and orderState != '' and orderState == 1 ">
+            and order_state = 1
+        </if>
+        <if test="orderState != null and orderState != '' and orderState == 5">
+            and order_state = 5
+        </if>
+        order by
+        create_time
+        desc
+    </select>
+    <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
+		select
+		a.goods_code goodsCode,
+		b.goods_name goodsName,
+		b.sale_price salePrice,
+		b.imageurl imagePath
+		from
+		t_order_detail a
+		LEFT JOIN t_goods b
+		on a.goods_code = b.goods_code
+		where
+		user_code = #{userId}
+		order by
+		a.create_time
+		desc
+	</select>
 </mapper>

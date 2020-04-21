@@ -76,4 +76,13 @@ public interface ClientOrderDao {
      * @return
      */
     int addImages(@Param("imageInfoList") List<ImageInfo> imageInfoList);
+
+    /**
+     * 客户查询订单列表
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
 }

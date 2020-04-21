@@ -1,5 +1,7 @@
 package com.xzsd.app.client.clientOrder.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
@@ -92,5 +94,23 @@ public class ClientOrderService {
             return AppResponse.bizError("新增失败！");
         }
         return AppResponse.success("新增成功！");
+    }
+
+    /**
+     * 客户查询订单列表
+     * @author zhong
+     * @date 2020-04-21
+     * @param clientOrderInfo
+     * @return
+     */
+    public AppResponse getOrdersList(ClientOrderInfo clientOrderInfo) {
+        String userId = SecurityUtils.getCurrentUserId();
+        clientOrderInfo.setUserId(userId);
+        clientOrderInfo.setIsDeleted(0);
+        PageHelper.startPage(clientOrderInfo.getPageNum(), clientOrderInfo.getPageSize());
+        List<ClientOrderInfo> goodsInfoList = clientOrderDao.getOrdersList(clientOrderInfo);
+        //包装Page对象
+        PageInfo<ClientOrderInfo> pageData= new PageInfo<ClientOrderInfo>(goodsInfoList);
+        return AppResponse.success("查询列表成功！", pageData);
     }
 }
