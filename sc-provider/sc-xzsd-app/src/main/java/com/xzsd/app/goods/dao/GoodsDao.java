@@ -44,12 +44,5 @@ public interface GoodsDao {
      */
     List<GoodsClassInfo> getSecondClass(String lastClassCode);
 
-    /**
-     * 新增订单评价
-     * @author zhong
-     * @date 2020-04-19
-     * @param goodsAppraiseInfo
-     * @return
-     */
-//    int saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo);
+
 }

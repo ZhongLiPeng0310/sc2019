@@ -3,6 +3,8 @@ package com.xzsd.app.client.clientOrder.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
+import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
+import com.xzsd.app.client.clientOrder.entity.ImageInfo;
 import com.xzsd.app.client.clientOrder.service.ClientOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 订单评价 订单列表
@@ -77,6 +80,24 @@ public class ClientOrderController {
             return clientOrderService.getOrdersByCode(orderCode);
         }catch (Exception e){
             logger.error("查询详情失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 新增订单评价
+     * @author zhong
+     * @date 2020-04-21
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    @PostMapping("saveOrdersAppraise")
+    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo, List<ImageInfo> imageInfoList){
+        try {
+            return clientOrderService.saveOrdersAppraise(goodsAppraiseInfo,imageInfoList);
+        }catch (Exception e){
+            logger.error("新增订单评价失败",e);
             System.out.println(e.toString());
             throw e;
         }

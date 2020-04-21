@@ -5,6 +5,8 @@ import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.xzsd.app.client.clientOrder.dao.ClientOrderDao;
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
+import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
+import com.xzsd.app.client.clientOrder.entity.ImageInfo;
 import com.xzsd.app.client.managerOrder.dao.ManagerOrderDao;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.stereotype.Service;
@@ -67,5 +69,28 @@ public class ClientOrderService {
     public AppResponse getOrdersByCode(String orderCode) {
         ClientOrderInfo clientOrderInfo = clientOrderDao.getOrdersByCode(orderCode);
         return AppResponse.success("查询成功！",clientOrderInfo);
+    }
+
+    /**
+     * 客户端新增订单评价
+     * @author zhong
+     * @date 2002-04-21
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo, List<ImageInfo> imageInfoList) {
+        String userId = SecurityUtils.getCurrentUserId();
+        goodsAppraiseInfo.setUserId(userId);
+        goodsAppraiseInfo.setIsDeleted(0);
+        goodsAppraiseInfo.setCreateName(userId);
+        //新增评价
+        int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfo);
+        //新增评价图片
+        int addImage = clientOrderDao.addImages(imageInfoList);
+        if (0 == saveOrdersAppraise){
+            return AppResponse.bizError("新增失败！");
+        }
+        return AppResponse.success("新增成功！");
     }
 }

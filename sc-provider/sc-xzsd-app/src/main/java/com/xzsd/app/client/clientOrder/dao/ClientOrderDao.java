@@ -1,6 +1,8 @@
 package com.xzsd.app.client.clientOrder.dao;
 
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
+import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
+import com.xzsd.app.client.clientOrder.entity.ImageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.access.method.P;
@@ -48,4 +50,30 @@ public interface ClientOrderDao {
      * @return
      */
     ClientOrderInfo getOrdersByCode(@Param("orderCode") String orderCode);
+    /**
+     * 新增订单评价
+     * @author zhong
+     * @date 2020-04-21
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    int saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo);
+
+    /**
+     * 新增评价图片
+     * @author zhong
+     * @date 2020-04-21
+     * @param goodsAppraiseInfo
+     * @return
+     */
+    List<ImageInfo> saveAppraiseImage(GoodsAppraiseInfo goodsAppraiseInfo);
+
+    /**
+     * 新增评价图片
+     * @author zhong
+     * @date 2020-04-21
+     * @param imageInfoList
+     * @return
+     */
+    int addImages(@Param("imageInfoList") List<ImageInfo> imageInfoList);
 }

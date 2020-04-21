@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.app.client.clientOrder.dao.ClientOrderDao">
-<!--    &lt;!&ndash;新增订单评价&ndash;&gt;-->
-<!--    <insert id="saveOrdersAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">-->
-<!--        insert into t_goods_appraise-->
-<!--        (goods_code,-->
-<!--        appraise_detail-->
-<!--        appraise_level,-->
-<!--        user_code,-->
-<!--        image_num,-->
-<!--        image_path,-->
-<!--        create_time,-->
-<!--        create_name,-->
-<!--        version)-->
-<!--        values-->
-<!--        (-->
-<!--        #{goods_code},-->
-<!--        #{appraiseDetail},-->
-<!--        #{appraiseLevel},-->
-<!--        #{userId},-->
-<!--        <foreach collection="listNum" item="item" index= "index" separator =",">-->
-<!--            (-->
-<!--            #{imageNum},-->
-<!--            )-->
-<!--        </foreach>-->
-<!--        <foreach collection="listImage" item="item" index= "index" separator =",">-->
-<!--            (-->
-<!--            #{imagePath},-->
-<!--            )-->
-<!--        </foreach>-->
-<!--        now(),-->
-<!--        #{createName},-->
-<!--        0-->
-<!--        )-->
-
-<!--    </insert>-->
-
+    <!--新增订单评价-->
+    <insert id="saveOrdersAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        insert into t_goods_appraise
+        (
+        appraise_code,
+        goods_code,
+        appraise_detail,
+        a_level,
+        user_code,
+        is_deleted,
+        create_time,
+        create_name,
+        version)
+        values
+        (
+        #{appraiseCode},
+        #{goodsCode},
+        #{appraiseDetail},
+        #{appraiseLevel},
+        #{userId},
+        #{isDeleted},
+        now(),
+        #{createName},
+        0
+        )
+    </insert>
+    <!--新增评价图片-->
+    <insert id="saveAppraiseImage" parameterType="java.util.List">
+        insert into
+        t_image
+        (
+        order_code,
+        goods_code,
+        user_code,
+        image_path,
+        image_type,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        <foreach collection="imageInfoList" item="images" separator=",">
+            (
+            #{images.orderCode},
+            #{images.goodsCode},
+            #{images.userId},
+            #{images.imagePath},
+            1,
+            0,
+            now(),
+            #{createName},
+            0)
+        </foreach>
+    </insert>
     <!--修改客户端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         update t_order
