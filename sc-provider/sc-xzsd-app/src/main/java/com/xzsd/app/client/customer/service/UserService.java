@@ -30,19 +30,10 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public AppResponse userRegister(UserInfo userInfo){
-        //检验账号是否存在
-        int countUserAcct = userDao.countUserAcct(userInfo);
-        if (0 != countUserAcct){
-            return AppResponse.bizError("用户账号已存在，请重新输入");
-        }
-        //检验手机号码是否存在
-        int countUserPhone = userDao.countUserPhone(userInfo);
-        if (0 != countUserPhone){
-            return AppResponse.bizError("用户手机号码已存在，请重新输入");
-        }
-        int countEmail = userDao.countEmail(userInfo);
-        if (0 != countEmail){
-            return AppResponse.bizError("用户邮箱已存在，请重新输入");
+        //检验用户账号和手机号码是否存在
+        int countUsers = userDao.countUsers(userInfo);
+        if (0 != countUsers){
+            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
         // 密码加密 默认为123
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());

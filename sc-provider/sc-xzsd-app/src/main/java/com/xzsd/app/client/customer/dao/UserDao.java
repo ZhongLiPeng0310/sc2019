@@ -37,6 +37,15 @@ public interface UserDao {
     int countEmail(UserInfo userInfo);
 
     /**
+     * 校验用户账号和手机号码是否重复
+     * @author zhong
+     * @date 2020-04-14
+     * @param userInfo
+     * @return
+     */
+    int countUsers(UserInfo userInfo);
+
+    /**
      * 新增客户信息用户客户表
      * @author zhong
      * @date 2020-03-26
