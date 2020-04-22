@@ -95,6 +95,7 @@
         c.store_name storeName,
         c.store_code storeCode,
         b.invite_code inviteCode,
+        CONCAT_WS('-',d.dic_name,e.dic_name,f.dic_name,c.address) address,
         a.role role
         from
         t_sys_user a
@@ -102,6 +103,12 @@
         on a.user_code = b.user_code
         LEFT JOIN t_store c
         on b.invite_code = c.invite_code
+        LEFT JOIN t_dictionary d
+        on c.province_code = d.dic_code
+        LEFT JOIN t_dictionary e
+        on c.city_code = e.dic_code
+        LEFT JOIN t_dictionary f
+        on c.area_code = f.dic_code
         where
         b.user_code = #{userId}
     </select>

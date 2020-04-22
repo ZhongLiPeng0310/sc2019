@@ -239,7 +239,7 @@
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
 		where
-		user_code = #{userId}
+		a.user_code = #{userId}
 		order by
 		a.create_time
 		desc

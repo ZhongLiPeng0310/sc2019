@@ -9,7 +9,7 @@
         c.dic_name provinceName,
         d.dic_name cityName,
         e.dic_name areaName,
-        b.address address,
+        CONCAT_WS('-',c.dic_name,d.dic_name,e.dic_name,b.address) address,
         b.invite_code inviteCode,
         a.role role
         from

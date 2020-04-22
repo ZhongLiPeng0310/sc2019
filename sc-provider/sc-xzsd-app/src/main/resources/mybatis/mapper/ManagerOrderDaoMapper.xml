@@ -102,16 +102,16 @@
         a.is_deleted = 0
         and store_code in (select store_code from t_store where user_code = #{userId})
         <if test="orderState != null and orderState != '' and orderState == 7">
-            and order_state = 7
+            and a.order_state = 7
         </if>
         <if test="orderState != null and orderState != '' and orderState == 1 ">
-            and order_state = 1
+            and a.order_state = 1
         </if>
         <if test="orderState != null and orderState != '' and orderState == 5">
-            and order_state = 5
+            and a.order_state = 5
         </if>
         order by
-        create_time
+        a.create_time
         desc
     </select>
     <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
@@ -125,7 +125,7 @@
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
 		where
-		user_code = #{userId}
+		a.user_code = #{userId}
 		order by
 		a.create_time
 		desc
