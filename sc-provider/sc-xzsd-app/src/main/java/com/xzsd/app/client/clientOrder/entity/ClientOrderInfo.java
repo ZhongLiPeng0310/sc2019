@@ -70,6 +70,10 @@ public class ClientOrderInfo {
      */
     private int stock;
     /**
+     * 销售量
+     */
+    private int sumSale;
+    /**
      * 选择商品的数量
      */
     private int sumOrder;
@@ -446,5 +450,13 @@ public class ClientOrderInfo {
 
     public void setSumOrder(int sumOrder) {
         this.sumOrder = sumOrder;
+    }
+
+    public int getSumSale() {
+        return sumSale;
+    }
+
+    public void setSumSale(int sumSale) {
+        this.sumSale = sumSale;
     }
 }

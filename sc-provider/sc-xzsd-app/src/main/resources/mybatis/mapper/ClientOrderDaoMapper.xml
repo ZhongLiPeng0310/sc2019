@@ -142,6 +142,24 @@
        where
        goods_code = #{goodsCode}
    </select>
+    <!--增加该商品的销售量-->
+    <update id="updateSumSale" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        update
+        t_goods
+        set
+        sum_sale = #{sumSale} + #{sumOrder}
+        where
+        goods_code = #{goodsCode}
+    </update>
+    <!--获取当前商品的销售量-->
+    <select id="getSumSale" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="int">
+        select
+        sum_sale
+        from
+        t_goods
+        where
+        goods_code = #{goodsCode}
+    </select>
     <!--订单对应商品的Map-->
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />

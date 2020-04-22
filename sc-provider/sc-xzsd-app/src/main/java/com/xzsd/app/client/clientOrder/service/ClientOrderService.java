@@ -64,8 +64,11 @@ public class ClientOrderService {
             clientOrderInfo.setSumOrder(countGoods);
             //修改该商品的库存数量
             int updateStock = clientOrderDao.updateStock(clientOrderInfo);
+            //获取下单商品当前的销售量
+            int sumSale = clientOrderDao.getSumSale(clientOrderInfo);
+            clientOrderInfo.setSumSale(sumSale);
             //增加商品的销售量
-//            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
+            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
             return AppResponse.success("新增成功！");
         }
 

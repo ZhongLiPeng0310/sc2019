@@ -64,6 +64,22 @@ public interface ClientOrderDao {
      */
     float getPrice(ClientOrderInfo clientOrderInfo);
     /**
+     * 增加下单商品的销售量
+     * @author zhong
+     * @date 2020-04-22
+     * @param clientOrderInfo
+     * @return
+     */
+    int updateSumSale(ClientOrderInfo clientOrderInfo);
+    /**
+     * 获取当前商品的销售量
+     * @author zhong
+     * @date 2020-04-22
+     * @param clientOrderInfo
+     * @return
+     */
+    int getSumSale(ClientOrderInfo clientOrderInfo);
+    /**
      * 客户端查询订单详情
      * @author zhong
      * @date 2020-04-21
