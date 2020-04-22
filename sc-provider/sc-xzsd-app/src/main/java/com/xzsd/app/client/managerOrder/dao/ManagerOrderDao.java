@@ -14,7 +14,7 @@ import java.util.List;
 public interface ManagerOrderDao {
     /**
      * 店长修改订单状态
-     * @date 2020-04-20
+     * @date 2020-04-21
      * @author zhong
      * @param orderCode
      * @param orderState
