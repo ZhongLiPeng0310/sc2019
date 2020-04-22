@@ -22,8 +22,8 @@ public class DriverService {
      * @return
      */
     public AppResponse getStoreByDriver(UserInfo userInfo) {
-        List<UserInfo> storelist = driverDao.getStoreByDriver(userInfo);
-        return AppResponse.success("查询成功！",storelist);
+        UserInfo driverMessage = driverDao.getStoreByDriver(userInfo);
+        return AppResponse.success("查询成功！",driverMessage);
     }
 
     /**

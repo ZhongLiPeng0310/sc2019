@@ -13,7 +13,7 @@ public interface DriverDao {
      * @param userInfo
      * @return
      */
-    List<UserInfo> getStoreByDriver(UserInfo userInfo);
+    UserInfo getStoreByDriver(UserInfo userInfo);
 
     /**
      * 查询司机信息
@@ -23,4 +23,6 @@ public interface DriverDao {
      * @return
      */
     UserInfo getMyself(UserInfo userInfo);
+
+
 }
