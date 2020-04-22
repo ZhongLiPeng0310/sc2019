@@ -131,7 +131,7 @@ public class UserService {
      * @return
      */
     public AppResponse getUserUrl(UserInfo userInfo) {
-        List<UserInfo> userInfoList = userDao.getUserUrl(userInfo);
-        return AppResponse.success("查询成功！",userInfoList);
+        UserInfo userInfoMessage = userDao.getUserUrl(userInfo);
+        return AppResponse.success("查询成功！",userInfoMessage);
     }
 }
