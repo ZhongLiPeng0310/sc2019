@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,6 +54,9 @@ public class ClientOrderService {
         String userId = SecurityUtils.getCurrentUserId();
         clientOrderInfo.setCreateName(userId);
         clientOrderInfo.setIsDeleted(0);
+        //计算订单的总价
+        float orderMoney = (clientOrderInfo.getOrderSum() * clientOrderInfo.getSalePrice());
+        clientOrderInfo.setOrderMoney(orderMoney);
         //新增订单
         int saveOrder = clientOrderDao.saveOrder(clientOrderInfo);
         //新增订单信息到详情表
