@@ -55,7 +55,14 @@ public interface ClientOrderDao {
      * @return
      */
     int updateStock(ClientOrderInfo clientOrderInfo);
-
+    /**
+     * 获取下单商品的价格
+     * @author zhong
+     * @date 2020-04-22
+     * @param clientOrderInfo
+     * @return
+     */
+    float getPrice(ClientOrderInfo clientOrderInfo);
     /**
      * 客户端查询订单详情
      * @author zhong

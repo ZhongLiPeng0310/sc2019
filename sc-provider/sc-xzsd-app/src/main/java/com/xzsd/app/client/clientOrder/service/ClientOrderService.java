@@ -50,9 +50,6 @@ public class ClientOrderService {
         String userId = SecurityUtils.getCurrentUserId();
         clientOrderInfo.setCreateName(userId);
         clientOrderInfo.setIsDeleted(0);
-        //计算订单的总价
-        float orderMoney = (clientOrderInfo.getOrderSum() * clientOrderInfo.getSalePrice());
-        clientOrderInfo.setOrderMoney(orderMoney);
         //新增订单
         int saveOrder = clientOrderDao.saveOrder(clientOrderInfo);
         //新增订单信息到详情表
@@ -67,6 +64,8 @@ public class ClientOrderService {
             clientOrderInfo.setSumOrder(countGoods);
             //修改该商品的库存数量
             int updateStock = clientOrderDao.updateStock(clientOrderInfo);
+            //增加商品的销售量
+//            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
             return AppResponse.success("新增成功！");
         }
 

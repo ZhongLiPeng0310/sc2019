@@ -53,7 +53,7 @@
         b.goods_code goodsCode,
         b.goods_name goodsName,
         a.order_sum orderSum,
-        a.order_money orderMoney,
+        c.order_money orderMoney,
         b.sale_price salePrice,
         b.cost_price costPrice,
         a.create_time createTime,
@@ -61,8 +61,11 @@
         a.update_name updateName,
         a.version version
         from
-        t_order_detail a LEFT JOIN t_goods b
+        t_order_detail a
+        LEFT JOIN t_goods b
         on a.goods_code = b.goods_code
+        LEFT JOIN t_order c
+        on a.order_code = c.order_code
         where a.order_code = #{orderCode}
         and a.is_deleted = 0
     </select>
