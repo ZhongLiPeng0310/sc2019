@@ -17,6 +17,7 @@
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
         <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+        <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
         <result column="order_state" property="orderState" jdbcType="VARCHAR" />
         <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
         <result column="address" property="address" jdbcType="VARCHAR" />
@@ -38,6 +39,7 @@
         select
         a.order_code,
         a.order_money,
+        a.sum_goods,
         e.user_name,
         e.phone,
         a.order_state,
@@ -75,6 +77,7 @@
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
+        <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
         <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
@@ -84,16 +87,19 @@
     </resultMap>
     <select id="getStoreOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getStoreOrdersList">
         select
-        order_code,
-        user_code,
-        user_name,
-        phone,
-        order_state,
-        order_money
+        a.order_code,
+        a.user_code,
+        b.user_name,
+        b.phone,
+        a.order_state,
+        a.order_money,
+        a.sum_goods
         from
-        t_order
+        t_order a
+        LEFT JOIN t_sys_user b
+        on a.user_code = b.user_code
         where
-        is_deleted = 0
+        a.is_deleted = 0
         and store_code in (select store_code from t_store where user_code = #{userId})
         <if test="orderState != null and orderState != '' and orderState == 7">
             and order_state = 7

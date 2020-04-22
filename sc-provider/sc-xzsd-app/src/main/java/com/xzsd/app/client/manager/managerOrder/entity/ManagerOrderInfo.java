@@ -20,6 +20,10 @@ public class ManagerOrderInfo {
      */
     private float orderMoney;
     /**
+     * 该订单购买是商品总数量
+     */
+    private int sumGoods;
+    /**
      * 订单状态  订单状态 0取消订单 1到货 2取消到货 3已取货 4取消已取货 5已完成（已完成未评价） 6取消已完成 7已付款 8已完成已评价
      */
     private int orderState;
@@ -93,10 +97,6 @@ public class ManagerOrderInfo {
      * 关键字
      */
     private String keyword;
-    /**
-     * 商品购买总数
-     */
-    private String sumGoods;
     /**
      * 商品图片
      */
@@ -314,11 +314,11 @@ public class ManagerOrderInfo {
         this.keyword = keyword;
     }
 
-    public String getSumGoods() {
+    public int getSumGoods() {
         return sumGoods;
     }
 
-    public void setSumGoods(String sumGoods) {
+    public void setSumGoods(int sumGoods) {
         this.sumGoods = sumGoods;
     }
 

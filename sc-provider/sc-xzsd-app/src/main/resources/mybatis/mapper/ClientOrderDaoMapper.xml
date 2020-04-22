@@ -77,6 +77,7 @@
         order_state,
         cart_code,
         store_code,
+        sum_goods,
         is_deleted,
         create_time,
         create_name,
@@ -90,6 +91,7 @@
         7,
         0,
         #{storeCode},
+        #{sumGoods},
         #{isDeleted},
         now(),
         #{createName},
@@ -145,6 +147,7 @@
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
         <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
         <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+        <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
         <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
         <result column="address" property="address" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="VARCHAR" />
@@ -162,6 +165,7 @@
         a.order_code,
         a.order_money,
         a.order_state,
+        a.sum_goods,
         a.store_code,
         d.address,
         a.create_time,
@@ -190,6 +194,7 @@
         <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
+        <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
         <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
@@ -202,7 +207,8 @@
         order_code,
         user_code,
         order_state,
-        order_money
+        order_money,
+        sum_goods
         from
         t_order
         where

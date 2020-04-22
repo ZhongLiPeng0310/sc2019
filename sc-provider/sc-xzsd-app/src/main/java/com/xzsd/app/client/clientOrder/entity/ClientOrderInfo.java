@@ -34,6 +34,10 @@ public class ClientOrderInfo {
      */
     private int orderState;
     /**
+     * 该订单购买是商品总数量
+     */
+    private int sumGoods;
+    /**
      * 门店编码
      */
     private String storeCode;
@@ -107,10 +111,6 @@ public class ClientOrderInfo {
      * 关键字
      */
     private String keyword;
-    /**
-     * 商品购买总数
-     */
-    private String sumGoods;
     /**
      * 商品图片
      */
@@ -320,11 +320,11 @@ public class ClientOrderInfo {
         this.keyword = keyword;
     }
 
-    public String getSumGoods() {
+    public int getSumGoods() {
         return sumGoods;
     }
 
-    public void setSumGoods(String sumGoods) {
+    public void setSumGoods(int sumGoods) {
         this.sumGoods = sumGoods;
     }
 
