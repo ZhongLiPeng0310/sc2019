@@ -68,7 +68,7 @@
         a.goods_name goodsName,
         a.cost_price costPrice,
         a.sale_price salePrice,
-        a.sum_sale sumPrice,
+        a.sum_sale sumSale,
         a.class_first_code classFirstCode,
         b.class_name classFirstName,
         a.class_second_code classSecondCode,

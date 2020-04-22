@@ -86,11 +86,16 @@
         b.class_name as classSecondName
         from
         t_goods_class a LEFT JOIN t_goods_class b
-        on a.class_code = b.last_class_code
+        on (a.class_code = b.last_class_code
+		and b.last_class_code is NOT NULL
+        and b.is_deleted = 0
+		)
         where
-        a.is_deleted = 0
-        and
         a.last_class_code is null
+		and
+		a.is_deleted = 0
+		ORDER BY
+		a.create_time DESC
     </select>
 
     <!--删除商品分类-->
