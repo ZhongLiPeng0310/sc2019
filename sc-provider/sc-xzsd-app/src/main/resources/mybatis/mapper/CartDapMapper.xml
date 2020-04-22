@@ -69,6 +69,7 @@
         b.goods_name goodsName,
         b.imageurl imagePath,
         b.sale_price salePrice,
+        b.goods_introduce goodsIntroduce,
         a.order_sum orderSum
         from
         t_cart a

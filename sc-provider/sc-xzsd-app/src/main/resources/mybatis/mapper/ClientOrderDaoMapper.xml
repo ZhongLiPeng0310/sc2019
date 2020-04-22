@@ -91,7 +91,7 @@
         7,
         0,
         #{storeCode},
-        #{sumGoods},
+        1,
         #{isDeleted},
         now(),
         #{createName},
@@ -166,6 +166,7 @@
         <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
         <result column="order_state" property="orderState" jdbcType="VARCHAR" />
         <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
+        <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
         <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
         <result column="address" property="address" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="VARCHAR" />
@@ -175,6 +176,7 @@
             <result column="imagePath" property="imagePath" jdbcType="VARCHAR" />
             <result column="salePrice" property="salePrice" jdbcType="VARCHAR" />
             <result column="orderSum" property="orderSum" jdbcType="VARCHAR" />
+            <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
     <!--查询订单详情-->
@@ -191,6 +193,7 @@
         c.goods_name goodsName,
         c.imageurl imagePath,
         c.sale_price salePrice,
+        c.goods_introduce goodsIntroduce,
         b.order_sum orderSum
         from
         t_order a
@@ -213,37 +216,39 @@
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
         <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
-        <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
+        <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" select="selectGoods" column="order_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
             <result property="imagePath" column="imageurl" jdbcType="VARCHAR"/>
             <result property="salePrice" column="sale_price" jdbcType="VARCHAR"/>
+            <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
+            <result column="goods_introduce" property="goodsIntroduce" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
     <select id="getOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getOrdersList">
         select
-        order_code,
-        user_code,
-        order_state,
-        order_money,
-        sum_goods
+        a.order_code,
+        a.user_code,
+        a.order_state,
+        a.order_money,
+        a.sum_goods
         from
-        t_order
+        t_order a
         where
-        is_deleted = 0
+        a.is_deleted = 0
         and
-        user_code = #{userId}
+        a.user_code = #{userId}
         <if test="orderState != null and orderState != '' and orderState == 7">
-            and order_state = 7
+            and a.order_state = 7
         </if>
         <if test="orderState != null and orderState != '' and orderState == 1 ">
-            and order_state = 1
+            and a.order_state = 1
         </if>
         <if test="orderState != null and orderState != '' and orderState == 5">
-            and order_state = 5
+            and a.order_state = 5
         </if>
         order by
-        create_time
+        a.create_time
         desc
     </select>
     <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
@@ -251,13 +256,17 @@
 		a.goods_code goodsCode,
 		b.goods_name goodsName,
 		b.sale_price salePrice,
-		b.imageurl imagePath
+		b.imageurl imagePath,
+		b.goods_introduce goodsIntroduce,
+		a.order_sum orderSum
 		from
 		t_order_detail a
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
+		LEFT JOIN t_order c
+		on a.order_code = c.order_code
 		where
-		a.user_code = #{userId}
+		a.order_code = #{orderCode}
 		order by
 		a.create_time
 		desc

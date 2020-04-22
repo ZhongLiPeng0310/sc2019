@@ -17,6 +17,7 @@
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
         <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+        <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
         <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
         <result column="order_state" property="orderState" jdbcType="VARCHAR" />
         <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
@@ -32,6 +33,7 @@
             <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
             <result column="salePrice" property="salePrice" jdbcType="VARCHAR" />
             <result column="orderSum" property="orderSum" jdbcType="VARCHAR" />
+            <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
     <!--查询订单详情-->
@@ -78,11 +80,13 @@
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
         <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
-        <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
+        <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo" select="selectGoods" column="order_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
             <result property="imagePath" column="imageurl" jdbcType="VARCHAR"/>
             <result property="salePrice" column="sale_price" jdbcType="VARCHAR"/>
+            <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
+            <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
     <select id="getStoreOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getStoreOrdersList">
@@ -119,13 +123,17 @@
 		a.goods_code goodsCode,
 		b.goods_name goodsName,
 		b.sale_price salePrice,
-		b.imageurl imagePath
+		b.imageurl imagePath,
+		a.order_sum orderSum,
+		b.goods_introduce goodsIntroduce
 		from
 		t_order_detail a
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
+		LEFT JOIN t_order c
+		on a.order_code = c.order_code
 		where
-		a.user_code = #{userId}
+		a.order_code = #{orderCode}
 		order by
 		a.create_time
 		desc

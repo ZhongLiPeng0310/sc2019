@@ -20,6 +20,10 @@ public class ManagerOrderInfo {
      */
     private float orderMoney;
     /**
+     * 购买数量
+     */
+    private int orderSum;
+    /**
      * 该订单购买是商品总数量
      */
     private int sumGoods;
@@ -59,10 +63,7 @@ public class ManagerOrderInfo {
      * 商品集合
      */
     private List<GoodsInfo> goodsList;
-    /**
-     * 购买数量
-     */
-    private int orderSum;
+
     /**
      * 商品售价
      */

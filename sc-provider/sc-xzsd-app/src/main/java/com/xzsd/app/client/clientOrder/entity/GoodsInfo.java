@@ -23,6 +23,10 @@ public class GoodsInfo {
      */
     private float salePrice;
     /**
+     * 购买数量
+     */
+    private int orderSum;
+    /**
      * 销售量
      */
     private int sumSale;
@@ -35,33 +39,10 @@ public class GoodsInfo {
      */
     private String className;
     /**
-     * 一级分类编码
-     */
-    private String classFirstCode;
-    /**
-     * 一级分类名称
-     */
-    private String classFirstName;
-    /**
-     * 二级分类编码
-     */
-    private String classSecondCode;
-    /**
-     * 二级分类名称
-     */
-    private String classSecondName;
-    /**
-     * 广告词
-     */
-    private String advertisement;
-    /**
      * 商品介绍
      */
     private String goodsIntroduce;
-    /**
-     * 购买总数
-     */
-    private String orderSum;
+
     /**
      * 商品状态 1下架  2上架（在售） 3未发布
      */
@@ -109,39 +90,6 @@ public class GoodsInfo {
     /**
      * 创建者
      */
-    private String createName;
-    /**
-     * 创建时间
-     * @return
-     */
-    private String createTime;
-    /**
-     * 更新人
-     * @return
-     */
-    private String updateName;
-    /**
-     * 更新时间
-     * @return
-     */
-    private String updateTime;
-    /**
-     * 版本号
-     * @return
-     */
-    private String version;
-
-    /**
-     * 页码
-     * @return
-     */
-    private int pageSize;
-
-    /**
-     * 页数
-     * @return
-     */
-    private int pageNum;
 
 
     public String getGoodsCode() {
@@ -158,38 +106,6 @@ public class GoodsInfo {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
-    }
-
-    public String getClassFirstName() {
-        return classFirstName;
-    }
-
-    public void setClassFirstName(String classFirstName) {
-        this.classFirstName = classFirstName;
-    }
-
-    public String getClassFirstCode() {
-        return classFirstCode;
-    }
-
-    public void setClassFirstCode(String classFirstCode) {
-        this.classFirstCode = classFirstCode;
-    }
-
-    public String getClassSecondCode() {
-        return classSecondCode;
-    }
-
-    public void setClassSecondCode(String classSecondCode) {
-        this.classSecondCode = classSecondCode;
-    }
-
-    public String getClassSecondName() {
-        return classSecondName;
-    }
-
-    public void setClassSecondName(String classSecondName) {
-        this.classSecondName = classSecondName;
     }
 
     public float getCostPrice() {
@@ -232,13 +148,6 @@ public class GoodsInfo {
         this.className = className;
     }
 
-    public String getAdvertisement() {
-        return advertisement;
-    }
-
-    public void setAdvertisement(String advertisement) {
-        this.advertisement = advertisement;
-    }
 
     public String getGoodsIntroduce() {
         return goodsIntroduce;
@@ -336,67 +245,11 @@ public class GoodsInfo {
         this.isDeleted = isDeleted;
     }
 
-    public String getCreateName() {
-        return createName;
-    }
-
-    public void setCreateName(String createName) {
-        this.createName = createName;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateName() {
-        return updateName;
-    }
-
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public String getOrderSum() {
+    public int getOrderSum() {
         return orderSum;
     }
 
-    public void setOrderSum(String orderSum) {
+    public void setOrderSum(int orderSum) {
         this.orderSum = orderSum;
     }
 }

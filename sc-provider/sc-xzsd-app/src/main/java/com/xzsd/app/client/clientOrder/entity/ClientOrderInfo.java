@@ -30,6 +30,14 @@ public class ClientOrderInfo {
      */
     private float orderMoney;
     /**
+     * 选择商品的数量
+     */
+    private int sumOrder;
+    /**
+     * 购买数量
+     */
+    private int orderSum;
+    /**
      * 订单状态  订单状态 0取消订单 1到货 2取消到货 3已取货 4取消已取货 5已完成（已完成未评价） 6取消已完成 7已付款 8已完成已评价
      */
     private int orderState;
@@ -73,14 +81,7 @@ public class ClientOrderInfo {
      * 销售量
      */
     private int sumSale;
-    /**
-     * 选择商品的数量
-     */
-    private int sumOrder;
-    /**
-     * 购买数量
-     */
-    private int orderSum;
+
     /**
      * 商品售价
      */
