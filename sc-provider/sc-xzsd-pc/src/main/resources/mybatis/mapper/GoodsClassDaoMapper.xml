@@ -59,26 +59,15 @@
         where class_code = #{classCode}
         and version = #{version}
     </update>
-
-<!--    &lt;!&ndash;获取商品分类列表&ndash;&gt;-->
-<!--    <select id="listGoodsClass" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">-->
-<!--        select-->
-<!--        a.class_code classCode,-->
-<!--        a.class_name className,-->
-<!--        a.remark remark,-->
-<!--        a.last_class_code lastClassCode-->
-<!--        from-->
-<!--        t_goods_class a-->
-<!--        where-->
-<!--        a.is_deleted = 0-->
-<!--        <if test="classCode != null and classCode != ''">-->
-<!--            and a.class_code like concat('%', #{classCode}, '%')-->
-<!--        </if>-->
-<!--        <if test="className!= null and className != ''">-->
-<!--            and a.class_name like concat('%', #{className}, '%')-->
-<!--        </if>-->
-<!--    </select>-->
-
+    <!--检验删除的商品分类下是否存在商品-->
+    <select id="countSecondGoods" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="int">
+        select
+        count(goods_code)
+        from
+        t_goods
+        where
+        class_second_code = #{classCode}
+    </select>
     <!--商品分类的Map-->
         <resultMap id="classFirstList" type="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
             <id column="class_code" property="classFirstCode" jdbcType="VARCHAR" />

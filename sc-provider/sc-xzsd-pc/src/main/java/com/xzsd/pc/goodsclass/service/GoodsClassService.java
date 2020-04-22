@@ -107,6 +107,11 @@ public class GoodsClassService {
         if (0 != countSecondClass){
             return AppResponse.bizError("删除失败，删除的分类存在二级分类！");
         }
+        //检验删除的商品分类下是否存在商品
+        int countSecondGoods = goodsClassDao.countSecondGoods(goodsClassInfo);
+        if (0 != countSecondGoods){
+            return AppResponse.bizError("删除失败，删除的分类下面存在商品！");
+        }
         //删除商品分类
         int deleteGoodsClass = goodsClassDao.deleteGoodsClass(goodsClassInfo);
         if (0 == deleteGoodsClass) {

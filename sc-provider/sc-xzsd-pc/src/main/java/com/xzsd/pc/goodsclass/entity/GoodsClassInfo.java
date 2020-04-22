@@ -42,6 +42,10 @@ public class GoodsClassInfo {
      */
     private String remark;
     /**
+     * 商品编码
+     */
+    private String goodsCode;
+    /**
      * 作废标记 0不删除 1删除
      */
     private int isDeleted;
@@ -227,5 +231,13 @@ public class GoodsClassInfo {
 
     public void setClassSecondList(List<ClassSecondList> classSecondList) {
         this.classSecondList = classSecondList;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 }
