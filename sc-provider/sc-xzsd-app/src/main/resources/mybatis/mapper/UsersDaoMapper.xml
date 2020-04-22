@@ -86,7 +86,7 @@
          where user_code = #{userCode}
     </update>
 
-    <!--获取用户信息-->
+    <!--获取客户信息-->
     <select id="getMysef" resultType="com.xzsd.app.client.customer.entity.UserInfo">
         select
         a.user_code userCode,
