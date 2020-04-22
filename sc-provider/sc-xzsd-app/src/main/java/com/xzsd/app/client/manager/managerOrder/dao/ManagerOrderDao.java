@@ -1,6 +1,6 @@
-package com.xzsd.app.client.managerOrder.dao;
+package com.xzsd.app.client.manager.managerOrder.dao;
 
-import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
+import com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

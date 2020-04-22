@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.app.client.managerOrder.dao.ManagerOrderDao">
+<mapper namespace="com.xzsd.app.client.manager.managerOrder.dao.ManagerOrderDao">
     <!--修改客户端订单状态-->
-    <update id="updateOrderState" parameterType="com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo">
+    <update id="updateOrderState" parameterType="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         update t_order
         set
         order_state = #{orderState},
@@ -14,7 +14,7 @@
     </update>
 
     <!--订单对应商品的Map-->
-    <resultMap id="getOrderDetail" type="com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo">
+    <resultMap id="getOrderDetail" type="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
         <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
         <result column="order_state" property="orderState" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="store_name" property="storeName" jdbcType="VARCHAR" />
-        <collection property="goodsList" ofType="com.xzsd.app.client.managerOrder.entity.GoodsInfo">
+        <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo">
             <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
             <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
             <result column="imagePath" property="imagePath" jdbcType="VARCHAR" />
@@ -68,14 +68,14 @@
     </select>
 
     <!--店长查询订单列表-->
-    <resultMap id="getStoreOrdersList" type="com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo">
+    <resultMap id="getStoreOrdersList" type="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         <id property="orderCode" column="order_code" jdbcType="VARCHAR"/>
         <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
-        <collection property="goodsList" ofType="com.xzsd.app.client.managerOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
+        <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo" select="selectGoods" column="user_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
             <result property="imagePath" column="imageurl" jdbcType="VARCHAR"/>

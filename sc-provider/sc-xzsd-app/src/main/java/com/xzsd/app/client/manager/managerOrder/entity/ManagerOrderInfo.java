@@ -1,4 +1,4 @@
-package com.xzsd.app.client.managerOrder.entity;
+package com.xzsd.app.client.manager.managerOrder.entity;
 
 import java.util.List;
 

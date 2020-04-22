@@ -1,9 +1,9 @@
-package com.xzsd.app.client.managerOrder.controller;
+package com.xzsd.app.client.manager.managerOrder.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
-import com.xzsd.app.client.managerOrder.service.ManagerOrderService;
+import com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo;
+import com.xzsd.app.client.manager.managerOrder.service.ManagerOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

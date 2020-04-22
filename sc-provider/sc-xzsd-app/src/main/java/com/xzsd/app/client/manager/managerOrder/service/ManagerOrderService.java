@@ -1,11 +1,11 @@
-package com.xzsd.app.client.managerOrder.service;
+package com.xzsd.app.client.manager.managerOrder.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.app.client.managerOrder.dao.ManagerOrderDao;
-import com.xzsd.app.client.managerOrder.entity.ManagerOrderInfo;
+import com.xzsd.app.client.manager.managerOrder.dao.ManagerOrderDao;
+import com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

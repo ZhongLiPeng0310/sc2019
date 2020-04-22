@@ -9,14 +9,10 @@ import com.xzsd.app.client.clientOrder.dao.ClientOrderDao;
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
 import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
 import com.xzsd.app.client.clientOrder.entity.ImageInfo;
-import com.xzsd.app.client.managerOrder.dao.ManagerOrderDao;
-import org.apache.catalina.security.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
