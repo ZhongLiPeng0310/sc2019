@@ -1,5 +1,6 @@
 package com.xzsd.app.client.clientOrder.dao;
 
+import com.xzsd.app.client.clientOrder.entity.CartOrderInfo;
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
 import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
 import com.xzsd.app.client.clientOrder.entity.ImageInfo;
@@ -90,29 +91,20 @@ public interface ClientOrderDao {
     /**
      * 新增订单评价
      * @author zhong
-     * @date 2020-04-21
-     * @param goodsAppraiseInfo
+     * @date 2020-04-23
+     * @param goodsAppraiseInfoList
      * @return
      */
-    int saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo);
-
+    int saveOrdersAppraise(@Param("goodsAppraiseInfoList") List<GoodsAppraiseInfo> goodsAppraiseInfoList);
     /**
      * 新增评价图片
      * @author zhong
-     * @date 2020-04-21
+     * @date 2020-04-23
      * @param goodsAppraiseInfo
      * @return
      */
     List<ImageInfo> saveAppraiseImage(GoodsAppraiseInfo goodsAppraiseInfo);
 
-    /**
-     * 新增评价图片
-     * @author zhong
-     * @date 2020-04-21
-     * @param imageInfoList
-     * @return
-     */
-    int addImages(@Param("imageInfoList") List<ImageInfo> imageInfoList);
 
     /**
      * 客户查询订单列表
@@ -123,5 +115,24 @@ public interface ClientOrderDao {
      */
     List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
 
+    /**
+     * 新增订单到订单表
+     * @param orderCode
+     * @param userId
+     * @param orderMoney
+     * @param storeCode
+     * @return
+     */
+    int saveCartOrder(@Param("orderCode") String orderCode,@Param("userId") String userId,@Param("orderMoney") float orderMoney,@Param("storeCode") String storeCode,@Param("sumGoods") int sumGoods);
 
+
+
+    /**
+     * 新增订单到订单详细表
+     * @author zhong
+     * @date 2020-04-23
+     * @param cartOrderInfoList
+     * @return
+     */
+    int saveCartOrderDetail(@Param("cartOrderInfoList") List<CartOrderInfo> cartOrderInfoList);
 }

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.app.client.clientOrder.dao.ClientOrderDao">
+
     <!--新增订单评价-->
-    <insert id="saveOrdersAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+    <insert id="saveOrdersAppraise" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
         insert into t_goods_appraise
         (
         appraise_code,
+        order_code,
         goods_code,
         appraise_detail,
         a_level,
@@ -15,46 +21,22 @@
         create_name,
         version)
         values
-        (
-        #{appraiseCode},
-        #{goodsCode},
-        #{appraiseDetail},
-        #{appraiseLevel},
-        #{userId},
-        #{isDeleted},
-        now(),
-        #{createName},
-        0
-        )
-    </insert>
-    <!--新增评价图片-->
-    <insert id="saveAppraiseImage" parameterType="java.util.List">
-        insert into
-        t_image
-        (
-        order_code,
-        goods_code,
-        user_code,
-        image_path,
-        image_type,
-        is_deleted,
-        create_time,
-        create_name,
-        version
-        )
-        <foreach collection="imageInfoList" item="images" separator=",">
+        <foreach collection="goodsAppraiseInfoList" item="appraise" separator="," index="index" >
             (
-            #{images.orderCode},
-            #{images.goodsCode},
-            #{images.userId},
-            #{images.imagePath},
-            1,
-            0,
-            now(),
-            #{createName},
-            0)
+            #{appraise.appraiseCode},
+            #{appraise.orderCode},
+            #{appraise.goodsCode},
+            #{appraise.appraiseDetail},
+            #{appraise.appraiseLevel},
+            #{appraise.userId},
+            #{appraise.isDeleted},
+            #{appraise.createTime},
+            #{appraise.userId},
+            #{appraise.version}
+            )
         </foreach>
     </insert>
+
     <!--修改客户端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         update t_order
@@ -75,7 +57,6 @@
         user_code,
         order_money,
         order_state,
-        cart_code,
         store_code,
         sum_goods,
         is_deleted,
@@ -89,7 +70,6 @@
         #{createName},
         #{orderMoney},
         7,
-        0,
         #{storeCode},
         1,
         #{isDeleted},
@@ -107,6 +87,7 @@
         user_code,
         goods_code,
         order_sum,
+        cart_code,
         is_deleted,
         create_time,
         create_name,
@@ -118,6 +99,7 @@
         #{createName},
         #{goodsCode},
         #{orderSum},
+        0,
         #{isDeleted},
         now(),
         #{createName},
@@ -271,4 +253,72 @@
 		a.create_time
 		desc
 	</select>
+
+    <!--新增订单到订单表-->
+    <insert id="saveCartOrder" parameterType="com.xzsd.app.client.clientOrder.entity.CartOrderInfo">
+        insert into
+        t_order
+        (
+        order_code,
+        user_code,
+        order_money,
+        order_state,
+        store_code,
+        sum_goods,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        values
+        (
+        #{orderCode},
+        #{userId},
+        #{orderMoney},
+        7,
+        #{storeCode},
+        #{sumGoods},
+        0,
+        now(),
+        #{userId},
+        0
+        )
+    </insert>
+
+    <!--新增订单到订单详情表-->
+    <insert id="saveCartOrderDetail" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        t_order_detail
+        (
+        detail_code,
+        order_code,
+        user_code,
+        goods_code,
+        order_sum,
+        cart_code,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        values
+        <foreach collection="cartOrderInfoList" item="order" separator="," index="index" >
+            (
+            #{order.detailCode},
+            #{order.orderCode},
+            #{order.userId},
+            #{order.goodsCode},
+            #{order.orderSum},
+            #{order.cartCode},
+            0,
+            #{order.createTime},
+            #{order.userId},
+            #{order.version}
+            )
+        </foreach>
+    </insert>
 </mapper>

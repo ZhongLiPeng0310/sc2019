@@ -26,8 +26,6 @@ public class ClientOrderController {
     @Resource
     private ClientOrderService clientOrderService;
     private static final Logger logger = LoggerFactory.getLogger(ClientOrderController.class);
-
-
     /**
      * 客户端修改订单状态
      * @author zhong
@@ -87,13 +85,14 @@ public class ClientOrderController {
      * 新增订单评价
      * @author zhong
      * @date 2020-04-21
-     * @param goodsAppraiseInfo
+     * @param
      * @return
      */
     @PostMapping("saveOrdersAppraise")
-    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo, List<ImageInfo> imageInfoList){
+    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel){
         try {
-            return clientOrderService.saveOrdersAppraise(goodsAppraiseInfo,imageInfoList);
+            String userId = SecurityUtils.getCurrentUserId();
+            return clientOrderService.saveOrdersAppraise(goodsAppraiseInfo,orderCode,goodsCode,appraiseDetail,appraiseLevel,userId);
         }catch (Exception e){
             logger.error("新增订单评价失败",e);
             System.out.println(e.toString());
@@ -117,5 +116,25 @@ public class ClientOrderController {
              System.out.println(e.toString());
              throw e;
          }
+    }
+
+    /**
+     * 在购物车新增订单
+     * @author zhong
+     * @date 2020-04-23
+     * @param orderSum
+     * @param goodsCode
+     * @param cartCode
+     * @return
+     */
+    @PostMapping("saveCartOrder")
+    private AppResponse saveCartOrder(String goodsCode,String orderSum,String cartCode,float orderMoney,String storeCode){
+        try{
+            return clientOrderService.saveCartOrder(goodsCode,orderSum,cartCode,orderMoney,storeCode);
+        }catch (Exception e){
+            logger.error("新增订单失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
     }
 }

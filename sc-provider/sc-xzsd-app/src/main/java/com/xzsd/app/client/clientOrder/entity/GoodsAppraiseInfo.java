@@ -1,5 +1,6 @@
 package com.xzsd.app.client.clientOrder.entity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +13,10 @@ public class GoodsAppraiseInfo {
      * 评价编码
      */
     private String appraiseCode;
+    /**
+     * 订单编码
+     */
+    private String orderCode;
     /**
      * 客户编码
      */
@@ -47,12 +52,12 @@ public class GoodsAppraiseInfo {
     /**
      * 评价等级(1-2星差评 3-4星中评 5好评)
      */
-    private int appraiseLevel;
+    private String appraiseLevel;
     /**
      * 创建时间
      * @return
      */
-    private String createTime;
+    private Date createTime;
     /**
      * 图片集合
      */
@@ -80,7 +85,7 @@ public class GoodsAppraiseInfo {
      * 版本号
      * @return
      */
-    private String version;
+    private int version;
 
     /**
      * 页码
@@ -150,11 +155,11 @@ public class GoodsAppraiseInfo {
         this.imageInfoList = imageInfoList;
     }
 
-    public int getAppraiseLevel() {
+    public String getAppraiseLevel() {
         return appraiseLevel;
     }
 
-    public void setAppraiseLevel(int appraiseLevel) {
+    public void setAppraiseLevel(String appraiseLevel) {
         this.appraiseLevel = appraiseLevel;
     }
 
@@ -174,11 +179,11 @@ public class GoodsAppraiseInfo {
         this.createName = createName;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -198,11 +203,11 @@ public class GoodsAppraiseInfo {
         this.updateTime = updateTime;
     }
 
-    public String getVersion() {
+    public int getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(int version) {
         this.version = version;
     }
 
@@ -244,5 +249,13 @@ public class GoodsAppraiseInfo {
 
     public void setImageNum(int imageNum) {
         this.imageNum = imageNum;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 }
