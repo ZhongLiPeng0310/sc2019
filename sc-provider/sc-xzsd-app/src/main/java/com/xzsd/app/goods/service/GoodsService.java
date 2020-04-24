@@ -27,6 +27,9 @@ public class GoodsService {
      * @return
      */
     public AppResponse getGoods(String goodsCode) {
+        float level = goodsDao.countLevel(goodsCode);
+        GoodsInfo countLevel = new GoodsInfo();
+        countLevel.setAppraiseLevel(level);
         GoodsInfo goodsInfo = goodsDao.getGoods(goodsCode);
         return AppResponse.success("查询成功！",goodsInfo);
     }

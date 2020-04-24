@@ -44,5 +44,12 @@ public interface GoodsDao {
      */
     List<GoodsClassInfo> getSecondClass(String lastClassCode);
 
-
+    /**
+     * 计算商品的评价星级
+     * @author zhong
+     * @date 2020-04-24
+     * @param goodsCode
+     * @return
+     */
+    float countLevel(@Param("goodsCode") String goodsCode);
 }

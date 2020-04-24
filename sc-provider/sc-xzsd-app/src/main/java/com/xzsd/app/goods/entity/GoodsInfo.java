@@ -84,7 +84,7 @@ public class GoodsInfo {
     /**
      * 评价等级
      */
-    private String appraiseLevel;
+    private float appraiseLevel;
     /**
      * 评价内容
      */
@@ -292,11 +292,11 @@ public class GoodsInfo {
         this.imagePath = imagePath;
     }
 
-    public String getAppraiseLevel() {
+    public float getAppraiseLevel() {
         return appraiseLevel;
     }
 
-    public void setAppraiseLevel(String appraiseLevel) {
+    public void setAppraiseLevel(float appraiseLevel) {
         this.appraiseLevel = appraiseLevel;
     }
 
