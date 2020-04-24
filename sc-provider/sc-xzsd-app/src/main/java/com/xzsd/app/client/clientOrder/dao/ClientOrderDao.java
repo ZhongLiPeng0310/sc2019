@@ -135,4 +135,13 @@ public interface ClientOrderDao {
      * @return
      */
     int saveCartOrderDetail(@Param("cartOrderInfoList") List<CartOrderInfo> cartOrderInfoList);
+
+    /**
+     * 删除新增订单后购物车的商品
+     * @author zhong
+     * @date 2020-04-24
+     * @param listCart
+     * @return
+     */
+    int updateCartGoods(@Param("listCart")List<String> listCart,@Param("userId") String userId);
 }

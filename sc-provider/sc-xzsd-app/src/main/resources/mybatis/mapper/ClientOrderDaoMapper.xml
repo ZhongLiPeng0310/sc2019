@@ -321,4 +321,17 @@
             )
         </foreach>
     </insert>
+    <!--删除对应商品的购物车-->
+    <update id="updateCartGoods" parameterType="com.xzsd.app.client.clientOrder.entity.CartOrderInfo">
+        update t_cart
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where cart_code in
+        <foreach item="item" index="index" collection="listCart" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>
