@@ -186,9 +186,25 @@ public class ClientOrderService {
         int saveCartOrder = clientOrderDao.saveCartOrder(orderCode,userId,orderMoney,storeCode,sumGoods);
         //新增订单到订单详情表
         int saveCartOrderDetail = clientOrderDao.saveCartOrderDetail(cartOrderInfoList);
+        //
         if (0 == saveCartOrder || 0 == saveCartOrderDetail){
             return AppResponse.bizError("新增失败！");
+        }else{
+            //获取当前商品的库存数量
+            ClientOrderInfo clientOrderInfo = new ClientOrderInfo();
+            int nowStock = clientOrderDao.nowStock(clientOrderInfo);
+            clientOrderInfo.setStock(nowStock);
+            int countGoods = clientOrderInfo.getOrderSum();
+            clientOrderInfo.setSumOrder(countGoods);
+            //修改该商品的库存数量
+            int updateStock = clientOrderDao.updateStock(clientOrderInfo);
+            //获取下单商品当前的销售量
+            int sumSale = clientOrderDao.getSumSale(clientOrderInfo);
+            clientOrderInfo.setSumSale(sumSale);
+            //增加商品的销售量
+            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
+            return AppResponse.success("新增成功！");
         }
-        return AppResponse.success("新增成功！");
+
     }
 }
