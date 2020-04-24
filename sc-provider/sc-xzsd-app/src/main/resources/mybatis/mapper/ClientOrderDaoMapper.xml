@@ -355,4 +355,26 @@
         where goods_code = #{item.goodsCode}
         </foreach>
     </update>
+
+    <!--查询下单商品当前的销售量-->
+    <select id="countSumSale" parameterType="java.util.List" resultType="java.lang.Integer">
+        select
+        sum_sale
+        from
+        t_goods
+        where
+        goods_code in
+        <foreach item="item" index="index" collection="listGoods" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <!--更新商品库存-->
+    <update id="updateSumSales" parameterType="java.util.List">
+        <foreach item="item" collection="cartOrderInfoList" separator=";" >
+            update t_goods
+            set
+            stock = #{item.sumSale} + #{item.orderSum}
+            where goods_code = #{item.goodsCode}
+        </foreach>
+    </update>
 </mapper>

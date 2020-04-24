@@ -164,6 +164,13 @@ public class ClientOrderService {
         List<CartOrderInfo> cartOrderInfoList = new ArrayList<CartOrderInfo>();
         //查询当前下单商品的库存
         List<Integer> countGoodsStock = clientOrderDao.countGoodsStock(listGoods);
+        for (int i = 0;i < countGoodsStock.size(); i++){
+            if (0 == i ){
+                return AppResponse.bizError("新增失败！商品库存不足");
+            }
+        }
+        //查询当前下单商品的销售量
+        List<Integer> countSumSale = clientOrderDao.countSumSale(listGoods);
         String userId = SecurityUtils.getCurrentUserId();
         //生成订单编码
         String orderCode = StringUtil.getCommonCode(2);
@@ -178,6 +185,7 @@ public class ClientOrderService {
             orderInfo.setCartCode(listCart.get(i));
             orderInfo.setGoodsCode(listGoods.get(i));
             orderInfo.setOrderSum(Integer.parseInt(listSum.get(i)));
+            orderInfo.setSumSale(countSumSale.get(i));
             orderInfo.setStock(countGoodsStock.get(i));
             orderInfo.setIsDeleted(0);
             orderInfo.setCreateTime(new Date());
@@ -188,7 +196,6 @@ public class ClientOrderService {
         int saveCartOrder = clientOrderDao.saveCartOrder(orderCode,userId,orderMoney,storeCode,sumGoods);
         //新增订单到订单详情表
         int saveCartOrderDetail = clientOrderDao.saveCartOrderDetail(cartOrderInfoList);
-        //
         if (0 == saveCartOrder || 0 == saveCartOrderDetail){
             return AppResponse.bizError("新增失败！");
         }else{
@@ -196,8 +203,9 @@ public class ClientOrderService {
             int updateCartGoods = clientOrderDao.updateCartGoods(listCart,userId);
             //修改下单商品的库存
             int updateGoodsStock = clientOrderDao.updateGoodsStock(cartOrderInfoList);
+            //修改下单商品的销售量
+            int updateSumSale = clientOrderDao.updateSumSales(cartOrderInfoList);
             return AppResponse.success("新增成功！");
         }
-
     }
 }
