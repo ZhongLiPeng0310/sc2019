@@ -33,7 +33,7 @@ public class CartService {
         cartInfo.setCartCode(StringUtil.getCommonCode(2));
         //检验新增的商品库存
         int countStock = cartDao.countStock(cartInfo);
-        if (countStock == 0 && countStock < cartInfo.getOrderSum()){
+        if (countStock == 0 || countStock < cartInfo.getOrderSum()){
             return AppResponse.bizError("新增失败，商品库存不足");
         }
         //检验新加的商品是否已经存在购物车
