@@ -1,7 +1,6 @@
 package com.xzsd.app.client.clientOrder.entity;
 
 import java.util.Date;
-import java.util.List;
 
 public class CartOrderInfo {
     /**
@@ -35,7 +34,7 @@ public class CartOrderInfo {
     /**
      * 购买数量
      */
-    private String orderSum;
+    private int orderSum;
     /**
      * 订单状态  订单状态 0取消订单 1到货 2取消到货 3已取货 4取消已取货 5已完成（已完成未评价） 6取消已完成 7已付款 8已完成已评价
      */
@@ -284,11 +283,11 @@ public class CartOrderInfo {
         this.sumGoods = sumGoods;
     }
 
-    public String getOrderSum() {
+    public int getOrderSum() {
         return orderSum;
     }
 
-    public void setOrderSum(String orderSum) {
+    public void setOrderSum(int orderSum) {
         this.orderSum = orderSum;
     }
 
@@ -299,4 +298,5 @@ public class CartOrderInfo {
     public void setVersion(int version) {
         this.version = version;
     }
+
 }

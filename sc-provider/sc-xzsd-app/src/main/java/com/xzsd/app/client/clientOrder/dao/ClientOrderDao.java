@@ -144,4 +144,22 @@ public interface ClientOrderDao {
      * @return
      */
     int updateCartGoods(@Param("listCart")List<String> listCart,@Param("userId") String userId);
+
+    /**
+     * 查询下单商品的库存
+     * @author zhong
+     * @date 2020-04-24
+     * @param listGoods
+     * @return
+     */
+    List<Integer> countGoodsStock(@Param("listGoods")List<String> listGoods);
+
+    /**
+     * 更新下单商品的库存
+     * @author zhong
+     * @date 2020-04-24
+     * @param cartOrderInfoList
+     * @return
+     */
+    int updateGoodsStock(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
 }

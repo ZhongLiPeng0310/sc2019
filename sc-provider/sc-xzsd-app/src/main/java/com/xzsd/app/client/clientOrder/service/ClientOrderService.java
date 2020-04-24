@@ -162,6 +162,8 @@ public class ClientOrderService {
         List<String> listSum = Arrays.asList(orderSum.split(","));
         List<String> listCart = Arrays.asList(cartCode.split(","));
         List<CartOrderInfo> cartOrderInfoList = new ArrayList<CartOrderInfo>();
+        //查询当前下单商品的库存
+        List<Integer> countGoodsStock = clientOrderDao.countGoodsStock(listGoods);
         String userId = SecurityUtils.getCurrentUserId();
         //生成订单编码
         String orderCode = StringUtil.getCommonCode(2);
@@ -175,7 +177,8 @@ public class ClientOrderService {
             orderInfo.setOrderMoney(orderMoney);
             orderInfo.setCartCode(listCart.get(i));
             orderInfo.setGoodsCode(listGoods.get(i));
-            orderInfo.setOrderSum(listSum.get(i));
+            orderInfo.setOrderSum(Integer.parseInt(listSum.get(i)));
+            orderInfo.setStock(countGoodsStock.get(i));
             orderInfo.setIsDeleted(0);
             orderInfo.setCreateTime(new Date());
             orderInfo.setVersion(0);
@@ -189,21 +192,13 @@ public class ClientOrderService {
         if (0 == saveCartOrder || 0 == saveCartOrderDetail){
             return AppResponse.bizError("新增失败！");
         }else{
-//            //获取当前商品的库存数量
-//            ClientOrderInfo clientOrderInfo = new ClientOrderInfo();
-//            int nowStock = clientOrderDao.nowStock(clientOrderInfo);
-//            clientOrderInfo.setStock(nowStock);
-//            int countGoods = clientOrderInfo.getOrderSum();
-//            clientOrderInfo.setSumOrder(countGoods);
-//            //修改该商品的库存数量
-//            int updateStock = clientOrderDao.updateStock(clientOrderInfo);
-//            //获取下单商品当前的销售量
-//            int sumSale = clientOrderDao.getSumSale(clientOrderInfo);
-//            clientOrderInfo.setSumSale(sumSale);
-//            //增加商品的销售量
-//            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
             //新增订单后删除购物车中的商品
             int updateCartGoods = clientOrderDao.updateCartGoods(listCart,userId);
+            if (0 != updateCartGoods){
+                System.out.println("删除购物车成功");
+            }
+            //修改下单商品的库存
+            int updateGoodsStock = clientOrderDao.updateGoodsStock(cartOrderInfoList);
             return AppResponse.success("新增成功！");
         }
 
