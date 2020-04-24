@@ -84,6 +84,12 @@ public class CartService {
      */
     public AppResponse updateAddSubCart(String cartCode, int orderSum, String userId) {
         AppResponse appResponse = AppResponse.success("修改成功");
+        //检验新增的商品库存
+        CartInfo cartInfo = new CartInfo();
+        int countStock = cartDao.countStock(cartInfo);
+        if (countStock == 0 && countStock < cartInfo.getOrderSum()){
+            return AppResponse.bizError("新增失败，商品库存不足");
+        }
         //修改购物车商品数量
         int updateAddSubCart = cartDao.updateAddSubCart(cartCode,orderSum,userId);
         if (0 == updateAddSubCart){
