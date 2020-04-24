@@ -188,7 +188,7 @@ public interface ClientOrderDao {
      * @param goodsAppraiseInfoList
      * @return
      */
-    int updateGoodsLevel(@Param("cartOrderInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
+    int updateGoodsLevel(@Param("goodsAppraiseInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
 
     /**
      * 查询当前下单商品的等级

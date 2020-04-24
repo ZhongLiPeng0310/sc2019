@@ -127,9 +127,6 @@ public class ClientOrderService {
         int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfoList);
         //更新商品的评价等级
         int updateGoodsLevel = clientOrderDao.updateGoodsLevel(goodsAppraiseInfoList);
-        if (0 == updateGoodsLevel){
-            System.out.println("更新成功！");
-        }
 //        //新增评价图片
 //        int addImage = clientOrderDao.addImages(imageInfoList);
         if (0 == saveOrdersAppraise){
@@ -174,7 +171,7 @@ public class ClientOrderService {
         //查询当前下单商品的库存
         List<Integer> countGoodsStock = clientOrderDao.countGoodsStock(listGoods);
         for (int i = 0;i < countGoodsStock.size(); i++){
-            if (0 == i ){
+            if (0 == countGoodsStock.get(i) ){
                 return AppResponse.bizError("新增失败！商品库存不足");
             }
         }
