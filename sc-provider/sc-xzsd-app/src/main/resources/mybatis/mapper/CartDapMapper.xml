@@ -12,7 +12,15 @@
         and
         is_deleted = 0
     </select>
-
+    <!--检验新增商品的库存-->
+    <select id="countStock" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
+        select
+        stock
+        from
+        t_goods
+        where
+        goods_code = #{goodsCode}
+    </select>
     <!--查出加入的商品在购物车的数量-->
     <select id="findSum" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
         select

@@ -32,7 +32,14 @@ public interface CartDao {
      * @return
      */
     int checkSave(CartInfo cartInfo);
-
+    /**
+     * 查询新增商品的库存
+     * @author zhong
+     * @date 2020-04-24
+     * @param cartInfo
+     * @return
+     */
+    int countStock(CartInfo cartInfo);
     /**
      * 更新购物车
      * @author zhong
