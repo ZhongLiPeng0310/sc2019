@@ -194,9 +194,6 @@ public class ClientOrderService {
         }else{
             //新增订单后删除购物车中的商品
             int updateCartGoods = clientOrderDao.updateCartGoods(listCart,userId);
-            if (0 != updateCartGoods){
-                System.out.println("删除购物车成功");
-            }
             //修改下单商品的库存
             int updateGoodsStock = clientOrderDao.updateGoodsStock(cartOrderInfoList);
             return AppResponse.success("新增成功！");
