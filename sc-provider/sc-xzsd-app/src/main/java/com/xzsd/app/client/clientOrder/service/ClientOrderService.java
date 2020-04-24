@@ -121,6 +121,8 @@ public class ClientOrderService {
         }
         //新增评价
         int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfoList);
+        //更新商品的评价等级
+        int updateGoodsLevel = clientOrderDao.updateGoodsLevel(goodsAppraiseInfoList);
 //        //新增评价图片
 //        int addImage = clientOrderDao.addImages(imageInfoList);
         if (0 == saveOrdersAppraise){

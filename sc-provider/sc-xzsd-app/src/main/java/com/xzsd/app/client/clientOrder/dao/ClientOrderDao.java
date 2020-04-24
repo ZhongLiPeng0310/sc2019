@@ -180,4 +180,13 @@ public interface ClientOrderDao {
      * @return
      */
     int updateSumSales(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
+
+    /**
+     * 更新商品的评价等级
+     * @author zhong
+     * @date 2020-04-24
+     * @param goodsAppraiseInfoList
+     * @return
+     */
+    int updateGoodsLevel(@Param("cartOrderInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
 }
