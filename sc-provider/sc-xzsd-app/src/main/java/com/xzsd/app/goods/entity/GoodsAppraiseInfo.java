@@ -29,6 +29,10 @@ public class GoodsAppraiseInfo {
      */
     private String appraiseDetail;
     /**
+     * 平均星级
+     */
+    private String avgLevel;
+    /**
      * 商品编码
      */
     private String goodsCode;
@@ -208,5 +212,13 @@ public class GoodsAppraiseInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getAvgLevel() {
+        return avgLevel;
+    }
+
+    public void setAvgLevel(String avgLevel) {
+        this.avgLevel = avgLevel;
     }
 }

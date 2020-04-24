@@ -54,6 +54,10 @@ public class GoodsAppraiseInfo {
      */
     private String appraiseLevel;
     /**
+     * 评价评价星级
+     */
+    private String avgLevel;
+    /**
      * 创建时间
      * @return
      */
@@ -257,5 +261,13 @@ public class GoodsAppraiseInfo {
 
     public void setOrderCode(String orderCode) {
         this.orderCode = orderCode;
+    }
+
+    public String getAvgLevel() {
+        return avgLevel;
+    }
+
+    public void setAvgLevel(String avgLevel) {
+        this.avgLevel = avgLevel;
     }
 }

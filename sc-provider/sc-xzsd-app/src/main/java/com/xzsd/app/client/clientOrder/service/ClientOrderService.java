@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -99,17 +100,20 @@ public class ClientOrderService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String userId) {
+    public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String userId,String avgLevel) {
         List<String> listDatail = Arrays.asList(appraiseDetail.split(","));
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listLevel = Arrays.asList(appraiseLevel.split(","));
         List<GoodsAppraiseInfo> goodsAppraiseInfoList = new ArrayList<GoodsAppraiseInfo>();
+        //查询评价的商品的星级
+        List<String> level = clientOrderDao.countLevel(listGoods);
         int number = listGoods.size();
         //根据页面传回来的数量插入
         for (int i = 0 ;i < number; i++){
             GoodsAppraiseInfo appraiseInfo = new GoodsAppraiseInfo();
             appraiseInfo.setAppraiseDetail(listDatail.get(i));
             appraiseInfo.setAppraiseLevel(listLevel.get(i));
+            appraiseInfo.setAvgLevel(level.get(i));
             appraiseInfo.setGoodsCode(listGoods.get(i));
             appraiseInfo.setOrderCode(orderCode);
             appraiseInfo.setUserId(userId);
@@ -123,6 +127,9 @@ public class ClientOrderService {
         int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfoList);
         //更新商品的评价等级
         int updateGoodsLevel = clientOrderDao.updateGoodsLevel(goodsAppraiseInfoList);
+        if (0 == updateGoodsLevel){
+            System.out.println("更新成功！");
+        }
 //        //新增评价图片
 //        int addImage = clientOrderDao.addImages(imageInfoList);
         if (0 == saveOrdersAppraise){

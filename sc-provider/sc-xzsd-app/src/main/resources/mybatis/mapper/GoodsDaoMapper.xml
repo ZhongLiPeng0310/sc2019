@@ -23,15 +23,7 @@
         a.is_deleted = 0
         and a.goods_code = #{goodsCode}
     </select>
-    <!--查询商品的评价星级-->
-    <select id="countLevel" parameterType="com.xzsd.app.goods.entity.GoodsInfo" resultType="java.lang.String">
-        select
-        avg(a_level)
-        from
-        t_goods_appraise
-        where
-        goods_code = #{goodsCode}
-    </select>
+
     <!--查询商品评价列表-->
     <resultMap id="selectAppraise" type="com.xzsd.app.goods.entity.GoodsAppraiseInfo" >
         <id property="appraiseCode" column="appraise_code" jdbcType="VARCHAR"/>

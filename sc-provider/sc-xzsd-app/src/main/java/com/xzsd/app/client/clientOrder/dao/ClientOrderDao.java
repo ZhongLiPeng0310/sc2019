@@ -189,4 +189,13 @@ public interface ClientOrderDao {
      * @return
      */
     int updateGoodsLevel(@Param("cartOrderInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
+
+    /**
+     * 查询当前下单商品的等级
+     * @author zhong
+     * @date 2020-04-24
+     * @param listGoods
+     * @return
+     */
+    List<String> countLevel(@Param("listGoods")List<String> listGoods);
 }

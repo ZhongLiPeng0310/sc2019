@@ -89,10 +89,10 @@ public class ClientOrderController {
      * @return
      */
     @PostMapping("saveOrdersAppraise")
-    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel){
+    private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String avgLevel){
         try {
             String userId = SecurityUtils.getCurrentUserId();
-            return clientOrderService.saveOrdersAppraise(goodsAppraiseInfo,orderCode,goodsCode,appraiseDetail,appraiseLevel,userId);
+            return clientOrderService.saveOrdersAppraise(goodsAppraiseInfo,orderCode,goodsCode,appraiseDetail,appraiseLevel,userId,avgLevel);
         }catch (Exception e){
             logger.error("新增订单评价失败",e);
             System.out.println(e.toString());
