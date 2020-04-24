@@ -59,6 +59,7 @@
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
+    <!--                                              订单                                    -->
     <!--修改客户端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         update t_order
@@ -164,6 +165,8 @@
         where
         goods_code = #{goodsCode}
     </select>
+
+    <!--订单详情-->
     <!--订单对应商品的Map-->
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
@@ -213,6 +216,7 @@
         a.order_code = #{orderCode}
     </select>
 
+    <!--订单列表-->
     <!--客户查询订单列表-->
     <resultMap id="getOrdersList" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id property="orderCode" column="order_code" jdbcType="VARCHAR"/>
@@ -390,7 +394,7 @@
             #{item}
         </foreach>
     </select>
-    <!--更新商品库存-->
+    <!--更新商品销售量-->
     <update id="updateSumSales" parameterType="java.util.List">
         <foreach item="item" collection="cartOrderInfoList" separator=";" >
             update t_goods
