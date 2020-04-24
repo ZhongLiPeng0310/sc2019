@@ -47,6 +47,8 @@
         <foreach item="item" index="index" collection="listGoods" open="(" separator="," close=")">
             #{item}
         </foreach>
+        GROUP BY
+        goods_code
     </select>
     <!--更新商品的评价星级-->
     <update id="updateGoodsLevel" parameterType="java.util.List">

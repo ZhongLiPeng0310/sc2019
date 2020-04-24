@@ -9,10 +9,6 @@
         sort_no sortNo,
         begin_time beginTime,
         end_time endTime,
-        create_time createTime,
-        create_name createName,
-        update_time updateTime,
-        update_name updateName,
         version version
         from
         t_picture_show

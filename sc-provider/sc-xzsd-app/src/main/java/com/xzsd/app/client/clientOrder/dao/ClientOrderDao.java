@@ -97,14 +97,22 @@ public interface ClientOrderDao {
      */
     int saveOrdersAppraise(@Param("goodsAppraiseInfoList") List<GoodsAppraiseInfo> goodsAppraiseInfoList);
     /**
-     * 新增评价图片
+     * 更新商品的评价等级
      * @author zhong
-     * @date 2020-04-23
-     * @param goodsAppraiseInfo
+     * @date 2020-04-24
+     * @param goodsAppraiseInfoList
      * @return
      */
-    List<ImageInfo> saveAppraiseImage(GoodsAppraiseInfo goodsAppraiseInfo);
+    int updateGoodsLevel(@Param("goodsAppraiseInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
 
+    /**
+     * 查询当前下单商品的等级
+     * @author zhong
+     * @date 2020-04-24
+     * @param listGoods
+     * @return
+     */
+    List<String> countLevel(@Param("listGoods")List<String> listGoods);
 
     /**
      * 客户查询订单列表
@@ -181,21 +189,5 @@ public interface ClientOrderDao {
      */
     int updateSumSales(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
 
-    /**
-     * 更新商品的评价等级
-     * @author zhong
-     * @date 2020-04-24
-     * @param goodsAppraiseInfoList
-     * @return
-     */
-    int updateGoodsLevel(@Param("goodsAppraiseInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
 
-    /**
-     * 查询当前下单商品的等级
-     * @author zhong
-     * @date 2020-04-24
-     * @param listGoods
-     * @return
-     */
-    List<String> countLevel(@Param("listGoods")List<String> listGoods);
 }
