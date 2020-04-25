@@ -43,43 +43,6 @@ public class ClientOrderService {
     }
 
     /**
-     * 客户端在商品页面新增订单
-     * @author zhong
-     * @date 2020-04-21
-     * @param clientOrderInfo
-     * @return
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public AppResponse saveOrder(ClientOrderInfo clientOrderInfo) {
-        clientOrderInfo.setOrderCode(StringUtil.getCommonCode(2));
-        String userId = SecurityUtils.getCurrentUserId();
-        clientOrderInfo.setCreateName(userId);
-        clientOrderInfo.setIsDeleted(0);
-        //新增订单
-        int saveOrder = clientOrderDao.saveOrder(clientOrderInfo);
-        //新增订单信息到详情表
-        int saveOrderDeatail = clientOrderDao.saveOrderDeatail(clientOrderInfo);
-        if (0 == saveOrder || 0 == saveOrderDeatail){
-            return AppResponse.bizError("新增失败，请重试！");
-        }else {
-            //获取当前商品的库存数量
-            int nowStock = clientOrderDao.nowStock(clientOrderInfo);
-            clientOrderInfo.setStock(nowStock);
-            int countGoods = clientOrderInfo.getOrderSum();
-            clientOrderInfo.setSumOrder(countGoods);
-            //修改该商品的库存数量
-            int updateStock = clientOrderDao.updateStock(clientOrderInfo);
-            //获取下单商品当前的销售量
-            int sumSale = clientOrderDao.getSumSale(clientOrderInfo);
-            clientOrderInfo.setSumSale(sumSale);
-            //增加商品的销售量
-            int updateSumSale = clientOrderDao.updateSumSale(clientOrderInfo);
-            return AppResponse.success("新增成功！");
-        }
-
-    }
-
-    /**
      * 客户端查询订单详情
      * @author zhong
      * @date 2020-04-21
@@ -101,7 +64,7 @@ public class ClientOrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String userId,String avgLevel) {
-        List<String> listDatail = Arrays.asList(appraiseDetail.split(","));
+        List<String> listDatail = Arrays.asList(appraiseDetail.split("@end"));
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listLevel = Arrays.asList(appraiseLevel.split(","));
         List<GoodsAppraiseInfo> goodsAppraiseInfoList = new ArrayList<GoodsAppraiseInfo>();

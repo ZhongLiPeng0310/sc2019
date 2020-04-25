@@ -13,7 +13,6 @@ import java.util.List;
 @Mapper
 public interface ClientOrderDao {
 
-
     /**
      * 修改订单状态
      * @date 2020-04-21
@@ -26,60 +25,13 @@ public interface ClientOrderDao {
     int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("userId") String userId);
 
     /**
-     * 客户端新增订单
+     * 客户查询订单列表
      * @author zhong
      * @date 2020-04-21
      * @param clientOrderInfo
      * @return
      */
-    int saveOrder(ClientOrderInfo clientOrderInfo);
-
-    /**
-     * 客户端新增订单到订单详情
-     * @author zhong
-     * @date 2020-04-21
-     * @param clientOrderInfo
-     * @return
-     */
-    int saveOrderDeatail(ClientOrderInfo clientOrderInfo);
-    /**
-     * 获取下单商品的库存
-     * @param clientOrderInfo
-     * @return
-     */
-    int nowStock(ClientOrderInfo clientOrderInfo);
-    /**
-     * 更新下单商品的库存数量
-     * @author zhong
-     * @date 2020-04-21
-     * @param clientOrderInfo
-     * @return
-     */
-    int updateStock(ClientOrderInfo clientOrderInfo);
-    /**
-     * 获取下单商品的价格
-     * @author zhong
-     * @date 2020-04-22
-     * @param clientOrderInfo
-     * @return
-     */
-    float getPrice(ClientOrderInfo clientOrderInfo);
-    /**
-     * 增加下单商品的销售量
-     * @author zhong
-     * @date 2020-04-22
-     * @param clientOrderInfo
-     * @return
-     */
-    int updateSumSale(ClientOrderInfo clientOrderInfo);
-    /**
-     * 获取当前商品的销售量
-     * @author zhong
-     * @date 2020-04-22
-     * @param clientOrderInfo
-     * @return
-     */
-    int getSumSale(ClientOrderInfo clientOrderInfo);
+    List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
     /**
      * 客户端查询订单详情
      * @author zhong
@@ -88,6 +40,8 @@ public interface ClientOrderDao {
      * @return
      */
     ClientOrderInfo getOrdersByCode(@Param("orderCode") String orderCode);
+
+    //-----订单评价
     /**
      * 新增订单评价
      * @author zhong
@@ -104,9 +58,8 @@ public interface ClientOrderDao {
      * @return
      */
     int updateGoodsLevel(@Param("goodsAppraiseInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
-
     /**
-     * 查询当前下单商品的等级
+     * 查询当前下单商品的评价等级
      * @author zhong
      * @date 2020-04-24
      * @param listGoods
@@ -114,15 +67,7 @@ public interface ClientOrderDao {
      */
     List<String> countLevel(@Param("listGoods")List<String> listGoods);
 
-    /**
-     * 客户查询订单列表
-     * @author zhong
-     * @date 2020-04-21
-     * @param clientOrderInfo
-     * @return
-     */
-    List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
-
+    //----新增订单
     /**
      * 新增订单到订单表
      * @param orderCode
@@ -132,8 +77,6 @@ public interface ClientOrderDao {
      * @return
      */
     int saveCartOrder(@Param("orderCode") String orderCode,@Param("userId") String userId,@Param("orderMoney") float orderMoney,@Param("storeCode") String storeCode,@Param("sumGoods") int sumGoods);
-
-
 
     /**
      * 新增订单到订单详细表

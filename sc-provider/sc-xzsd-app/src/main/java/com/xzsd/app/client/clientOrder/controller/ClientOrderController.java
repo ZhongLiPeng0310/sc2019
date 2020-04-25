@@ -9,6 +9,7 @@ import com.xzsd.app.client.clientOrder.service.ClientOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,24 +47,6 @@ public class ClientOrderController {
     }
 
     /**
-     * 在商品页面新增订单
-     * @author zhong
-     * @date 2020-04-21
-     * @param clientOrderInfo
-     * @return
-     */
-    @PostMapping("saveOrder")
-    private AppResponse saveOrder(ClientOrderInfo clientOrderInfo){
-        try{
-            return clientOrderService.saveOrder(clientOrderInfo);
-        }catch (Exception e){
-            logger.error("新增成功！");
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
-
-    /**
      * 客户端获取订单详情
      * @autho zhong
      * @date 2020-04-21
@@ -88,6 +71,7 @@ public class ClientOrderController {
      * @param
      * @return
      */
+
     @PostMapping("saveOrdersAppraise")
     private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String avgLevel){
         try {
