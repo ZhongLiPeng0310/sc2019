@@ -186,7 +186,6 @@ public class ClientOrderService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveAppraise(AppraiseOrderInfo appraiseOrderInfo) {
         String userCode = SecurityUtils.getCurrentUserId();
-        List<String> listGoods = new ArrayList<>();
         for (int i = 0; i < appraiseOrderInfo.getAppraiseInfoList().size(); i++){
             //设置评价信息
             appraiseOrderInfo.getAppraiseInfoList().get(i).setAppraiseCode(StringUtil.getCommonCode(2));
@@ -203,7 +202,7 @@ public class ClientOrderService {
         }
         //更新商品的评价等级
         int updateGoodsLevel = clientOrderDao.updateLevel(appraiseOrderInfo);
-        if (0 == saveAppraise ||0 ==updateGoodsLevel){
+        if (0 == saveAppraise ||0 == updateGoodsLevel){
             return AppResponse.bizError("评价失败");
         }
         return AppResponse.success("评价成功！");
