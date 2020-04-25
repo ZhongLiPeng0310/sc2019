@@ -71,7 +71,6 @@ public class ClientOrderController {
      * @param
      * @return
      */
-
     @PostMapping("saveOrdersAppraise")
     private AppResponse saveOrdersAppraise(GoodsAppraiseInfo goodsAppraiseInfo,String orderCode,String goodsCode ,String appraiseDetail,String appraiseLevel,String avgLevel){
         try {
