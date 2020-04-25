@@ -133,8 +133,8 @@ public class ClientOrderService {
         List<CartOrderInfo> cartOrderInfoList = new ArrayList<CartOrderInfo>();
         //查询当前下单商品的库存
         List<Integer> countGoodsStock = clientOrderDao.countGoodsStock(listGoods);
-        for (int i = 0;i < countGoodsStock.size(); i++){
-            if (0 == countGoodsStock.get(i) ){
+        for (int i = 0;i < listGoods.size(); i++){
+            if (0 == countGoodsStock.get(i) || Integer.parseInt(listSum.get(i)) > countGoodsStock.get(i)){
                 return AppResponse.bizError("新增失败！商品库存不足");
             }
         }
@@ -161,6 +161,7 @@ public class ClientOrderService {
             orderInfo.setVersion(0);
             cartOrderInfoList.add(orderInfo);
         }
+
         //新增订单到订单表
         int saveCartOrder = clientOrderDao.saveCartOrder(orderCode,userId,orderMoney,storeCode,sumGoods);
         //新增订单到订单详情表
