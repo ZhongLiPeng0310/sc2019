@@ -166,7 +166,6 @@
         version = version + 1
         where
         type = 4
-        and version = #{version}
     </update>
     <!--查询热门商品详情-->
     <select id="getHotGoodsByHotCode" parameterType="java.lang.String" resultType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo">

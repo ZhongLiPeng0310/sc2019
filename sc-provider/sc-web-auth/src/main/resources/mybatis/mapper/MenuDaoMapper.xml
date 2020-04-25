@@ -55,6 +55,8 @@
         t_menu a
         where
         a.is_deleted = 0
+        and
+        a.role = 1
         order by a.create_time
     </select>
 
