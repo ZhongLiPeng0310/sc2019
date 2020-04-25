@@ -1,6 +1,7 @@
 package com.xzsd.app.client.driver.dao;
 
-import com.xzsd.app.client.manager.managerMessage.entity.UserInfo;
+
+import com.xzsd.app.client.customer.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

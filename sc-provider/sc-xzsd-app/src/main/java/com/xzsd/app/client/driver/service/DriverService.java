@@ -2,8 +2,9 @@ package com.xzsd.app.client.driver.service;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.xzsd.app.client.customer.entity.UserInfo;
 import com.xzsd.app.client.driver.dao.DriverDao;
-import com.xzsd.app.client.manager.managerMessage.entity.UserInfo;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

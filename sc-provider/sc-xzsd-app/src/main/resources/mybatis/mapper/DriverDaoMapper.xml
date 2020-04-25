@@ -9,7 +9,7 @@
         c.dic_name provinceName,
         d.dic_name cityName,
         e.dic_name areaName,
-        b.address address,
+        CONCAT_WS('-',c.dic_name,d.dic_name,e.dic_name,b.address) address,
         a.user_code userCode,
         a.user_name userName,
         a.phone phone
@@ -28,7 +28,7 @@
         (select city_code from t_driver where user_code = #{userId})
     </select>
     <!--查询司机信息-->
-    <select id="getMyself" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
+    <select id="getMyself" resultType="com.xzsd.app.client.customer.entity.UserInfo">
         select
         a.user_code userCode,
         a.user_name userName,
