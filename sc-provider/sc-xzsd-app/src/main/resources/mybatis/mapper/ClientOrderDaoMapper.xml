@@ -302,13 +302,60 @@
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
-<!--    &lt;!&ndash;更新商品销售量&ndash;&gt;-->
-<!--    <update id="updateSumSales" parameterType="java.util.List">-->
-<!--        <foreach item="item" collection="cartOrderInfoList" separator=";" >-->
-<!--            update t_goods-->
-<!--            set-->
-<!--            sum_sale = #{item.sumSale} + #{item.orderSum}-->
-<!--            where goods_code = #{item.goodsCode}-->
-<!--        </foreach>-->
-<!--    </update>-->
+
+    <!--新增评价json-->
+    <insert id="saveAppraise" parameterType="com.xzsd.app.client.clientOrder.entity.AppraiseOrderInfo">
+        insert into t_goods_appraise
+        (
+        appraise_code,
+        user_code,
+        order_code,
+        goods_code,
+        appraise_detail,
+        a_level,
+        is_deleted,
+        create_time,
+        create_name,
+        version
+        )
+        values
+        <foreach collection="appraiseInfoList" index="index" item="item" open="" separator="," close="">
+            (
+            #{item.appraiseCode},
+            #{userCode},
+            #{orderCode},
+            #{item.goodsCode},
+            #{item.appraiseDetail},
+            #{item.appraiseLevel},
+            #{isDeleted},
+            now(),
+            #{createName},
+            0
+            )
+        </foreach>
+    </insert>
+
+    <!--查询商品的评价星级-->
+    <select id="countGoodsLevel" parameterType="java.util.List" resultType="java.lang.String">
+        select
+        avg(a_level)
+        from
+        t_goods_appraise
+        where
+        goods_code in
+        <foreach item="item" index="index" collection="appraiseInfoList" open="(" separator="," close=")">
+            #{item.goodsCode}
+        </foreach>
+        GROUP BY
+        goods_code
+    </select>
+    <!--更新商品的评价星级-->
+    <update id="updateLevel" parameterType="java.util.List">
+        <foreach item="item" collection="appraiseInfoList" separator=";" >
+            update t_goods
+            set
+            a_level = #{item.avgLevel}
+            where goods_code = #{item.goodsCode}
+        </foreach>
+    </update>
 </mapper>

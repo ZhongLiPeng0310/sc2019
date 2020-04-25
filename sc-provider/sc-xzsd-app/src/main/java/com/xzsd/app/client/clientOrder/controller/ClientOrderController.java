@@ -2,6 +2,7 @@ package com.xzsd.app.client.clientOrder.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.app.client.clientOrder.entity.AppraiseOrderInfo;
 import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
 import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
 import com.xzsd.app.client.clientOrder.entity.ImageInfo;
@@ -116,6 +117,25 @@ public class ClientOrderController {
             return clientOrderService.saveCartOrder(goodsCode,orderSum,cartCode,orderMoney,storeCode);
         }catch (Exception e){
             logger.error("新增订单失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 新增评价   json格式
+     * @param appraiseOrderInfo
+     * @return
+     */
+    @PostMapping("saveAppraise")
+    public AppResponse saveAppraise(@RequestBody AppraiseOrderInfo appraiseOrderInfo){
+        try{
+            String userCode = SecurityUtils.getCurrentUserId();
+            appraiseOrderInfo.setCreateName(userCode);
+            appraiseOrderInfo.setUserCode(userCode);
+            return clientOrderService.saveAppraise(appraiseOrderInfo);
+        }catch (Exception e){
+            logger.error("评价失败");
             System.out.println(e.toString());
             throw e;
         }

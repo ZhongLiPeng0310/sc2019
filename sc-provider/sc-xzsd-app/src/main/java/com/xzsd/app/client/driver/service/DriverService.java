@@ -23,7 +23,7 @@ public class DriverService {
      * @return
      */
     public AppResponse getStoreByDriver(UserInfo userInfo) {
-        UserInfo driverMessage = driverDao.getStoreByDriver(userInfo);
+        List<UserInfo> driverMessage = driverDao.getStoreByDriver(userInfo);
         return AppResponse.success("查询成功！",driverMessage);
     }
 

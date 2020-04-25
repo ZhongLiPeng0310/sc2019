@@ -11,7 +11,7 @@
         a.publisher publisher,
         a.author author,
         a.sale_price salePrice,
-        a.a_level appraiseLevel,
+        ROUND(a.a_level,1) appraiseLevel,
         a.create_time createTime,
         a.create_name createName,
         a.update_time updateTime,

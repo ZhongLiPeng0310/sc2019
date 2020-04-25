@@ -1,9 +1,6 @@
 package com.xzsd.app.client.clientOrder.dao;
 
-import com.xzsd.app.client.clientOrder.entity.CartOrderInfo;
-import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
-import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
-import com.xzsd.app.client.clientOrder.entity.ImageInfo;
+import com.xzsd.app.client.clientOrder.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.access.method.P;
@@ -114,14 +111,6 @@ public interface ClientOrderDao {
      */
     List<Integer> countSumSale(@Param("listGoods")List<String> listGoods);
 
-//    /**
-//     * 修改下单商品的销售量
-//     * @author zhong
-//     * @date 2020-04-24
-//     * @param cartOrderInfoList
-//     * @return
-//     */
-//    int updateSumSales(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
     /**
      * 更新下单商品的库存和销量
      * @author zhong
@@ -131,4 +120,27 @@ public interface ClientOrderDao {
      */
     int updateGoodsStock(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
 
+    /**
+     * 新增评价  json
+     * @param appraiseOrderInfo
+     * @return
+     */
+    int saveAppraise(AppraiseOrderInfo appraiseOrderInfo);
+
+    /**
+     * 更新商品的星级
+     * @author zhong
+     * @date 2020-04-25
+     * @param appraiseOrderInfo
+     * @return
+     */
+    int updateLevel(AppraiseOrderInfo appraiseOrderInfo);
+    /**
+     * 查询当前评价商品的星级
+     * @author zhong
+     * @date 2020-04-25
+     * @param appraiseOrderInfo
+     * @return
+     */
+    List<String> countGoodsLevel(AppraiseOrderInfo appraiseOrderInfo);
 }

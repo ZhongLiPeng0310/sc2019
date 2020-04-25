@@ -15,6 +15,10 @@ public class GoodsInfo {
      */
     private String goodsName;
     /**
+     * 商品平均星级
+     */
+    private String avgLevel;
+    /**
      * 成本价
      */
     private float costPrice;
@@ -251,5 +255,13 @@ public class GoodsInfo {
 
     public void setOrderSum(int orderSum) {
         this.orderSum = orderSum;
+    }
+
+    public String getAvgLevel() {
+        return avgLevel;
+    }
+
+    public void setAvgLevel(String avgLevel) {
+        this.avgLevel = avgLevel;
     }
 }

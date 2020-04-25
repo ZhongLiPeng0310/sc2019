@@ -6,10 +6,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.xzsd.app.client.clientOrder.dao.ClientOrderDao;
-import com.xzsd.app.client.clientOrder.entity.CartOrderInfo;
-import com.xzsd.app.client.clientOrder.entity.ClientOrderInfo;
-import com.xzsd.app.client.clientOrder.entity.GoodsAppraiseInfo;
-import com.xzsd.app.client.clientOrder.entity.ImageInfo;
+import com.xzsd.app.client.clientOrder.entity.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -177,5 +174,38 @@ public class ClientOrderService {
 //            int updateSumSale = clientOrderDao.updateSumSales(cartOrderInfoList);
             return AppResponse.success("新增成功！");
         }
+    }
+
+    /**
+     * 新增评价  json格式
+     * @author zhong
+     * @date 2020-04-25
+    * @param appraiseOrderInfo
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse saveAppraise(AppraiseOrderInfo appraiseOrderInfo) {
+        String userCode = SecurityUtils.getCurrentUserId();
+        List<String> listGoods = new ArrayList<>();
+        for (int i = 0; i < appraiseOrderInfo.getAppraiseInfoList().size(); i++){
+            //设置评价信息
+            appraiseOrderInfo.getAppraiseInfoList().get(i).setAppraiseCode(StringUtil.getCommonCode(2));
+            appraiseOrderInfo.getAppraiseInfoList().get(i).setCreateName(userCode);
+            appraiseOrderInfo.getAppraiseInfoList().get(i).setIsDeleted(0);
+        }
+        //新增评价
+        int saveAppraise = clientOrderDao.saveAppraise(appraiseOrderInfo);
+        //查询评价的商品的星级
+        List<String> level = clientOrderDao.countGoodsLevel(appraiseOrderInfo);
+        for (int i = 0; i < appraiseOrderInfo.getAppraiseInfoList().size(); i++){
+            appraiseOrderInfo.getAppraiseInfoList().get(i).setGoodsCode(appraiseOrderInfo.getAppraiseInfoList().get(i).getGoodsCode());
+            appraiseOrderInfo.getAppraiseInfoList().get(i).setAvgLevel(level.get(i));
+        }
+        //更新商品的评价等级
+        int updateGoodsLevel = clientOrderDao.updateLevel(appraiseOrderInfo);
+        if (0 == saveAppraise ||0 ==updateGoodsLevel){
+            return AppResponse.bizError("评价失败");
+        }
+        return AppResponse.success("评价成功！");
     }
 }
