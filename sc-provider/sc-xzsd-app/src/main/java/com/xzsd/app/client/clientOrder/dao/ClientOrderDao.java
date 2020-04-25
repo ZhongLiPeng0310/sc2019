@@ -106,15 +106,6 @@ public interface ClientOrderDao {
     List<Integer> countGoodsStock(@Param("listGoods")List<String> listGoods);
 
     /**
-     * 更新下单商品的库存
-     * @author zhong
-     * @date 2020-04-24
-     * @param cartOrderInfoList
-     * @return
-     */
-    int updateGoodsStock(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
-
-    /**
      * 查询下单商品的当前销售量
      * @author zhong
      * @date 2020-04-24
@@ -123,14 +114,21 @@ public interface ClientOrderDao {
      */
     List<Integer> countSumSale(@Param("listGoods")List<String> listGoods);
 
+//    /**
+//     * 修改下单商品的销售量
+//     * @author zhong
+//     * @date 2020-04-24
+//     * @param cartOrderInfoList
+//     * @return
+//     */
+//    int updateSumSales(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
     /**
-     * 修改下单商品的销售量
+     * 更新下单商品的库存和销量
      * @author zhong
      * @date 2020-04-24
      * @param cartOrderInfoList
      * @return
      */
-    int updateSumSales(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
-
+    int updateGoodsStock(@Param("cartOrderInfoList")List<CartOrderInfo> cartOrderInfoList);
 
 }

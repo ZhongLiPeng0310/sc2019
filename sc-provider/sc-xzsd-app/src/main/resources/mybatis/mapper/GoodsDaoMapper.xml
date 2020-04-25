@@ -57,13 +57,21 @@
         a.is_deleted = 0
         and
         a.goods_code = #{goodsCode}
-        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 1 and appraiseLevel == 2">
-            and a.a_level = 1
-            and a.a_level = 2
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 1 ">
+            and (a.a_level = 1
+            or a.a_level = 2)
         </if>
-        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 3 and appraiseLevel == 4">
-            and a.a_level = 3
-            and a.a_level = 4
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 2">
+            and (a.a_level = 1
+            or a.a_level = 2)
+        </if>
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 3">
+            and (a.a_level = 3
+            or a.a_level = 4)
+        </if>
+        <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 4">
+            and (a.a_level = 3
+            or a.a_level = 4)
         </if>
         <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 5">
             and a.a_level = 5

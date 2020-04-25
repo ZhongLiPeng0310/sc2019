@@ -216,7 +216,6 @@
         0
         )
     </insert>
-
     <!--新增订单到订单详情表-->
     <insert id="saveCartOrderDetail" useGeneratedKeys="true" parameterType="java.util.List">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
@@ -253,6 +252,7 @@
             )
         </foreach>
     </insert>
+
     <!--删除对应商品的购物车-->
     <update id="updateCartGoods" parameterType="com.xzsd.app.client.clientOrder.entity.CartOrderInfo">
         update t_cart
@@ -266,6 +266,7 @@
             #{item}
         </foreach>
     </update>
+
     <!--查询当前下单商品的库存-->
     <select id="countGoodsStock" parameterType="java.util.List" resultType="java.lang.Integer">
         select
@@ -278,16 +279,6 @@
             #{item}
         </foreach>
     </select>
-    <!--更新商品库存-->
-    <update id="updateGoodsStock" parameterType="java.util.List">
-        <foreach item="item" collection="cartOrderInfoList" separator=";" >
-        update t_goods
-        set
-        stock = #{item.stock} - #{item.orderSum}
-        where goods_code = #{item.goodsCode}
-        </foreach>
-    </update>
-
     <!--查询下单商品当前的销售量-->
     <select id="countSumSale" parameterType="java.util.List" resultType="java.lang.Integer">
         select
@@ -300,13 +291,24 @@
             #{item}
         </foreach>
     </select>
-    <!--更新商品销售量-->
-    <update id="updateSumSales" parameterType="java.util.List">
+
+    <!--更新商品库存和销量-->
+    <update id="updateGoodsStock" parameterType="java.util.List">
         <foreach item="item" collection="cartOrderInfoList" separator=";" >
             update t_goods
             set
-            stock = #{item.sumSale} + #{item.orderSum}
+            stock = #{item.stock} - #{item.orderSum},
+            sum_sale = #{item.sumSale} + #{item.orderSum}
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
+<!--    &lt;!&ndash;更新商品销售量&ndash;&gt;-->
+<!--    <update id="updateSumSales" parameterType="java.util.List">-->
+<!--        <foreach item="item" collection="cartOrderInfoList" separator=";" >-->
+<!--            update t_goods-->
+<!--            set-->
+<!--            sum_sale = #{item.sumSale} + #{item.orderSum}-->
+<!--            where goods_code = #{item.goodsCode}-->
+<!--        </foreach>-->
+<!--    </update>-->
 </mapper>

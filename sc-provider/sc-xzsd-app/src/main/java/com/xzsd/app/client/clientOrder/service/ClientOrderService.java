@@ -170,10 +170,10 @@ public class ClientOrderService {
         }else{
             //新增订单后删除购物车中的商品
             int updateCartGoods = clientOrderDao.updateCartGoods(listCart,userId);
-            //修改下单商品的库存
+            //修改下单商品的库存和销量
             int updateGoodsStock = clientOrderDao.updateGoodsStock(cartOrderInfoList);
-            //修改下单商品的销售量
-            int updateSumSale = clientOrderDao.updateSumSales(cartOrderInfoList);
+//            //修改下单商品的销售量
+//            int updateSumSale = clientOrderDao.updateSumSales(cartOrderInfoList);
             return AppResponse.success("新增成功！");
         }
     }
