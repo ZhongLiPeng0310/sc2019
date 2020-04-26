@@ -36,7 +36,9 @@ public class HomePageService {
      * @return
      */
     public AppResponse getHotGoods(HotGoodsInfo hotGoodsInfo) {
-        List<HotGoodsInfo> hotGoodsInfoList = homePageDao.getHotGoods(hotGoodsInfo);
+        //查询展示数量
+        int showNo = homePageDao.getShowNo();
+        List<HotGoodsInfo> hotGoodsInfoList = homePageDao.getHotGoods(showNo);
         return AppResponse.success("查询成功！",hotGoodsInfoList);
     }
 }

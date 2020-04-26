@@ -43,4 +43,15 @@
         LIMIT
         0,#{showNo}
     </select>
+    <!--查询展示数量-->
+    <select id="getShowNo" resultType="java.lang.Integer">
+        select
+        a.show_no showNo
+        from
+        t_dictionary a
+        where
+        a.type = 4
+        and
+        a.is_deleted = 0
+    </select>
 </mapper>
