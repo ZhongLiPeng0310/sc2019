@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.hotGoods.dao.HotGoodsDao">
 
-    <!--检验商品是否已存在轮播图-->
+    <!--检验商品是否已存在热门商品-->
     <select id="countGoods" parameterType="com.xzsd.pc.hotGoods.entity.HotGoodsInfo" resultType="int">
         select count(goods_code)
         from t_hot_goods
@@ -82,7 +82,7 @@
         <if test="goodsCode != null and goodsCode != ''">
             and a.goods_code like concat('%', #{goodsCode}, '%')
         </if>
-        order by a.create_time desc
+        order by a.hot_sort Asc
     </select>
 
     <!--删除热门商品-->

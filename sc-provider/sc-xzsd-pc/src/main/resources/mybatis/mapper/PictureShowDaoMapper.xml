@@ -84,7 +84,7 @@
         <if test="showState != null and showState != ''">
             and a.show_state like concat('%', #{showState}, '%')
         </if>
-        order by a.create_time desc
+        order by a.sort_no Asc
 
     </select>
 
