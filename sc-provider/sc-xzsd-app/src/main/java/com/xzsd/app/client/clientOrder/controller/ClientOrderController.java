@@ -32,14 +32,13 @@ public class ClientOrderController {
      * 客户端修改订单状态
      * @author zhong
      * @date 2020-04-21
-     * @param orderCode
+     * @param clientOrderInfo
      * @return
      */
     @PostMapping("updateOrderState")
-    private AppResponse updateOrderState(String orderCode,int orderState){
+    private AppResponse updateOrderState(ClientOrderInfo clientOrderInfo){
         try {
-            String userId = SecurityUtils.getCurrentUserId();
-            return clientOrderService.updateOrderState(orderCode,orderState,userId);
+            return clientOrderService.updateOrderState(clientOrderInfo);
         }catch (Exception e){
             logger.error("修改订单状态失败",e);
             System.out.println(e.toString());

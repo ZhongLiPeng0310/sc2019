@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -26,15 +25,34 @@ public class ClientOrderService {
      * 客户端修改订单状态
      * @author zhong
      * @date 2020-04-21
-     * @param orderCode
+     * @param clientOrderInfo
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateOrderState(String orderCode, int orderState, String userId) {
+    public AppResponse updateOrderState(ClientOrderInfo clientOrderInfo) {
+        String userId = SecurityUtils.getCurrentUserId();
+        clientOrderInfo.setUserId(userId);
         //修改订单状态
-        int updateOrderState = clientOrderDao.updateOrderState(orderCode,orderState,userId);
+        int updateOrderState = clientOrderDao.updateOrderState(clientOrderInfo);
+        if (clientOrderInfo.getOrderState() == 9){
+            //查询订单的商品编码 购买数量 商品的库存
+            List<ClientOrderInfo> clientOrderInfoList = clientOrderDao.getOrder(clientOrderInfo.getOrderCode());
+            //修改商品库存
+            int updateStock = clientOrderDao.updateStock(clientOrderInfoList);
+            if (0 == updateStock){
+                return AppResponse.bizError("数据无变化，请重试！");
+            }
+        }else if (clientOrderInfo.getOrderState() == 5){
+            //查询订单的商品编码 购买数量 商品的库存
+            List<ClientOrderInfo> clientOrderInfoList = clientOrderDao.getOrder(clientOrderInfo.getOrderCode());
+            //修改商品库存
+            int updateStock = clientOrderDao.updateSumSale(clientOrderInfoList);
+            if (0 == updateStock){
+                return AppResponse.bizError("数据无变化，请重试！");
+            }
+        }
         if (0 == updateOrderState){
-            return AppResponse.bizError("修改失败！");
+            return AppResponse.bizError("数据无变化，请重试！");
         }
         return AppResponse.success("修改成功！");
     }
@@ -87,12 +105,10 @@ public class ClientOrderService {
         int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfoList);
         //更新商品的评价等级
         int updateGoodsLevel = clientOrderDao.updateGoodsLevel(goodsAppraiseInfoList);
-//        //新增评价图片
-//        int addImage = clientOrderDao.addImages(imageInfoList);
         if (0 == saveOrdersAppraise){
-            return AppResponse.bizError("新增失败！");
+            return AppResponse.bizError("评价失败！");
         }
-        return AppResponse.success("新增成功！");
+            return AppResponse.success("评价成功！");
     }
 
     /**
@@ -135,8 +151,8 @@ public class ClientOrderService {
                 return AppResponse.bizError("新增失败！商品库存不足");
             }
         }
-        //查询当前下单商品的销售量
-        List<Integer> countSumSale = clientOrderDao.countSumSale(listGoods);
+//        //查询当前下单商品的销售量
+//        List<Integer> countSumSale = clientOrderDao.countSumSale(listGoods);
         String userId = SecurityUtils.getCurrentUserId();
         //生成订单编码
         String orderCode = StringUtil.getCommonCode(2);
@@ -151,14 +167,13 @@ public class ClientOrderService {
             orderInfo.setCartCode(listCart.get(i));
             orderInfo.setGoodsCode(listGoods.get(i));
             orderInfo.setOrderSum(Integer.parseInt(listSum.get(i)));
-            orderInfo.setSumSale(countSumSale.get(i));
+//            orderInfo.setSumSale(countSumSale.get(i));
             orderInfo.setStock(countGoodsStock.get(i));
             orderInfo.setIsDeleted(0);
             orderInfo.setCreateTime(new Date());
             orderInfo.setVersion(0);
             cartOrderInfoList.add(orderInfo);
         }
-
         //新增订单到订单表
         int saveCartOrder = clientOrderDao.saveCartOrder(orderCode,userId,orderMoney,storeCode,sumGoods);
         //新增订单到订单详情表
@@ -168,10 +183,8 @@ public class ClientOrderService {
         }else{
             //新增订单后删除购物车中的商品
             int updateCartGoods = clientOrderDao.updateCartGoods(listCart,userId);
-            //修改下单商品的库存和销量
+            //修改下单商品的库存
             int updateGoodsStock = clientOrderDao.updateGoodsStock(cartOrderInfoList);
-//            //修改下单商品的销售量
-//            int updateSumSale = clientOrderDao.updateSumSales(cartOrderInfoList);
             return AppResponse.success("新增成功！");
         }
     }

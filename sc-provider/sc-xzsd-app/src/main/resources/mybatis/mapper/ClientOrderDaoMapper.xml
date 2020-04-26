@@ -59,6 +59,8 @@
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
+
+
     <!--                                              订单                                    -->
     <!--修改客户端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
@@ -71,8 +73,40 @@
         where
         order_code = #{orderCode}
     </update>
+    <!--查询对应订单编码里的商品编码和商品的购买数量-->
+    <select id="getOrder" parameterType="java.lang.String" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
+        select
+        a.goods_code goodsCode,
+        a.order_sum orderSum,
+        b.stock stock,
+        b.sum_sale sumSale
+        from
+        t_order_detail a
+        LEFT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        where
+        a.order_code = #{orderCode}
+    </select>
+    <!--更新商品库存-->
+    <update id="updateStock" parameterType="java.util.List">
+        <foreach item="item" collection="clientOrderInfoList" separator=";" >
+            update t_goods
+            set
+            stock = #{item.stock} + #{item.orderSum}
+            where goods_code = #{item.goodsCode}
+        </foreach>
+    </update>
+    <!--更新商品销售量-->
+    <update id="updateSumSale" parameterType="java.util.List">
+        <foreach item="item" collection="clientOrderInfoList" separator=";" >
+            update t_goods
+            set
+            sum_sale = #{item.sumSale} + #{item.orderSum}
+            where goods_code = #{item.goodsCode}
+        </foreach>
+    </update>
 
-    <!--订单详情-->
+    <!--                                     订单详情                       -->
     <!--订单对应商品的Map-->
     <resultMap id="getOrderDetail" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
@@ -122,7 +156,7 @@
         a.order_code = #{orderCode}
     </select>
 
-    <!--订单列表-->
+    <!--                                                订单列表                                                          -->
     <!--客户查询订单列表-->
     <resultMap id="getOrdersList" type="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         <id property="orderCode" column="order_code" jdbcType="VARCHAR"/>
@@ -279,26 +313,13 @@
             #{item}
         </foreach>
     </select>
-    <!--查询下单商品当前的销售量-->
-    <select id="countSumSale" parameterType="java.util.List" resultType="java.lang.Integer">
-        select
-        sum_sale
-        from
-        t_goods
-        where
-        goods_code in
-        <foreach item="item" index="index" collection="listGoods" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
 
-    <!--更新商品库存和销量-->
+    <!--更新商品库存-->
     <update id="updateGoodsStock" parameterType="java.util.List">
         <foreach item="item" collection="cartOrderInfoList" separator=";" >
             update t_goods
             set
-            stock = #{item.stock} - #{item.orderSum},
-            sum_sale = #{item.sumSale} + #{item.orderSum}
+            stock = #{item.stock} - #{item.orderSum}
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>

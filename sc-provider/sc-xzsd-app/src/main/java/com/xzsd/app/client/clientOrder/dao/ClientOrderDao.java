@@ -14,13 +14,23 @@ public interface ClientOrderDao {
      * 修改订单状态
      * @date 2020-04-21
      * @author zhong
-     * @param orderState
-     * @param orderState
-     * @param userId
+     * @param clientOrderInfo
      * @return
      */
-    int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("userId") String userId);
+    int updateOrderState(ClientOrderInfo clientOrderInfo);
 
+    /**
+     * 查询订单的商品编码 购买数量 商品的库存
+     * @author zhong
+     * @date 2020-04-26
+     * @param orderCode
+     * @return
+     */
+    List<ClientOrderInfo> getOrder(@Param("orderCode") String orderCode);
+    //修改商品的库存
+    int updateStock(@Param("clientOrderInfoList") List<ClientOrderInfo> clientOrderInfoList);
+    //修改商品的销售量
+    int updateSumSale(@Param("clientOrderInfoList") List<ClientOrderInfo> clientOrderInfoList);
     /**
      * 客户查询订单列表
      * @author zhong
@@ -29,6 +39,7 @@ public interface ClientOrderDao {
      * @return
      */
     List<ClientOrderInfo> getOrdersList(ClientOrderInfo clientOrderInfo);
+
     /**
      * 客户端查询订单详情
      * @author zhong
@@ -38,7 +49,7 @@ public interface ClientOrderDao {
      */
     ClientOrderInfo getOrdersByCode(@Param("orderCode") String orderCode);
 
-    //-----订单评价
+    //-----订单评价-----------------------------------------------------------------------
     /**
      * 新增订单评价
      * @author zhong
@@ -64,7 +75,7 @@ public interface ClientOrderDao {
      */
     List<String> countLevel(@Param("listGoods")List<String> listGoods);
 
-    //----新增订单
+    //----新增订单--------------------------------------------------------------
     /**
      * 新增订单到订单表
      * @param orderCode
@@ -109,7 +120,7 @@ public interface ClientOrderDao {
      * @param listGoods
      * @return
      */
-    List<Integer> countSumSale(@Param("listGoods")List<String> listGoods);
+//    List<Integer> countSumSale(@Param("listGoods")List<String> listGoods);
 
     /**
      * 更新下单商品的库存和销量
@@ -143,4 +154,7 @@ public interface ClientOrderDao {
      * @return
      */
     List<String> countGoodsLevel(AppraiseOrderInfo appraiseOrderInfo);
+
+
+
 }

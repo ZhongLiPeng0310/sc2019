@@ -165,6 +165,12 @@ public class ClientOrderInfo {
      */
     private int pageNum;
 
+    /**
+     * 商品集合
+     * @return
+     */
+    private List<GoodsInfo> goodsInfoList;
+
     public String getOrderCode() {
         return orderCode;
     }
@@ -459,5 +465,13 @@ public class ClientOrderInfo {
 
     public void setSumSale(int sumSale) {
         this.sumSale = sumSale;
+    }
+
+    public List<GoodsInfo> getGoodsInfoList() {
+        return goodsInfoList;
+    }
+
+    public void setGoodsInfoList(List<GoodsInfo> goodsInfoList) {
+        this.goodsInfoList = goodsInfoList;
     }
 }
