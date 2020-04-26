@@ -24,8 +24,8 @@
         LEFT JOIN t_dictionary e
         on b.area_code = e.dic_code
         where a.is_deleted = 0
-        and b.city_code in
-        (select city_code from t_driver where user_code = #{userId})
+        and b.area_code in
+        (select area_code from t_driver where user_code = #{userId})
     </select>
     <!--查询司机信息-->
     <select id="getMyself" resultType="com.xzsd.app.client.customer.entity.UserInfo">

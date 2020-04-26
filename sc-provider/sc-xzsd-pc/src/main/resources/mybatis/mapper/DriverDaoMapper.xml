@@ -109,7 +109,7 @@
             and b.area_code like concat('%', #{areaCode}, '%')
         </if>
         <if test="role != null and role != '' and role == 3">
-            and b.city_code in (select city_code from t_store where user_code = #{userId})
+            and b.area_code in (select area_code from t_store where user_code = #{userId})
         </if>
         <if test="role != null and role != '' and role == 1">
             and a.is_deleted = 0
