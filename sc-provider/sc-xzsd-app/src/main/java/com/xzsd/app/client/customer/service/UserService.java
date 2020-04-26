@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 实现类
@@ -34,6 +35,13 @@ public class UserService {
         int countUsers = userDao.countUsers(userInfo);
         if (0 != countUsers){
             return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
+        }
+        //校验店铺邀请码是否存在
+        List<String> countInvite = userDao.countInvite();
+        for (int i = 0; i < countInvite.size(); i++){
+            if (userInfo.getInviteCode() != countInvite.get(i)){
+                return AppResponse.bizError("邀请码不存在，请重新输入");
+            }
         }
         // 密码加密 默认为123
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
@@ -95,6 +103,13 @@ public class UserService {
      * @return
      */
     public AppResponse updateInviteCode(UserInfo userInfo) {
+        //校验店铺邀请码是否存在
+        List<String> countInvite = userDao.countInvite();
+        for (int i = 0; i < countInvite.size(); i++){
+            if (userInfo.getInviteCode() != countInvite.get(i)){
+                return AppResponse.bizError("邀请码不存在，请重新输入");
+            }
+        }
         AppResponse appResponse = AppResponse.success("修改成功！");
         int updateCode = userDao.updateInviteCode(userInfo);
         if (0 == updateCode){

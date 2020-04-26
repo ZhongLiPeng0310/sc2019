@@ -24,7 +24,15 @@
         where user_code = #{userId}
         and is_deleted = 0
     </select>
-
+    <!--校验邀请码是否存在-->
+    <select id="countInvite" resultType="java.lang.String">
+        select
+        invite_code inviteCode
+        from
+        t_store
+        where
+        is_deleted = 0
+    </select>
     <!--注册用户-->
     <insert id="userRegister" parameterType="com.xzsd.app.client.customer.entity.UserInfo">
         insert into t_sys_user

@@ -4,6 +4,8 @@ package com.xzsd.app.client.customer.dao;
 import com.xzsd.app.client.customer.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * UsersDao
  * @author zhong
@@ -98,4 +100,13 @@ public interface UserDao {
      * @return
      */
     int updateInviteCode(UserInfo userInfo);
+
+    /**
+     * 校验邀请码
+     * @author zhong
+     * @date 2020-04-26
+     * @return
+     */
+    List<String> countInvite();
+
 }
