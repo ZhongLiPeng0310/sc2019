@@ -15,9 +15,11 @@
         where
         is_deleted = 0
         and
+        (now() between begin_time and end_time)
+        and
         show_state = 1
         order by
-        sort_no desc
+        sort_no Asc
     </select>
 
     <!--查询首页热门商品-->
@@ -37,6 +39,8 @@
         t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
-        order by a.hot_sort desc
+        order by a.hot_sort Asc
+        LIMIT
+        0,#{showNo}
     </select>
 </mapper>

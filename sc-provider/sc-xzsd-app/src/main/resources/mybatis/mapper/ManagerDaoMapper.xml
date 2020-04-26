@@ -37,7 +37,7 @@
         LEFT JOIN t_driver b
         on a.user_code = b.user_code
         where b.is_deleted = 0
-        and b.city_code in
-        (select city_code from t_store where user_code = #{userId})
+        and b.area_code in
+        (select area_code from t_store where user_code = #{userId})
     </select>
 </mapper>
