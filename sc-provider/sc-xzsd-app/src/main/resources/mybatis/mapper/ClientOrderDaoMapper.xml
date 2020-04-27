@@ -37,9 +37,10 @@
         </foreach>
     </insert>
     <!--查询商品的评价星级-->
-    <select id="countLevel" parameterType="java.util.List" resultType="java.lang.String">
+    <select id="countLevel" parameterType="java.util.List" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         select
-        avg(a_level)
+        avg(a_level) avgLevel,
+        goods_code goodsCode
         from
         t_goods_appraise
         where
@@ -52,7 +53,7 @@
     </select>
     <!--更新商品的评价星级-->
     <update id="updateGoodsLevel" parameterType="java.util.List">
-        <foreach item="item" collection="goodsAppraiseInfoList" separator=";" >
+        <foreach item="item" collection="levelList" separator=";" >
             update t_goods
             set
             a_level = #{item.avgLevel}

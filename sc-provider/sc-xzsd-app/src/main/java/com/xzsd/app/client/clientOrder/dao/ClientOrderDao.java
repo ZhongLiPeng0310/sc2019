@@ -62,10 +62,10 @@ public interface ClientOrderDao {
      * 更新商品的评价等级
      * @author zhong
      * @date 2020-04-24
-     * @param goodsAppraiseInfoList
+     * @param levelList
      * @return
      */
-    int updateGoodsLevel(@Param("goodsAppraiseInfoList")List<GoodsAppraiseInfo> goodsAppraiseInfoList);
+    int updateGoodsLevel(@Param("levelList") List<ClientOrderInfo> levelList);
     /**
      * 查询当前下单商品的评价等级
      * @author zhong
@@ -73,7 +73,7 @@ public interface ClientOrderDao {
      * @param listGoods
      * @return
      */
-    List<String> countLevel(@Param("listGoods")List<String> listGoods);
+    List<ClientOrderInfo> countLevel(@Param("listGoods") List<String> listGoods);
 
     //----新增订单--------------------------------------------------------------
     /**

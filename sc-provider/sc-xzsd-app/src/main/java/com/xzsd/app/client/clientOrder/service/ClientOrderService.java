@@ -83,15 +83,14 @@ public class ClientOrderService {
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listLevel = Arrays.asList(appraiseLevel.split(","));
         List<GoodsAppraiseInfo> goodsAppraiseInfoList = new ArrayList<GoodsAppraiseInfo>();
-        //查询评价的商品的星级
-        List<String> level = clientOrderDao.countLevel(listGoods);
+
         int number = listGoods.size();
         //根据页面传回来的数量插入
         for (int i = 0 ;i < number; i++){
             GoodsAppraiseInfo appraiseInfo = new GoodsAppraiseInfo();
             appraiseInfo.setAppraiseDetail(listDatail.get(i));
             appraiseInfo.setAppraiseLevel(listLevel.get(i));
-            appraiseInfo.setAvgLevel(level.get(i));
+//            appraiseInfo.setAvgLevel(level.get(i));
             appraiseInfo.setGoodsCode(listGoods.get(i));
             appraiseInfo.setOrderCode(orderCode);
             appraiseInfo.setUserId(userId);
@@ -103,8 +102,10 @@ public class ClientOrderService {
         }
         //新增评价
         int saveOrdersAppraise = clientOrderDao.saveOrdersAppraise(goodsAppraiseInfoList);
+        //查询评价的商品的星级
+        List<ClientOrderInfo> levelList = clientOrderDao.countLevel(listGoods);
         //更新商品的评价等级
-        int updateGoodsLevel = clientOrderDao.updateGoodsLevel(goodsAppraiseInfoList);
+        int updateGoodsLevel = clientOrderDao.updateGoodsLevel(levelList);
         if (0 == saveOrdersAppraise){
             return AppResponse.bizError("评价失败！");
         }

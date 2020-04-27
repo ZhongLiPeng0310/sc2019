@@ -74,6 +74,10 @@ public class ClientOrderInfo {
      */
     private String goodsName;
     /**
+     * 商品的平均星级
+     */
+    private String avgLevel;
+    /**
      * 当前商品的库存
      */
     private int stock;
@@ -473,5 +477,13 @@ public class ClientOrderInfo {
 
     public void setGoodsInfoList(List<GoodsInfo> goodsInfoList) {
         this.goodsInfoList = goodsInfoList;
+    }
+
+    public String getAvgLevel() {
+        return avgLevel;
+    }
+
+    public void setAvgLevel(String avgLevel) {
+        this.avgLevel = avgLevel;
     }
 }
