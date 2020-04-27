@@ -56,10 +56,6 @@ public class UserController {
     @PostMapping("updateUserPassword")
     public AppResponse updateUserPassword(UserInfo userInfo) {
         try {
-            //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            userInfo.setUpdateName(userId);
-            userInfo.setUserCode(userId);
             return userService.updateUserPassword(userInfo);
         } catch (Exception e) {
             logger.error("修改异常", e);

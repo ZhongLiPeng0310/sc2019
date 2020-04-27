@@ -48,6 +48,13 @@ public interface UserDao {
      * @return
      */
     int updateUser(UserInfo userInfo);
+    /**
+     * 获取当前密码
+     * @author zhong
+     * @date 2020-04-27
+     * @return
+     */
+    UserInfo getUser(@Param("userCode") String userCode);
 
     /**
      * 查询用户信息
@@ -75,4 +82,8 @@ public interface UserDao {
      * @return
      */
     UserInfo getUserUrl(UserInfo userInfo);
+
+
+
+
 }

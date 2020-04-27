@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.neusoft.webauth.users.dao.UserDao;
 import com.neusoft.webauth.users.entity.UserInfo;
@@ -95,20 +96,31 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUser(UserInfo userInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
-        userInfo.setUserPassword(password);
-        //检验用户账号和手机号码是否存在
-        int countUsers = userDao.countUsers(userInfo);
-        if (0 != countUsers){
-            return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
-        }
-        // 修改用户信息
-        int count = userDao.updateUser(userInfo);
-        if (0 == count) {
-            appResponse = AppResponse.versionError("数据有变化，请刷新！");
+            //修改密码
+            //获取用户id
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUserCode(userId);
+            String oldPassword = userInfo.getUserPassword();
+            //原密码已加密 需要校验密码是否改动
+            UserInfo user = userDao.getUser(userInfo.getUserCode());
+            if(PasswordUtils.Password(oldPassword,user.getUserPassword())) {
+                userInfo.setUserPassword(oldPassword);
+            }else {
+                String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
+                userInfo.setUserPassword(password);
+            }
+            //检验用户账号和手机号码是否存在
+            int countUsers = userDao.countUsers(userInfo);
+            if (0 != countUsers){
+                return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
+            }
+            // 修改用户信息
+            int count = userDao.updateUser(userInfo);
+            if (0 == count) {
+                appResponse = AppResponse.versionError("数据有变化，请刷新！");
+                return appResponse;
+            }
             return appResponse;
-        }
-        return appResponse;
     }
 
     /**

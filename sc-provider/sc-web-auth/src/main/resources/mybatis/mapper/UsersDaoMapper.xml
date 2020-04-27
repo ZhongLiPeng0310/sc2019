@@ -99,6 +99,14 @@
         </foreach>
     </update>
 
+    <select id="getUser" parameterType="java.lang.String" resultType="com.xzsd.app.client.customer.entity.UserInfo">
+        select
+        user_password userPassword
+        from
+        t_sys_user
+        where
+        user_code = #{userCode}
+    </select>
     <!--修改用户信息-->
     <update id="updateUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
         update t_sys_user

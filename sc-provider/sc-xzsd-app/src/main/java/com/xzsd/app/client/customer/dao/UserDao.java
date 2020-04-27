@@ -3,6 +3,7 @@ package com.xzsd.app.client.customer.dao;
 
 import com.xzsd.app.client.customer.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -73,7 +74,14 @@ public interface UserDao {
      * @return
      */
     UserInfo getUserById(String userCode);
-
+    /**
+     * 获取用户密码
+     * @author zhong
+     * @date 2020-04-16
+     * @param userCode
+     * @return
+     */
+    UserInfo getUser(@Param("userCode") String userCode);
     /**
      * 修改密码
      * @author zhong
@@ -101,12 +109,17 @@ public interface UserDao {
      */
     int updateInviteCode(UserInfo userInfo);
 
+
+
+
     /**
      * 校验邀请码
      * @author zhong
      * @date 2020-04-26
      * @return
      */
-    List<String> countInvite();
+    int countInvite(@Param("inviteCode") String inviteCode);
+
+
 
 }

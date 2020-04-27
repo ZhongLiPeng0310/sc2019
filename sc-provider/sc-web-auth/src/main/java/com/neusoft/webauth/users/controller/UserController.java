@@ -98,7 +98,7 @@ public class UserController {
     public AppResponse updateUser(UserInfo userInfo) {
         try {
             //获取用户id
-            String userId = AuthUtils.getCurrentUserId();
+            String userId = SecurityUtils.getCurrentUserId();
             userInfo.setUpdateName(userId);
             return userService.updateUser(userInfo);
         } catch (Exception e) {

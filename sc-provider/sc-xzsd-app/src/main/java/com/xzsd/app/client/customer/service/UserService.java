@@ -36,10 +36,11 @@ public class UserService {
         if (0 != countUsers){
             return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
-        //校验店铺邀请码是否存在
-        List<String> countInvite = userDao.countInvite();
-        for (int i = 0; i < countInvite.size(); i++){
-            if (userInfo.getInviteCode() != countInvite.get(i)){
+        if(null != userInfo.getInviteCode() && !"".equals(userInfo.getInviteCode())) {
+            //校验店铺邀请码是否存在
+            String inviteCode =  userInfo.getInviteCode();
+            int countInvite = userDao.countInvite(inviteCode);
+            if (0 == countInvite) {
                 return AppResponse.bizError("邀请码不存在，请重新输入");
             }
         }
@@ -69,8 +70,14 @@ public class UserService {
         AppResponse appResponse = AppResponse.success("修改密码成功！");
         // 需要校验原密码是否正确
         if(null != userInfo.getUserPassword() && !"".equals(userInfo.getUserPassword())) {
-            String userPassword = PasswordUtils.generatePassword(userInfo.getUserPassword());
-                if(PasswordUtils.Password(userPassword,userInfo.getUserPassword())) {
+                //获取用户id
+                String userId = SecurityUtils.getCurrentUserId();
+                userInfo.setUpdateName(userId);
+                userInfo.setUserCode(userId);
+                String oldPassword = userInfo.getUserPassword();
+                //原密码已加密
+                UserInfo user = userDao.getUser(userInfo.getUserCode());
+                if(!PasswordUtils.Password(oldPassword,user.getUserPassword())) {
                     return AppResponse.bizError("原密码不匹配，请重新输入！");
                 }
         }
@@ -104,11 +111,10 @@ public class UserService {
      */
     public AppResponse updateInviteCode(UserInfo userInfo) {
         //校验店铺邀请码是否存在
-        List<String> countInvite = userDao.countInvite();
-        for (int i = 0; i < countInvite.size(); i++){
-            if (userInfo.getInviteCode() != countInvite.get(i)){
-                return AppResponse.bizError("邀请码不存在，请重新输入");
-            }
+        String inviteCode =  userInfo.getInviteCode();
+        int countInvite = userDao.countInvite(inviteCode);
+        if (0 == countInvite) {
+            return AppResponse.bizError("邀请码不存在，请重新输入");
         }
         AppResponse appResponse = AppResponse.success("修改成功！");
         int updateCode = userDao.updateInviteCode(userInfo);
