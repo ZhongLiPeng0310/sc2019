@@ -97,15 +97,14 @@ public class UserService {
     public AppResponse updateUser(UserInfo userInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
             //修改密码
-            //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            userInfo.setUserCode(userId);
+            //当前在页面上的密码
             String oldPassword = userInfo.getUserPassword();
-            //原密码已加密 需要校验密码是否改动
+            //获取用户的原密码已加密 需要校验密码是否改动
             UserInfo user = userDao.getUser(userInfo.getUserCode());
-            if(PasswordUtils.Password(oldPassword,user.getUserPassword())) {
+            //校验原密码和显示密码是否相同
+            if(oldPassword.equals(user.getUserPassword())) {
                 userInfo.setUserPassword(oldPassword);
-            }else {
+            }else{
                 String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
                 userInfo.setUserPassword(password);
             }

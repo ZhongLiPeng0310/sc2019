@@ -99,7 +99,8 @@
         </foreach>
     </update>
 
-    <select id="getUser" parameterType="java.lang.String" resultType="com.xzsd.app.client.customer.entity.UserInfo">
+    <!--获取用户的密码-->
+    <select id="getUser" parameterType="java.lang.String" resultType="com.neusoft.webauth.users.entity.UserInfo">
         select
         user_password userPassword
         from
