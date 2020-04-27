@@ -45,7 +45,7 @@ public class ClientOrderService {
         }else if (clientOrderInfo.getOrderState() == 5){
             //查询订单的商品编码 购买数量 商品的库存
             List<ClientOrderInfo> clientOrderInfoList = clientOrderDao.getOrder(clientOrderInfo.getOrderCode());
-            //修改商品库存
+            //修改商品销售量
             int updateStock = clientOrderDao.updateSumSale(clientOrderInfoList);
             if (0 == updateStock){
                 return AppResponse.bizError("数据无变化，请重试！");
