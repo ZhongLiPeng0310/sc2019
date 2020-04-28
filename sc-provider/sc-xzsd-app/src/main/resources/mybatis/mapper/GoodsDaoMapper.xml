@@ -4,23 +4,21 @@
     <!--app查询商品详情-->
     <select id="getGoods" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsInfo">
         select
-        a.goods_name goodsName,
-        a.stock stock,
-        a.imageurl imagePath,
-        a.goods_introduce goodsIntroduce,
-        a.publisher publisher,
-        a.author author,
-        a.sale_price salePrice,
-        ROUND(a.a_level,1) appraiseLevel,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
-        from
-        t_goods a
-        where
-        a.is_deleted = 0
+            a.goods_name goodsName,
+            a.stock stock,
+            a.imageurl imagePath,
+            a.goods_introduce goodsIntroduce,
+            a.publisher publisher,
+            a.author author,
+            a.sale_price salePrice,
+            ROUND(a.a_level,1) appraiseLevel,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
+        from t_goods a
+        where a.is_deleted = 0
         and a.goods_code = #{goodsCode}
     </select>
 
@@ -41,22 +39,17 @@
     </resultMap>
     <select id="getGoodsAppraise" parameterType="com.xzsd.app.goods.entity.GoodsAppraiseInfo" resultMap="selectAppraise">
         select
-        a.appraise_code,
-        b.user_acct,
-        a.appraise_detail,
-        a.a_level,
-        a.user_code,
-        a.create_time
-        from
-        t_goods_appraise a
-        LEFT JOIN
-        t_sys_user b
-        on
-        a.user_code = b.user_code
-        where
-        a.is_deleted = 0
-        and
-        a.goods_code = #{goodsCode}
+            a.appraise_code,
+            b.user_acct,
+            a.appraise_detail,
+            a.a_level,
+            a.user_code,
+            a.create_time
+        from t_goods_appraise a
+        LEFT JOIN t_sys_user b
+        on a.user_code = b.user_code
+        where a.is_deleted = 0
+        and a.goods_code = #{goodsCode}
         <if test="appraiseLevel != null and appraiseLevel != '' and appraiseLevel == 1 ">
             and (a.a_level = 1
             or a.a_level = 2)
@@ -93,14 +86,12 @@
     <!--查询商品一级分类列表-->
     <select id="getFirstClass" parameterType="com.xzsd.app.goods.entity.GoodsClassInfo" resultType="com.xzsd.app.goods.entity.GoodsClassInfo">
         select
-        a.class_name classFirstName,
-        a.class_code classFirstCode,
-        a.version version
-        from
-        t_goods_class a
+            a.class_name classFirstName,
+            a.class_code classFirstCode,
+            a.version version
+        from t_goods_class a
         where a.is_deleted = 0
-        and
-        a.last_class_code is null
+        and a.last_class_code is null
         order by create_time desc
     </select>
 
@@ -118,19 +109,17 @@
     <!--查询商品二级分类和商品-->
     <select id="getSecondClass" resultMap="getSecondClass">
         select
-        a.class_name,
-        a.class_code,
-        b.goods_code goodsCode,
-        b.goods_name goodsName,
-        b.imageurl imageUrl,
-        b.sale_price salePrice
-        from
-        t_goods_class a
+            a.class_name,
+            a.class_code,
+            b.goods_code goodsCode,
+            b.goods_name goodsName,
+            b.imageurl imageUrl,
+            b.sale_price salePrice
+        from t_goods_class a
         LEFT JOIN t_goods b
         on a.class_code = b.class_second_code
         where a.is_deleted = 0
-        and
-        a.last_class_code = #{lastClassCode}
+        and a.last_class_code = #{lastClassCode}
         order by
         b.create_time desc
     </select>
