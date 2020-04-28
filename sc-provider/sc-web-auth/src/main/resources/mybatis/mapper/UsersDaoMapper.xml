@@ -51,21 +51,21 @@
     <!--查询用户列表-->
     <select id="listUsersByPage" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="com.neusoft.webauth.users.entity.UserInfo">
         select
-        a.user_code userCode,
-        a.user_acct userAcct,
-        a.user_password userPassword,
-        a.user_name userName,
-        a.sex sex,
-        a.phone phone,
-        a.email email,
-        a.id_card idCard,
-        a.role role,
-        a.image_path imagePath,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.user_code userCode,
+            a.user_acct userAcct,
+            a.user_password userPassword,
+            a.user_name userName,
+            a.sex sex,
+            a.phone phone,
+            a.email email,
+            a.id_card idCard,
+            a.role role,
+            a.image_path imagePath,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from t_sys_user a
         where a.is_deleted = 0
         and
@@ -105,8 +105,7 @@
     <select id="getUser" parameterType="java.lang.String" resultType="com.neusoft.webauth.users.entity.UserInfo">
         select
         user_password userPassword
-        from
-        t_sys_user
+        from t_sys_user
         where
         user_code = #{userCode}
     </select>
@@ -156,13 +155,11 @@
     <!--获取顶部导航栏-->
     <select id="getUserUrl" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="com.neusoft.webauth.users.entity.UserInfo">
         select
-        user_code userCode,
-        user_name userName,
-        image_path imagePath,
-        role role
-        from
-        t_sys_user
-        where
-        user_code = #{userId}
+            user_code userCode,
+            user_name userName,
+            image_path imagePath,
+            role role
+        from t_sys_user
+        where user_code = #{userId}
     </select>
 </mapper>
