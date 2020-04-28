@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * @DescriptionDemo 实现类
+ * @classname GoodsService
  * @Author zhong
  * @Date 2020-03-24
  */
@@ -42,9 +43,7 @@ public class GoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveGoods(GoodsInfo goodsInfo) {
-        /**
-         * 随机生成商品编码
-         */
+         // 随机生成商品编码
         goodsInfo.setGoodsCode(StringUtil.getCommonCode(2));
         goodsInfo.setIsDeleted(0);
         // 校验新增商品时，isbn书号是否已存在
@@ -109,7 +108,6 @@ public class GoodsService {
     public AppResponse deleteGoods(String goodsCode,String userId){
         List<String> listCode = Arrays.asList(goodsCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-
         //获取轮播图和热门商品的list
         List<String> goodsCodeList = goodsDao.listHotShow(listCode);
         //排除处于轮播图和热门商品的商品编码
@@ -143,7 +141,7 @@ public class GoodsService {
         //修改商品上架下架
         int updateState = goodsDao.updateGoodsState(listCode,goodsState,listVersion,userId);
         if (0 == updateState){
-            appResponse = AppResponse.bizError("修改失败，请重试！");
+            appResponse = AppResponse.bizError("数据有变化，请刷新！");
         }
         return appResponse;
     }

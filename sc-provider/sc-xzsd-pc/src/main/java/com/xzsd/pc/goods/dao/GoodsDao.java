@@ -25,7 +25,7 @@ import java.util.List;
 public interface GoodsDao {
     /**
      * 新增商品
-     * @param goodsInfo 用户信息
+     * @param goodsInfo 商品信息
      * @return
      */
     int saveGoods(GoodsInfo goodsInfo);
