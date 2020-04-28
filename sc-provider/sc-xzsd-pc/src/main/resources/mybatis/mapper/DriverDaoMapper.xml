@@ -93,8 +93,8 @@
         LEFT JOIN t_driver b
         on a.user_code = b.user_code
         where b.is_deleted = 0
-        <if test="userAcct != null and userAcct != ''">
-            and a.user_acct like concat('%', #{userAcct}, '%')
+        <if test="userCode != null and userCode != ''">
+            and a.user_code like concat('%', #{userCode}, '%')
         </if>
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
