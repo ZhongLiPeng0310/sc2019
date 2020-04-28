@@ -83,14 +83,12 @@ public class ClientOrderService {
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listLevel = Arrays.asList(appraiseLevel.split(","));
         List<GoodsAppraiseInfo> goodsAppraiseInfoList = new ArrayList<GoodsAppraiseInfo>();
-
         int number = listGoods.size();
         //根据页面传回来的数量插入
         for (int i = 0 ;i < number; i++){
             GoodsAppraiseInfo appraiseInfo = new GoodsAppraiseInfo();
             appraiseInfo.setAppraiseDetail(listDatail.get(i));
             appraiseInfo.setAppraiseLevel(listLevel.get(i));
-//            appraiseInfo.setAvgLevel(level.get(i));
             appraiseInfo.setGoodsCode(listGoods.get(i));
             appraiseInfo.setOrderCode(orderCode);
             appraiseInfo.setUserId(userId);
@@ -152,8 +150,6 @@ public class ClientOrderService {
                 return AppResponse.bizError("新增失败！商品库存不足");
             }
         }
-//        //查询当前下单商品的销售量
-//        List<Integer> countSumSale = clientOrderDao.countSumSale(listGoods);
         String userId = SecurityUtils.getCurrentUserId();
         //生成订单编码
         String orderCode = StringUtil.getCommonCode(2);
@@ -168,7 +164,6 @@ public class ClientOrderService {
             orderInfo.setCartCode(listCart.get(i));
             orderInfo.setGoodsCode(listGoods.get(i));
             orderInfo.setOrderSum(Integer.parseInt(listSum.get(i)));
-//            orderInfo.setSumSale(countSumSale.get(i));
             orderInfo.setStock(countGoodsStock.get(i));
             orderInfo.setIsDeleted(0);
             orderInfo.setCreateTime(new Date());
