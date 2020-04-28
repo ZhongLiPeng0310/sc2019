@@ -4,16 +4,15 @@
     <!--查询店长信息-->
     <select id="getStoreByCode" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
         select
-        b.store_code storeCode,
-        b.store_name storeName,
-        c.dic_name provinceName,
-        d.dic_name cityName,
-        e.dic_name areaName,
-        CONCAT_WS('-',c.dic_name,d.dic_name,e.dic_name,b.address) address,
-        b.invite_code inviteCode,
-        a.role role
-        from
-        t_sys_user a
+            b.store_code storeCode,
+            b.store_name storeName,
+            c.dic_name provinceName,
+            d.dic_name cityName,
+            e.dic_name areaName,
+            CONCAT_WS('-',c.dic_name,d.dic_name,e.dic_name,b.address) address,
+            b.invite_code inviteCode,
+            a.role role
+        from t_sys_user a
         LEFT JOIN t_store b
         on a.user_code = b.user_code
         LEFT JOIN t_dictionary c
@@ -22,18 +21,16 @@
         on b.city_code = d.dic_code
         LEFT JOIN t_dictionary e
         on b.area_code = e.dic_code
-        where
-        a.user_code = #{userId}
+        where a.user_code = #{userId}
     </select>
 
     <!--查询附近司机信息-->
     <select id="getStoreDriverByCode" parameterType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo" resultType="com.xzsd.app.client.manager.managerMessage.entity.UserInfo">
         select
-        a.user_code userCode,
-        a.user_name userName,
-        a.phone phone
-        from
-        t_sys_user a
+            a.user_code userCode,
+            a.user_name userName,
+            a.phone phone
+        from t_sys_user a
         LEFT JOIN t_driver b
         on a.user_code = b.user_code
         where b.is_deleted = 0
