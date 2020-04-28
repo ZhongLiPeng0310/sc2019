@@ -5,17 +5,17 @@
     <!--查询订单列表-->
     <select id="listOrderByPage" parameterType="com.xzsd.pc.order.entity.OrderInfo" resultType="com.xzsd.pc.order.entity.OrderInfo">
         select
-        a.order_code orderCode,
-        a.order_money orderMoney,
-        a.order_state orderState,
-        a.store_code storeCode,
-        c.user_name userName,
-        c.phone phone,
-        a.create_time createTime,
-        b.invite_code inviteCode,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.order_code orderCode,
+            a.order_money orderMoney,
+            a.order_state orderState,
+            a.store_code storeCode,
+            c.user_name userName,
+            c.phone phone,
+            a.create_time createTime,
+            b.invite_code inviteCode,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from t_customer b
         LEFT JOIN t_order a
         on a.user_code = b.user_code
@@ -48,20 +48,19 @@
     <!--查询订单详情-->
     <select id="getOrderByOrderCode" parameterType="java.lang.String" resultType="com.xzsd.pc.order.entity.OrderInfo">
         select
-        a.user_code userCode,
-        a.order_code orderCode,
-        b.goods_code goodsCode,
-        b.goods_name goodsName,
-        a.order_sum orderSum,
-        c.order_money orderMoney,
-        b.sale_price salePrice,
-        b.cost_price costPrice,
-        a.create_time createTime,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
-        from
-        t_order_detail a
+            a.user_code userCode,
+            a.order_code orderCode,
+            b.goods_code goodsCode,
+            b.goods_name goodsName,
+            a.order_sum orderSum,
+            c.order_money orderMoney,
+            b.sale_price salePrice,
+            b.cost_price costPrice,
+            a.create_time createTime,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
+        from t_order_detail a
         LEFT JOIN t_goods b
         on a.goods_code = b.goods_code
         LEFT JOIN t_order c
@@ -74,10 +73,10 @@
     <update id="updateOrderState" parameterType="com.xzsd.pc.order.entity.OrderInfo">
         update t_order
         set
-        order_state = #{orderState},
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
+            order_state = #{orderState},
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
         where
         order_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
