@@ -117,8 +117,7 @@
         on c.city_code = e.dic_code
         LEFT JOIN t_dictionary f
         on c.area_code = f.dic_code
-        where
-        b.user_code = #{userId}
+        where b.user_code = #{userId}
     </select>
 
     <!--校验邀请码是否存在-->
