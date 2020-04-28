@@ -113,6 +113,7 @@
         <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
         <result column="address" property="address" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
         <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
             <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
             <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
@@ -132,6 +133,7 @@
             a.store_code,
             d.address,
             a.create_time,
+            a.version,
             b.goods_code goodsCode,
             c.goods_name goodsName,
             c.imageurl imagePath,
