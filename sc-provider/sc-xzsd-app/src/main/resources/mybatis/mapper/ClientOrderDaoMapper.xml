@@ -39,12 +39,10 @@
     <!--查询商品的评价星级-->
     <select id="countLevel" parameterType="java.util.List" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         select
-        avg(a_level) avgLevel,
-        goods_code goodsCode
-        from
-        t_goods_appraise
-        where
-        goods_code in
+            avg(a_level) avgLevel,
+            goods_code goodsCode
+        from t_goods_appraise
+        where goods_code in
         <foreach item="item" index="index" collection="listGoods" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -56,7 +54,7 @@
         <foreach item="item" collection="levelList" separator=";" >
             update t_goods
             set
-            a_level = #{item.avgLevel}
+                a_level = #{item.avgLevel}
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
@@ -67,22 +65,20 @@
     <update id="updateOrderState" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         update t_order
         set
-        order_state = #{orderState},
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
-        where
-        order_code = #{orderCode}
+            order_state = #{orderState},
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
+        where order_code = #{orderCode}
     </update>
     <!--查询对应订单编码里的商品编码和商品的购买数量-->
     <select id="getOrder" parameterType="java.lang.String" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         select
-        a.goods_code goodsCode,
-        a.order_sum orderSum,
-        b.stock stock,
-        b.sum_sale sumSale
-        from
-        t_order_detail a
+            a.goods_code goodsCode,
+            a.order_sum orderSum,
+            b.stock stock,
+            b.sum_sale sumSale
+        from t_order_detail a
         LEFT JOIN t_goods b
         on a.goods_code = b.goods_code
         where
@@ -92,8 +88,7 @@
     <update id="updateStock" parameterType="java.util.List">
         <foreach item="item" collection="clientOrderInfoList" separator=";" >
             update t_goods
-            set
-            stock = #{item.stock} + #{item.orderSum}
+            set stock = #{item.stock} + #{item.orderSum}
             where goods_code = #{item.goodsCode}
         </foreach>
     </update>
@@ -130,31 +125,28 @@
     <!--查询订单详情-->
     <select id="getOrdersByCode" parameterType="java.lang.String" resultMap="getOrderDetail">
         select
-        a.order_code,
-        a.order_money,
-        a.order_state,
-        a.sum_goods,
-        a.store_code,
-        d.address,
-        a.create_time,
-        b.goods_code goodsCode,
-        c.goods_name goodsName,
-        c.imageurl imagePath,
-        c.sale_price salePrice,
-        c.goods_introduce goodsIntroduce,
-        b.order_sum orderSum
-        from
-        t_order a
+            a.order_code,
+            a.order_money,
+            a.order_state,
+            a.sum_goods,
+            a.store_code,
+            d.address,
+            a.create_time,
+            b.goods_code goodsCode,
+            c.goods_name goodsName,
+            c.imageurl imagePath,
+            c.sale_price salePrice,
+            c.goods_introduce goodsIntroduce,
+            b.order_sum orderSum
+        from t_order a
         LEFT JOIN t_order_detail b
         on a.order_code = b.order_code
         LEFT JOIN t_goods c
         on b.goods_code = c.goods_code
         LEFT JOIN t_store d
         on a.store_code = d.store_code
-        where
-        a.is_deleted = 0
-        and
-        a.order_code = #{orderCode}
+        where a.is_deleted = 0
+        and a.order_code = #{orderCode}
     </select>
 
     <!--                                                订单列表                                                          -->
@@ -176,17 +168,14 @@
     </resultMap>
     <select id="getOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getOrdersList">
         select
-        a.order_code,
-        a.user_code,
-        a.order_state,
-        a.order_money,
-        a.sum_goods
-        from
-        t_order a
-        where
-        a.is_deleted = 0
-        and
-        a.user_code = #{userId}
+            a.order_code,
+            a.user_code,
+            a.order_state,
+            a.order_money,
+            a.sum_goods
+        from t_order a
+        where a.is_deleted = 0
+        and a.user_code = #{userId}
         <if test="orderState != null and orderState != '' and orderState == 7">
             and a.order_state = 7
         </if>
@@ -202,20 +191,18 @@
     </select>
     <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
 		select
-		a.goods_code goodsCode,
-		b.goods_name goodsName,
-		b.sale_price salePrice,
-		b.imageurl imagePath,
-		b.goods_introduce goodsIntroduce,
-		a.order_sum orderSum
-		from
-		t_order_detail a
+            a.goods_code goodsCode,
+            b.goods_name goodsName,
+            b.sale_price salePrice,
+            b.imageurl imagePath,
+            b.goods_introduce goodsIntroduce,
+            a.order_sum orderSum
+		from t_order_detail a
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
 		LEFT JOIN t_order c
 		on a.order_code = c.order_code
-		where
-		a.order_code = #{orderCode}
+		where a.order_code = #{orderCode}
 		order by
 		a.create_time
 		desc
@@ -292,10 +279,10 @@
     <update id="updateCartGoods" parameterType="com.xzsd.app.client.clientOrder.entity.CartOrderInfo">
         update t_cart
         set
-        is_deleted = 1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
+            is_deleted = 1,
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
         where cart_code in
         <foreach item="item" index="index" collection="listCart" open="(" separator="," close=")">
             #{item}
