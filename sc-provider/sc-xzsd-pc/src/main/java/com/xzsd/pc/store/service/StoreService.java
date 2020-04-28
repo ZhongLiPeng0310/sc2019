@@ -16,6 +16,11 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 门店管理实现层
+ * @author zhong
+ * @date 2020-04-06
+ */
 @Service
 public class StoreService {
 
@@ -169,6 +174,13 @@ public class StoreService {
         return AppResponse.success("查询成功！",listCity);
     }
 
+    /**
+     * 查询区域列表
+     * @author zhong
+     * @date 2020-04-13
+     * @param dictionaryInfo
+     * @return
+     */
     public AppResponse listArea(DictionaryInfo dictionaryInfo) {
         List<DictionaryInfo> listArea = storeDao.listArea(dictionaryInfo);
         return AppResponse.success("查询成功！",listArea);

@@ -44,7 +44,7 @@ public class StoreController {
             AppResponse appResponse = storeService.saveStore(storeInfo);
             return appResponse;
         }catch (Exception e){
-            logger.error("门店信息失败",e);
+            logger.error("新增门店信息失败",e);
             System.out.println(e.toString());
             throw e;
         }
@@ -82,7 +82,7 @@ public class StoreController {
             String userId = SecurityUtils.getCurrentUserId();
             return storeService.deleteStore(storeCode, userId);
         } catch (Exception e) {
-            logger.error("门点删除错误", e);
+            logger.error("门店删除错误", e);
             System.out.println(e.toString());
             throw e;
         }

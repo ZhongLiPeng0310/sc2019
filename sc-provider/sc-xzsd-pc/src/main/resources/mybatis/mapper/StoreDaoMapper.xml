@@ -70,22 +70,22 @@
     <!--查询门店列表-->
     <select id="listStoreByPage" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="com.xzsd.pc.store.entity.StoreInfo">
         select
-        a.store_code storeCode,
-        a.store_name storeName,
-        a.province_code provinceCode,
-        a.city_code cityCode,
-        a.area_code areaCode,
-        a.address address,
-        a.phone phone,
-        a.invite_code inviteCode,
-        a.user_code userCode,
-        b.user_name userName,
-        b.user_acct userAcct,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.store_code storeCode,
+            a.store_name storeName,
+            a.province_code provinceCode,
+            a.city_code cityCode,
+            a.area_code areaCode,
+            a.address address,
+            a.phone phone,
+            a.invite_code inviteCode,
+            a.user_code userCode,
+            b.user_name userName,
+            b.user_acct userAcct,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
@@ -134,46 +134,44 @@
     <update id="updateStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
         update t_store
         set
-        store_name = #{storeName},
-        phone = #{phone},
-        user_code = #{userCode},
-        license_code = #{licenseCode},
-        province_code = #{provinceCode},
-        city_code = #{cityCode},
-        area_code = #{areaCode},
-        address = #{address},
-        update_time = now(),
-        update_name = #{updateName},
-        version = version + 1
-        where
-        store_code = #{storeCode}
-        and
-        version = #{version}
+            store_name = #{storeName},
+            phone = #{phone},
+            user_code = #{userCode},
+            license_code = #{licenseCode},
+            province_code = #{provinceCode},
+            city_code = #{cityCode},
+            area_code = #{areaCode},
+            address = #{address},
+            update_time = now(),
+            update_name = #{updateName},
+            version = version + 1
+        where store_code = #{storeCode}
+        and version = #{version}
     </update>
 
     <!--查询门店详情信息-->
     <select id="getStoreByStoreCode" parameterType="java.lang.String" resultType="com.xzsd.pc.store.entity.StoreInfo">
         select
-        a.store_code storeCode,
-        a.store_name storeName,
-        e.dic_code provinceCode,
-        e.dic_name provinceName,
-        c.dic_code cityCode,
-        c.dic_name cityName,
-        d.dic_code areaCode,
-        d.dic_name areaName,
-        a.address address,
-        a.phone phone,
-        a.invite_code inviteCode,
-        a.user_code userCode,
-        a.license_code licenseCode,
-        b.user_name userName,
-        b.user_acct userAcct,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.store_code storeCode,
+            a.store_name storeName,
+            e.dic_code provinceCode,
+            e.dic_name provinceName,
+            c.dic_code cityCode,
+            c.dic_name cityName,
+            d.dic_code areaCode,
+            d.dic_name areaName,
+            a.address address,
+            a.phone phone,
+            a.invite_code inviteCode,
+            a.user_code userCode,
+            a.license_code licenseCode,
+            b.user_name userName,
+            b.user_acct userAcct,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
