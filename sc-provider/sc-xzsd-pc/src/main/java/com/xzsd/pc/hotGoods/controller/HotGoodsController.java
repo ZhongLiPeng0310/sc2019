@@ -31,6 +31,8 @@ public class HotGoodsController {
 
     /**
      * 新增热门商品
+     * @author zhong
+     * @date 2020-04-04
      * @param hotGoodsInfo
      * @return
      */
