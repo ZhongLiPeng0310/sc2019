@@ -44,6 +44,4 @@ public class CustomerService {
         PageInfo<CustomerInfo> pageData = new PageInfo<>(customerInfoList);
         return AppResponse.success("查询成功",pageData);
     }
-
-
 }
