@@ -99,7 +99,7 @@ public class PictureShowController {
         try {
             //     获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return pictureShowService.updatePictureShowState(showCode, showState ,version,userId);
+            return pictureShowService.updatePictureShowState(showCode,showState,version,userId);
         } catch (Exception e) {
             logger.error("商品修改状态错误", e);
             System.out.println(e.toString());

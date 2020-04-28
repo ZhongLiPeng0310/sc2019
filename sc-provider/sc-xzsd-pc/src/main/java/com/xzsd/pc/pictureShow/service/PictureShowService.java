@@ -29,24 +29,25 @@ public class PictureShowService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse savePictureShow(PictureShowInfo pictureShowInfo) {
-        //检验新增的商品是否存在轮播图中
+        //检验新增的商品、序号、图片是否存在轮播图中
         int countGoods =  pictureShowDao.countGoods(pictureShowInfo);
         if (0 != countGoods){
-            return AppResponse.bizError("新增失败，商品已存在！");
+            return AppResponse.bizError("新增失败，商品或排序号或轮播图的图片已存在！请重试");
         }
-        //检验新增的轮播图序号是否重复
-        int countSort =  pictureShowDao.countSort(pictureShowInfo);
-        if (0 != countSort){
-            return AppResponse.bizError("新增失败，该排序号已存在！");
-        }
+//        //检验新增的轮播图序号是否重复
+//        int countSort =  pictureShowDao.countSort(pictureShowInfo);
+//        if (0 != countSort){
+//            return AppResponse.bizError("新增失败，该排序号已存在！");
+//        }
+//        //检验新增的轮播图图片是否已新增
+//        int countPicture = pictureShowDao.countPicture(pictureShowInfo);
+//        if (0 != countPicture){
+//            return AppResponse.bizError("新增失败，轮播图的图片已存在！");
+//        }
+        //随机轮播图编号
         pictureShowInfo.setShowCode(StringUtil.getCommonCode(2));
         pictureShowInfo.setIsDeleted(0);
         //新增轮播图
-        int countPicture = pictureShowDao.countPicture(pictureShowInfo);
-        if (0 != countPicture){
-            return AppResponse.bizError("新增失败，轮播图的图片已存在！");
-        }
-        //检验新增的轮播图图片是否已新增
         int savePictureShow = pictureShowDao.savePictureShow(pictureShowInfo);
         if (0 == savePictureShow){
             return AppResponse.bizError("新增失败，请重试！");

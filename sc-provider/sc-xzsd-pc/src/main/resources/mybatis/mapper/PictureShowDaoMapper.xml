@@ -4,34 +4,34 @@
 
     <!--检验商品是否已存在轮播图-->
     <select id="countGoods" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
-        select count(goods_code)
+        select count(show_code)
         from t_picture_show
         where is_deleted = 0
-        and goods_code = #{goodsCode}
+        and (goods_code = #{goodsCode} or sort_no = #{sortNo} or show_image_url = #{imagePath})
         <if test="showCode != null and showCode != ''">
             and show_code != #{showCode}
         </if>
     </select>
-    <!--检验新的轮播图的排序号是否重复-->
-    <select id="countSort" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
-        select count(sort_no)
-        from t_picture_show
-        where is_deleted = 0
-        and sort_no = #{sortNo}
-        <if test="showCode != null and showCode != ''">
-            and show_code != #{showCode}
-        </if>
-    </select>
-    <!--检验商品是否已存在轮播图-->
-    <select id="countPicture" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">
-        select count(show_image_url)
-        from t_picture_show
-        where is_deleted = 0
-        and show_image_url = #{imagePath}
-        <if test="showCode != null and showCode != ''">
-            and show_code != #{showCode}
-        </if>
-    </select>
+<!--    &lt;!&ndash;检验新的轮播图的排序号是否重复&ndash;&gt;-->
+<!--    <select id="countSort" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">-->
+<!--        select count(sort_no)-->
+<!--        from t_picture_show-->
+<!--        where is_deleted = 0-->
+<!--        and sort_no = #{sortNo}-->
+<!--        <if test="showCode != null and showCode != ''">-->
+<!--            and show_code != #{showCode}-->
+<!--        </if>-->
+<!--    </select>-->
+<!--    &lt;!&ndash;检验图片是否已存在轮播图&ndash;&gt;-->
+<!--    <select id="countPicture" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">-->
+<!--        select count(show_image_url)-->
+<!--        from t_picture_show-->
+<!--        where is_deleted = 0-->
+<!--        and show_image_url = #{imagePath}-->
+<!--        <if test="showCode != null and showCode != ''">-->
+<!--            and show_code != #{showCode}-->
+<!--        </if>-->
+<!--    </select>-->
     <!--新增轮播图-->
     <insert id="savePictureShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
         insert into t_picture_show
@@ -67,17 +67,17 @@
     <!--查询轮播图列表-->
     <select id="listPictureShowByPage" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="com.xzsd.pc.pictureShow.entity.PictureShowInfo">
         select
-        a.show_code showCode,
-        a.sort_no sortNo,
-        a.show_image_url imagePath,
-        a.show_state showState,
-        a.begin_time beginTime,
-        a.end_time endTime,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.show_code showCode,
+            a.sort_no sortNo,
+            a.show_image_url imagePath,
+            a.show_state showState,
+            a.begin_time beginTime,
+            a.end_time endTime,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from
         t_picture_show a
         where a.is_deleted = 0
@@ -124,16 +124,16 @@
     <!--连接商品列表-->
     <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
         select
-        a.goods_code goodsCode,
-        a.goods_name goodsName,
-        b.class_name classFirstName,
-        c.class_name classSecondName,
-        a.goods_state goodsState,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.goods_code goodsCode,
+            a.goods_name goodsName,
+            b.class_name classFirstName,
+            c.class_name classSecondName,
+            a.goods_state goodsState,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from
         t_goods a
         LEFT JOIN t_goods_class b
