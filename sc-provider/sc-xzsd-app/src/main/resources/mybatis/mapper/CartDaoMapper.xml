@@ -83,6 +83,7 @@
         LEFT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
+        and b.is_deleted = 0
         and a.user_code = #{userId}
         order by
         a.sort_no desc

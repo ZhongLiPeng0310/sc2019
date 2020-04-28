@@ -295,10 +295,9 @@
     <select id="countGoodsStock" parameterType="java.util.List" resultType="java.lang.Integer">
         select
         stock
-        from
-        t_goods
-        where
-        goods_code in
+        from t_goods
+        where is_deleted = 0
+        and goods_code in
         <foreach item="item" index="index" collection="listGoods" open="(" separator="," close=")">
             #{item}
         </foreach>
