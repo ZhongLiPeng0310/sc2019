@@ -46,7 +46,7 @@ public class ManagerOrderInfo {
     /**
      * 下单人手机号码
      */
-    private int phone;
+    private String phone;
     /**
      * 商品编码
      */
@@ -203,11 +203,11 @@ public class ManagerOrderInfo {
         this.userName = userName;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
