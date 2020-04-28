@@ -5,12 +5,11 @@
     <update id="updateOrderState" parameterType="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         update t_order
         set
-        order_state = #{orderState},
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
-        where
-        order_code = #{orderCode}
+            order_state = #{orderState},
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
+        where order_code = #{orderCode}
     </update>
 
     <!--订单对应商品的Map-->
@@ -26,6 +25,7 @@
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
         <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo">
             <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
             <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
@@ -39,24 +39,24 @@
     <!--查询订单详情-->
     <select id="getStoreOrdersByCode" parameterType="java.lang.String" resultMap="getOrderDetail">
         select
-        a.order_code,
-        a.order_money,
-        a.sum_goods,
-        e.user_name,
-        e.phone,
-        a.order_state,
-        a.store_code,
-        d.store_name,
-        d.address,
-        a.create_time,
-        c.goods_code goodsCode,
-        c.goods_name goodsName,
-        c.goods_introduce goodsIntroduce,
-        c.imageurl imagePath,
-        c.sale_price salePrice,
-        b.order_sum orderSum
-        from
-        t_order a
+            a.order_code,
+            a.order_money,
+            a.sum_goods,
+            e.user_name,
+            e.phone,
+            a.order_state,
+            a.store_code,
+            d.store_name,
+            d.address,
+            a.create_time,
+            a.version,
+            c.goods_code goodsCode,
+            c.goods_name goodsName,
+            c.goods_introduce goodsIntroduce,
+            c.imageurl imagePath,
+            c.sale_price salePrice,
+            b.order_sum orderSum
+        from t_order a
         LEFT JOIN t_order_detail b
         on a.order_code = b.order_code
         LEFT JOIN t_goods c
@@ -65,10 +65,8 @@
         on a.store_code = d.store_code
         LEFT JOIN t_sys_user e
         on a.user_code = e.user_code
-        where
-        a.is_deleted = 0
-        and
-        a.order_code = #{orderCode}
+        where a.is_deleted = 0
+        and a.order_code = #{orderCode}
     </select>
 
     <!--店长查询订单列表-->
@@ -91,19 +89,17 @@
     </resultMap>
     <select id="getStoreOrdersList" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultMap="getStoreOrdersList">
         select
-        a.order_code,
-        a.user_code,
-        b.user_name,
-        b.phone,
-        a.order_state,
-        a.order_money,
-        a.sum_goods
-        from
-        t_order a
+            a.order_code,
+            a.user_code,
+            b.user_name,
+            b.phone,
+            a.order_state,
+            a.order_money,
+            a.sum_goods
+        from t_order a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
-        where
-        a.is_deleted = 0
+        where a.is_deleted = 0
         and store_code in (select store_code from t_store where user_code = #{userId})
         <if test="orderState != null and orderState != '' and orderState == 7">
             and a.order_state = 7
@@ -120,20 +116,18 @@
     </select>
     <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
 		select
-		a.goods_code goodsCode,
-		b.goods_name goodsName,
-		b.sale_price salePrice,
-		b.imageurl imagePath,
-		a.order_sum orderSum,
-		b.goods_introduce goodsIntroduce
-		from
-		t_order_detail a
+            a.goods_code goodsCode,
+            b.goods_name goodsName,
+            b.sale_price salePrice,
+            b.imageurl imagePath,
+            a.order_sum orderSum,
+            b.goods_introduce goodsIntroduce
+		from t_order_detail a
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code
 		LEFT JOIN t_order c
 		on a.order_code = c.order_code
-		where
-		a.order_code = #{orderCode}
+		where a.order_code = #{orderCode}
 		order by
 		a.create_time
 		desc
