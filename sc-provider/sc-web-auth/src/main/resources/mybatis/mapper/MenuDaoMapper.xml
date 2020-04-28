@@ -111,5 +111,6 @@
         from t_menu a
         where a.is_deleted = 0
         and a.role = #{role}
+        order by a.create_time DESC
     </select>
 </mapper>
