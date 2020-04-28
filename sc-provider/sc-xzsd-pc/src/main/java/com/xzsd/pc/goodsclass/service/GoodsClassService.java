@@ -42,8 +42,7 @@ public class GoodsClassService {
         int saveGoodsClass = goodsClassDao.saveGoodsClass(goodsClassInfo);
         if (0 == saveGoodsClass){
             return AppResponse.bizError("新增失败，请重试！");
-        }
-        else{
+        }else{
             return AppResponse.success("新增成功！");
         }
     }

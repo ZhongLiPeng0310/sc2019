@@ -1,13 +1,15 @@
 package com.xzsd.pc.goodsclass.dao;
-
-
-
 import com.xzsd.pc.goodsclass.entity.GoodsClassInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @classname GoodsClassDao
+ * @author zhong
+ * @date 2020-03-27
+ */
 @Mapper
 public interface GoodsClassDao {
     /**
@@ -21,6 +23,8 @@ public interface GoodsClassDao {
 
     /**
      * 修改商品分类
+     * @author zhong
+     * @date 2020-03-27
      * @param goodsClassInfo
      * @return
      */

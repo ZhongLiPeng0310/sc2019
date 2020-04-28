@@ -126,6 +126,4 @@ public class GoodsClassController {
             throw e;
         }
     }
-
-
 }
