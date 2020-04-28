@@ -80,20 +80,18 @@
     <!--获取商品分类列表-->
     <select id="listGoodsClass" resultMap="classFirstList">
         select
-        a.class_code,
-        a.class_name,
-        b.class_code as classSecondCode,
-        b.class_name as classSecondName
+            a.class_code,
+            a.class_name,
+            b.class_code as classSecondCode,
+            b.class_name as classSecondName
         from
         t_goods_class a LEFT JOIN t_goods_class b
         on (a.class_code = b.last_class_code
 		and b.last_class_code is NOT NULL
         and b.is_deleted = 0
 		)
-        where
-        a.last_class_code is null
-		and
-		a.is_deleted = 0
+        where a.last_class_code is null
+		and a.is_deleted = 0
 		ORDER BY
 		a.create_time DESC
     </select>
