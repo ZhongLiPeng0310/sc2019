@@ -5,32 +5,26 @@
     <select id="checkSave" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
         select
         count(goods_code)
-        from
-        t_cart
-        where
-        goods_code = #{goodsCode}
-        and
-        is_deleted = 0
+        from t_cart
+        where goods_code = #{goodsCode}
+        and user_code = #{userId}
+        and is_deleted = 0
     </select>
     <!--检验新增商品的库存-->
     <select id="countStock" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
         select
         stock
-        from
-        t_goods
-        where
-        goods_code = #{goodsCode}
+        from t_goods
+        where goods_code = #{goodsCode}
     </select>
     <!--查出加入的商品在购物车的数量-->
     <select id="findSum" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
         select
         order_sum orderSum
-        from
-        t_cart
-        where
-        goods_code = #{goodsCode}
-        and
-        is_deleted = 0
+        from t_cart
+        where goods_code = #{goodsCode}
+        and user_code = #{userId}
+        and is_deleted = 0
     </select>
 
     <!--更新购物车商品数量-->
@@ -41,6 +35,7 @@
             update_time = now(),
             update_name = #{userId}
         where goods_code = #{goodsCode}
+        and user_code = #{userId}
     </update>
 
     <!--新增购物车-->
@@ -83,20 +78,33 @@
         LEFT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
-        and b.is_deleted = 0
         and a.user_code = #{userId}
         order by
         a.sort_no desc
     </select>
+
     <!--修改购物车商品数量-->
     <update id="updateAddSubCart" parameterType="com.xzsd.app.client.cart.entity.CartInfo">
         update t_cart
         set
             order_sum = #{orderSum},
             update_time = now(),
-            update_name = #{userId}
+            update_name = #{updateName},
+            version = version + 1
         where cart_code = #{cartCode}
     </update>
+    <!--校验修改商品数量是否符合库存-->
+    <select id="countCartStock" parameterType="com.xzsd.app.client.cart.entity.CartInfo" resultType="int">
+        select
+        a.stock
+        from
+        t_goods a
+        LEFT JOIN t_cart b
+        on a.goods_code = b.goods_code
+        where
+        b.cart_code = #{cartCode}
+    </select>
+
     <!--删除购物车-->
     <update id="deleteCart" parameterType="com.xzsd.app.client.cart.entity.CartInfo">
         update t_cart

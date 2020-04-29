@@ -64,15 +64,16 @@ public class CartController {
      * 修改购物车数量
      * @author zhong
      * @date 2020-04-19
-     * @param cartCode
+     * @param cartInfo
      * @return
      */
     @PostMapping("updateAddSubCart")
-    private AppResponse updateAddSubCart(String cartCode,int orderSum){
+    private AppResponse updateAddSubCart(CartInfo cartInfo){
         try {
             //获取当前登录的用户编码
             String userId = SecurityUtils.getCurrentUserId();
-            return cartService.updateAddSubCart(cartCode,orderSum,userId);
+            cartInfo.setUpdateName(userId);
+            return cartService.updateAddSubCart(cartInfo);
         }catch (Exception e){
             logger.error("查询失败",e);
             System.out.println(e.toString());

@@ -61,12 +61,19 @@ public interface CartDao {
      * 修改购物车商品数量
      * @author zhong
      * @date 2020-04-19
-     * @param cartCode
-     * @param orderSum
-     * @param userId
+     * @param cartInfo
      * @return
      */
-    int updateAddSubCart(@Param("cartCode") String cartCode,@Param("orderSum") int orderSum,@Param("userId") String userId);
+    int updateAddSubCart(CartInfo cartInfo);
+
+    /**
+     * 校验修改商品数量是否符合库存
+     * @author zhong
+     * @date 2020-04-19
+     * @param cartInfo
+     * @return
+     */
+    int countCartStock(CartInfo cartInfo);
 
     /**
      * 删除购物车
@@ -77,6 +84,7 @@ public interface CartDao {
      * @return
      */
     int deleteCart(@Param("listCode")List<String> listCode,@Param("userId") String userId);
+
 
 
 }

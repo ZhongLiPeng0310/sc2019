@@ -48,11 +48,11 @@ public class CartService {
                 return AppResponse.success("加入成功！");
             }
         }
-        //加入购物车
-        int saveCart = cartDao.saveCart(cartInfo);
-        if (0 == saveCart){
-            return AppResponse.bizError("加入失败！");
-        }
+            //加入购物车
+            int saveCart = cartDao.saveCart(cartInfo);
+            if (0 == saveCart){
+                return AppResponse.bizError("加入失败！");
+            }
         return AppResponse.success("加入成功！");
     }
 
@@ -77,21 +77,18 @@ public class CartService {
      * 修改购物车商品加减数量
      * @author zhong
      * @date 2020-04-19
-     * @param cartCode
-     * @param orderSum
-     * @param userId
+     * @param cartInfo
      * @return
      */
-    public AppResponse updateAddSubCart(String cartCode, int orderSum, String userId) {
+    public AppResponse updateAddSubCart(CartInfo cartInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
-        //检验新增的商品库存
-        CartInfo cartInfo = new CartInfo();
-        int countStock = cartDao.countStock(cartInfo);
-        if (countStock == 0 && countStock < cartInfo.getOrderSum()){
-            return AppResponse.bizError("新增失败，商品库存不足");
+        //检验在购物车中新增的商品库存
+        int countStock = cartDao.countCartStock(cartInfo);
+        if (countStock == 0 || countStock < cartInfo.getOrderSum()){
+            return AppResponse.bizError("商品库存不足");
         }
         //修改购物车商品数量
-        int updateAddSubCart = cartDao.updateAddSubCart(cartCode,orderSum,userId);
+        int updateAddSubCart = cartDao.updateAddSubCart(cartInfo);
         if (0 == updateAddSubCart){
             return AppResponse.bizError("修改失败");
         }
@@ -109,9 +106,9 @@ public class CartService {
     public AppResponse deleteCart(String cartCode, String userId) {
         AppResponse appResponse = AppResponse.success("删除成功");
         List<String> listCode = Arrays.asList(cartCode.split(","));
-        //修改购物车商品数量
-        int updateAddSubCart = cartDao.deleteCart(listCode,userId);
-        if (0 == updateAddSubCart){
+        //删除购物车
+        int deleteCart = cartDao.deleteCart(listCode,userId);
+        if (0 == deleteCart){
             return AppResponse.bizError("删除失败");
         }
         return appResponse;
