@@ -108,7 +108,12 @@
             and a.order_state = 1
         </if>
         <if test="orderState != null and orderState != '' and orderState == 5">
-            and a.order_state = 5
+            and (a.order_state = 5
+            or a.order_state = 8)
+        </if>
+        <if test="orderState != null and orderState != '' and orderState == 8">
+            and (a.order_state = 5
+            or a.order_state = 8)
         </if>
         order by
         a.create_time
