@@ -147,35 +147,6 @@
     and version = #{version}
   </update>
 
-<!--    &lt;!&ndash;检验删除的商品是否存在轮播图中&ndash;&gt;-->
-<!--    <select id="findGoodsPicShow" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">-->
-<!--        select count(a.goods_code)-->
-<!--        from-->
-<!--        t_picture_show a LEFT JOIN t_goods b-->
-<!--        on a.goods_code = b.goods_code-->
-<!--        where-->
-<!--        a.goods_code in-->
-<!--        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">-->
-<!--            #{item}-->
-<!--        </foreach>-->
-<!--        and-->
-<!--        a.is_deleted = 0-->
-<!--    </select>-->
-<!--    &lt;!&ndash;检验删除的商品是否存在热门商品中&ndash;&gt;-->
-<!--    <select id="findGoodsHotGoods" parameterType="com.xzsd.pc.pictureShow.entity.PictureShowInfo" resultType="int">-->
-<!--        select -->
-<!--        count(a.goods_code)-->
-<!--        from-->
-<!--        t_hot_goods a LEFT JOIN t_goods b-->
-<!--        on a.goods_code = b.goods_code-->
-<!--        where-->
-<!--        a.goods_code in-->
-<!--        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">-->
-<!--            #{item}-->
-<!--        </foreach>-->
-<!--        and-->
-<!--        a.is_deleted = 0-->
-<!--    </select>-->
 
     <!--查询在轮播图和热门商品的商品名称-->
     <select id="listHotShow" parameterType="java.lang.String" resultType="java.lang.String">
@@ -191,7 +162,8 @@
         and (goods_code in
         (select goods_code from t_hot_goods where is_deleted = 0)
         or goods_code in
-        (select goods_code from t_picture_show where is_deleted = 0))
+        (select goods_code from t_picture_show where is_deleted = 0)
+        )
     </select>
     <!--删除商品-->
     <update id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
@@ -226,7 +198,6 @@
         <foreach item="item" index="index" collection="listVersion" open="(" separator="," close=")">
             #{item}
         </foreach>
-
     </update>
 
     <!--查询商品信息-->

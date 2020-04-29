@@ -113,23 +113,24 @@ public class GoodsService {
         //排除处于轮播图和热门商品的商品编码
         ArrayList listGoodsCode = new ArrayList<>(listCode);
         listGoodsCode.removeAll(goodsCodeList);
-        if (goodsCodeList.size() != 0){
-            appResponse =  AppResponse.success("商品删除失败，商品编码为"+ goodsCodeList+"的商品存在轮播图和热门商品，无法删除" );
+        //商品存在轮播图或热门商品中，删除失败
+        if (0 == listGoodsCode.size()){
+            return AppResponse.bizError("商品存在轮播图或热门商品中，删除失败，请重试！");
         }
         //删除商品
         int deleteGood = goodsDao.deleteGoods(listGoodsCode,userId);
-        if (0 == deleteGood){
-            appResponse = AppResponse.bizError("商品存在轮播图或热门商品中，删除失败，请重试！");
+        if (goodsCodeList.size() != 0 && listGoodsCode.size() != 0 && 0 != deleteGood){
+            return AppResponse.success("删除成功，商品编码为"+ goodsCodeList+"的商品存在轮播图和热门商品，无法删除" );
         }
-        if (goodsCodeList.size() != 0 && listGoodsCode.size() != 0){
-            return AppResponse.success("部分商品删除成功，商品编码为"+ goodsCodeList+"的商品存在轮播图和热门商品，无法删除" );
-        }
-        return appResponse;
+
+       return appResponse;
     }
 
     /**
-     * //修改商品上架下架
+     * 修改商品上架下架
      * @param goodsCode
+     * @author zhong
+     * @date 2020-03-26
      * @param
      * @return
      */
