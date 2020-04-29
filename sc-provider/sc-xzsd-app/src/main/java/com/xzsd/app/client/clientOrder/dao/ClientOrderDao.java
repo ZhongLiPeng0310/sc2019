@@ -27,9 +27,13 @@ public interface ClientOrderDao {
      * @return
      */
     List<ClientOrderInfo> getOrder(@Param("orderCode") String orderCode);
-    //修改商品的库存
+    /**
+     * 修改商品的库存
+     */
     int updateStock(@Param("clientOrderInfoList") List<ClientOrderInfo> clientOrderInfoList);
-    //修改商品的销售量
+    /**
+     * 修改商品的销售量
+     */
     int updateSumSale(@Param("clientOrderInfoList") List<ClientOrderInfo> clientOrderInfoList);
     /**
      * 客户查询订单列表

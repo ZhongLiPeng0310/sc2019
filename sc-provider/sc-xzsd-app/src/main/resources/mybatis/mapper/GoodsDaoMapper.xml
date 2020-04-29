@@ -120,6 +120,7 @@
         on a.class_code = b.class_second_code
         where a.is_deleted = 0
         and a.last_class_code = #{lastClassCode}
+        and b.goods_state = 2
         order by
         b.create_time desc
     </select>
