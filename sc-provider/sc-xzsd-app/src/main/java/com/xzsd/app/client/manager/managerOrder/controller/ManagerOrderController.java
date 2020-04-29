@@ -33,10 +33,10 @@ public class ManagerOrderController {
      * @return
      */
     @PostMapping("updateOrderState")
-    private AppResponse updateOrderState(String orderCode, int orderState){
+    private AppResponse updateOrderState(String orderCode, int orderState,String version){
         try {
             String userId = SecurityUtils.getCurrentUserId();
-            return managerOrderService.updateOrderState(orderCode,orderState,userId);
+            return managerOrderService.updateOrderState(orderCode,orderState,version,userId);
         }catch (Exception e){
             logger.error("修改订单状态失败",e);
             System.out.println(e.toString());

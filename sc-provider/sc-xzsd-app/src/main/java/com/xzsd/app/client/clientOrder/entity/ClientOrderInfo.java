@@ -155,7 +155,7 @@ public class ClientOrderInfo {
      * 版本号
      * @return
      */
-    private int version;
+    private String version;
 
     /**
      * 页码
@@ -407,11 +407,11 @@ public class ClientOrderInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 

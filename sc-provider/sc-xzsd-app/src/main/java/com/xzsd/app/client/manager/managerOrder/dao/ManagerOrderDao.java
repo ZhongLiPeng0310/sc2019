@@ -21,7 +21,7 @@ public interface ManagerOrderDao {
      * @param userId
      * @return
      */
-    int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("userId") String userId);
+    int updateOrderState(@Param("orderCode") String orderCode,@Param("orderState") int orderState,@Param("version") String version,@Param("userId") String userId);
 
     /**
      * 店长查询订单详情

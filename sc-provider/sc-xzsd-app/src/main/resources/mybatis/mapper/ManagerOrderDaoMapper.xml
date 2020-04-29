@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.app.client.manager.managerOrder.dao.ManagerOrderDao">
-    <!--修改客户端订单状态-->
+    <!--修改店长端订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo">
         update t_order
         set
@@ -10,6 +10,7 @@
             update_name = #{userId},
             version = version + 1
         where order_code = #{orderCode}
+        and version = #{version}
     </update>
 
     <!--订单对应商品的Map-->
@@ -95,7 +96,8 @@
             b.phone,
             a.order_state,
             a.order_money,
-            a.sum_goods
+            a.sum_goods,
+            a.version
         from t_order a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code

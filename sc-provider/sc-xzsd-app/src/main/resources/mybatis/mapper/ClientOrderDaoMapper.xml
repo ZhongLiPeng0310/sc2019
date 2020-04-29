@@ -70,6 +70,7 @@
             update_name = #{userId},
             version = version + 1
         where order_code = #{orderCode}
+        and version = #{version}
     </update>
     <!--查询对应订单编码里的商品编码和商品的购买数量-->
     <select id="getOrder" parameterType="java.lang.String" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
@@ -159,6 +160,7 @@
         <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
         <result property="orderMoney" column="order_money" jdbcType="VARCHAR"/>
         <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
         <collection property="goodsList" ofType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" select="selectGoods" column="order_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
@@ -174,7 +176,8 @@
             a.user_code,
             a.order_state,
             a.order_money,
-            a.sum_goods
+            a.sum_goods,
+            a.version
         from t_order a
         where a.is_deleted = 0
         and a.user_code = #{userId}

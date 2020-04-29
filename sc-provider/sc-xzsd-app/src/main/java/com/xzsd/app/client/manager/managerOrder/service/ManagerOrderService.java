@@ -25,9 +25,9 @@ public class ManagerOrderService {
      * @param userId
      * @return
      */
-    public AppResponse updateOrderState(String orderCode, int orderState, String userId) {
+    public AppResponse updateOrderState(String orderCode, int orderState,String version, String userId) {
         //修改订单状态
-        int updateOrderState = managerOrderDao.updateOrderState(orderCode,orderState,userId);
+        int updateOrderState = managerOrderDao.updateOrderState(orderCode,orderState,version,userId);
         if (0 == updateOrderState){
             return AppResponse.bizError("修改失败！");
         }
