@@ -75,7 +75,7 @@
             a.province_code provinceCode,
             a.city_code cityCode,
             a.area_code areaCode,
-            a.address address,
+            CONCAT_WS('',c.dic_name,d.dic_name,e.dic_name,a.address) address,
             a.phone phone,
             a.invite_code inviteCode,
             a.user_code userCode,
@@ -89,6 +89,12 @@
         from t_store a
         LEFT JOIN t_sys_user b
         on a.user_code = b.user_code
+        LEFT JOIN t_dictionary c
+        on a.province_code = c.dic_code
+        LEFT JOIN t_dictionary d
+        on a.city_code = d.dic_code
+        LEFT JOIN t_dictionary e
+        on a.area_code = e.dic_code
         where a.is_deleted = 0
         <if test="storeCode != null and storeCode != ''">
             and a.store_code like concat('%', #{storeCode}, '%')
