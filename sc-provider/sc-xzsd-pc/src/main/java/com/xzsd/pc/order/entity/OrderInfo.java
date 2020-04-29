@@ -25,6 +25,10 @@ public class OrderInfo {
      */
     private int orderState;
     /**
+     * 商品库存
+     */
+    private int stock;
+    /**
      * 门店编码
      */
     private String storeCode;
@@ -299,5 +303,13 @@ public class OrderInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

@@ -28,14 +28,29 @@ public interface OrderDao {
      */
     OrderInfo getOrderByOrderCode(@Param("orderCode") String orderCode);
 
+
+
+
     /**
      * 修改订单状态
      * @author zhong
      * @date 2020-04-12
      * @param listCode
-     * @param orderState
-     * @param userId
      * @return
      */
     int updateOrderState(@Param("listCode") List<String> listCode,@Param("orderState") int orderState,@Param("userId") String userId);
+
+    /**
+     * 查询订单的商品编码 购买数量 商品的库存
+     * @param listCode
+     * @return
+     */
+    List<OrderInfo> getOrder(@Param("listCode") List<String> listCode);
+
+    /**
+     * 修改订单对应商品的库存
+     * @param orderInfoList
+     * @return
+     */
+    int updateStock(@Param("orderInfoList") List<OrderInfo> orderInfoList);
 }

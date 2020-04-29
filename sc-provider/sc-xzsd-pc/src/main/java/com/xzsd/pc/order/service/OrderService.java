@@ -59,19 +59,27 @@ public class OrderService {
      * @author zhong
      * @date 2020-04-12
      * @param orderCode
-     * @param orderState
      * @param userId
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateOrderState(String orderCode, int orderState, String userId) {
+    public AppResponse updateOrderState(String orderCode,int orderState,String userId) {
+        //分割订单编码，逗号隔开
         List<String> listCode = Arrays.asList(orderCode.split(","));
-        AppResponse appResponse = AppResponse.success("修改成功!");
         //修改订单状态
         int count = orderDao.updateOrderState(listCode,orderState,userId);
-        if (0 == count){
-            appResponse = AppResponse.bizError("修改失败，请重试！");
+        if (orderState == 9){
+            //查询订单的商品编码 购买数量 商品的库存
+            List<OrderInfo> orderInfoList = orderDao.getOrder(listCode);
+            //修改商品库存
+            int updateStock = orderDao.updateStock(orderInfoList);
+            if (0 == updateStock){
+                return AppResponse.bizError("数据无变化，请重试！");
+            }
         }
-        return appResponse;
+        if (0 == count){
+            return AppResponse.bizError("数据无变化，请重试！");
+        }
+        return AppResponse.success("修改成功！");
     }
 }
