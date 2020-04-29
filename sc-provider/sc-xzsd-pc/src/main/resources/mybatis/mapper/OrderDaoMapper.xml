@@ -82,6 +82,10 @@
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
         </foreach>
+        and version in
+        <foreach item="item" index="index" collection="listVersion" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
     <!--查询对应订单编码里的商品编码和商品的购买数量-->
     <select id="getOrder" parameterType="java.util.List" resultType="com.xzsd.pc.order.entity.OrderInfo">

@@ -38,7 +38,7 @@ public interface OrderDao {
      * @param listCode
      * @return
      */
-    int updateOrderState(@Param("listCode") List<String> listCode,@Param("orderState") int orderState,@Param("userId") String userId);
+    int updateOrderState(@Param("listCode") List<String> listCode,@Param("orderState") int orderState,@Param("listVersion")List<String> listVersion, @Param("userId") String userId);
 
     /**
      * 查询订单的商品编码 购买数量 商品的库存

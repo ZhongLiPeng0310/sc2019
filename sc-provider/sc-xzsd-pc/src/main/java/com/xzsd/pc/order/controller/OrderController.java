@@ -71,11 +71,11 @@ public class OrderController {
      * @return
      */
     @PostMapping("updateOrderState")
-    public AppResponse updateOrderState(String orderCode,int orderState){
+    public AppResponse updateOrderState(String orderCode,int orderState,String version){
         try{
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return orderService.updateOrderState(orderCode,orderState,userId);
+            return orderService.updateOrderState(orderCode,orderState,version,userId);
         }catch (Exception e){
             logger.error("订单状态修改错误！",e);
             System.out.println(e.toString());

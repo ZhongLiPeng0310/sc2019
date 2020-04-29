@@ -63,11 +63,13 @@ public class OrderService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateOrderState(String orderCode,int orderState,String userId) {
+    public AppResponse updateOrderState(String orderCode,int orderState,String version,String userId) {
         //分割订单编码，逗号隔开
         List<String> listCode = Arrays.asList(orderCode.split(","));
+        //分割版本号，逗号隔开
+        List<String> listVersion = Arrays.asList(version.split(","));
         //修改订单状态
-        int count = orderDao.updateOrderState(listCode,orderState,userId);
+        int count = orderDao.updateOrderState(listCode,orderState,listVersion,userId);
         if (orderState == 9){
             //查询订单的商品编码 购买数量 商品的库存
             List<OrderInfo> orderInfoList = orderDao.getOrder(listCode);
