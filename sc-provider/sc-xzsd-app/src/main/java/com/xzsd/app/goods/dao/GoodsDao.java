@@ -36,7 +36,7 @@ public interface GoodsDao {
     List<GoodsClassInfo> getFirstClass(GoodsClassInfo goodsClassInfo);
 
     /**
-     * 查询商品二级分类接口
+     * 查询商品二级分类及商品接口
      * @author zhong
      * @date 2020-03-26
      * @param lastClassCode

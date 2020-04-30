@@ -58,7 +58,7 @@ public class GoodsService {
         return AppResponse.success("查询列表成功！", classFirstList);
     }
     /**
-     * 查询二级分类接口
+     * 查询二级分类及商品接口
      * @date 2020-03-26
      * @author zhong
      * @param lastClassCode
