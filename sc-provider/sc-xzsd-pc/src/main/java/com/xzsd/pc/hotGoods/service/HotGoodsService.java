@@ -122,6 +122,7 @@ public class HotGoodsService {
      * @param dictionaryInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse saveShowNo(DictionaryInfo dictionaryInfo) {
         //检验展示商品数量是否存在
         int countShowNo = hotGoodsDao.countShowNo(dictionaryInfo);
