@@ -66,6 +66,7 @@ public class UserService {
      * @param userInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserPassword(UserInfo userInfo) {
         AppResponse appResponse = AppResponse.success("修改密码成功！");
         // 需要校验原密码是否正确
@@ -109,6 +110,7 @@ public class UserService {
      * @param userInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateInviteCode(UserInfo userInfo) {
         //校验店铺邀请码是否存在
         String inviteCode =  userInfo.getInviteCode();
