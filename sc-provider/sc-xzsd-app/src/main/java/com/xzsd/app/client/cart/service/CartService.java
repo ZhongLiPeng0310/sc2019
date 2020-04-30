@@ -26,6 +26,7 @@ public class CartService {
      * @param cartInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse saveCart(CartInfo cartInfo) {
         String userId = SecurityUtils.getCurrentUserId();
         cartInfo.setUserId(userId);
@@ -105,6 +106,7 @@ public class CartService {
      * @param userId
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteCart(String cartCode, String userId) {
         AppResponse appResponse = AppResponse.success("删除成功");
         List<String> listCode = Arrays.asList(cartCode.split(","));
