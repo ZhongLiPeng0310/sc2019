@@ -34,16 +34,6 @@ public class PictureShowService {
         if (0 != countGoods){
             return AppResponse.bizError("新增失败，商品或排序号或轮播图的图片已存在！请重试");
         }
-//        //检验新增的轮播图序号是否重复
-//        int countSort =  pictureShowDao.countSort(pictureShowInfo);
-//        if (0 != countSort){
-//            return AppResponse.bizError("新增失败，该排序号已存在！");
-//        }
-//        //检验新增的轮播图图片是否已新增
-//        int countPicture = pictureShowDao.countPicture(pictureShowInfo);
-//        if (0 != countPicture){
-//            return AppResponse.bizError("新增失败，轮播图的图片已存在！");
-//        }
         //随机轮播图编号
         pictureShowInfo.setShowCode(StringUtil.getCommonCode(2));
         pictureShowInfo.setIsDeleted(0);
