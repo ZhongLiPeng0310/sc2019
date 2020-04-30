@@ -8,6 +8,7 @@ import com.neusoft.util.StringUtil;
 import com.xzsd.app.client.cart.dao.CartDao;
 import com.xzsd.app.client.cart.entity.CartInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -80,6 +81,7 @@ public class CartService {
      * @param cartInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateAddSubCart(CartInfo cartInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
         //检验在购物车中新增的商品库存
