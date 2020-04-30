@@ -53,6 +53,7 @@ public class GoodsClassService {
      * @param goodsClassInfo
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("修改成功");
         //检验修改的商品分类名称是否已存在
@@ -99,6 +100,7 @@ public class GoodsClassService {
      * @date 2020-03-27
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteGoodsClass(GoodsClassInfo goodsClassInfo) {
         AppResponse appResponse = AppResponse.success("删除成功！");
         //检验删除的商品分类是否存在二级分类
