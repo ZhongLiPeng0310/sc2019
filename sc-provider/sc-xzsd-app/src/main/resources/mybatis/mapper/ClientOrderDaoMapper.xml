@@ -39,7 +39,7 @@
     <!--查询商品的评价星级-->
     <select id="countLevel" parameterType="java.util.List" resultType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo">
         select
-            avg(a_level) avgLevel,
+            ROUND(avg(a_level),1) avgLevel,
             goods_code goodsCode
         from t_goods_appraise
         where goods_code in
