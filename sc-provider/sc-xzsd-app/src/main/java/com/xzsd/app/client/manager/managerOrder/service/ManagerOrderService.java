@@ -7,6 +7,7 @@ import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.client.manager.managerOrder.dao.ManagerOrderDao;
 import com.xzsd.app.client.manager.managerOrder.entity.ManagerOrderInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ManagerOrderService {
      * @param userId
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateOrderState(String orderCode, int orderState,String version, String userId) {
         //修改订单状态
         int updateOrderState = managerOrderDao.updateOrderState(orderCode,orderState,version,userId);
