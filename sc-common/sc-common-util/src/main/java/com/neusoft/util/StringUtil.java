@@ -690,12 +690,49 @@ label0:
 		return prefix + suffix;
 	}
 
+    /**
+     * 生成邀请码编码
+     * @param num
+     * @return
+     */
     public static String getInviteCode(int num){
         String prefix = RandomUtil.radmonkey(num);
         String suffix = RandomUtil.radmonkey(num);
         return prefix + suffix;
     }
-  	
+
+    /**
+     * 商品编码
+     * @param num
+     * @return
+     */
+    public static String getGoodsCode(int num){
+        String prefix = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        String suffix = "SP";
+        return suffix + prefix;
+    }
+
+    /**
+     * 门店编码
+     * @param num
+     * @return
+     */
+    public static String getClassCode(int num){
+        String prefix = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        String suffix = "XZSD";
+        return suffix + prefix;
+    }
+
+    /**
+     * 司机编码
+     * @param num
+     * @return
+     */
+    public static String getDriverCode(int num){
+        String prefix = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        String suffix = "SJ";
+        return suffix + prefix;
+    }
 	/**
  	  * 部门：软件开发事业部
  	  * 功能：去字符串的前后空格
