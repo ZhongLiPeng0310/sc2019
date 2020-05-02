@@ -38,6 +38,22 @@ public class GoodsClassInfo {
      */
     private String lastClassCode;
     /**
+     * 商品编码
+     */
+    private String goodsCode;
+    /**
+     * 商品名称
+     */
+    private String goodsName;
+    /**
+     * 商品图片路径
+     */
+    private String imageUrl;
+    /**
+     * 商品售价
+     */
+    private String salePrice;
+    /**
      * 作废标记 0不删除 1删除
      */
     private int isDeleted;
@@ -214,5 +230,37 @@ public class GoodsClassInfo {
 
     public void setClassSecondGoodsList(List<ClassSecondList> classSecondGoodsList) {
         this.classSecondGoodsList = classSecondGoodsList;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
     }
 }
