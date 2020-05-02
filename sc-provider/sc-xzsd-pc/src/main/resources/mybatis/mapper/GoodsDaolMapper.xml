@@ -170,6 +170,7 @@
         update t_goods
         set
             is_deleted = 1,
+            goods_state = 1,
             update_time = now(),
             update_name = #{userId},
             version = version + 1
