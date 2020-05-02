@@ -64,7 +64,7 @@ public class DriverService {
         //加密密码
         String password = PasswordUtils.generatePassword(driverInfo.getUserPassword());
         driverInfo.setUserPassword(password);
-        driverInfo.setUserCode(StringUtil.getCommonCode(2));
+        driverInfo.setUserCode(StringUtil.getDriverCode(2));
         driverInfo.setIsDeleted(0);
         //新增司机
         int saveToDriver = driverDao.saveDriver(driverInfo);

@@ -79,16 +79,16 @@
     <!--查询司机列表-->
     <select id="listDriverByPage" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverInfo">
         select
-        a.user_code userCode,
-        a.user_acct userAcct,
-        a.user_name userName,
-        a.phone phone,
-        a.id_card idCard,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
+            a.user_code userCode,
+            a.user_acct userAcct,
+            a.user_name userName,
+            a.phone phone,
+            a.id_card idCard,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
         from t_sys_user a
         LEFT JOIN t_driver b
         on a.user_code = b.user_code
@@ -121,10 +121,10 @@
     <update id="deleteDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_driver
         set
-        is_deleted = 1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
+            is_deleted = 1,
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
         where user_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
@@ -134,10 +134,10 @@
     <update id="deleteUser" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_sys_user
         set
-        is_deleted = 1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
+            is_deleted = 1,
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
         where user_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
