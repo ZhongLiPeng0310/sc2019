@@ -71,8 +71,9 @@ public class UserController {
 
     /**
      * 删除用户信息
+     * @author zhong
+     * @date 2020-03-26
      * @param userCode
-     * 2020-03-26
      * @return
      */
     @PostMapping("deleteUser")

@@ -72,6 +72,7 @@ public class UserService {
      * 删除用户信息
      * @param userCode
      * @param userId
+     * @author zhong
      * @date 2020-03-26
      * @return
      */
@@ -90,6 +91,7 @@ public class UserService {
     /**
      * 修改用户信息
      * @param userInfo
+     * @author zhong
      * @2020-03-26
      * @return
      */
