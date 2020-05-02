@@ -63,10 +63,9 @@
     <select id="countSecondGoods" parameterType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo" resultType="int">
         select
         count(goods_code)
-        from
-        t_goods
-        where
-        class_second_code = #{classCode}
+        from t_goods
+        where class_second_code = #{classCode}
+        and is_deleted = 0
     </select>
     <!--商品分类的Map-->
         <resultMap id="classFirstList" type="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
