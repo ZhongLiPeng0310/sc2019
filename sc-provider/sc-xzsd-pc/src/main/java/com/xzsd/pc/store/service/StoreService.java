@@ -38,7 +38,7 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveStore(StoreInfo storeInfo) {
-        storeInfo.setStoreCode(StringUtil.getCommonCode(2));
+        storeInfo.setStoreCode(StringUtil.getStoreCode(2));
         storeInfo.setInviteCode(StringUtil.getInviteCode(3));
         storeInfo.setIsDeleted(0);
         //检验新增门店时用户编码是否已存在门店中
