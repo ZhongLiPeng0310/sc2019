@@ -70,10 +70,8 @@
         where a.is_deleted = 0
         and
         (a.role = 1
-        or
-        a.role = 3
-        or
-        a.role = 4
+        or a.role = 3
+        or a.role = 4
         )
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
@@ -91,10 +89,10 @@
     <update id="deleteUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
         update t_sys_user
         set
-        is_deleted = 1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
+            is_deleted = 1,
+            update_time = now(),
+            update_name = #{userId},
+            version = version + 1
         where user_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
@@ -106,8 +104,7 @@
         select
         user_password userPassword
         from t_sys_user
-        where
-        user_code = #{userCode}
+        where user_code = #{userCode}
     </select>
     <!--修改用户信息-->
     <update id="updateUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
