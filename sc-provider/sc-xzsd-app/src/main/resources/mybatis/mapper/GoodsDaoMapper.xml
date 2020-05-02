@@ -118,9 +118,8 @@
             b.sale_price salePrice
         from t_goods_class a
         LEFT JOIN t_goods b
-        on a.class_code = b.class_second_code
+        on (a.class_code = b.class_second_code and b.is_deleted = 0)
         where a.is_deleted = 0
-        and b.is_deleted = 0
         and a.last_class_code = #{lastClassCode}
         and b.goods_state = 2
         order by
