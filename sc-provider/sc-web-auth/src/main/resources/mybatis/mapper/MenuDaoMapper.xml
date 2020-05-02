@@ -4,8 +4,7 @@
 
     <!--获取当前登录人的角色-->
     <select id="getUserRole" parameterType="java.lang.String" resultType="int">
-        select
-        role
+        select role
         from t_sys_user
         where user_code = #{userId}
     </select>
@@ -72,12 +71,12 @@
     <update id="deleteMenu" parameterType="com.neusoft.webauth.menu.entity.MenuInfo">
         update t_menu
         set
-        is_deleted =1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version +1
+            is_deleted =1,
+            update_time = now(),
+            update_name = #{userId},
+            version = version +1
         where
-        menu_code = #{menuCode}
+            menu_code = #{menuCode}
     </update>
 
     <!--查询菜单详情-->
