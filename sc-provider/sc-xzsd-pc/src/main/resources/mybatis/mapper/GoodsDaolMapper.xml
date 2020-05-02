@@ -252,25 +252,24 @@
     <!--查询二级分类列表-->
     <select id="getSecondClass" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsclass.entity.GoodsClassInfo">
         select
-        a.class_name classSecondName,
-        a.class_code classSecondCode,
-        a.version version
+            a.class_name classSecondName,
+            a.class_code classSecondCode,
+            a.version version
         from t_goods_class a
         where a.is_deleted = 0
         and a.last_class_code = #{lastClassCode}
         order by
-        create_time desc
+        create_time
+        desc
     </select>
 
     <!--查询门店列表-->
     <select id="getAllStore" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="com.xzsd.pc.store.entity.StoreInfo">
         select
-        a.store_code storeCode,
-        a.store_name storeName,
-        a.version verison
-        from
-        t_store a
-        where
-        a.is_deleted = 0
+            a.store_code storeCode,
+            a.store_name storeName,
+            a.version verison
+        from t_store a
+        where a.is_deleted = 0
     </select>
 </mapper>

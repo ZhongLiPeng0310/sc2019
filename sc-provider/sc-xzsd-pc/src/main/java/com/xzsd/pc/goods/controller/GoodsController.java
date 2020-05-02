@@ -23,13 +23,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-    /**
-     * springboot自带的日志
-     */
     private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
-    /**
-     * 将service里的类注入  @Resource
-     */
+
     @Resource
     private GoodsService goodsService;
 
@@ -43,6 +38,9 @@ public class GoodsController {
 
     /**
      * Post请求  方法名  saveGoods
+     * 新增商品
+     * @author zhong
+     * @date 2020-03-24
      * @param goodsInfo
      * @return
      */
@@ -63,7 +61,6 @@ public class GoodsController {
 
     /**
      * 查询商品列表(分页)
-     *
      * @param goodsInfo
      * @return AppResponse
      * @author zhong
@@ -80,13 +77,12 @@ public class GoodsController {
         }
     }
 
-
-            /**
-             * 修改商品
-             * @param goodsInfo
-             * @author Zhong
-             * @date 2020-03-25
-             */
+    /**
+     * 修改商品
+     * @param goodsInfo
+     * @author Zhong
+     * @date 2020-03-25
+     */
     @PostMapping("updateGoods")
     public AppResponse updateGoods(GoodsInfo goodsInfo) {
         try {
@@ -103,9 +99,9 @@ public class GoodsController {
 
     /**
      * 删除商品
-     * goodsInfo
-     * zhong
-     * 2020-03-25
+     * classname :goodsInfo
+     * @author：zhong
+     * @date 2020-03-25
      */
     @PostMapping("deleteGoods")
     public AppResponse deleteGoods(String goodsCode) {
@@ -140,8 +136,8 @@ public class GoodsController {
 
     /**
      * 查看商品详情
-     * zhong
-     * 2020-03-26
+     * @author zhong
+     * @date 2020-03-26
      */
     @RequestMapping(value = "getGoodsByGoodsCode")
     public AppResponse getGoodsByGoodsCode(String goodsCode) {

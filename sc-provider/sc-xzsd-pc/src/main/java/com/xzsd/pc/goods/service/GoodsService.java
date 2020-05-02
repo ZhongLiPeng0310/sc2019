@@ -44,7 +44,7 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveGoods(GoodsInfo goodsInfo) {
          // 随机生成商品编码
-        goodsInfo.setGoodsCode(StringUtil.getCommonCode(2));
+        goodsInfo.setGoodsCode(StringUtil.getGoodsCode(2));
         goodsInfo.setIsDeleted(0);
         // 校验新增商品时，isbn书号是否已存在
         int countIsbn =goodsDao.countIsbn(goodsInfo);
