@@ -98,6 +98,19 @@
             #{item}
         </foreach>
     </update>
+    <!--删除司机-->
+    <update id="deleteUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
+        update t_driver
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_name = #{userId},
+        version = version + 1
+        where user_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
     <!--获取用户的密码-->
     <select id="getUser" parameterType="java.lang.String" resultType="com.neusoft.webauth.users.entity.UserInfo">

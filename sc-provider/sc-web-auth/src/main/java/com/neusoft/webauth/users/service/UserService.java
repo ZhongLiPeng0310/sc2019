@@ -81,8 +81,10 @@ public class UserService {
         List<String> listCode = Arrays.asList(userCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
-        int count = userDao.deleteUser(listCode,userId);
-        if(0 == count) {
+        int deleteUser = userDao.deleteUser(listCode,userId);
+        // 删除司机
+        int deleteDriver = userDao.deleteDriver(listCode,userId);
+        if(0 == deleteUser) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }
         return appResponse;
