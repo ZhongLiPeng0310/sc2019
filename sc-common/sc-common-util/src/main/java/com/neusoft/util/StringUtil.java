@@ -717,7 +717,7 @@ label0:
      * @param num
      * @return
      */
-    public static String getClassCode(int num){
+    public static String getStoreCode(int num){
         String prefix = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
         String suffix = "XZSD";
         return suffix + prefix;
