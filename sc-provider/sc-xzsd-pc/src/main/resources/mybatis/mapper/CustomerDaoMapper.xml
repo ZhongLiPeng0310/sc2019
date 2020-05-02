@@ -13,22 +13,23 @@
     <!--查询客户列表-->
     <select id="listCustomerByPage" parameterType="com.xzsd.pc.customer.entity.CustomerInfo" resultType="com.xzsd.pc.customer.entity.CustomerInfo">
         select
-        a.user_code userCode,
-        a.user_acct userAcct,
-        a.user_password userPassword,
-        a.user_name userName,
-        a.sex sex,
-        a.phone phone,
-        a.email email,
-        a.id_card idCard,
-        a.role role,
-        b.invite_code inviteCode,
-        a.create_time createTime,
-        a.create_name createName,
-        a.update_time updateTime,
-        a.update_name updateName,
-        a.version version
-        from t_sys_user a LEFT JOIN t_customer b
+            a.user_code userCode,
+            a.user_acct userAcct,
+            a.user_password userPassword,
+            a.user_name userName,
+            a.sex sex,
+            a.phone phone,
+            a.email email,
+            a.id_card idCard,
+            a.role role,
+            b.invite_code inviteCode,
+            a.create_time createTime,
+            a.create_name createName,
+            a.update_time updateTime,
+            a.update_name updateName,
+            a.version version
+        from t_sys_user a
+        LEFT JOIN t_customer b
         on a.user_code = b.user_code
         where b.is_deleted = 0
         <if test="userAcct != null and userAcct != ''">
