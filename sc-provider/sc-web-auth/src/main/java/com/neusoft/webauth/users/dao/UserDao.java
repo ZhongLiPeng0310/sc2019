@@ -39,15 +39,7 @@ public interface UserDao {
      * @return
      */
     int deleteUser(@Param("listCode") List<String> listCode, @Param("userId") String userId);
-    /**
-     * 删除司机信息
-     * @author zhong
-     * @date 2020-04-16
-     * @param listCode
-     * @param userId
-     * @return
-     */
-    int deleteDriver(@Param("listCode") List<String> listCode, String userId);
+
     /**
      * 修改用户信息
      * @author zhong

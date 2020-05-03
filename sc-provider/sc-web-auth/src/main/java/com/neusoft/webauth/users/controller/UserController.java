@@ -80,7 +80,7 @@ public class UserController {
     public AppResponse deleteUser(String userCode) {
         try {
             //获取用户id
-            String userId = AuthUtils.getCurrentUserId();
+            String userId = SecurityUtils.getCurrentUserId();
             return userService.deleteUser(userCode,userId);
         } catch (Exception e) {
             logger.error("用户删除错误", e);

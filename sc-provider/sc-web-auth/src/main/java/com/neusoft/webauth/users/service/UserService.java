@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.neusoft.util.AuthUtils;
 import com.neusoft.util.StringUtil;
 import com.neusoft.webauth.users.dao.UserDao;
 import com.neusoft.webauth.users.entity.UserInfo;
@@ -71,7 +72,6 @@ public class UserService {
     /**
      * 删除用户信息
      * @param userCode
-     * @param userId
      * @author zhong
      * @date 2020-03-26
      * @return
@@ -82,8 +82,6 @@ public class UserService {
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
         int deleteUser = userDao.deleteUser(listCode,userId);
-        // 删除司机
-        int deleteDriver = userDao.deleteDriver(listCode,userId);
         if(0 == deleteUser) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }

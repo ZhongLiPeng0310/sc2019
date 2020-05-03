@@ -70,9 +70,7 @@
         where a.is_deleted = 0
         and
         (a.role = 1
-        or a.role = 3
-        or a.role = 4
-        )
+        or a.role = 3)
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
@@ -93,19 +91,6 @@
             update_time = now(),
             update_name = #{userId},
             version = version + 1
-        where user_code in
-        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </update>
-    <!--删除司机-->
-    <update id="deleteDriver" parameterType="com.neusoft.webauth.users.entity.UserInfo">
-        update t_driver
-        set
-        is_deleted = 1,
-        update_time = now(),
-        update_name = #{userId},
-        version = version + 1
         where user_code in
         <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
