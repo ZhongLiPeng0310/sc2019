@@ -24,7 +24,7 @@
             b.goods_code goodsCode,
             b.goods_name goodsName,
             b.sale_price salePrice,
-            b.imageurl imagePath,
+            b.image_url imagePath,
             a.hot_sort hotSort,
             a.create_time createTime,
             a.create_name createName,

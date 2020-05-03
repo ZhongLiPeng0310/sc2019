@@ -54,7 +54,7 @@
             c.goods_code goodsCode,
             c.goods_name goodsName,
             c.goods_introduce goodsIntroduce,
-            c.imageurl imagePath,
+            c.image_url imagePath,
             c.sale_price salePrice,
             b.order_sum orderSum
         from t_order a
@@ -82,7 +82,7 @@
         <collection property="goodsList" ofType="com.xzsd.app.client.manager.managerOrder.entity.GoodsInfo" select="selectGoods" column="order_code">
             <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
-            <result property="imagePath" column="imageurl" jdbcType="VARCHAR"/>
+            <result property="imagePath" column="image_url" jdbcType="VARCHAR"/>
             <result property="salePrice" column="sale_price" jdbcType="VARCHAR"/>
             <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
             <result column="goodsIntroduce" property="goodsIntroduce" jdbcType="VARCHAR" />
@@ -124,14 +124,14 @@
         a.create_time
         desc
     </select>
-    <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
+    <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.GoodsInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">
 		select
-            a.goods_code goodsCode,
-            b.goods_name goodsName,
-            b.sale_price salePrice,
-            b.imageurl imagePath,
-            a.order_sum orderSum,
-            b.goods_introduce goodsIntroduce
+            a.goods_code,
+            b.goods_name,
+            b.sale_price,
+            b.image_url imagePath,
+            a.order_sum,
+            b.goods_introduce
 		from t_order_detail a
 		LEFT JOIN t_goods b
 		on a.goods_code = b.goods_code

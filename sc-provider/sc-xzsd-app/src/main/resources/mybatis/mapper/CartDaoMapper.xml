@@ -71,7 +71,7 @@
             a.cart_code cartCode,
             a.goods_code goodsCode,
             b.goods_name goodsName,
-            b.imageurl imagePath,
+            b.image_url imagePath,
             b.sale_price salePrice,
             b.goods_introduce goodsIntroduce,
             a.order_sum orderSum
