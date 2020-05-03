@@ -6,6 +6,7 @@
         select
             b.store_code storeCode,
             b.store_name storeName,
+            a.user_name userName,
             a.image_path imagePath,
             c.dic_name provinceName,
             d.dic_name cityName,

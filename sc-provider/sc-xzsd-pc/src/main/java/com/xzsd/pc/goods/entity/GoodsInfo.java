@@ -29,6 +29,10 @@ public class GoodsInfo {
      */
     private int sumSale;
     /**
+     * 商家名称
+     */
+    private String supplierName;
+    /**
      * 分类编码
      */
     private String classCode;
@@ -388,5 +392,13 @@ public class GoodsInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 }

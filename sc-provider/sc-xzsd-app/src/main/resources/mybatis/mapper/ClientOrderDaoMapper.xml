@@ -185,7 +185,12 @@
             and a.order_state = 7
         </if>
         <if test="orderState != null and orderState != '' and orderState == 1 ">
-            and a.order_state = 1
+            and (a.order_state = 1
+            or a.order_state = 3)
+        </if>
+        <if test="orderState != null and orderState != '' and orderState == 3 ">
+            and (a.order_state = 1
+            or a.order_state = 3)
         </if>
         <if test="orderState != null and orderState != '' and orderState == 5">
             and (a.order_state = 5
@@ -196,7 +201,7 @@
             or a.order_state = 8)
         </if>
         order by
-        a.create_time
+        a.create_time DESC
         desc
     </select>
     <select id="selectGoods" parameterType="com.xzsd.app.client.clientOrder.entity.ClientOrderInfo" resultType="com.xzsd.app.client.clientOrder.entity.GoodsInfo">

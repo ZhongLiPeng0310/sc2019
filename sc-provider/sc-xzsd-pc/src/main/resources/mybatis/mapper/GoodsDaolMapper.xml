@@ -27,7 +27,7 @@
          goods_introduce,
          goods_state,
          browse,
-         store_code,
+         supplier_name,
          stock,
          isbn,
          author,
@@ -50,7 +50,7 @@
             #{goodsIntroduce},
             3,
             0,
-            #{storeCode},
+            #{supplierName},
             #{stock},
             #{isbn},
             #{author},
@@ -80,8 +80,7 @@
         a.goods_state goodsState,
         a.up_time upTime,
         a.browse browse,
-        a.store_code storeCode,
-        d.store_name storeName,
+        a.supplier_name supplierName,
         a.stock stock,
         a.isbn isbn,
         a.author author,
@@ -99,8 +98,6 @@
     on a.class_first_code = b.class_code
     LEFT JOIN t_goods_class c
     on a.class_second_code = c.class_code
-    LEFT JOIN t_store d
-    on a.store_code = d.store_code
     where a.is_deleted = 0
     <if test="goodsState != null and goodsState != ''">
      and a.goods_state like concat('%', #{goodsState}, '%')
@@ -134,7 +131,7 @@
          goods_introduce = #{goodsIntroduce},
          goods_state = #{goodsState},
          browse = #{browse},
-         store_code = #{storeCode},
+         supplier_name = #{supplierName},
          stock = #{stock},
          isbn = #{isbn},
          author = #{author},
@@ -218,7 +215,7 @@
              a.goods_state goodsState,
              a.up_time upTime,
              a.browse browse,
-             a.store_code storeCode,
+             a.supplier_name supplierName,
              a.stock stock,
              a.isbn isbn,
              a.author author,

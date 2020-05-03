@@ -109,6 +109,9 @@
         <if test="orderState != null and orderState != '' and orderState == 1 ">
             and a.order_state = 1
         </if>
+        <if test="orderState != null and orderState != '' and orderState == 3 ">
+            and a.order_state = 3
+        </if>
         <if test="orderState != null and orderState != '' and orderState == 5">
             and (a.order_state = 5
             or a.order_state = 8)
