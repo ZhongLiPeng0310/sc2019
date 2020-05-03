@@ -99,7 +99,7 @@
         </foreach>
     </update>
     <!--删除司机-->
-    <update id="deleteUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
+    <update id="deleteDriver" parameterType="com.neusoft.webauth.users.entity.UserInfo">
         update t_driver
         set
         is_deleted = 1,
