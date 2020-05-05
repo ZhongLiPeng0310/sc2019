@@ -33,9 +33,14 @@ public class MenuService {
     public AppResponse saveMenu(MenuInfo menuInfo) {
         menuInfo.setMenuCode(StringUtil.getCommonCode(2));
         menuInfo.setIsDeleted(0);
+        //校验新增菜单时 菜单名称和路由是否重复
+        int countMenu = menuDao.countMenu(menuInfo);
+        if (0 != countMenu){
+            return AppResponse.bizError("新增失败，菜单名称或路由已存在，请重试！");
+        }
         //新增菜单
-        int count = menuDao.saveMenu(menuInfo);
-        if (0 == count) {
+        int saveMenu = menuDao.saveMenu(menuInfo);
+        if (0 == saveMenu) {
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功！");
@@ -68,6 +73,11 @@ public class MenuService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateMenu(MenuInfo menuInfo) {
+        //校验修改菜单时 菜单名称和路由是否重复
+        int countMenu = menuDao.countMenu(menuInfo);
+        if (0 != countMenu){
+            return AppResponse.bizError("修改失败，菜单名称或路由已存在，请重试！");
+        }
         AppResponse appResponse = AppResponse.success("修改成功！");
         //修改菜单
         int count = menuDao.updateMenu(menuInfo);

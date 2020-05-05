@@ -33,13 +33,38 @@ public interface UserDao {
     List<UserInfo> listUsersByPage(UserInfo userInfo);
 
     /**
-     * 删除用户信息
+     * 获取用户表中，角色是管理员的编码
+     * @author zhong
+     * @date 2020-04-10
      * @param listCode
+     * @return
+     */
+    List<String> countUserRole(@Param("listCode") List<String> listCode);
+    /**
+     * 删除用户信息
+     * @param listUserCode
      * @param userId
      * @return
      */
-    int deleteUser(@Param("listCode") List<String> listCode, @Param("userId") String userId);
+    int deleteUser(@Param("listUserCode") List<String> listUserCode, @Param("userId") String userId);
 
+    /**
+     * 校验删除的店长是否已拥有门店
+     * @author zhong
+     * @date 2020-3-26
+     * @param listUserCode
+     * @return
+     */
+    int countStoreUser(@Param("listUserCode") List<String> listUserCode);
+
+    /**
+     * 查询当前修改用户的角色
+     * @author zhong
+     * @date 2020-04-04
+     * @param userCode
+     * @return
+     */
+    int getUserRole(@Param("userCode") String userCode);
     /**
      * 修改用户信息
      * @author zhong

@@ -1,6 +1,7 @@
 package com.xzsd.pc.order.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单实体类
@@ -19,7 +20,7 @@ public class OrderInfo {
     /**
      * 订单总价
      */
-    private float orderMoney;
+    private String orderMoney;
     /**
      * 订单状态  订单状态 0取消订单 1到货 2取消到货 3已取货 4取消已取货 5已完成（已完成未评价） 6取消已完成 7已付款 8已完成已评价
      */
@@ -32,6 +33,7 @@ public class OrderInfo {
      * 门店编码
      */
     private String storeCode;
+
     /**
      * 下单人
      */
@@ -51,15 +53,15 @@ public class OrderInfo {
     /**
      * 购买数量
      */
-    private int orderSum;
+    private String orderSum;
     /**
      * 商品售价
      */
-    private float salePrice;
+    private String salePrice;
     /**
      * 商品成本价
      */
-    private float costPrice;
+    private String costPrice;
     /**
      * 付款时间
      */
@@ -81,6 +83,14 @@ public class OrderInfo {
      * 当前登录人id
      */
     private String userId;
+    /**
+     *购买商品的总数
+     */
+    private String sumGoods;
+    /**
+     * 地址
+     */
+    private String address;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -112,6 +122,11 @@ public class OrderInfo {
      * @return
      */
     private int pageNum;
+    /**
+     * 商品集合
+     * @return
+     */
+    private List<GoodsInfo> goodsList;
 
     public String getOrderCode() {
         return orderCode;
@@ -129,11 +144,11 @@ public class OrderInfo {
         this.userCode = userCode;
     }
 
-    public float getOrderMoney() {
+    public String getOrderMoney() {
         return orderMoney;
     }
 
-    public void setOrderMoney(float orderMoney) {
+    public void setOrderMoney(String orderMoney) {
         this.orderMoney = orderMoney;
     }
 
@@ -185,27 +200,27 @@ public class OrderInfo {
         this.goodsName = goodsName;
     }
 
-    public int getOrderSum() {
+    public String getOrderSum() {
         return orderSum;
     }
 
-    public void setOrderSum(int orderSum) {
+    public void setOrderSum(String orderSum) {
         this.orderSum = orderSum;
     }
 
-    public float getSalePrice() {
+    public String getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(float salePrice) {
+    public void setSalePrice(String salePrice) {
         this.salePrice = salePrice;
     }
 
-    public float getCostPrice() {
+    public String getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(float costPrice) {
+    public void setCostPrice(String costPrice) {
         this.costPrice = costPrice;
     }
 
@@ -311,5 +326,29 @@ public class OrderInfo {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getSumGoods() {
+        return sumGoods;
+    }
+
+    public void setSumGoods(String sumGoods) {
+        this.sumGoods = sumGoods;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<GoodsInfo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsInfo> goodsList) {
+        this.goodsList = goodsList;
     }
 }

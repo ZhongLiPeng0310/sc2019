@@ -45,28 +45,43 @@
         </if>
     </select>
 
+    <!--                                     订单详情                       -->
+    <!--订单对应商品的Map-->
+    <resultMap id="getOrderDetail" type="com.xzsd.pc.order.entity.OrderInfo">
+        <id column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+        <result column="sum_goods" property="sumGoods" jdbcType="VARCHAR" />
+        <result column="order_sum" property="orderSum" jdbcType="VARCHAR" />
+        <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
+        <collection property="goodsList" ofType="com.xzsd.pc.order.entity.GoodsInfo">
+            <id column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
+            <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+            <result column="salePrice" property="salePrice" jdbcType="VARCHAR" />
+            <result column="orderSum" property="orderSum" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
     <!--查询订单详情-->
-    <select id="getOrderByOrderCode" parameterType="java.lang.String" resultType="com.xzsd.pc.order.entity.OrderInfo">
+    <select id="getOrderByOrderCode" parameterType="java.lang.String" resultMap="getOrderDetail">
         select
-            a.user_code userCode,
-            a.order_code orderCode,
+            a.order_code,
+            a.order_money,
+            a.sum_goods,
+            b.user_code,
+            a.version,
             b.goods_code goodsCode,
-            b.goods_name goodsName,
-            a.order_sum orderSum,
-            c.order_money orderMoney,
-            b.sale_price salePrice,
-            b.cost_price costPrice,
-            a.create_time createTime,
-            a.update_time updateTime,
-            a.update_name updateName,
-            a.version version
-        from t_order_detail a
-        LEFT JOIN t_goods b
-        on a.goods_code = b.goods_code
-        LEFT JOIN t_order c
-        on a.order_code = c.order_code
-        where a.order_code = #{orderCode}
-        and a.is_deleted = 0
+            c.goods_name goodsName,
+            c.sale_price salePrice,
+            b.order_sum orderSum
+        from t_order a
+        LEFT JOIN t_order_detail b
+        on a.order_code = b.order_code
+        LEFT JOIN t_goods c
+        on b.goods_code = c.goods_code
+        LEFT JOIN t_store d
+        on a.store_code = d.store_code
+        where a.is_deleted = 0
+        and a.order_code = #{orderCode}
     </select>
 
     <!--修改订单状态-->
@@ -87,6 +102,17 @@
             #{item}
         </foreach>
     </update>
+    <!--查询修改的订单的状态-->
+    <select id="getOrderState" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        order_state
+        from t_order
+        where
+        order_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
     <!--查询对应订单编码里的商品编码和商品的购买数量-->
     <select id="getOrder" parameterType="java.util.List" resultType="com.xzsd.pc.order.entity.OrderInfo">
         select

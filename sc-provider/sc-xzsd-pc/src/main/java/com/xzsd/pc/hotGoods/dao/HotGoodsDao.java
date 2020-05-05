@@ -80,20 +80,11 @@ public interface HotGoodsDao {
     int updateShowNo(DictionaryInfo dictionaryInfo);
 
     /**
-     * 检验新增的商品是否存在热门商品表中
+     * 检验新增的商品、排序序号是否存在热门商品表中
      * @param hotGoodsInfo
      * @return
      */
     int countGoods(HotGoodsInfo hotGoodsInfo);
-
-    /**
-     * 检验新增的热门商品的排序序号是否重复
-     * @author zhong
-     * @date 2020-04-10
-     * @param hotGoodsInfo
-     * @return
-     */
-    int countSort(HotGoodsInfo hotGoodsInfo);
 
     /**
      * 查询热门商品详情

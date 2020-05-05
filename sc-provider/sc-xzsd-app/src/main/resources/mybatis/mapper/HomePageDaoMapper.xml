@@ -4,18 +4,21 @@
     <!--查询首页轮播图-->
     <select id="getPictureShow" resultType="com.xzsd.app.homePage.entity.PictureShowInfo">
         select
-            show_image_url imagePath,
-            goods_code goodsCode,
-            sort_no sortNo,
-            begin_time beginTime,
-            end_time endTime,
-            version version
-        from t_picture_show
-        where is_deleted = 0
-        and (now() between begin_time and end_time)
-        and show_state = 1
+            a.show_image_url imagePath,
+            a.goods_code goodsCode,
+            a.sort_no sortNo,
+            a.begin_time beginTime,
+            a.end_time endTime,
+            a.version version
+        from t_picture_show a
+        LEFT JOIN t_goods b
+        on a.goods_code = b.goods_code
+        where a.is_deleted = 0
+        and b.goods_state = 2
+        and (now() between a.begin_time and a.end_time)
+        and a.show_state = 1
         order by
-        sort_no Asc
+        a.sort_no Asc
     </select>
 
     <!--查询首页热门商品-->
@@ -26,6 +29,7 @@
             b.sale_price salePrice,
             b.image_url imagePath,
             a.hot_sort hotSort,
+            b.a_level appraiseLevel,
             a.create_time createTime,
             a.create_name createName,
             a.update_time updateTime,
@@ -34,6 +38,7 @@
         from t_hot_goods a RIGHT JOIN t_goods b
         on a.goods_code = b.goods_code
         where a.is_deleted = 0
+        and b.goods_state = 2
         order by a.hot_sort Asc
         LIMIT 0,#{showNo}
     </select>

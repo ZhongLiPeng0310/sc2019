@@ -23,6 +23,14 @@ public interface MenuDao {
     int saveMenu(MenuInfo menuInfo);
 
     /**
+     * 校验新增菜单时 菜单名称和路由是否重复
+     * @author zhong
+     * @date 2020-04-11
+     * @param menuInfo
+     * @return
+     */
+    int countMenu(MenuInfo menuInfo);
+    /**
      * 查询菜单列表
      * @author zhong
      * @date 2020-04-11
@@ -66,14 +74,16 @@ public interface MenuDao {
      * @param userId
      * @return
      */
-    int getUserRole(String userId);
+    int getUserRole(@Param("userId") String userId);
 
     /**
-     * 根据角色查询菜单lieb
+     * 根据角色查询菜单列表
      * @author zhong
      * @date 2020-04-13
      * @param menuInfo
      * @return
      */
     List<MenuInfo> listMenuHome(MenuInfo menuInfo);
+
+
 }

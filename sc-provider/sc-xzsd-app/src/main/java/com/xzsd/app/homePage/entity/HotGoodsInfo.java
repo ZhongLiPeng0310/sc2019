@@ -19,6 +19,10 @@ public class HotGoodsInfo {
      */
     private int hotSort;
     /**
+     * 商品评价星级
+     */
+    private String appraiseLevel;
+    /**
      * 商品名称
      */
     private String goodsName;
@@ -185,5 +189,13 @@ public class HotGoodsInfo {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getAppraiseLevel() {
+        return appraiseLevel;
+    }
+
+    public void setAppraiseLevel(String appraiseLevel) {
+        this.appraiseLevel = appraiseLevel;
     }
 }

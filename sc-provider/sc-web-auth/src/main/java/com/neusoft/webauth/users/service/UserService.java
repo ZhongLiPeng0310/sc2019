@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,8 +81,24 @@ public class UserService {
     public AppResponse deleteUser(String userCode,String userId) {
         List<String> listCode = Arrays.asList(userCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
+        //获取用户表中，角色是管理员的编码
+        List<String> userCodeList = userDao.countUserRole(listCode);
+        //排除是管理员的编码
+        ArrayList listUserCode = new ArrayList(listCode);
+        listUserCode.removeAll(userCodeList);
+        //删除的用户存在管理员，删除失败
+        if (0 == listUserCode.size()){
+            return AppResponse.bizError("删除的用户是管理员，无此权限!");
+        }
+        int countStoreUser = userDao.countStoreUser(listUserCode);
+        if (0 != countStoreUser){
+            return AppResponse.bizError("删除失败，该用户拥有门店，请重试！");
+        }
         // 删除用户
-        int deleteUser = userDao.deleteUser(listCode,userId);
+        int deleteUser = userDao.deleteUser(listUserCode,userId);
+        if (userCodeList.size() != 0 && listUserCode.size() != 0 && 0 != deleteUser){
+            return AppResponse.success("删除成功！，用户编码为" + userCodeList +"的用户的管理员，无法删除！");
+        }
         if(0 == deleteUser) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }
@@ -114,6 +131,11 @@ public class UserService {
             int countUsers = userDao.countUsers(userInfo);
             if (0 != countUsers){
                 return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
+            }
+            //获取修改的用户的角色
+            int getRole = userDao.getUserRole(userInfo.getUserCode());
+            if (getRole == 3 && userInfo.getRole() == 1){
+                return AppResponse.bizError("修改失败，不允许跨级修改角色");
             }
             // 修改用户信息
             int count = userDao.updateUser(userInfo);

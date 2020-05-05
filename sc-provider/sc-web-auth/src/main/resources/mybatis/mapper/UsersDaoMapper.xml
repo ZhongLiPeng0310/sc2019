@@ -12,6 +12,7 @@
             and user_code != #{userCode}
         </if>
     </select>
+
     <!--新增用户-->
     <insert id="saveUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">
         insert into t_sys_user
@@ -92,10 +93,34 @@
             update_name = #{userId},
             version = version + 1
         where user_code in
-        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="listUserCode" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
+    <!--校验删除的店长是否已拥有门店-->
+    <select id="countStoreUser" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
+        select count(store_code)
+        from t_store
+        where is_deleted = 0
+        and user_code in
+        <foreach item="item" index="index" collection="listUserCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <!--查获取用户表中，角色是管理员的编码-->
+    <select id="countUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct
+        user_code
+        from t_sys_user
+        where is_deleted = 0
+        and user_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and user_code in
+        (select user_code from t_sys_user where is_deleted = 0 and role = 1)
+    </select>
 
     <!--获取用户的密码-->
     <select id="getUser" parameterType="java.lang.String" resultType="com.neusoft.webauth.users.entity.UserInfo">
@@ -103,6 +128,13 @@
         user_password userPassword
         from t_sys_user
         where user_code = #{userCode}
+    </select>
+    <select id="getUserRole" parameterType="java.lang.String" resultType="int">
+        select
+        role
+        from t_sys_user
+        where user_code = #{userCode}
+        and is_deleted = 0
     </select>
     <!--修改用户信息-->
     <update id="updateUser" parameterType="com.neusoft.webauth.users.entity.UserInfo">

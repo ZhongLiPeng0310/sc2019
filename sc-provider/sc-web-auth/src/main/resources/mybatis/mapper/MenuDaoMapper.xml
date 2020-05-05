@@ -8,6 +8,16 @@
         from t_sys_user
         where user_code = #{userId}
     </select>
+    <!--校验新增菜单时 菜单名称和路由是否重复-->
+    <select id="countMenu" parameterType="com.neusoft.webauth.menu.entity.MenuInfo" resultType="int">
+        select count(menu_code)
+        from t_menu
+        where (menu_name = #{menuName} or route = #{route})
+        <if test="menuCode != null and menuCode != ''">
+            and menu_code != #{menuCode}
+        </if>
+    </select>
+
     <!--新增菜单-->
     <insert id="saveMenu" parameterType="com.neusoft.webauth.menu.entity.MenuInfo">
         insert into t_menu

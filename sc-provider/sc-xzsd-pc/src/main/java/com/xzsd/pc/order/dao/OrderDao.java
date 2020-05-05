@@ -28,9 +28,14 @@ public interface OrderDao {
      */
     OrderInfo getOrderByOrderCode(@Param("orderCode") String orderCode);
 
-
-
-
+    /**
+     * 校验取消的订单状态
+     * @date 2020-05-05
+     * @author zhong
+     * @param listCode
+     * @return
+     */
+    List<Integer> getOrderState(@Param("listCode") List<String> listCode);
     /**
      * 修改订单状态
      * @author zhong
@@ -53,4 +58,7 @@ public interface OrderDao {
      * @return
      */
     int updateStock(@Param("orderInfoList") List<OrderInfo> orderInfoList);
+
+
+
 }

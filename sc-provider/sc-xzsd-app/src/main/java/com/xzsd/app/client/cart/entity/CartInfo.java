@@ -31,6 +31,10 @@ public class CartInfo {
      */
     private String goodsName;
     /**
+     * 商品介绍
+     */
+    private String goodsIntroduce;
+    /**
      * 售价
      */
     private float salePrice;
@@ -234,5 +238,13 @@ public class CartInfo {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getGoodsIntroduce() {
+        return goodsIntroduce;
+    }
+
+    public void setGoodsIntroduce(String goodsIntroduce) {
+        this.goodsIntroduce = goodsIntroduce;
     }
 }
