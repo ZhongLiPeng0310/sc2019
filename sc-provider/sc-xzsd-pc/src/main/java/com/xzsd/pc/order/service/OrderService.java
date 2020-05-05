@@ -70,15 +70,6 @@ public class OrderService {
         List<String> listVersion = Arrays.asList(version.split(","));
         //修改订单状态
         int count = orderDao.updateOrderState(listCode,orderState,listVersion,userId);
-//        if (orderState == 9) {
-//            //订单状态为已完成，不可以取消
-//            List<Integer> getOrderState = orderDao.getOrderState(listCode);
-//            for (int i = 0; i < getOrderState.size(); i++) {
-//                if (getOrderState.get(i) == 5 || getOrderState.get(i) == 8) {
-//                    return AppResponse.bizError("修改失败，订单已完成");
-//                }
-//            }
-//        }
         if (orderState == 9){
             //查询订单的商品编码 购买数量 商品的库存
             List<OrderInfo> orderInfoList = orderDao.getOrder(listCode);
