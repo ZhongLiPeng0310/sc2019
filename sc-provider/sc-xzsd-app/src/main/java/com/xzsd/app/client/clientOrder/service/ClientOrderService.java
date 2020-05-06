@@ -34,6 +34,7 @@ public class ClientOrderService {
         clientOrderInfo.setUserId(userId);
         //修改订单状态
         int updateOrderState = clientOrderDao.updateOrderState(clientOrderInfo);
+        //如果修改订单的状态为取消订单  则回滚对应订单中的商品的库存  如果修改订单状态为确认收货，则增加商品的销售量
         if (clientOrderInfo.getOrderState() == 9){
             //查询订单的商品编码 购买数量 商品的库存
             List<ClientOrderInfo> clientOrderInfoList = clientOrderDao.getOrder(clientOrderInfo.getOrderCode());
@@ -82,6 +83,7 @@ public class ClientOrderService {
         List<String> listDatail = Arrays.asList(appraiseDetail.split("@end"));
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listLevel = Arrays.asList(appraiseLevel.split(","));
+        //创建list储存评价的星级、内容
         List<GoodsAppraiseInfo> goodsAppraiseInfoList = new ArrayList<GoodsAppraiseInfo>();
         int number = listGoods.size();
         //根据页面传回来的数量插入
@@ -142,6 +144,7 @@ public class ClientOrderService {
         List<String> listGoods = Arrays.asList(goodsCode.split(","));
         List<String> listSum = Arrays.asList(orderSum.split(","));
         List<String> listCart = Arrays.asList(cartCode.split(","));
+        //创建list储存商品、购买数量、购物车编码
         List<CartOrderInfo> cartOrderInfoList = new ArrayList<CartOrderInfo>();
         //查询当前下单商品的库存
         List<Integer> countGoodsStock = clientOrderDao.countGoodsStock(listGoods);

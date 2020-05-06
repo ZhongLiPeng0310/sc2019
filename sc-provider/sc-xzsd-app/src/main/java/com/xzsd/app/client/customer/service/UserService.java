@@ -44,7 +44,7 @@ public class UserService {
                 return AppResponse.bizError("邀请码不存在，请重新输入");
             }
         }
-        // 密码加密 默认为123
+        // 密码加密
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
         userInfo.setUserPassword(password);
         userInfo.setUserCode(StringUtil.getCommonCode(2));

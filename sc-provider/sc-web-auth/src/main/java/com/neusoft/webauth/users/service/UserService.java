@@ -42,9 +42,10 @@ public class UserService {
         if (0 != countUsers){
             return AppResponse.bizError("用户账号或手机号码已存在，请重新输入");
         }
-        // 密码加密 默认为123456
+        // 密码加密
         String password = PasswordUtils.generatePassword(userInfo.getUserPassword());
         userInfo.setUserPassword(password);
+        //随机生成编码
         userInfo.setUserCode(StringUtil.getCommonCode(2));
         userInfo.setIsDeleted(0);
         //新增用户
@@ -90,6 +91,7 @@ public class UserService {
         if (0 == listUserCode.size()){
             return AppResponse.bizError("删除的用户是管理员，无此权限!");
         }
+        //校验店长是否拥有店铺
         int countStoreUser = userDao.countStoreUser(listUserCode);
         if (0 != countStoreUser){
             return AppResponse.bizError("删除失败，该用户拥有门店，请重试！");

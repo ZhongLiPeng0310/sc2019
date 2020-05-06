@@ -41,10 +41,10 @@ public class CartService {
         //检验新加的商品是否已经存在购物车
         int checkSave = cartDao.checkSave(cartInfo);
         if (0 != checkSave){
-            //查找当前的数量
+            //查找购物车中对应商品当前的数量
             int nowSum = cartDao.findSum(cartInfo);
             cartInfo.setNewOrderSum(nowSum);
-            //更新当前数量
+            //更新购物车中对应的商品的当前数量
             int updateCart = cartDao.updateCart(cartInfo);
             if (0 != updateCart){
                 return AppResponse.success("加入成功！");
