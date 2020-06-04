@@ -98,12 +98,14 @@
         </foreach>
     </update>
     <!--校验删除的店长是否已拥有门店-->
-    <select id="countStoreUser" parameterType="com.neusoft.webauth.users.entity.UserInfo" resultType="int">
-        select count(store_code)
+    <select id="countStoreUser" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct
+        user_code
         from t_store
         where is_deleted = 0
         and user_code in
-        <foreach item="item" index="index" collection="listUserCode" open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>

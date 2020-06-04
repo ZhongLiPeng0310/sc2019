@@ -52,10 +52,10 @@ public interface UserDao {
      * 校验删除的店长是否已拥有门店
      * @author zhong
      * @date 2020-3-26
-     * @param listUserCode
+     * @param listCode
      * @return
      */
-    int countStoreUser(@Param("listUserCode") List<String> listUserCode);
+    List<String> countStoreUser(@Param("listCode") List<String> listCode);
 
     /**
      * 查询当前修改用户的角色
@@ -107,6 +107,7 @@ public interface UserDao {
      * @return
      */
     UserInfo getUserUrl(UserInfo userInfo);
+
 
 
 }

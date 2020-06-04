@@ -84,22 +84,23 @@ public class UserService {
         AppResponse appResponse = AppResponse.success("删除成功！");
         //获取用户表中，角色是管理员的编码
         List<String> userCodeList = userDao.countUserRole(listCode);
-        //排除是管理员的编码
+        //获取用户表中，角色是店长，且拥有门店
+        List<String> userStoreList = userDao.countStoreUser(listCode);
+        //排除是管理员\店长，且拥有门店的编码
         ArrayList listUserCode = new ArrayList(listCode);
         listUserCode.removeAll(userCodeList);
+        listUserCode.removeAll(userStoreList);
         //删除的用户存在管理员，删除失败
         if (0 == listUserCode.size()){
-            return AppResponse.bizError("删除的用户是管理员，无此权限!");
-        }
-        //校验店长是否拥有店铺
-        int countStoreUser = userDao.countStoreUser(listUserCode);
-        if (0 != countStoreUser){
-            return AppResponse.bizError("删除失败，该用户拥有门店，请重试！");
+            return AppResponse.bizError("删除的用户是管理员或者拥有门店的店长，无此权限!");
         }
         // 删除用户
         int deleteUser = userDao.deleteUser(listUserCode,userId);
         if (userCodeList.size() != 0 && listUserCode.size() != 0 && 0 != deleteUser){
-            return AppResponse.success("删除成功！，用户编码为" + userCodeList +"的用户的管理员，无法删除！");
+            return AppResponse.success("删除成功！，用户编码为" + userCodeList +"的用户是管理员，无法删除！");
+        }
+        if (userStoreList.size() != 0 && listUserCode.size() != 0 && 0 != deleteUser){
+            return AppResponse.success("删除成功！，用户编码为" + userCodeList +"的用户拥有门店，无法删除！");
         }
         if(0 == deleteUser) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
